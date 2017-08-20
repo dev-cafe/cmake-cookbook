@@ -1,0 +1,71 @@
+language: cpp
+sudo: false
+dist: trusty
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-5
+            - g++-5
+            - gfortran-5
+      env:
+        - CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
+        - GENERATOR="Unix Makefiles"
+        - BUILDFLAGS="VERBOSE=1"
+        - CXX=g++-5
+        - CC=gcc-5
+        - FC=gfortran-5
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-5
+            - g++-5
+            - gfortran-5
+      env:
+        - CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
+        - GENERATOR="Ninja"
+        - BUILDFLAGS="-v"
+        - NINJA_URL="https://github.com/Kitware/ninja/releases/download/v1.7.2.gaad58.kitware.dyndep-1/"
+        - NINJA_TARBALL_NAME="ninja-1.7.2.gaad58.kitware.dyndep-1_x86_64-linux-gnu"
+        - CXX=g++-5
+        - CC=gcc-5
+        - FC=gfortran-5
+    - os: osx
+      env:
+        - GENERATOR="Unix Makefiles"
+        - BUILDFLAGS="VERBOSE=1"
+    - os: osx
+      env:
+        - GENERATOR="Ninja"
+        - BUILDFLAGS="-v"
+        - NINJA_URL="https://github.com/Kitware/ninja/releases/download/v1.7.2.gaad58.kitware.dyndep-1/"
+        - NINJA_TARBALL_NAME="ninja-1.7.2.gaad58.kitware.dyndep-1_x86_64-apple-darwin"
+
+before_script:
+  - |
+    # Install CMake 3.7.2 and Kitware-maintained version of Ninja
+    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      cd ${TRAVIS_BUILD_DIR}
+      curl -L ${CMAKE_URL} | tar xz
+      export PATH=$PWD/cmake-3.7.2-Linux-x86_64/bin:$PATH
+      export LD_LIBARY_PATH=$PWD/cmake-3.7.2-Linux-x86_64/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+      # Install latest available CMake
+      brew upgrade cmake
+    fi
+  - |
+    if [[ "${GENERATOR}" == "Ninja" ]]; then
+      cd ${TRAVIS_BUILD_DIR}
+      curl -L ${NINJA_URL}${NINJA_TARBALL_NAME}.tar.gz | tar xz
+      export PATH=$PWD/${NINJA_TARBALL_NAME}:$PATH
+    fi
+  - ./.scripts/report_versions.sh
+script:
+  - python ./.scripts/ci_configure_build_test.py
