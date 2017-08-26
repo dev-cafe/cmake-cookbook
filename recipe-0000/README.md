@@ -11,3 +11,7 @@
 - Explain set up used on Travis and AppVeyor:
   - CMake at least 3.7.2
   - Ninja version [maintained by Kitware](https://github.com/Kitware/ninja)
+- Each recipe will list the toolstack as “ingredients”.
+- Running `cmake --system-information your-system.txt` dumps all information about the
+  current system to the `cmake-info-your-system.txt` file. This is invaluable to learn what the defaults
+  are for a lot of operations.
