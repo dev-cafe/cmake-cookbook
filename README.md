@@ -11,6 +11,12 @@
 
 Experimental collection of CMake recipes.
 
+## Conventions
+
+- Folders for recipes are named `recipe-XYZU`, where `XYZU` is a number, _i.e._ `0000`, `0001` and so forth.
+- Each recipe can have more than one example subfolder. These subfolders are named `prefix-example`. `prefix` can be anything of your choice, _e.g._ `cxx-example` is a valid name.
+- Any code for the recipes **must be stored** in a `prefix-example` subdirectory.
+
 ## Recipes
 
 - [Recipe 0000](recipe-0000/README.md)

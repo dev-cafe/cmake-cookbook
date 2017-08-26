@@ -24,12 +24,7 @@ def run_command(cmd):
 
 def main():
     # Glob recipes excluding recipe-0000
-    recipes = [os.path.abspath(r)
-               for r in glob.glob('recipe-*') if "0000" not in r]
-    # For local testing
-    # generator = 'Unix Makefiles'
-    # buildflags = 'VERBOSE=1'
-    # topdir = '/home/roberto/Workspace/robertodr/cmake-recipes'
+    recipes = [r for r in sorted(glob.glob('recipe-*')) if "0000" not in r]
     # Get some environment variables
     generator = os.environ.get('GENERATOR')
     buildflags = os.environ.get('BUILDFLAGS')
@@ -39,19 +34,31 @@ def main():
     elif os.environ.get('APPVEYOR'):
         topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
     else:
-        raise RuntimeError('Only Travis and AppVeyor supported.')
+        # Local testing
+        generator = 'Unix Makefiles'
+        buildflags = 'VERBOSE=1'
+        topdir = os.getcwd()
 
     for recipe in recipes:
-        os.chdir(recipe)
-        # Configure
-        [print(x, end="") for x in
-         run_command(['cmake', '-H.', '-Bbuild', '-G' + generator])]
-        os.chdir('build')
-        # Build
-        [print(x, end="") for x in
-         run_command(['cmake', '--build', '.', '--', buildflags])]
-        # Test
-        # [print(x, end="") for x in run_command(['ctest'])]
+        recipe_dir = os.path.abspath(recipe)
+        os.chdir(recipe_dir)
+        # Glob examples
+        examples = [e for e in sorted(glob.glob('*-example'))]
+        for example in examples:
+            os.chdir(os.path.abspath(example))
+            print('{} and {}'.format(recipe, example))
+            # Configure
+            configure = run_command(['cmake', '-H.',
+                                     '-Bbuild', '-G' + generator])
+            [print(x, end="") for x in configure]
+            os.chdir('build')
+            # Build
+            build = run_command(['cmake', '--build', '.', '--', buildflags])
+            [print(x, end="") for x in build]
+            # Test
+            # test = run_command(['ctest'])
+            # [print(x, end="") for x in test]
+            os.chdir(recipe_dir)
         os.chdir(topdir)
 
 

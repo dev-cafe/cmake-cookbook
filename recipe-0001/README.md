@@ -1,11 +1,12 @@
-Compiling a single C++ source file into an executable
-=====================================================
+Compiling a single source file into an executable
+=================================================
 
-This recipes shows how to run CMake to configure and build a simple C++ project. The project consists of a single source file for a single executable.
+These recipes shows how to run CMake to configure and build a simple project. The project consists of a single source file for a single executable.
+The same project is presented in C++, C and Fortran 90.
 
 ## Ingredients
 
-- A C++ compiler
+- A C++ (or C or Fortran 90) compiler
 - CMake, any version higher than 2.8
 
 ## Contents of `CMakeLists.txt`
