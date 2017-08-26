@@ -21,3 +21,7 @@ Experimental collection of CMake recipes.
 
 - [Recipe 0000](recipe-0000/README.md)
 - [Recipe 0001](recipe-0001/README.md)
+- [Recipe 0002](recipe-0002/README.md)
+- [Recipe 0003](recipe-0003/README.md)
+- [Recipe 0004](recipe-0004/README.md)
+- [Recipe 0005](recipe-0005/README.md)

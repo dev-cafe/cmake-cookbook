@@ -59,6 +59,8 @@ before_script:
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       # Install latest available CMake
       brew upgrade cmake
+      # Get GFortran
+      brew install gfortran
     fi
   - |
     if [[ "${GENERATOR}" == "Ninja" ]]; then
