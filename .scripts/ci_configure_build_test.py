@@ -24,11 +24,12 @@ def run_command(cmd):
 
 def main():
     # Glob recipes excluding recipe-0000
-    recipes = [r for r in sorted(glob.glob('recipe-*')) if "0000" not in r]
+    recipes = [r for r in sorted(glob.glob('recipe-*')) if '0000' not in r]
     # Get some environment variables
     generator = os.environ.get('GENERATOR')
     buildflags = os.environ.get('BUILDFLAGS')
     topdir = ''
+    is_visual_studio = True if generator == 'Visual Studio 14 2015' else False
     if os.environ.get('TRAVIS'):
         topdir = os.environ.get('TRAVIS_BUILD_DIR')
     elif os.environ.get('APPVEYOR'):
@@ -44,6 +45,9 @@ def main():
         os.chdir(recipe_dir)
         # Glob examples
         examples = [e for e in sorted(glob.glob('*-example'))]
+        # Remove Fortran examples if generator is Visual Studio
+        if is_visual_studio:
+            examples = filter(lambda x: 'fortran' not in x, examples)
         for example in examples:
             os.chdir(os.path.abspath(example))
             print('{} and {}'.format(recipe, example))

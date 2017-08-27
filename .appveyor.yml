@@ -17,7 +17,7 @@ build:
 environment:
   matrix:
     - GENERATOR: "Visual Studio 14 2015"
-      BUILDFLAGS: "/verbosity:detailed"
+      BUILDFLAGS: "/verbosity:normal"
     - GENERATOR: "MinGW Makefiles"
       BUILDFLAGS: "VERBOSE=1"
     - GENERATOR: "Ninja"
@@ -30,6 +30,8 @@ init:
   - set PATH=C:\MinGW\bin;%PATH%
 
 install:
+  # Install GFortran
+  - mingw-get install fortran
   # Install dependencies in C:\projects\deps
   - mkdir C:\projects\deps
   - cd C:\projects\deps

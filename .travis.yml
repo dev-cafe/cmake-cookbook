@@ -60,7 +60,7 @@ before_script:
       # Install latest available CMake
       brew upgrade cmake
       # Get GFortran
-      brew install gfortran
+      brew install gcc
     fi
   - |
     if [[ "${GENERATOR}" == "Ninja" ]]; then
