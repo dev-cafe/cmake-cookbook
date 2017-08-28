@@ -6,7 +6,7 @@ project(recipe-0003 CXX)
 
 # generate a library from sources
 set(_sources Message.hpp Message.cpp)
-add_library(message ${_sources})
+add_library(message STATIC ${_sources})
 
 add_executable(hello-world hello-world.cpp)
 
