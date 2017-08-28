@@ -1,11 +1,11 @@
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/robertodr/cmake-recipes/master/LICENSE.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bast/cmake-recipes/master/LICENSE.md)
 
-[![Travis branch](https://img.shields.io/travis/robertodr/cmake-recipes/master.svg?style=flat-square)](https://travis-ci.org/robertodr/cmake-recipes)
-[![AppVeyor branch](https://img.shields.io/appveyor/ci/robertodr/cmake-recipes/master.svg?style=flat-square)](https://ci.appveyor.com/project/robertodr/cmake-recipes/branch/master)
+[![Travis branch](https://img.shields.io/travis/bast/cmake-recipes/master.svg?style=flat-square)](https://travis-ci.org/bast/cmake-recipes)
+[![AppVeyor branch](https://img.shields.io/appveyor/ci/bast/cmake-recipes/master.svg?style=flat-square)](https://ci.appveyor.com/project/bast/cmake-recipes/branch/master)
 
-[![GitHub issues](https://img.shields.io/github/issues/robertodr/cmake-recipes.svg?style=flat-square)](https://github.com/robertodr/cmake-recipes/issues)
-[![GitHub forks](https://img.shields.io/github/forks/robertodr/cmake-recipes.svg?style=flat-square)](https://github.com/robertodr/cmake-recipes/network)
-[![GitHub stars](https://img.shields.io/github/stars/robertodr/cmake-recipes.svg?style=flat-square)](https://github.com/robertodr/cmake-recipes/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/bast/cmake-recipes.svg?style=flat-square)](https://github.com/bast/cmake-recipes/issues)
+[![GitHub forks](https://img.shields.io/github/forks/bast/cmake-recipes.svg?style=flat-square)](https://github.com/bast/cmake-recipes/network)
+[![GitHub stars](https://img.shields.io/github/stars/bast/cmake-recipes.svg?style=flat-square)](https://github.com/bast/cmake-recipes/stargazers)
 
 # cmake-recipes
 
