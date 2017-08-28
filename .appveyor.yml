@@ -6,9 +6,7 @@
 version: 'build_{build}-{branch}'
 
 image:
-  - Visual Studio 2013
   - Visual Studio 2015
-  - Visual Studio 2017
 
 platform: x86
 
@@ -17,11 +15,7 @@ build:
 
 environment:
   matrix:
-    - GENERATOR: "Visual Studio 12 2013"
-      BUILDFLAGS: "/verbosity:normal"
     - GENERATOR: "Visual Studio 14 2015"
-      BUILDFLAGS: "/verbosity:normal"
-    - GENERATOR: "Visual Studio 15 2017"
       BUILDFLAGS: "/verbosity:normal"
     - GENERATOR: "MinGW Makefiles"
       BUILDFLAGS: "VERBOSE=1"
