@@ -10,7 +10,7 @@ add_library(message-objs OBJECT ${_sources})
 # This is only needed for older compilers, but doesn't hurt either to have it
 set_target_properties(message-objs PROPERTIES POSITION_INDEPENDENT_CODE 1)
 
-add_library(message SHARED $<TARGET_OBJECTS:message-objs>)
+add_library(message STATIC $<TARGET_OBJECTS:message-objs>)
 
 add_executable(hello-world hello-world.cpp)
 
