@@ -1,0 +1,51 @@
+# See http://msdn.microsoft.com/en-us/library/ms164311.aspx for
+# command-line options to MSBuild.
+
+# Speeding up a Visual Studio build.
+# http://blogs.msdn.com/b/vcblog/archive/2011/01/05/damn-my-vc-project-is-building-slower-in-vs2010-what-do-i-do-now-a-step-by-step-guide.aspx
+version: 'build_{build}-{branch}'
+
+image:
+  - Visual Studio 2015
+
+platform: x86
+
+build:
+  parallel: true
+
+environment:
+  matrix:
+    - GENERATOR: "Visual Studio 14 2015"
+      BUILDFLAGS: "/verbosity:normal"
+    - GENERATOR: "MinGW Makefiles"
+      BUILDFLAGS: "VERBOSE=1"
+    - GENERATOR: "Ninja"
+      BUILDFLAGS: "-v"
+
+init:
+  # Workaround for CMake not wanting sh.exe on PATH for MinGW
+  - set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
+  - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
+  - set PATH=C:\MinGW\bin;%PATH%
+
+install:
+  # Install GFortran
+  - mingw-get install fortran
+  # Install dependencies in C:\projects\deps
+  - mkdir C:\projects\deps
+  - cd C:\projects\deps
+  # Install Kitware-maintained Ninja
+  - set NINJA_URL="https://github.com/Kitware/ninja/releases/download/v1.7.2.gaad58.kitware.dyndep-1/ninja-1.7.2.gaad58.kitware.dyndep-1_i686-pc-windows-msvc.zip"
+  - appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
+  - 7z e ninja.zip -oC:\projects\deps\ninja > nul
+  - set PATH=%PATH%;C:\projects\deps\ninja
+
+before_build:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - cmake --version
+  - ninja.exe --version
+
+build_script:
+  - python .\.scripts\ci_configure_build_test.py
+
+deploy: off
