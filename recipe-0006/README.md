@@ -1,2 +1,2 @@
-Troubleshooting Simple Builds
-=============================
+How to Present Options to the User
+==================================
