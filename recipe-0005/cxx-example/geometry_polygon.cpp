@@ -1,5 +1,6 @@
 #include "geometry_polygon.hpp"
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 
 namespace geometry {
