@@ -12,7 +12,7 @@ foreach(_source IN LISTS _sources)
   message(${_tmp})
 endforeach()
 
-add_library(geometry SHARED ${_sources})
+add_library(geometry STATIC ${_sources})
 
 add_executable(compute-areas compute-areas.cpp)
 
