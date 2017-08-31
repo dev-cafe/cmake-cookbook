@@ -8,9 +8,10 @@ project(recipe-0004 CXX)
 option(USE_LIBRARY "Compile sources into a library" OFF)
 
 include(CMakeDependentOption)
-# second options depends on the value of the first
+# second option depends on the value of the first
 cmake_dependent_option(MAKE_STATIC_LIBRARY "Compile sources into a static library" OFF
                        "USE_LIBRARY" ON)
+# third option depends on the value of the first
 cmake_dependent_option(MAKE_SHARED_LIBRARY "Compile sources into a shared library" ON
                        "USE_LIBRARY" ON)
 
