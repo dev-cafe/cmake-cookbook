@@ -4,22 +4,16 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 # project name and language
 project(recipe-0008 CXX)
 
+message("Build type: ${CMAKE_BUILD_TYPE}")
+message("Configuration types: ${CMAKE_CONFIGURATION_TYPES}")
+message("C++ compiler flags, debug mode: ${CMAKE_CXX_FLAGS_DEBUG}")
+message("C++ compiler flags, relese mode: ${CMAKE_CXX_FLAGS_RELEASE}")
+message("C++ compiler flags, release with debug info mode: ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+message("C++ compiler flags, minimal release mode: ${CMAKE_CXX_FLAGS_MINSIZEREL}")
+message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
+
 # list sources by globbing
 file(GLOB _sources geometry_*)
-
-# try the IN LISTS foreach syntax
-message(STATUS "List sources using IN LISTS syntax")
-foreach(_source IN LISTS _sources)
-  get_filename_component(_tmp ${_source} NAME)
-  message(${_tmp})
-endforeach()
-# try the plain foreach syntax
-# requires to expand the contents of the variable
-message(STATUS "List sources using plain syntax")
-foreach(_source ${_sources})
-  get_filename_component(_tmp ${_source} NAME)
-  message(${_tmp})
-endforeach()
 
 # These compiler flags will not work on Windows
 add_library(geometry STATIC ${_sources})

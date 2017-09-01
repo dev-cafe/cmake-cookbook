@@ -6,9 +6,9 @@ This recipe shows how to set compiler flags for targets using
 Clang, thus building this project **fails**  on Visual Studio.
 
 The ideal way of setting compiler flags:
-- Define which `CMAKE_CONFIGURATION_TYPES` are allowed for the project Debug,
-  Release, RelWithDebInfo, MinSizeRel, and/or custom types.
-- Define a set of `${PROJECT_NAME}_<LANG>_FLAGS_<CONFIG>`
+- Define a set of `${PROJECT_NAME}_<LANG>_FLAGS_<CONFIG>`. These will be your
+  own flags for the project.
+  Notice that it is possible to add your own build types. [See here](https://stackoverflow.com/a/11437693)
 
 If using C++ or C, use the mechanism, available in CMake 3.1 and later,
 to set the language standard and the features:

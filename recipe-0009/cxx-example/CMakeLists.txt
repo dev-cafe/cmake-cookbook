@@ -2,15 +2,7 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 # project name and language
-project(recipe-0008 CXX)
-
-message("Build type: ${CMAKE_BUILD_TYPE}")
-message("Configuration types: ${CMAKE_CONFIGURATION_TYPES}")
-message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
-message("C++ compiler flags, debug mode: ${CMAKE_CXX_FLAGS_DEBUG}")
-message("C++ compiler flags, relese mode: ${CMAKE_CXX_FLAGS_RELEASE}")
-message("C++ compiler flags, release with debug info mode: ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
-message("C++ compiler flags, minimal release mode: ${CMAKE_CXX_FLAGS_MINSIZEREL}")
+project(recipe-0009 CXX)
 
 add_executable(inplace_expression_validity inplace_expression_validity.cpp)
 # We would like C++11, without compiler-specific extensions.
