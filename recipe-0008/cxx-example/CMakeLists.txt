@@ -21,6 +21,7 @@ foreach(_source ${_sources})
   message(${_tmp})
 endforeach()
 
+# These compiler flags will not work on Windows
 add_library(geometry STATIC ${_sources})
 target_compile_options(geometry
   PRIVATE
