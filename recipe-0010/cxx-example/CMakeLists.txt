@@ -22,12 +22,10 @@ set_target_properties(animals
   )
 
 add_executable(animal-farm animal-farm.cpp)
-target_link_libraries(animal-farm animals)
-# We want C++14, without compiler-specific extensions.
-# Any standard lower than that will abort compilation.
 set_target_properties(animal-farm
   PROPERTIES
     CXX_STANDARD 14
     CXX_EXTENSIONS OFF
     CXX_STANDARD_REQUIRED ON
   )
+target_link_libraries(animal-farm animals)

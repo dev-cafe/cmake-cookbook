@@ -11,7 +11,6 @@
 typedef std::function<std::unique_ptr<Animal>(const std::string &)> CreateAnimal;
 
 int main() {
-
   Factory<CreateAnimal> farm;
   farm.subscribe("CAT",
                  [](const std::string & n) { return std::make_unique<Cat>(n); });
