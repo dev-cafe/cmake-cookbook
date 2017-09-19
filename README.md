@@ -7,15 +7,20 @@
 [![GitHub forks](https://img.shields.io/github/forks/bast/cmake-recipes.svg?style=flat-square)](https://github.com/bast/cmake-recipes/network)
 [![GitHub stars](https://img.shields.io/github/stars/bast/cmake-recipes.svg?style=flat-square)](https://github.com/bast/cmake-recipes/stargazers)
 
-# cmake-recipes
 
-Experimental collection of CMake recipes.
+# Experimental collection of CMake recipes
+
 
 ## Conventions
 
-- Folders for recipes are named `recipe-XYZU`, where `XYZU` is a number, _i.e._ `0000`, `0001` and so forth.
-- Each recipe can have more than one example subfolder. These subfolders are named `prefix-example`. `prefix` can be anything of your choice, _e.g._ `cxx-example` is a valid name.
-- Any code for the recipes **must be stored** in a `prefix-example` subdirectory.
+- Folders for recipes are named `recipe-XYZU`, where `XYZU` is a number, _i.e._
+  `0000`, `0001` and so forth.
+- Each recipe can have more than one example subfolder. These subfolders are
+  named `prefix-example`. `prefix` can be anything of your choice, _e.g._
+`cxx-example` is a valid name.
+- Any code for the recipes **must be stored** in a `prefix-example`
+  subdirectory.
+
 
 ## Recipes
 
