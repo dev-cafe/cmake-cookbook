@@ -69,5 +69,6 @@ before_script:
       export PATH=$PWD/${NINJA_TARBALL_NAME}:$PATH
     fi
   - ./.scripts/report_versions.sh
+
 script:
   - python ./.scripts/ci_configure_build_test.py
