@@ -1,6 +1,5 @@
 // Original example by Evgenii Rudnyi http://MatrixProgramming.com
 // found at: http://matrixprogramming.com/files/code/LAPACK/dgesv.cpp
-// simple example - to be improved
 
 #include <chrono>
 #include <cmath>

@@ -15,7 +15,7 @@ include(FortranCInterface)
 FortranCInterface_VERIFY(CXX)
 FortranCInterface_HEADER(FortranC.hpp)
 
-add_library(math CxxLAPACK.cpp)
+add_library(math CxxBLAS.cpp CxxLAPACK.cpp)
 target_include_directories(math
   PUBLIC
     ${PROJECT_BINARY_DIR}
