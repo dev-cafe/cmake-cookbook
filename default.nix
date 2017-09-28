@@ -2,6 +2,7 @@ with import <nixpkgs> {}; {
   cmakeEnv = stdenv.mkDerivation {
     name = "cmake-recipes";
     buildInputs = [
+      atlasWithLapack
       boost
       bundler
       ccache
@@ -13,6 +14,7 @@ with import <nixpkgs> {}; {
       gcc
       gfortran
       gdb
+      hdf5-fortran
       lldb
       openmpi
       python27Packages.breathe
