@@ -8,8 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(OpenMP)
-
+find_package(OpenMP REQUIRED)
 
 add_executable(hello-openmp hello-openmp.cpp)
 target_compile_options(hello-openmp
