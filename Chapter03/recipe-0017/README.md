@@ -1,2 +1,2 @@
-Detecting the OpenACC Parallel Environment
-==========================================
+Detecting the Boost Libraries
+=============================

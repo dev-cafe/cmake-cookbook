@@ -1,2 +1,0 @@
-Making Your Package Discoverable
-================================
