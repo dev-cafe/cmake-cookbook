@@ -11,6 +11,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(OpenMP REQUIRED)
 
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+if(TARGET Eigen3::Eigen)
+  message(STATUS "Eigen3 version ${EIGEN3_VERSION_STRING} found in ${EIGEN3_INCLUDE_DIR}")
+endif()
 
 find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
