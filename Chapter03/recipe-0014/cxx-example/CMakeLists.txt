@@ -18,16 +18,11 @@ FortranCInterface_HEADER(FortranC.hpp)
 add_library(math CxxBLAS.cpp CxxLAPACK.cpp)
 target_include_directories(math
   PUBLIC
-    ${PROJECT_BINARY_DIR}
     ${PROJECT_SOURCE_DIR}
+    ${PROJECT_BINARY_DIR}
   )
 
 add_executable(linear-algebra linear-algebra.cpp)
-target_include_directories(linear-algebra
-  PRIVATE
-    ${PROJECT_BINARY_DIR}
-    ${PROJECT_SOURCE_DIR}
-  )
 target_link_libraries(linear-algebra
   PUBLIC
     ${BLAS_LIBRARIES}

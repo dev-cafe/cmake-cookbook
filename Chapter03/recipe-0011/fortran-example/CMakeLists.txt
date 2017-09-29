@@ -2,8 +2,12 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 # project name and language
-project(recipe-0001 Fortran)
+project(recipe-0011 Fortran)
 
-find_package(PythonInterp 2.7 REQUIRED)
+find_package(PythonInterp)
 
 add_executable(hello-world hello-world.f90)
+target_compile_options(hello-world
+  PUBLIC
+    -std=f95
+  )
