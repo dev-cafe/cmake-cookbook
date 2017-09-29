@@ -8,7 +8,8 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-find_package(PythonLibs 2.7 QUIET REQUIRED)
+find_package(PythonInterp 2.7 EXACT REQUIRED)
+find_package(PythonLibs 2.7 EXACT REQUIRED)
 
 add_executable(hello-embedded-python hello-embedded-python.c)
 target_include_directories(hello-embedded-python
