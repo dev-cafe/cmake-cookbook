@@ -11,6 +11,7 @@ with import <nixpkgs> {}; {
       clang-analyzer
       cmake
       doxygen
+      eigen3_3
       gcc
       gfortran
       gdb
