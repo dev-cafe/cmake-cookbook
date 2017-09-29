@@ -4,10 +4,13 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 # project name and language
 project(recipe-0013 CXX)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 find_package(PythonInterp 2.7 REQUIRED)
 find_package(PythonLibs 2.7 REQUIRED)
 
-include(FindPackageHandleStandardArgs)
 # Find NumPy location
 execute_process(
   COMMAND
@@ -28,6 +31,7 @@ execute_process(
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
+include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(NumPy
   FOUND_VAR NumPy_FOUND
   REQUIRED_VARS NumPy
