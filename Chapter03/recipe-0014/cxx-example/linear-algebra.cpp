@@ -38,9 +38,6 @@ int main(int argc, char ** argv) {
     }
     b[r] = dist(mt);
   }
-  // Save matrix and RHS
-  std::vector<double> A1(a);
-  std::vector<double> b1(b);
   end = std::chrono::system_clock::now();
   // Report times
   elapsed_seconds = end - start;
@@ -48,10 +45,20 @@ int main(int argc, char ** argv) {
   std::cout << "matrices allocated and initialized " << std::ctime(&end_time)
             << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
+  start = std::chrono::system_clock::now();
+  // Scale RHS vector by a random number between -1.0 and 1.0
+  C_DSCAL(dim, dist(mt), b.data(), 1);
+  // Save matrix and RHS
+  std::vector<double> A1(A);
+  std::vector<double> b1(b);
+  end = std::chrono::system_clock::now();
+  end_time = std::chrono::system_clock::to_time_t(end);
+  std::cout << "C_DSCAL done, A and b saved " << std::ctime(&end_time)
+            << "elapsed time: " << elapsed_seconds.count() << "s\n";
+
   int info;
   start = std::chrono::system_clock::now();
-  int one = 1;
-  info = C_DGESV(dim, one, A.data(), dim, ipiv.data(), b.data(), dim);
+  info = C_DGESV(dim, 1, A.data(), dim, ipiv.data(), b.data(), dim);
   end = std::chrono::system_clock::now();
   // Report times
   elapsed_seconds = end - start;
