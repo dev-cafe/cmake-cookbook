@@ -1,2 +1,2 @@
-Detecting the Boost Libraries
-=============================
+Detecting the Eigen Library
+===========================

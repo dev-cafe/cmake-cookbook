@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 # project name and language
-project(recipe-0018 Fortran)
+project(recipe-0019 Fortran)
 
 find_package(HDF5 1.8.15 REQUIRED COMPONENTS Fortran)
 # Was the Fortran 2003 interface to HDF5 enabled?
