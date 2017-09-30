@@ -33,8 +33,6 @@ int main(int argc, char ** argv) {
             << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
   start = std::chrono::system_clock::now();
-  // Scale RHS vector by pi
-  b *= M_PI;
   // Save matrix and RHS
   Eigen::MatrixXd A1 = A;
   Eigen::VectorXd b1 = b;
