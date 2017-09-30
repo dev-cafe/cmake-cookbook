@@ -14,19 +14,3 @@ find_package(MPI REQUIRED)
 set(CMAKE_CXX_COMPILER ${MPI_CXX_COMPILER})
 
 add_executable(hello-mpi hello-mpi.cpp)
-target_compile_options(hello-mpi
-  PUBLIC
-    ${MPI_CXX_COMPILE_FLAGS}
-  )
-target_include_directories(hello-mpi
-  PUBLIC
-    ${MPI_CXX_INCLUDE_PATH}
-  )
-target_link_libraries(hello-mpi
-  PUBLIC
-    ${MPI_CXX_LIBRARIES}
-  )
-set_target_properties(hello-mpi
-  PROPERTIES
-    LINK_FLAGS ${MPI_CXX_LINK_FLAGS}
-  )
