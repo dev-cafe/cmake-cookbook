@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 # project name and language
-project(recipe-0014 CXX)
+project(recipe-0017 CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -15,15 +15,18 @@ if(TARGET Eigen3::Eigen)
   message(STATUS "Eigen3 version ${EIGEN3_VERSION_STRING} found in ${EIGEN3_INCLUDE_DIR}")
 endif()
 
-find_package(BLAS REQUIRED)
-find_package(LAPACK REQUIRED)
+find_package(BLAS)
+find_package(LAPACK)
 
 add_executable(linear-algebra linear-algebra.cpp)
-target_compile_definitions(linear-algebra
-  PRIVATE
-    EIGEN_USE_BLAS
-    EIGEN_USE_LAPACKE_STRICT
-  )
+if(BLAS_FOUND AND LAPACK_FOUND)
+  message(STATUS "Eigen will use some subroutines from BLAS and LAPACK. See here: http://eigen.tuxfamily.org/dox-devel/TopicUsingBlasLapack.html")
+  target_compile_definitions(linear-algebra
+    PRIVATE
+      EIGEN_USE_BLAS
+      EIGEN_USE_LAPACKE_STRICT
+    )
+endif()
 target_compile_options(linear-algebra
   PUBLIC
     ${OpenMP_CXX_FLAGS}
