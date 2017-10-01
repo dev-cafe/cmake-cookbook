@@ -6,12 +6,12 @@ import subprocess
 import os
 
 
-def run_command(cmd):
+def run_command(command):
     """
-    Accepts a list
-    Code copied from: https://stackoverflow.com/a/4417735
+    command is a list
+    code adapted from: https://stackoverflow.com/a/4417735
     """
-    popen = subprocess.Popen(cmd,
+    popen = subprocess.Popen(command,
                              stdout=subprocess.PIPE,
                              universal_newlines=True)
     for stdout_line in iter(popen.stdout.readline, ""):
@@ -19,7 +19,7 @@ def run_command(cmd):
     popen.stdout.close()
     return_code = popen.wait()
     if return_code:
-        raise subprocess.CalledProcessError(return_code, cmd)
+        raise subprocess.CalledProcessError(return_code, command)
 
 
 def main():
