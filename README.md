@@ -22,6 +22,24 @@
   subdirectory.
 
 
+## Configuring tests
+
+You can place an optional `config.yml` file in the recipe directory, next to `CMakeLists.txt`.
+If present, the test script will parse it to set environment variables and CMake definitions for a particular recipe.
+
+Example:
+```yaml
+# environment variables to be set
+env:
+  CXX: g++
+
+# these will be passed to CMake as -DFOO=bar -DSOME_OPTION=ON
+definitions:
+  FOO: bar
+  SOME_OPTION: ON
+```
+
+
 ## Running tests on your computer
 
 ```shell

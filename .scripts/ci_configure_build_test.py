@@ -80,6 +80,24 @@ def handle_errors(errors):
     return return_code
 
 
+def parse_yaml():
+    '''
+    If recipe directory contains a file called config.yml, we parse it.
+    '''
+    import yaml
+    import sys
+    file_name = 'config.yml'
+    if os.path.isfile(file_name):
+        with open(file_name, 'r') as f:
+            try:
+                config = yaml.load(f, yaml.SafeLoader)
+            except yaml.YAMLError as exc:
+                print(exc)
+                sys.exit(-1)
+        return config
+    return {}
+
+
 def main():
     recipes = get_list_of_recipes_to_run()
     generator, buildflags, topdir, is_visual_studio = get_env_variables()
@@ -104,7 +122,19 @@ def main():
             # configure step
             sys.stdout.write('  configuring ... ')
             sys.stdout.flush()
-            errors = run_command(command='cmake -H. -Bbuild -G"{0}"'.format(generator),
+            config = parse_yaml()
+            env = ''
+            if 'env' in config:
+                for k in config['env']:
+                    v = config['env'][k]
+                    env += '{0}={1} '.format(k, v)
+            definitions = ''
+            if 'definitions' in config:
+                for k in config['definitions']:
+                    v = config['definitions'][k]
+                    definitions += ' -D{0}={1}'.format(k, v)
+            command = '{0} cmake -H. -Bbuild -G"{1}"{2}'.format(env, generator, definitions)
+            errors = run_command(command=command,
                                  expected_strings=['-- Configuring done',
                                                    '-- Generating done'])
             return_code += handle_errors(errors)
