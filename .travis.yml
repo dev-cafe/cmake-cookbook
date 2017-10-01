@@ -56,12 +56,18 @@ before_script:
       curl -L ${CMAKE_URL} | tar xz
       export PATH=$PWD/cmake-3.7.2-Linux-x86_64/bin:$PATH
       export LD_LIBARY_PATH=$PWD/cmake-3.7.2-Linux-x86_64/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+      pip install --user virtualenv
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       # Install latest available CMake
       brew upgrade cmake
       # Get GFortran
       brew install gcc
+      # virtual environments
+      pip install virtualenv
     fi
+  - virtualenv venv
+  - source venv/bin/activate
+  - pip install -r requirements.txt
   - |
     if [[ "${GENERATOR}" == "Ninja" ]]; then
       cd ${TRAVIS_BUILD_DIR}
