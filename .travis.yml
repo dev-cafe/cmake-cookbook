@@ -71,4 +71,4 @@ before_script:
   - ./.scripts/report_versions.sh
 
 script:
-  - python ./.scripts/ci_configure_build_test.py
+  - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'

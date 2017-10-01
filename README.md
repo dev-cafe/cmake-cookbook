@@ -25,7 +25,7 @@
 ## Running tests on your computer
 
 ```shell
-$ python ./.scripts/ci_configure_build_test.py
+$ python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
 ```
 
 

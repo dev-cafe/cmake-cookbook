@@ -4,6 +4,7 @@ from __future__ import print_function  # Only Python 2.x
 import glob
 import subprocess
 import os
+import sys
 
 
 def run_command(command):
@@ -23,8 +24,19 @@ def run_command(command):
 
 
 def main():
+
+    # we expect the script to be executed as: python .scripts/ci_configure_build_test.py regex
+    # stop here if the number of arguments is not right
+    if len(sys.argv) == 2:
+        # we assume the last positional argument to be the regex to glob after
+        glob_regex = sys.argv[-1]
+    else:
+        sys.stderr.write('ERROR: script expects one argument, example:\n')
+        sys.stderr.write("python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'\n")
+        sys.exit(1)
+
     # Glob recipes excluding recipe-0000
-    recipes = [r for r in sorted(glob.glob('Chapter*/recipe-*')) if '0000' not in r]
+    recipes = [r for r in sorted(glob.glob(glob_regex)) if '0000' not in r]
     # Get some environment variables
     generator = os.environ.get('GENERATOR')
     buildflags = os.environ.get('BUILDFLAGS')
