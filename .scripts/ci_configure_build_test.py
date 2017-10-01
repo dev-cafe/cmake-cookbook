@@ -23,8 +23,7 @@ def run_command(command):
         raise subprocess.CalledProcessError(return_code, command)
 
 
-def main():
-
+def get_list_of_recipes_to_run():
     # we expect the script to be executed as: python .scripts/ci_configure_build_test.py regex
     # stop here if the number of arguments is not right
     if len(sys.argv) == 2:
@@ -34,10 +33,11 @@ def main():
         sys.stderr.write('ERROR: script expects one argument, example:\n')
         sys.stderr.write("python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'\n")
         sys.exit(1)
+    # glob recipes but exclude recipe-0000
+    return [r for r in sorted(glob.glob(glob_regex)) if '0000' not in r]
 
-    # Glob recipes excluding recipe-0000
-    recipes = [r for r in sorted(glob.glob(glob_regex)) if '0000' not in r]
-    # Get some environment variables
+
+def get_env_variables():
     generator = os.environ.get('GENERATOR')
     buildflags = os.environ.get('BUILDFLAGS')
     topdir = ''
@@ -51,6 +51,12 @@ def main():
         generator = 'Unix Makefiles'
         buildflags = 'VERBOSE=1'
         topdir = os.getcwd()
+    return generator, buildflags, topdir, is_visual_studio
+
+
+def main():
+    recipes = get_list_of_recipes_to_run()
+    generator, buildflags, topdir, is_visual_studio = get_env_variables()
 
     for recipe in recipes:
         recipe_dir = os.path.abspath(recipe)
