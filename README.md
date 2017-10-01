@@ -31,7 +31,8 @@ Example:
 ```yaml
 # environment variables to be set
 env:
-  CXX: g++
+  SOME_ENVIRONMENT_VAR: 'example'
+  ANOTHER_VAR: 'foo'
 
 # these will be passed to CMake as -DFOO=bar -DSOME_OPTION=ON
 definitions:
