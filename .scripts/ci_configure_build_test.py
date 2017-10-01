@@ -7,20 +7,33 @@ import os
 import sys
 
 
-def run_command(command):
+def run_command(command, expected_strings):
     """
-    command is a list
-    code adapted from: https://stackoverflow.com/a/4417735
+    Executes a command (string) and checks whether all expected strings (list)
+    are present in the stdout.
+    If all strings are present, it returns errors as None.
+    If not all are present, it combines stdout and stderr and returns it as error
+    and lets the caller deal with it.
+    We do this in this a bit convoluted way since CMake sometimes/often (?)
+    puts warnings into stderr so we cannot just check for the presence of stderr.
     """
     popen = subprocess.Popen(command,
+                             shell=True,
                              stdout=subprocess.PIPE,
-                             universal_newlines=True)
-    for stdout_line in iter(popen.stdout.readline, ""):
-        yield stdout_line
-    popen.stdout.close()
-    return_code = popen.wait()
-    if return_code:
-        raise subprocess.CalledProcessError(return_code, command)
+                             stderr=subprocess.PIPE)
+
+    stdout_coded, stderr_coded = popen.communicate()
+    stdout = stdout_coded.decode('UTF-8')
+    stderr = stderr_coded.decode('UTF-8')
+
+    if all([s in stdout for s in expected_strings]):
+        # we found all strings, assume there are no errors
+        # and return None
+        errors = None
+    else:
+        errors = stdout + stderr
+
+    return errors
 
 
 def get_list_of_recipes_to_run():
@@ -54,34 +67,54 @@ def get_env_variables():
     return generator, buildflags, topdir, is_visual_studio
 
 
+def handle_errors(errors):
+    if errors is None:
+        sys.stdout.write('OK\n')
+        return 0
+    else:
+        sys.stdout.write('FAILED\n')
+        sys.stderr.write(errors + '\n')
+        return 1
+
+
 def main():
     recipes = get_list_of_recipes_to_run()
     generator, buildflags, topdir, is_visual_studio = get_env_variables()
 
+    return_code = 0
     for recipe in recipes:
         recipe_dir = os.path.abspath(recipe)
         os.chdir(recipe_dir)
         # Glob examples
         examples = [e for e in sorted(glob.glob('*-example'))]
+
+        # TODO we need to get rid of this
         # Remove Fortran examples if generator is Visual Studio
         if is_visual_studio:
             examples = filter(lambda x: 'fortran' not in x, examples)
+
         for example in examples:
+
             os.chdir(os.path.abspath(example))
-            print('{} and {}'.format(recipe, example))
-            # Configure
-            configure = run_command(['cmake', '-H.',
-                                     '-Bbuild', '-G' + generator])
-            [print(x, end="") for x in configure]
+            sys.stdout.write('{}/{}\n'.format(recipe, example))
+
+            # configure step
+            sys.stdout.write('  configuring ... ')
+            errors = run_command(command='cmake -H. -Bbuild -G"{0}"'.format(generator),
+                                 expected_strings=['-- Configuring done',
+                                                   '-- Generating done'])
+            return_code += handle_errors(errors)
+
+            # build step
             os.chdir('build')
-            # Build
-            build = run_command(['cmake', '--build', '.', '--', buildflags])
-            [print(x, end="") for x in build]
-            # Test
-            # test = run_command(['ctest'])
-            # [print(x, end="") for x in test]
+            sys.stdout.write('  building ... ')
+            errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
+                                 expected_strings=['Built target'])
+            return_code += handle_errors(errors)
+
             os.chdir(recipe_dir)
         os.chdir(topdir)
+    sys.exit(return_code)
 
 
 if __name__ == '__main__':
