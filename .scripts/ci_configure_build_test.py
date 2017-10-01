@@ -106,6 +106,13 @@ def main():
     for recipe in recipes:
         recipe_dir = os.path.abspath(recipe)
         os.chdir(recipe_dir)
+
+        # extract title from README.md
+        with open('README.md', 'r') as f:
+            for line in f.read().splitlines():
+                if line[0:2] == '# ':
+                    print('\nrecipe: {0}'.format(line[2:]))
+
         # Glob examples
         examples = [e for e in sorted(glob.glob('*-example'))]
 
@@ -117,10 +124,10 @@ def main():
         for example in examples:
 
             os.chdir(os.path.abspath(example))
-            sys.stdout.write('{}/{}\n'.format(recipe, example))
+            sys.stdout.write('  {}/{}\n'.format(recipe, example))
 
             # configure step
-            sys.stdout.write('  configuring ... ')
+            sys.stdout.write('    configuring ... ')
             sys.stdout.flush()
             config = parse_yaml()
             env = ''
@@ -141,7 +148,7 @@ def main():
 
             # build step
             os.chdir('build')
-            sys.stdout.write('  building ... ')
+            sys.stdout.write('    building ... ')
             sys.stdout.flush()
             errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
                                  expected_strings=['Built target'])
