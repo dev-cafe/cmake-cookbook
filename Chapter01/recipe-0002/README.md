@@ -1,5 +1,4 @@
-Switching Generators
-====================
+# Switching Generators
 
 A single `CMakeLists.txt` can be used to configure projects for different toolstacks on different platforms.
 CMake is a build system _generator_. starting from a description of the operations the build system, _e.g._ Unix Makefiles, Ninja, Visual Studio, etc.,

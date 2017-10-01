@@ -1,2 +1,1 @@
-Detecting the Boost Libraries
-=============================
+# Detecting the Boost Libraries

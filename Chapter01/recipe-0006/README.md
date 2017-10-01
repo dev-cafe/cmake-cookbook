@@ -1,2 +1,1 @@
-How to Present Options to the User
-==================================
+# How to Present Options to the User

@@ -1,2 +1,1 @@
-Building and Linking Static and Shared Libraries
-================================================
+# Building and Linking Static and Shared Libraries

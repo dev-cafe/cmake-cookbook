@@ -1,2 +1,1 @@
-Switching the Build Type
-========================
+# Switching the Build Type
