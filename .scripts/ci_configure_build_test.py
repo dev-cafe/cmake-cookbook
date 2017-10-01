@@ -70,11 +70,14 @@ def get_env_variables():
 def handle_errors(errors):
     if errors is None:
         sys.stdout.write('OK\n')
-        return 0
+        return_code = 0
     else:
         sys.stdout.write('FAILED\n')
         sys.stderr.write(errors + '\n')
-        return 1
+        return_code = 1
+    sys.stdout.flush()
+    sys.stderr.flush()
+    return return_code
 
 
 def main():
@@ -100,6 +103,7 @@ def main():
 
             # configure step
             sys.stdout.write('  configuring ... ')
+            sys.stdout.flush()
             errors = run_command(command='cmake -H. -Bbuild -G"{0}"'.format(generator),
                                  expected_strings=['-- Configuring done',
                                                    '-- Generating done'])
@@ -108,6 +112,7 @@ def main():
             # build step
             os.chdir('build')
             sys.stdout.write('  building ... ')
+            sys.stdout.flush()
             errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
                                  expected_strings=['Built target'])
             return_code += handle_errors(errors)
