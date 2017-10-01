@@ -23,50 +23,47 @@ def run_command(cmd):
 
 
 def main():
-    # Glob chapters
-    chapters = [c for c in sorted(glob.glob('Chapter*'))]
-    for chapter in chapters:
-        # Glob recipes excluding recipe-0000
-        recipes = [r for r in sorted(glob.glob('recipe-*')) if '0000' not in r]
-        # Get some environment variables
-        generator = os.environ.get('GENERATOR')
-        buildflags = os.environ.get('BUILDFLAGS')
-        topdir = ''
-        is_visual_studio = True if generator == 'Visual Studio 14 2015' else False
-        if os.environ.get('TRAVIS'):
-            topdir = os.environ.get('TRAVIS_BUILD_DIR')
-        elif os.environ.get('APPVEYOR'):
-            topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
-        else:
-            # Local testing
-            generator = 'Unix Makefiles'
-            buildflags = 'VERBOSE=1'
-            topdir = os.getcwd()
+    # Glob recipes excluding recipe-0000
+    recipes = [r for r in sorted(glob.glob('Chapter*/recipe-*')) if '0000' not in r]
+    # Get some environment variables
+    generator = os.environ.get('GENERATOR')
+    buildflags = os.environ.get('BUILDFLAGS')
+    topdir = ''
+    is_visual_studio = True if generator == 'Visual Studio 14 2015' else False
+    if os.environ.get('TRAVIS'):
+        topdir = os.environ.get('TRAVIS_BUILD_DIR')
+    elif os.environ.get('APPVEYOR'):
+        topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
+    else:
+        # Local testing
+        generator = 'Unix Makefiles'
+        buildflags = 'VERBOSE=1'
+        topdir = os.getcwd()
 
-        for recipe in recipes:
-            recipe_dir = os.path.abspath(recipe)
+    for recipe in recipes:
+        recipe_dir = os.path.abspath(recipe)
+        os.chdir(recipe_dir)
+        # Glob examples
+        examples = [e for e in sorted(glob.glob('*-example'))]
+        # Remove Fortran examples if generator is Visual Studio
+        if is_visual_studio:
+            examples = filter(lambda x: 'fortran' not in x, examples)
+        for example in examples:
+            os.chdir(os.path.abspath(example))
+            print('{} and {}'.format(recipe, example))
+            # Configure
+            configure = run_command(['cmake', '-H.',
+                                     '-Bbuild', '-G' + generator])
+            [print(x, end="") for x in configure]
+            os.chdir('build')
+            # Build
+            build = run_command(['cmake', '--build', '.', '--', buildflags])
+            [print(x, end="") for x in build]
+            # Test
+            # test = run_command(['ctest'])
+            # [print(x, end="") for x in test]
             os.chdir(recipe_dir)
-            # Glob examples
-            examples = [e for e in sorted(glob.glob('*-example'))]
-            # Remove Fortran examples if generator is Visual Studio
-            if is_visual_studio:
-                examples = filter(lambda x: 'fortran' not in x, examples)
-            for example in examples:
-                os.chdir(os.path.abspath(example))
-                print('{} and {}'.format(recipe, example))
-                # Configure
-                configure = run_command(['cmake', '-H.',
-                                         '-Bbuild', '-G' + generator])
-                [print(x, end="") for x in configure]
-                os.chdir('build')
-                # Build
-                build = run_command(['cmake', '--build', '.', '--', buildflags])
-                [print(x, end="") for x in build]
-                # Test
-                # test = run_command(['ctest'])
-                # [print(x, end="") for x in test]
-                os.chdir(recipe_dir)
-            os.chdir(topdir)
+        os.chdir(topdir)
 
 
 if __name__ == '__main__':
