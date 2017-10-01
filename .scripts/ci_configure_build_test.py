@@ -82,11 +82,11 @@ def handle_errors(errors):
 
 def parse_yaml():
     '''
-    If recipe directory contains a file called config.yml, we parse it.
+    If recipe directory contains a file called menu.yml, we parse it.
     '''
     import yaml
     import sys
-    file_name = 'config.yml'
+    file_name = 'menu.yml'
     if os.path.isfile(file_name):
         with open(file_name, 'r') as f:
             try:

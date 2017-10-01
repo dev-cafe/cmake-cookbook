@@ -24,7 +24,7 @@
 
 ## Configuring tests
 
-You can place an optional `config.yml` file in the recipe directory, next to `CMakeLists.txt`.
+You can place an optional `menu.yml` file in the recipe directory, next to `CMakeLists.txt`.
 If present, the test script will parse it to set environment variables and CMake definitions for a particular recipe.
 
 Example:
