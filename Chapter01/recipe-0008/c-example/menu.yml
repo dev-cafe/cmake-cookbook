@@ -1,0 +1,3 @@
+definitions:
+  CMAKE_C_COMPILER: 'gcc'
+  CMAKE_BUILD_TYPE: 'Debug'

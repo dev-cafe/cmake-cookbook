@@ -8,7 +8,6 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <iterator>
 #include <string>
 
 #include <uuid/uuid.h>

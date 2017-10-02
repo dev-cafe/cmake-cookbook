@@ -1,0 +1,2 @@
+definitions:
+  CMAKE_C_COMPILER: 'gcc'
