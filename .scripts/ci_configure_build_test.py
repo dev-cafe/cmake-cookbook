@@ -19,6 +19,7 @@ def run_command(command, expected_strings):
     We do this in this a bit convoluted way since CMake sometimes/often (?)
     puts warnings into stderr so we cannot just check for the presence of stderr.
     """
+    print(command)
     popen = subprocess.Popen(command,
                              shell=True,
                              stdout=subprocess.PIPE,

@@ -1,0 +1,2 @@
+definitions:
+  CMAKE_INCLUDE_PATH: "$TRAVIS_BUILD_DIR/eigen-eigen-26667be4f70b"

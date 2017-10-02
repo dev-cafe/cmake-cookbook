@@ -12,6 +12,14 @@ matrix:
             - gcc-5
             - g++-5
             - gfortran-5
+            - python-dev
+            - libblas-dev
+            - liblapack-dev
+            - libopenmpi-dev
+            - openmpi-bin
+            - libboost1.55-all-dev
+            - libhdf5-openmpi-dev
+            - uuid-dev
       env:
         - CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
         - GENERATOR="Unix Makefiles"
@@ -28,6 +36,14 @@ matrix:
             - gcc-5
             - g++-5
             - gfortran-5
+            - python-dev
+            - libblas-dev
+            - liblapack-dev
+            - libopenmpi-dev
+            - openmpi-bin
+            - libboost-dev
+            - libhdf5-openmpi-dev
+            - uuid-dev
       env:
         - CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
         - GENERATOR="Ninja"
@@ -56,12 +72,15 @@ before_script:
       curl -L ${CMAKE_URL} | tar xz
       export PATH=$PWD/cmake-3.7.2-Linux-x86_64/bin:$PATH
       export LD_LIBARY_PATH=$PWD/cmake-3.7.2-Linux-x86_64/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+      # Get Eigen
+      wget -q -O eigen.tar.gz https://bitbucket.org/eigen/eigen/get/3.3.0.tar.gz
+      tar xzf eigen.tar.gz
       pip install --user virtualenv
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       # Install latest available CMake
       brew upgrade cmake
       # Get GFortran
-      brew install gcc
+      brew install gcc eigen boost mpich hdf5
       # virtual environments
       pip install virtualenv
     fi
