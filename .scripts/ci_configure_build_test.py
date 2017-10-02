@@ -5,6 +5,8 @@ import glob
 import subprocess
 import os
 import sys
+import datetime
+import time
 
 
 def run_command(command, expected_strings):
@@ -125,6 +127,12 @@ def main():
             os.chdir(example)
             sys.stdout.write('  {}/{}\n'.format(recipe, example))
 
+            # we append a time stamp to the build directory
+            # to avoid it being re-used when running tests multiple times
+            # when debugging on a laptop
+            time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
+            build_directory = 'build-{0}'.format(time_stamp)
+
             # configure step
             sys.stdout.write('    configuring ... ')
             sys.stdout.flush()
@@ -139,14 +147,14 @@ def main():
                 for k in config['definitions']:
                     v = config['definitions'][k]
                     definitions += ' -D{0}={1}'.format(k, v)
-            command = '{0} cmake -H. -Bbuild -G"{1}"{2}'.format(env, generator, definitions)
+            command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
             errors = run_command(command=command,
                                  expected_strings=['-- Configuring done',
                                                    '-- Generating done'])
             return_code += handle_errors(errors)
 
             # build step
-            os.chdir(os.path.join(example, 'build'))
+            os.chdir(build_directory)
             sys.stdout.write('    building ... ')
             sys.stdout.flush()
             errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
