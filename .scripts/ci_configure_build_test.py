@@ -36,7 +36,7 @@ def run_command(command, expected_strings):
     return errors
 
 
-def get_list_of_recipes_to_run():
+def get_list_of_recipes_to_run(topdir):
     # we expect the script to be executed as: python .scripts/ci_configure_build_test.py regex
     # stop here if the number of arguments is not right
     if len(sys.argv) == 2:
@@ -47,7 +47,7 @@ def get_list_of_recipes_to_run():
         sys.stderr.write("python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'\n")
         sys.exit(1)
     # glob recipes but exclude recipe-0000
-    return [r for r in sorted(glob.glob(glob_regex)) if '0000' not in r]
+    return [r for r in sorted(glob.glob(os.path.join(topdir, glob_regex))) if '0000' not in r]
 
 
 def get_env_variables():
@@ -99,13 +99,12 @@ def parse_yaml():
 
 
 def main():
-    recipes = get_list_of_recipes_to_run()
     generator, buildflags, topdir, is_visual_studio = get_env_variables()
+    recipes = get_list_of_recipes_to_run(topdir)
 
     return_code = 0
     for recipe in recipes:
-        recipe_dir = os.path.abspath(recipe)
-        os.chdir(recipe_dir)
+        os.chdir(recipe)
 
         # extract title from README.md
         with open('README.md', 'r') as f:
@@ -114,7 +113,7 @@ def main():
                     print('\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
-        examples = [e for e in sorted(glob.glob('*-example'))]
+        examples = [e for e in sorted(glob.glob(os.path.join(recipe, '*-example')))]
 
         # TODO we need to get rid of this
         # Remove Fortran examples if generator is Visual Studio
@@ -123,7 +122,7 @@ def main():
 
         for example in examples:
 
-            os.chdir(os.path.abspath(example))
+            os.chdir(example)
             sys.stdout.write('  {}/{}\n'.format(recipe, example))
 
             # configure step
@@ -147,15 +146,13 @@ def main():
             return_code += handle_errors(errors)
 
             # build step
-            os.chdir('build')
+            os.chdir(os.path.join(example, 'build'))
             sys.stdout.write('    building ... ')
             sys.stdout.flush()
             errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
                                  expected_strings=['Built target'])
             return_code += handle_errors(errors)
 
-            os.chdir(recipe_dir)
-        os.chdir(topdir)
     sys.exit(return_code)
 
 
