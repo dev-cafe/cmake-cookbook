@@ -42,6 +42,7 @@ install:
 
 before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
+  - pip install -r requirements.txt
   - cmake --version
   - ninja.exe --version
 
