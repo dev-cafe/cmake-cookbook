@@ -1,2 +1,1 @@
-Detecting the BLAS and LAPACK Math Libraries
-============================================
+# Detecting the BLAS and LAPACK Math Libraries

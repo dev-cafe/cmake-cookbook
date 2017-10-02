@@ -22,10 +22,32 @@
   subdirectory.
 
 
+## Configuring tests
+
+You can place an optional `menu.yml` file in the recipe directory, next to `CMakeLists.txt`.
+If present, the test script will parse it to set environment variables and CMake definitions for a particular recipe.
+
+Example:
+```yaml
+# environment variables to be set
+env:
+  SOME_ENVIRONMENT_VAR: 'example'
+  ANOTHER_VAR: 'foo'
+
+# these will be passed to CMake as -DFOO=bar -DSOME_OPTION=ON
+definitions:
+  FOO: bar
+  SOME_OPTION: ON
+```
+
+
 ## Running tests on your computer
 
 ```shell
-$ python ./.scripts/ci_configure_build_test.py
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
 ```
 
 

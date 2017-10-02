@@ -1,2 +1,1 @@
-Writing CMake Code to Detect External Libraries
-===============================================
+# Writing CMake Code to Detect External Libraries

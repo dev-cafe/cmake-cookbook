@@ -1,2 +1,1 @@
-Detecting the MPI Parallel Environment
-======================================
+# Detecting the MPI Parallel Environment

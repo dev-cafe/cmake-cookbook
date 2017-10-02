@@ -1,5 +1,4 @@
-Setting the Standard for the Language
-=====================================
+# Setting the Standard for the Language
 
 **WARNING**
 

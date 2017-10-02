@@ -1,5 +1,4 @@
-Compiling a single source file into an executable
-=================================================
+# Compiling a single source file into an executable
 
 These recipes shows how to run CMake to configure and build a simple project. The project consists of a single source file for a single executable.
 The same project is presented in C++, C and Fortran 90.

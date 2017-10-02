@@ -1,2 +1,1 @@
-How to Specify the Compiler
-===========================
+# How to Specify the Compiler
