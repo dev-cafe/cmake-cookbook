@@ -1,5 +1,5 @@
 - [Discovering the operating system](recipe-0011/README.md)
-- Dealing with platform-dependent source code
+- [Dealing with platform-dependent source code](recipe-0012/README.md)
 - Dealing with compiler-dependent source code
 - Discovering the processor architecture
 - Discovering the processor instruction set
