@@ -1,4 +1,5 @@
 # Detecting the Python Library
 
 Code example copy-pasted from the Python docs on embedding:
-https://docs.python.org/2/extending/embedding.html#very-high-level-embedding
+- For Python 2.7 https://docs.python.org/2.7/extending/embedding.html
+- For Python 3.5 https://docs.python.org/3.5/extending/embedding.html
