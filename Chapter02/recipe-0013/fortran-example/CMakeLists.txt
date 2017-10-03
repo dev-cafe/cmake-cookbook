@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(recipe-0013 Fortran)
 
 # compactly let the preprocessor know about the compiler vendor
-add_definitions(-DIS_${CMAKE_Fortran_COMPILER_ID}_COMPILER)
+add_definitions(-DIS_${CMAKE_Fortran_COMPILER_ID}_FORTRAN_COMPILER)
 
 # define executable and its source file
 add_executable(hello-world hello-world.F90)

@@ -6,16 +6,16 @@ project(recipe-0013 CXX)
 
 # let the preprocessor know about the compiler vendor
 if(CMAKE_CXX_COMPILER_ID MATCHES Intel)
-    add_definitions(-DIS_INTEL_COMPILER)
+    add_definitions(-DIS_INTEL_CXX_COMPILER)
 endif()
 if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-    add_definitions(-DIS_GNU_COMPILER)
+    add_definitions(-DIS_GNU_CXX_COMPILER)
 endif()
 if(CMAKE_CXX_COMPILER_ID MATCHES PGI)
-    add_definitions(-DIS_PGI_COMPILER)
+    add_definitions(-DIS_PGI_CXX_COMPILER)
 endif()
 if(CMAKE_CXX_COMPILER_ID MATCHES XL)
-    add_definitions(-DIS_XL_COMPILER)
+    add_definitions(-DIS_XL_CXX_COMPILER)
 endif()
 # etc ...
 
