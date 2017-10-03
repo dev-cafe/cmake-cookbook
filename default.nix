@@ -16,16 +16,17 @@ with import <nixpkgs> {}; {
       gfortran
       gdb
       hdf5-fortran
+      libuuid
       lldb
       openmpi
-      python27Packages.breathe
-      python27Packages.jupyter
-      python27Packages.matplotlib
-      python27Packages.numpy
-      python27Packages.pyyaml
-      python27Packages.scipy
-      python27Packages.sphinx
-      python27Packages.sympy
+      python35Packages.breathe
+      python35Packages.jupyter
+      python35Packages.matplotlib
+      python35Packages.numpy
+      python35Packages.pyyaml
+      python35Packages.scipy
+      python35Packages.sphinx
+      python35Packages.sympy
       zlib
     ];
   };

@@ -6,37 +6,37 @@ matrix:
     - os: linux
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
           packages:
-            - gcc-5
-            - g++-5
-            - gfortran-5
+            - gfortran
+            - python-dev
+            - libblas-dev
+            - liblapack-dev
+            - libopenmpi-dev
+            - openmpi-bin
+            - libboost1.55-all-dev
+            - libhdf5-openmpi-dev
+            - uuid-dev
+            - pkg-config
       env:
-        - CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
-        - CXX=g++-5
-        - CC=gcc-5
-        - FC=gfortran-5
     - os: linux
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
           packages:
-            - gcc-5
-            - g++-5
-            - gfortran-5
+            - python-dev
+            - libblas-dev
+            - liblapack-dev
+            - libopenmpi-dev
+            - openmpi-bin
+            - libboost-dev
+            - libhdf5-openmpi-dev
+            - uuid-dev
+            - pkg-config
       env:
-        - CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
-        - NINJA_URL="https://github.com/Kitware/ninja/releases/download/v1.7.2.gaad58.kitware.dyndep-1/"
-        - NINJA_TARBALL_NAME="ninja-1.7.2.gaad58.kitware.dyndep-1_x86_64-linux-gnu"
-        - CXX=g++-5
-        - CC=gcc-5
-        - FC=gfortran-5
+        - NINJA_URL="https://goo.gl/4g5Jjv"
     - os: osx
       env:
         - GENERATOR="Unix Makefiles"
@@ -45,23 +45,36 @@ matrix:
       env:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
-        - NINJA_URL="https://github.com/Kitware/ninja/releases/download/v1.7.2.gaad58.kitware.dyndep-1/"
-        - NINJA_TARBALL_NAME="ninja-1.7.2.gaad58.kitware.dyndep-1_x86_64-apple-darwin"
+        - NINJA_URL="https://goo.gl/qLgScp"
 
-before_script:
+before_install:
+  - test -n $CC && unset CC
+  - test -n $CXX && unset CXX
+  - test -n $FC && unset FC
+
+install:
+  - mkdir -p ${HOME}/Deps
+  - DEPS=${HOME}/Deps
   - |
     # Install CMake 3.7.2 and Kitware-maintained version of Ninja
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      cd ${TRAVIS_BUILD_DIR}
-      curl -L ${CMAKE_URL} | tar xz
-      export PATH=$PWD/cmake-3.7.2-Linux-x86_64/bin:$PATH
-      export LD_LIBARY_PATH=$PWD/cmake-3.7.2-Linux-x86_64/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+      cd ${DEPS}
+      mkdir -p cmake-3.7.2
+      curl -L https://goo.gl/dSVHTh | tar -xz -C cmake-3.7.2 --strip-components=1
+      export PATH=$PWD/cmake-3.7.2/bin:$PATH
+      export LD_LIBARY_PATH=$PWD/cmake-3.7.2/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+      # Get Eigen
+      curl -L http://bitbucket.org/eigen/eigen/get/3.3.4.tar.gz | tar xz
+      cd eigen-eigen-5a0156e40feb
+      cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=${PWD}/eigen-3.3.4 >/dev/null 2>&1
+      cmake --build build_eigen -- install >/dev/null 2>&1
       pip install --user virtualenv
+      cd ${TRAVIS_BUILD_DIR}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       # Install latest available CMake
       brew upgrade cmake
       # Get GFortran
-      brew install gcc
+      brew install gcc eigen boost mpich hdf5 pkg-config ossp-uuid
       # virtual environments
       pip install virtualenv
     fi
@@ -70,10 +83,14 @@ before_script:
   - pip install -r requirements.txt
   - |
     if [[ "${GENERATOR}" == "Ninja" ]]; then
+      cd ${DEPS}
+      mkdir -p ninja-1.7.2
+      curl -L ${NINJA_URL} | tar -xz -C ninja-1.7.2 --strip-components=1
+      export PATH=$PWD/ninja-1.7.2:$PATH
       cd ${TRAVIS_BUILD_DIR}
-      curl -L ${NINJA_URL}${NINJA_TARBALL_NAME}.tar.gz | tar xz
-      export PATH=$PWD/${NINJA_TARBALL_NAME}:$PATH
     fi
+
+before_script:
   - ./.scripts/report_versions.sh
 
 script:

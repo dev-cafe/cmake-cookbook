@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Boost REQUIRED COMPONENTS system filesystem)
+find_package(Boost 1.54 REQUIRED COMPONENTS filesystem)
 
 add_executable(path-info path-info.cpp)
 target_include_directories(path-info
@@ -17,6 +17,5 @@ target_include_directories(path-info
   )
 target_link_libraries(path-info
   PUBLIC
-    ${Boost_SYSTEM_LIBRARY}
-    ${Boost_FILESYSTEM_LIBRARY}
+    ${Boost_LIBRARIES}
   )

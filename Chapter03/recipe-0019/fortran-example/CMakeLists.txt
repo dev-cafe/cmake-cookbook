@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 # project name and language
 project(recipe-0019 Fortran)
 
-find_package(HDF5 1.8.15 REQUIRED COMPONENTS Fortran)
+find_package(HDF5 1.8 REQUIRED COMPONENTS Fortran)
 # Was the Fortran 2003 interface to HDF5 enabled?
 # Compile an example from the HDF5 website:
 # https://support.hdfgroup.org/HDF5/examples/f-src.html
@@ -48,22 +48,12 @@ if(HDF5_IS_PARALLEL)
   set(CMAKE_Fortran_COMPILER ${MPI_Fortran_COMPILER})
 
   add_executable(ph5example ph5example.f90)
-  target_compile_options(ph5example
-    PUBLIC
-      ${MPI_Fortran_COMPILE_FLAGS}
-    )
   target_include_directories(ph5example
     PUBLIC
       ${HDF5_INCLUDE_DIRS}
-      ${MPI_Fortran_INCLUDE_PATH}
     )
   target_link_libraries(ph5example
     PUBLIC
       ${HDF5_Fortran_LIBRARIES}
-      ${MPI_Fortran_LIBRARIES}
-    )
-  set_target_properties(ph5example
-    PROPERTIES
-      LINK_FLAGS ${MPI_Fortran_LINK_FLAGS}
     )
 endif()

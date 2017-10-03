@@ -1,0 +1,3 @@
+definitions:
+  CMAKE_Fortran_COMPILER: 'gfortran'
+  CMAKE_BUILD_TYPE: 'RelWithDebInfo'

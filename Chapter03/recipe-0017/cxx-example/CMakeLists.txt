@@ -19,6 +19,10 @@ find_package(BLAS)
 find_package(LAPACK)
 
 add_executable(linear-algebra linear-algebra.cpp)
+target_compile_options(linear-algebra
+  PUBLIC
+    ${OpenMP_CXX_FLAGS}
+  )
 if(BLAS_FOUND AND LAPACK_FOUND)
   message(STATUS "Eigen will use some subroutines from BLAS and LAPACK. See here: http://eigen.tuxfamily.org/dox-devel/TopicUsingBlasLapack.html")
   target_compile_definitions(linear-algebra
@@ -26,17 +30,18 @@ if(BLAS_FOUND AND LAPACK_FOUND)
       EIGEN_USE_BLAS
       EIGEN_USE_LAPACKE_STRICT
     )
+  target_link_libraries(linear-algebra
+    PUBLIC
+      Eigen3::Eigen
+      ${BLAS_LIBRARIES}
+      ${LAPACK_LIBRARIES}
+    )
+else()
+  target_link_libraries(linear-algebra
+    PUBLIC
+      Eigen3::Eigen
+    )
 endif()
-target_compile_options(linear-algebra
-  PUBLIC
-    ${OpenMP_CXX_FLAGS}
-  )
-target_link_libraries(linear-algebra
-  PUBLIC
-    Eigen3::Eigen
-    ${BLAS_LIBRARIES}
-    ${LAPACK_LIBRARIES}
-  )
 set_target_properties(linear-algebra
   PROPERTIES
     LINK_FLAGS ${OpenMP_CXX_FLAGS}

@@ -1,0 +1,3 @@
+definitions:
+  CMAKE_CXX_COMPILER: 'g++'
+  CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
