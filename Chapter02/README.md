@@ -1,0 +1,8 @@
+- Discovering the operating system
+- Dealing with platform-dependent source code
+- Dealing with compiler-dependent source code
+- Discovering the processor
+- Discovering the instruction set
+- Assisting the Eigen library in selecting an instruction set
+- Detecting CUDA capabilities
+- Building CUDA code with CMake
