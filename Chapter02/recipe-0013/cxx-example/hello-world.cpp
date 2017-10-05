@@ -17,7 +17,7 @@ std::string say_hello() {
 #elif IS_XL_CXX_COMPILER
   return std::string("Hello XL compiler!");
 #else
-  return std::string("Hello unknown compiler!");
+  return std::string("Hello unknown compiler - have we met before?");
 #endif
 }
 
