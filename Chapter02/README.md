@@ -1,8 +1,8 @@
 - [Discovering the operating system](recipe-01/README.md)
 - [Dealing with platform-dependent source code](recipe-02/README.md)
 - [Dealing with compiler-dependent source code](recipe-03/README.md)
-- Discovering the processor architecture
-- Discovering the processor instruction set
+- [Discovering the host processor architecture](recipe-04/README.md)
+- Discovering the host processor instruction set
 - Assisting the Eigen library in selecting the instruction set
 - Detecting CUDA capabilities
 - Building CUDA code with CMake
