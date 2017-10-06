@@ -1,6 +1,6 @@
-- [Discovering the operating system](recipe-0011/README.md)
-- [Dealing with platform-dependent source code](recipe-0012/README.md)
-- [Dealing with compiler-dependent source code](recipe-0013/README.md)
+- [Discovering the operating system](recipe-01/README.md)
+- [Dealing with platform-dependent source code](recipe-02/README.md)
+- [Dealing with compiler-dependent source code](recipe-03/README.md)
 - Discovering the processor architecture
 - Discovering the processor instruction set
 - Assisting the Eigen library in selecting the instruction set

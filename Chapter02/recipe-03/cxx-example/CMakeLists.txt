@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 # project name and language
-project(recipe-0013 CXX)
+project(recipe-03 CXX)
 
 # define executable and its source file
 add_executable(hello-world hello-world.cpp)
