@@ -3,8 +3,7 @@
 # The return code will capture an error from ANY of the functions in the pipe
 set -euo pipefail
 
-
-# Report versions of whole tool stack
+echo "Report versions of whole tool stack"
 
 # CMake
 cmake --version

@@ -1,0 +1,17 @@
+pipeline:
+  build:
+    image: robertodr/ubuntu-16.04_mkl2017.4.239-pgi17.4:latest
+    commands:
+      - virtualenv venv
+      - . venv/bin/activate
+      - pip install -r requirements.txt
+      - ./.scripts/report_versions.sh
+      - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
+
+matrix:
+  include:
+    - GENERATOR: 'Unix Makefiles'
+      BUILDFLAGS: 'VERBOSE=1'
+    - GENERATOR: 'Ninja'
+      BUILDFLAGS: '-v'
+

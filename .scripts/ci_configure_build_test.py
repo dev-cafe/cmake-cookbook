@@ -62,6 +62,8 @@ def get_env_variables():
         topdir = os.environ.get('TRAVIS_BUILD_DIR')
     elif os.environ.get('APPVEYOR'):
         topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
+    elif os.environ.get('DRONE'):
+        topdir = os.getcwd()
     else:
         # Local testing
         generator = 'Unix Makefiles'
