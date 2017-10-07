@@ -13,7 +13,7 @@ The same project is presented in C++, C and Fortran 90.
 All that’s needed to configure and build this minimal project on GNU/Linux, Mac OS X and Windows is the following:
 
 ```
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 project(recipe-0001 CXX)
 
@@ -21,7 +21,7 @@ add_executable(hello-world hello-world.cpp)
 ```
 
 ```
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 ```
 The first line sets a minimum required version for CMake. A fatal error will be issued if a version of CMake lower than that will be used.
 ```
