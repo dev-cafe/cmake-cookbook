@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 # project name and language
-project(recipe-0012 CXX)
+project(recipe-02 CXX)
 
 # define executable and its source file
 add_executable(hello-world hello-world.cpp)
@@ -14,6 +14,6 @@ endif()
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     target_compile_definitions(hello-world PUBLIC "-DIS_MAC")
 endif()
-if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     target_compile_definitions(hello-world PUBLIC "-DIS_WINDOWS")
 endif()

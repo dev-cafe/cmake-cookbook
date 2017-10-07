@@ -11,7 +11,7 @@ program hello
 #elif IS_XL_FORTRAN_COMPILER
    print *, 'Hello XL compiler!'
 #else
-   print *, 'Hello unknown compiler!'
+   print *, 'Hello unknown compiler - have we met before?'
 #endif
 
 end program
