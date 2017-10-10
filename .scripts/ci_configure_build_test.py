@@ -9,7 +9,7 @@ import datetime
 import time
 
 
-def run_command(command, expected_strings):
+def run_command(command, success_predicate):
     """
     Executes a command (string) and checks whether all expected strings (list)
     are present in the stdout.
@@ -29,7 +29,7 @@ def run_command(command, expected_strings):
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
 
-    if all([s in stdout for s in expected_strings]):
+    if success_predicate(stdout):
         # we found all strings, assume there are no errors
         # and return None
         errors = None
@@ -62,10 +62,12 @@ def get_env_variables():
         topdir = os.environ.get('TRAVIS_BUILD_DIR')
     elif os.environ.get('APPVEYOR'):
         topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
+    elif os.environ.get('DRONE'):
+        topdir = os.getcwd()
     else:
         # Local testing
-        generator = 'Unix Makefiles'
-        buildflags = 'VERBOSE=1'
+        generator = 'Ninja'
+        buildflags = '-v'
         topdir = os.getcwd()
     return generator, buildflags, topdir, is_visual_studio
 
@@ -104,6 +106,9 @@ def parse_yaml():
 def main():
     generator, buildflags, topdir, is_visual_studio = get_env_variables()
     recipes = get_list_of_recipes_to_run(topdir)
+
+    # Set NINJA_STATUS environment variable
+    os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
 
     return_code = 0
     for recipe in recipes:
@@ -149,17 +154,19 @@ def main():
                     v = config['definitions'][k]
                     definitions += ' -D{0}={1}'.format(k, v)
             command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
+            expected_strings = ['-- Configuring done',
+                              '-- Generating done']
             errors = run_command(command=command,
-                                 expected_strings=['-- Configuring done',
-                                                   '-- Generating done'])
+                                 success_predicate=lambda s: all([x in s for x in expected_strings]))
             return_code += handle_errors(errors)
 
             # build step
             os.chdir(build_directory)
             sys.stdout.write('    building ... ')
             sys.stdout.flush()
+            expected_strings = ['Built target', 'Built edge']
             errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
-                                 expected_strings=['Built target'])
+                                 success_predicate=lambda s: any([x in s for x in expected_strings]))
             return_code += handle_errors(errors)
 
     sys.exit(return_code)
