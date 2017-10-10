@@ -4,7 +4,7 @@ dist: trusty
 matrix:
   include:
     - os: linux
-      addons:
+      addons: &1
         apt:
           packages:
             - gfortran
@@ -21,18 +21,7 @@ matrix:
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: linux
-      addons:
-        apt:
-          packages:
-            - python-dev
-            - libblas-dev
-            - liblapack-dev
-            - libopenmpi-dev
-            - openmpi-bin
-            - libboost-dev
-            - libhdf5-openmpi-dev
-            - uuid-dev
-            - pkg-config
+      addons: *1
       env:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
