@@ -16,7 +16,6 @@ execute_process(
   COMMAND
     ${PYTHON_EXECUTABLE} "-c" "import re, numpy; print(re.compile('/__init__.py.*').sub('',numpy.__version__))"
   OUTPUT_VARIABLE NumPy_VERSION
-  ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
 message(STATUS "NumPy version: ${NumPy_VERSION}")
