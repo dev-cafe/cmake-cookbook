@@ -17,7 +17,7 @@ int main(int argc, char * argv[]) {
     return 1;
   }
 
-  fprintf(stdout, "NumPy version: %s\n", TO_STRING(NumPy_VERSION));
+  fprintf(stdout, "NumPy version: %s\n", TOSTRING(NumPy_VERSION));
 
   Py_Initialize();
 
