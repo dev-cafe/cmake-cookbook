@@ -1,1 +1,2 @@
 - [Using platform-independent file operations](recipe-01/README.md)
+- [Running a custom command at configure-time](recipe-02/README.md)
