@@ -13,7 +13,7 @@ include(FortranCInterface)
 FortranCInterface_VERIFY(CXX)
 FortranCInterface_HEADER(FortranC.hpp)
 
-set(wrap_BLAS_LAPACK
+set(wrap_BLAS_LAPACK_sources
   ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.hpp
   ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.hpp
@@ -22,11 +22,11 @@ set(wrap_BLAS_LAPACK
 
 add_custom_command(
   OUTPUT
-    ${wrap_BLAS_LAPACK}
+    ${wrap_BLAS_LAPACK_sources}
   COMMAND
     ${CMAKE_COMMAND} -E tar xzf ${CMAKE_CURRENT_SOURCE_DIR}/wrap_BLAS_LAPACK.tar.gz
   COMMAND
-    ${CMAKE_COMMAND} -E touch ${wrap_BLAS_LAPACK}
+    ${CMAKE_COMMAND} -E touch ${wrap_BLAS_LAPACK_sources}
   WORKING_DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}
   DEPENDS
@@ -49,6 +49,7 @@ target_sources(math
 target_include_directories(math
   PUBLIC
     ${PROJECT_BINARY_DIR}
+  INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
 
