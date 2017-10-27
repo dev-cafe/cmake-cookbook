@@ -23,7 +23,6 @@ set_source_files_properties(
   )
 
 add_library(math "")
-add_dependencies(math BLAS_LAPACK_wrappers)
 target_sources(math
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.cpp
@@ -39,3 +38,4 @@ target_include_directories(math
   INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
+add_dependencies(math BLAS_LAPACK_wrappers)
