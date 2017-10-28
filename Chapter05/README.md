@@ -1,2 +1,5 @@
 - [Using platform-independent file operations](recipe-01/README.md)
 - [Running a custom command at configure-time](recipe-02/README.md)
+- [Running a custom command at build-time I](recipe-03/README.md)
+- [Running a custom command at build-time II](recipe-04/README.md)
+- [Running custom commands for specific targets at build-time](recipe-05/README.md)
