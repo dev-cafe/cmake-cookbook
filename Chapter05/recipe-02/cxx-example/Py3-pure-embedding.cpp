@@ -1,11 +1,4 @@
-/*
- * Code example from:
- *    https://docs.python.org/2/extending/embedding.html#pure-embedding
- */
-
 #include <Python.h>
-
-#include "Report.hpp"
 
 int main(int argc, char * argv[]) {
   PyObject *pName, *pModule, *pDict, *pFunc;
@@ -17,14 +10,12 @@ int main(int argc, char * argv[]) {
     return 1;
   }
 
-  fprintf(stdout, "NumPy version: %s\n", TOSTRING(NumPy_VERSION));
-
   Py_Initialize();
 
   PyRun_SimpleString("import sys");
   PyRun_SimpleString("sys.path.append(\".\")");
 
-  pName = PyString_FromString(argv[1]);
+  pName = PyUnicode_DecodeFSDefault(argv[1]);
   /* Error checking of pName left out */
 
   pModule = PyImport_Import(pName);
@@ -37,7 +28,7 @@ int main(int argc, char * argv[]) {
     if (pFunc && PyCallable_Check(pFunc)) {
       pArgs = PyTuple_New(argc - 3);
       for (i = 0; i < argc - 3; ++i) {
-        pValue = PyInt_FromLong(atoi(argv[i + 3]));
+        pValue = PyLong_FromLong(atoi(argv[i + 3]));
         if (!pValue) {
           Py_DECREF(pArgs);
           Py_DECREF(pModule);
@@ -50,7 +41,7 @@ int main(int argc, char * argv[]) {
       pValue = PyObject_CallObject(pFunc, pArgs);
       Py_DECREF(pArgs);
       if (pValue != NULL) {
-        printf("Result of call: %ld\n", PyInt_AsLong(pValue));
+        printf("Result of call: %ld\n", PyLong_AsLong(pValue));
         Py_DECREF(pValue);
       } else {
         Py_DECREF(pFunc);
