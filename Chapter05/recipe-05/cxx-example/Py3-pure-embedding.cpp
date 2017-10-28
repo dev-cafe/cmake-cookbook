@@ -1,3 +1,8 @@
+/*
+ * Code example from:
+ *    https://docs.python.org/3.5/extending/embedding.html#pure-embedding
+ */
+
 #include <Python.h>
 
 int main(int argc, char * argv[]) {
