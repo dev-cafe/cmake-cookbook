@@ -1,4 +1,11 @@
+/*
+ * Code example from:
+ *    https://docs.python.org/3.5/extending/embedding.html#pure-embedding
+ */
+
 #include <Python.h>
+
+#include "Report.hpp"
 
 int main(int argc, char * argv[]) {
   PyObject *pName, *pModule, *pDict, *pFunc;
@@ -14,6 +21,8 @@ int main(int argc, char * argv[]) {
 
   PyRun_SimpleString("import sys");
   PyRun_SimpleString("sys.path.append(\".\")");
+
+  fprintf(stdout, "NumPy version: %s\n", TOSTRING(NumPy_VERSION));
 
   pName = PyUnicode_DecodeFSDefault(argv[1]);
   /* Error checking of pName left out */

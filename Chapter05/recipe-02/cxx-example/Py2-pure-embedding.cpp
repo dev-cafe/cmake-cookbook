@@ -5,6 +5,8 @@
 
 #include <Python.h>
 
+#include "Report.hpp"
+
 int main(int argc, char * argv[]) {
   PyObject *pName, *pModule, *pDict, *pFunc;
   PyObject *pArgs, *pValue;
@@ -19,6 +21,8 @@ int main(int argc, char * argv[]) {
 
   PyRun_SimpleString("import sys");
   PyRun_SimpleString("sys.path.append(\".\")");
+
+  fprintf(stdout, "NumPy version: %s\n", TOSTRING(NumPy_VERSION));
 
   pName = PyString_FromString(argv[1]);
   /* Error checking of pName left out */
