@@ -30,15 +30,33 @@ If present, the test script will parse it to set environment variables and CMake
 
 Example:
 ```yaml
-# environment variables to be set
-env:
-  - SOME_ENVIRONMENT_VAR: 'example'
-  - ANOTHER_VAR: 'foo'
+# used when run locally
+local:
+  # environment variables to be set
+  env:
+    - SOME_ENVIRONMENT_VAR: 'example'
+    - ANOTHER_VAR: 'foo'
+  # these will be passed to CMake as -DFOO=bar -DSOME_OPTION=ON
+  definitions:
+    - FOO: bar
+    - SOME_OPTION: ON
 
-# these will be passed to CMake as -DFOO=bar -DSOME_OPTION=ON
-definitions:
-  - FOO: bar
-  - SOME_OPTION: ON
+# Travis CI on Linux
+travis-linux:
+  definitions:
+    - ...
+
+# Travis CI on OS X
+travis-osx:
+  ...
+
+# AppVeyor
+appveyor:
+  ...
+
+# Drone CI
+drone:
+  ...
 ```
 
 

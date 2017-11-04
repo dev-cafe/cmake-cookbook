@@ -1,3 +1,24 @@
-definitions:
-  - CMAKE_CXX_COMPILER: 'g++'
-  - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+appveyor:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+
+drone:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+
+travis-linux:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+
+travis-osx:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+
+local:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'

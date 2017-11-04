@@ -143,16 +143,29 @@ def main():
             sys.stdout.flush()
             config = parse_yaml()
 
+            if os.environ.get('TRAVIS'):
+                travis_os_name = os.environ.get('TRAVIS_OS_NAME')
+                if travis_os_name == 'osx':
+                    system = 'travis-osx'
+                else:
+                    system = 'travis-linux'
+            elif os.environ.get('APPVEYOR'):
+                system = 'appveyor'
+            elif os.environ.get('DRONE'):
+                system = 'drone'
+            else:
+                system = 'local'
+
             env = ''
-            if 'env' in config:
-                for entry in config['env']:
+            if 'env' in config[system]:
+                for entry in config[system]['env']:
                     for k in entry.keys():
                         v = entry[k]
                         env += '{0}={1} '.format(k, v)
 
             definitions = ''
-            if 'definitions' in config:
-                for entry in config['definitions']:
+            if 'definitions' in config[system]:
+                for entry in config[system]['definitions']:
                     for k in entry.keys():
                         v = entry[k]
                         definitions += ' -D{0}={1}'.format(k, v)

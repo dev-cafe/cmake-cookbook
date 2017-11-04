@@ -1,2 +1,19 @@
-definitions:
-  - CMAKE_CXX_COMPILER: 'g++'
+appveyor:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+
+drone:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+
+travis-linux:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+
+travis-osx:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+
+local:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'

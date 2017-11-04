@@ -1,2 +1,19 @@
-definitions:
-  - CMAKE_Fortran_COMPILER: 'gfortran'
+appveyor:
+  definitions:
+    - CMAKE_Fortran_COMPILER: 'gfortran'
+
+drone:
+  definitions:
+    - CMAKE_Fortran_COMPILER: 'gfortran'
+
+travis-linux:
+  definitions:
+    - CMAKE_Fortran_COMPILER: 'gfortran'
+
+travis-osx:
+  definitions:
+    - CMAKE_Fortran_COMPILER: 'gfortran'
+
+local:
+  definitions:
+    - CMAKE_Fortran_COMPILER: 'gfortran'
