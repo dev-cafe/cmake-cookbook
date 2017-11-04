@@ -142,16 +142,21 @@ def main():
             sys.stdout.write('  configuring ... ')
             sys.stdout.flush()
             config = parse_yaml()
+
             env = ''
             if 'env' in config:
-                for k in config['env']:
-                    v = config['env'][k]
-                    env += '{0}={1} '.format(k, v)
+                for entry in config['env']:
+                    for k in entry.keys():
+                        v = entry[k]
+                        env += '{0}={1} '.format(k, v)
+
             definitions = ''
             if 'definitions' in config:
-                for k in config['definitions']:
-                    v = config['definitions'][k]
-                    definitions += ' -D{0}={1}'.format(k, v)
+                for entry in config['definitions']:
+                    for k in entry.keys():
+                        v = entry[k]
+                        definitions += ' -D{0}={1}'.format(k, v)
+
             command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
             expected_strings = ['-- Configuring done',
                               '-- Generating done']

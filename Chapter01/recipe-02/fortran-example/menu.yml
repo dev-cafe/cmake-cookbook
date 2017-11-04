@@ -1,2 +1,2 @@
 definitions:
-  CMAKE_Fortran_COMPILER: 'gfortran'
+  - CMAKE_Fortran_COMPILER: 'gfortran'

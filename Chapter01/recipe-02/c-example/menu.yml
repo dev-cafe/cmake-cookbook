@@ -1,2 +1,2 @@
 definitions:
-  CMAKE_C_COMPILER: 'gcc'
+  - CMAKE_C_COMPILER: 'gcc'

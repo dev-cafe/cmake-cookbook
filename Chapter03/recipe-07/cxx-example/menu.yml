@@ -1,3 +1,3 @@
 definitions:
-  CMAKE_CXX_COMPILER: 'g++'
-  Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'
+  - CMAKE_CXX_COMPILER: 'g++'
+  - Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'

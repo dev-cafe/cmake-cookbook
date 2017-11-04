@@ -1,4 +1,4 @@
 definitions:
-  CMAKE_CXX_COMPILER: 'g++'
-  CMAKE_C_COMPILER: 'gcc'
-  CMAKE_Fortran_COMPILER: 'gfortran'
+  - CMAKE_CXX_COMPILER: 'g++'
+  - CMAKE_C_COMPILER: 'gcc'
+  - CMAKE_Fortran_COMPILER: 'gfortran'
