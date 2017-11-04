@@ -148,9 +148,6 @@ def main():
             time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
             build_directory = 'build-{0}'.format(time_stamp)
 
-            # configure step
-            sys.stdout.write('  configuring ... ')
-            sys.stdout.flush()
             config = parse_yaml()
 
             # assemble env vars
@@ -169,6 +166,9 @@ def main():
                         v = entry[k]
                         definitions += ' -D{0}={1}'.format(k, v)
 
+            # configure step
+            sys.stdout.write('  configuring ... ')
+            sys.stdout.flush()
             command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
             expected_strings = [
                 '-- Configuring done',
@@ -181,11 +181,11 @@ def main():
             os.chdir(build_directory)
             sys.stdout.write('  building ... ')
             sys.stdout.flush()
+            command = 'cmake --build . -- {0}'.format(buildflags)
             expected_strings = [
                 'Built target',
                 'Built edge',
                 ]
-            command = 'cmake --build . -- {0}'.format(buildflags)
             return_code += run_command(command=command,
                                        success_predicate=lambda s: any([x in s for x in expected_strings]))
 
