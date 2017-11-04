@@ -69,8 +69,8 @@ def get_list_of_recipes_to_run(topdir):
         sys.stderr.write('ERROR: script expects one argument, example:\n')
         sys.stderr.write("python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'\n")
         sys.exit(1)
-    # glob recipes but exclude recipe-0000
-    return [r for r in sorted(glob.glob(os.path.join(topdir, glob_regex))) if '0000' not in r]
+    # glob recipes
+    return [r for r in sorted(glob.glob(os.path.join(topdir, glob_regex)))]
 
 
 def get_env_variables():
