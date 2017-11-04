@@ -25,6 +25,32 @@ def get_ci_environment():
     return ci_environment
 
 
+def get_generator():
+    generator = os.environ.get('GENERATOR')
+    if generator is None:
+        generator = 'Ninja'
+    return generator
+
+
+def get_buildflags():
+    buildflags = os.environ.get('BUILDFLAGS')
+    if buildflags is None:
+        buildflags = '-v'
+    return buildflags
+
+
+def get_topdir():
+    if os.environ.get('TRAVIS'):
+        topdir = os.environ.get('TRAVIS_BUILD_DIR')
+    elif os.environ.get('APPVEYOR'):
+        topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
+    elif os.environ.get('DRONE'):
+        topdir = os.getcwd()
+    else:
+        topdir = os.getcwd()
+    return topdir
+
+
 def run_command(command, success_predicate):
     """
     Executes a command (string) and checks whether all expected strings (list)
@@ -73,25 +99,6 @@ def get_list_of_recipes_to_run(topdir):
     return [r for r in sorted(glob.glob(os.path.join(topdir, glob_regex)))]
 
 
-def get_env_variables():
-    generator = os.environ.get('GENERATOR')
-    buildflags = os.environ.get('BUILDFLAGS')
-    topdir = ''
-    is_visual_studio = True if generator == 'Visual Studio 14 2015' else False
-    if os.environ.get('TRAVIS'):
-        topdir = os.environ.get('TRAVIS_BUILD_DIR')
-    elif os.environ.get('APPVEYOR'):
-        topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
-    elif os.environ.get('DRONE'):
-        topdir = os.getcwd()
-    else:
-        # Local testing
-        generator = 'Ninja'
-        buildflags = '-v'
-        topdir = os.getcwd()
-    return generator, buildflags, topdir, is_visual_studio
-
-
 def parse_yaml():
     '''
     If recipe directory contains a file called menu.yml, we parse it.
@@ -111,7 +118,10 @@ def parse_yaml():
 
 
 def main():
-    generator, buildflags, topdir, is_visual_studio = get_env_variables()
+    topdir = get_topdir()
+    buildflags = get_buildflags()
+    generator = get_generator()
+    is_visual_studio = True if generator == 'Visual Studio 14 2015' else False
     recipes = get_list_of_recipes_to_run(topdir)
 
     # Set NINJA_STATUS environment variable
