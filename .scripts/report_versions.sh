@@ -5,12 +5,8 @@ set -euo pipefail
 
 echo "Report versions of whole tool stack"
 
-# CMake
-cmake --version
-
-# Generators
-if [[ "${GENERATOR}" == "Unix Makefiles" ]]; then
-    make --version
-else
-    ninja --version
-fi
+for tool in cmake make ninja; do
+    echo ""
+    echo "Checking version of $tool:"
+    $tool --version 2> /dev/null || echo "$tool not available"
+done
