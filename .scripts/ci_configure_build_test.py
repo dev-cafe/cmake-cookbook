@@ -9,6 +9,22 @@ import datetime
 import time
 
 
+def get_ci_environment():
+    if os.environ.get('TRAVIS'):
+        travis_os_name = os.environ.get('TRAVIS_OS_NAME')
+        if travis_os_name == 'osx':
+            ci_environment = 'travis-osx'
+        else:
+            ci_environment = 'travis-linux'
+    elif os.environ.get('APPVEYOR'):
+        ci_environment = 'appveyor'
+    elif os.environ.get('DRONE'):
+        ci_environment = 'drone'
+    else:
+        ci_environment = 'local'
+    return ci_environment
+
+
 def run_command(command, success_predicate):
     """
     Executes a command (string) and checks whether all expected strings (list)
@@ -127,6 +143,8 @@ def main():
         if is_visual_studio:
             examples = filter(lambda x: 'fortran' not in x, examples)
 
+        ci_environment = get_ci_environment()
+
         for example in examples:
 
             os.chdir(example)
@@ -143,36 +161,27 @@ def main():
             sys.stdout.flush()
             config = parse_yaml()
 
-            if os.environ.get('TRAVIS'):
-                travis_os_name = os.environ.get('TRAVIS_OS_NAME')
-                if travis_os_name == 'osx':
-                    system = 'travis-osx'
-                else:
-                    system = 'travis-linux'
-            elif os.environ.get('APPVEYOR'):
-                system = 'appveyor'
-            elif os.environ.get('DRONE'):
-                system = 'drone'
-            else:
-                system = 'local'
-
+            # assemble env vars
             env = ''
-            if 'env' in config[system]:
-                for entry in config[system]['env']:
+            if 'env' in config[ci_environment]:
+                for entry in config[ci_environment]['env']:
                     for k in entry.keys():
                         v = entry[k]
                         env += '{0}={1} '.format(k, v)
 
+            # assemble definitions
             definitions = ''
-            if 'definitions' in config[system]:
-                for entry in config[system]['definitions']:
+            if 'definitions' in config[ci_environment]:
+                for entry in config[ci_environment]['definitions']:
                     for k in entry.keys():
                         v = entry[k]
                         definitions += ' -D{0}={1}'.format(k, v)
 
             command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
-            expected_strings = ['-- Configuring done',
-                              '-- Generating done']
+            expected_strings = [
+                '-- Configuring done',
+                '-- Generating done',
+                ]
             errors = run_command(command=command,
                                  success_predicate=lambda s: all([x in s for x in expected_strings]))
             return_code += handle_errors(errors)
@@ -181,8 +190,12 @@ def main():
             os.chdir(build_directory)
             sys.stdout.write('  building ... ')
             sys.stdout.flush()
-            expected_strings = ['Built target', 'Built edge']
-            errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
+            expected_strings = [
+                'Built target',
+                'Built edge',
+                ]
+            command = 'cmake --build . -- {0}'.format(buildflags)
+            errors = run_command(command=command,
                                  success_predicate=lambda s: any([x in s for x in expected_strings]))
             return_code += handle_errors(errors)
 
