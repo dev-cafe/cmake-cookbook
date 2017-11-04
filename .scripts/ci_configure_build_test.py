@@ -19,7 +19,6 @@ def run_command(command, success_predicate):
     We do this in this a bit convoluted way since CMake sometimes/often (?)
     puts warnings into stderr so we cannot just check for the presence of stderr.
     """
-    print(command)
     popen = subprocess.Popen(command,
                              shell=True,
                              stdout=subprocess.PIPE,
@@ -131,7 +130,7 @@ def main():
         for example in examples:
 
             os.chdir(example)
-            sys.stdout.write('  {}/{}\n'.format(recipe, example))
+            sys.stdout.write('\n  {}\n'.format(example))
 
             # we append a time stamp to the build directory
             # to avoid it being re-used when running tests multiple times
@@ -140,7 +139,7 @@ def main():
             build_directory = 'build-{0}'.format(time_stamp)
 
             # configure step
-            sys.stdout.write('    configuring ... ')
+            sys.stdout.write('  configuring ... ')
             sys.stdout.flush()
             config = parse_yaml()
             env = ''
@@ -162,7 +161,7 @@ def main():
 
             # build step
             os.chdir(build_directory)
-            sys.stdout.write('    building ... ')
+            sys.stdout.write('  building ... ')
             sys.stdout.flush()
             expected_strings = ['Built target', 'Built edge']
             errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
