@@ -121,7 +121,6 @@ def main():
     topdir = get_topdir()
     buildflags = get_buildflags()
     generator = get_generator()
-    is_visual_studio = True if generator == 'Visual Studio 14 2015' else False
     recipes = get_list_of_recipes_to_run(topdir)
 
     # Set NINJA_STATUS environment variable
@@ -142,7 +141,7 @@ def main():
 
         # TODO we need to get rid of this
         # Remove Fortran examples if generator is Visual Studio
-        if is_visual_studio:
+        if generator == 'Visual Studio 14 2015':
             examples = filter(lambda x: 'fortran' not in x, examples)
 
         ci_environment = get_ci_environment()
