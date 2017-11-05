@@ -17,3 +17,5 @@ travis-osx:
 local:
   definitions:
     - CMAKE_Fortran_COMPILER: 'gfortran'
+  failing_generators:
+    - 'Ninja'

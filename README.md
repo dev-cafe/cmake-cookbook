@@ -59,6 +59,19 @@ drone:
   ...
 ```
 
+## Expected failures
+
+Sometimes we expect a failure. For instance let us imagine we expect
+a test to fail on AppVeyor when using the Ninja generator. We can express this using:
+
+```
+appveyor:
+  definitions:
+    - CMAKE_Fortran_COMPILER: 'gfortran'
+  failing_generators:
+    - 'Ninja'
+```
+
 
 ## Running tests on your computer
 

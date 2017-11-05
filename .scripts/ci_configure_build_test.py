@@ -53,7 +53,9 @@ def get_topdir():
     return topdir
 
 
-def run_command(command, success_predicate):
+def run_command(command,
+                expect_failure,
+                success_predicate):
     """
     Executes a command (string) and checks whether all expected strings (list)
     are present in the stdout.
@@ -72,14 +74,17 @@ def run_command(command, success_predicate):
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
 
+    return_code = 0
     if success_predicate(stdout):
         # we found all strings, assume there are no errors
         sys.stdout.write('OK\n')
-        return_code = 0
     else:
-        sys.stdout.write('FAILED\n')
-        sys.stderr.write(stdout + stderr + '\n')
-        return_code = 1
+        if expect_failure:
+            sys.stdout.write('EXPECTED TO FAIL\n')
+        else:
+            sys.stdout.write('FAILED\n')
+            sys.stderr.write(stdout + stderr + '\n')
+            return_code = 1
 
     sys.stdout.flush()
     sys.stderr.flush()
@@ -160,6 +165,11 @@ def main():
 
             config = parse_yaml()
 
+            failing_generators = []
+            if 'failing_generators' in config[ci_environment]:
+                failing_generators = config[ci_environment]['failing_generators']
+            expect_failure = generator in failing_generators
+
             # assemble env vars
             env = ''
             if 'env' in config[ci_environment]:
@@ -185,6 +195,7 @@ def main():
                 '-- Generating done',
                 ]
             return_code += run_command(command=command,
+                                       expect_failure=expect_failure,
                                        success_predicate=lambda s: all([x in s for x in expected_strings]))
 
             # build step
@@ -197,6 +208,7 @@ def main():
                 'Built edge',
                 ]
             return_code += run_command(command=command,
+                                       expect_failure=expect_failure,
                                        success_predicate=lambda s: any([x in s for x in expected_strings]))
 
     sys.exit(return_code)
