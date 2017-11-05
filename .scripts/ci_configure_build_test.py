@@ -35,7 +35,9 @@ def get_generator():
 def get_buildflags():
     buildflags = os.environ.get('BUILDFLAGS')
     if buildflags is None:
-        buildflags = '-v'
+        # this fails on my laptop with Unix Makefiles (?)
+#       buildflags = '-v'
+        buildflags = ''
     return buildflags
 
 
