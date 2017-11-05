@@ -53,17 +53,17 @@ def get_topdir():
     return topdir
 
 
-def run_command(command,
+def run_command(step,
+                command,
                 expect_failure,
+                skip_predicate,
                 success_predicate):
     """
-    Executes a command (string) and checks whether all expected strings (list)
-    are present in the stdout.
-    If all strings are present, it returns errors as None.
-    If not all are present, it combines stdout and stderr and returns it as error
-    and lets the caller deal with it.
-    We do this in this a bit convoluted way since CMake sometimes/often (?)
-    puts warnings into stderr so we cannot just check for the presence of stderr.
+    step: string (e.g. 'configuring', 'building', ...); only used in printing
+    command: string; this is the command to be run
+    expect_failure: bool; if True we do not panic if the command fails
+    skip_predicate: bool(stdout, stderr)
+    success_predicate: bool(stdout)
     """
     popen = subprocess.Popen(command,
                              shell=True,
@@ -75,19 +75,20 @@ def run_command(command,
     stderr = stderr_coded.decode('UTF-8')
 
     return_code = 0
-    if success_predicate(stdout):
-        # we found all strings, assume there are no errors
-        sys.stdout.write('OK\n')
-    else:
-        if expect_failure:
-            sys.stdout.write('EXPECTED TO FAIL\n')
+    if not skip_predicate(stdout, stderr):
+        sys.stdout.write('  {0} ... '.format(step))
+        if success_predicate(stdout):
+            # we found all strings, assume there are no errors
+            sys.stdout.write('OK\n')
         else:
-            sys.stdout.write('FAILED\n')
-            sys.stderr.write(stdout + stderr + '\n')
-            return_code = 1
-
-    sys.stdout.flush()
-    sys.stderr.flush()
+            if expect_failure:
+                sys.stdout.write('EXPECTED TO FAIL\n')
+            else:
+                sys.stdout.write('FAILED\n')
+                sys.stderr.write(stdout + stderr + '\n')
+                return_code = 1
+        sys.stdout.flush()
+        sys.stderr.flush()
 
     return return_code
 
@@ -187,29 +188,47 @@ def main():
                         definitions += ' -D{0}={1}'.format(k, v)
 
             # configure step
-            sys.stdout.write('  configuring ... ')
-            sys.stdout.flush()
+            step = 'configuring'
             command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
             expected_strings = [
                 '-- Configuring done',
                 '-- Generating done',
                 ]
-            return_code += run_command(command=command,
+            skip_predicate = lambda stdout, stderr: False
+            success_predicate = lambda stdout: all([x in stdout for x in expected_strings])
+            return_code += run_command(step=step,
+                                       command=command,
                                        expect_failure=expect_failure,
-                                       success_predicate=lambda s: all([x in s for x in expected_strings]))
+                                       skip_predicate=skip_predicate,
+                                       success_predicate=success_predicate)
+
+            os.chdir(build_directory)
 
             # build step
-            os.chdir(build_directory)
-            sys.stdout.write('  building ... ')
-            sys.stdout.flush()
+            step = 'building'
             command = 'cmake --build . -- {0}'.format(buildflags)
             expected_strings = [
                 'Built target',
                 'Built edge',
                 ]
-            return_code += run_command(command=command,
+            skip_predicate = lambda stdout, stderr: False
+            success_predicate = lambda stdout: any([x in stdout for x in expected_strings])
+            return_code += run_command(step=step,
+                                       command=command,
                                        expect_failure=expect_failure,
-                                       success_predicate=lambda s: any([x in s for x in expected_strings]))
+                                       skip_predicate=skip_predicate,
+                                       success_predicate=success_predicate)
+
+            # test step
+            step = 'testing'
+            command = 'ctest'
+            skip_predicate = lambda stdout, stderr: 'No test configuration file found!' in stderr
+            success_predicate = lambda stdout: '100% tests passed, 0 tests failed' in stdout
+            return_code += run_command(step=step,
+                                       command=command,
+                                       expect_failure=expect_failure,
+                                       skip_predicate=skip_predicate,
+                                       success_predicate=success_predicate)
 
     sys.exit(return_code)
 
