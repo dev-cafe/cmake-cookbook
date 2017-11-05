@@ -122,6 +122,7 @@ def main():
     buildflags = get_buildflags()
     generator = get_generator()
     recipes = get_list_of_recipes_to_run(topdir)
+    ci_environment = get_ci_environment()
 
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
@@ -143,8 +144,6 @@ def main():
         # Remove Fortran examples if generator is Visual Studio
         if generator == 'Visual Studio 14 2015':
             examples = filter(lambda x: 'fortran' not in x, examples)
-
-        ci_environment = get_ci_environment()
 
         for example in examples:
 
