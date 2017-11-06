@@ -9,7 +9,15 @@ find_package(HDF5 1.8 REQUIRED COMPONENTS Fortran)
 # Compile an example from the HDF5 website:
 # https://support.hdfgroup.org/HDF5/examples/f-src.html
 set(scratch_directory ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/hdf5)
-try_compile(HDF5_Fortran2003 ${scratch_directory} ${PROJECT_SOURCE_DIR}/compound_complex_fortran2003.f90)
+try_compile(HDF5_Fortran2003
+  ${scratch_directory}
+  SOURCES
+    ${PROJECT_SOURCE_DIR}/compound_complex_fortran2003.f90
+  CMAKE_FLAGS
+    INCLUDE_DIRECTORIES ${HDF5_INCLUDE_DIRS}
+  LINK_LIBRARIES
+    ${HDF5_Fortran_LIBRARIES}
+  )
 
 if(NOT HDF5_Fortran2003)
   message(STATUS "HDF5 was NOT compiled with Fortran 2003 bindings (--enable-fortran2003)")
