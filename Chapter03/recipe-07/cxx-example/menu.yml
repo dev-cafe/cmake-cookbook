@@ -1,3 +1,24 @@
-definitions:
-  CMAKE_CXX_COMPILER: 'g++'
-  Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'
+appveyor:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'
+
+drone:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'
+
+travis-linux:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'
+
+travis-osx:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'
+
+local:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'g++'
+    - Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'

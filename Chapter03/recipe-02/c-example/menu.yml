@@ -1,2 +1,19 @@
-definitions:
-  CMAKE_C_COMPILER: 'gcc'
+appveyor:
+  definitions:
+    - CMAKE_C_COMPILER: 'gcc'
+
+drone:
+  definitions:
+    - CMAKE_C_COMPILER: 'gcc'
+
+travis-linux:
+  definitions:
+    - CMAKE_C_COMPILER: 'gcc'
+
+travis-osx:
+  definitions:
+    - CMAKE_C_COMPILER: 'gcc'
+
+local:
+  definitions:
+    - CMAKE_C_COMPILER: 'gcc'

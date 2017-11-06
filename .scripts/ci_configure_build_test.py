@@ -9,17 +9,62 @@ import datetime
 import time
 
 
-def run_command(command, success_predicate):
+def get_ci_environment():
+    if os.environ.get('TRAVIS'):
+        travis_os_name = os.environ.get('TRAVIS_OS_NAME')
+        if travis_os_name == 'osx':
+            ci_environment = 'travis-osx'
+        else:
+            ci_environment = 'travis-linux'
+    elif os.environ.get('APPVEYOR'):
+        ci_environment = 'appveyor'
+    elif os.environ.get('DRONE'):
+        ci_environment = 'drone'
+    else:
+        ci_environment = 'local'
+    return ci_environment
+
+
+def get_generator():
+    generator = os.environ.get('GENERATOR')
+    if generator is None:
+        generator = 'Ninja'
+    return generator
+
+
+def get_buildflags():
+    buildflags = os.environ.get('BUILDFLAGS')
+    if buildflags is None:
+        # this fails on my laptop with Unix Makefiles (?)
+#       buildflags = '-v'
+        buildflags = ''
+    return buildflags
+
+
+def get_topdir():
+    if os.environ.get('TRAVIS'):
+        topdir = os.environ.get('TRAVIS_BUILD_DIR')
+    elif os.environ.get('APPVEYOR'):
+        topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
+    elif os.environ.get('DRONE'):
+        topdir = os.getcwd()
+    else:
+        topdir = os.getcwd()
+    return topdir
+
+
+def run_command(step,
+                command,
+                expect_failure,
+                skip_predicate,
+                success_predicate):
     """
-    Executes a command (string) and checks whether all expected strings (list)
-    are present in the stdout.
-    If all strings are present, it returns errors as None.
-    If not all are present, it combines stdout and stderr and returns it as error
-    and lets the caller deal with it.
-    We do this in this a bit convoluted way since CMake sometimes/often (?)
-    puts warnings into stderr so we cannot just check for the presence of stderr.
+    step: string (e.g. 'configuring', 'building', ...); only used in printing
+    command: string; this is the command to be run
+    expect_failure: bool; if True we do not panic if the command fails
+    skip_predicate: bool(stdout, stderr)
+    success_predicate: bool(stdout)
     """
-    print(command)
     popen = subprocess.Popen(command,
                              shell=True,
                              stdout=subprocess.PIPE,
@@ -29,14 +74,23 @@ def run_command(command, success_predicate):
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
 
-    if success_predicate(stdout):
-        # we found all strings, assume there are no errors
-        # and return None
-        errors = None
-    else:
-        errors = stdout + stderr
+    return_code = 0
+    if not skip_predicate(stdout, stderr):
+        sys.stdout.write('  {0} ... '.format(step))
+        if success_predicate(stdout):
+            # we found all strings, assume there are no errors
+            sys.stdout.write('OK\n')
+        else:
+            if expect_failure:
+                sys.stdout.write('EXPECTED TO FAIL\n')
+            else:
+                sys.stdout.write('FAILED\n')
+                sys.stderr.write(stdout + stderr + '\n')
+                return_code = 1
+        sys.stdout.flush()
+        sys.stderr.flush()
 
-    return errors
+    return return_code
 
 
 def get_list_of_recipes_to_run(topdir):
@@ -49,40 +103,8 @@ def get_list_of_recipes_to_run(topdir):
         sys.stderr.write('ERROR: script expects one argument, example:\n')
         sys.stderr.write("python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'\n")
         sys.exit(1)
-    # glob recipes but exclude recipe-0000
-    return [r for r in sorted(glob.glob(os.path.join(topdir, glob_regex))) if '0000' not in r]
-
-
-def get_env_variables():
-    generator = os.environ.get('GENERATOR')
-    buildflags = os.environ.get('BUILDFLAGS')
-    topdir = ''
-    is_visual_studio = True if generator == 'Visual Studio 14 2015' else False
-    if os.environ.get('TRAVIS'):
-        topdir = os.environ.get('TRAVIS_BUILD_DIR')
-    elif os.environ.get('APPVEYOR'):
-        topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
-    elif os.environ.get('DRONE'):
-        topdir = os.getcwd()
-    else:
-        # Local testing
-        generator = 'Ninja'
-        buildflags = '-v'
-        topdir = os.getcwd()
-    return generator, buildflags, topdir, is_visual_studio
-
-
-def handle_errors(errors):
-    if errors is None:
-        sys.stdout.write('OK\n')
-        return_code = 0
-    else:
-        sys.stdout.write('FAILED\n')
-        sys.stderr.write(errors + '\n')
-        return_code = 1
-    sys.stdout.flush()
-    sys.stderr.flush()
-    return return_code
+    # glob recipes
+    return [r for r in sorted(glob.glob(os.path.join(topdir, glob_regex)))]
 
 
 def parse_yaml():
@@ -104,8 +126,11 @@ def parse_yaml():
 
 
 def main():
-    generator, buildflags, topdir, is_visual_studio = get_env_variables()
+    topdir = get_topdir()
+    buildflags = get_buildflags()
+    generator = get_generator()
     recipes = get_list_of_recipes_to_run(topdir)
+    ci_environment = get_ci_environment()
 
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
@@ -125,13 +150,13 @@ def main():
 
         # TODO we need to get rid of this
         # Remove Fortran examples if generator is Visual Studio
-        if is_visual_studio:
+        if generator == 'Visual Studio 14 2015':
             examples = filter(lambda x: 'fortran' not in x, examples)
 
         for example in examples:
 
             os.chdir(example)
-            sys.stdout.write('  {}/{}\n'.format(recipe, example))
+            sys.stdout.write('\n  {}\n'.format(example))
 
             # we append a time stamp to the build directory
             # to avoid it being re-used when running tests multiple times
@@ -139,35 +164,71 @@ def main():
             time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
             build_directory = 'build-{0}'.format(time_stamp)
 
-            # configure step
-            sys.stdout.write('    configuring ... ')
-            sys.stdout.flush()
             config = parse_yaml()
+
+            failing_generators = []
+            if 'failing_generators' in config[ci_environment]:
+                failing_generators = config[ci_environment]['failing_generators']
+            expect_failure = generator in failing_generators
+
+            # assemble env vars
             env = ''
-            if 'env' in config:
-                for k in config['env']:
-                    v = config['env'][k]
-                    env += '{0}={1} '.format(k, v)
+            if 'env' in config[ci_environment]:
+                for entry in config[ci_environment]['env']:
+                    for k in entry.keys():
+                        v = entry[k]
+                        env += '{0}={1} '.format(k, v)
+
+            # assemble definitions
             definitions = ''
-            if 'definitions' in config:
-                for k in config['definitions']:
-                    v = config['definitions'][k]
-                    definitions += ' -D{0}={1}'.format(k, v)
+            if 'definitions' in config[ci_environment]:
+                for entry in config[ci_environment]['definitions']:
+                    for k in entry.keys():
+                        v = entry[k]
+                        definitions += ' -D{0}={1}'.format(k, v)
+
+            # configure step
+            step = 'configuring'
             command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
-            expected_strings = ['-- Configuring done',
-                              '-- Generating done']
-            errors = run_command(command=command,
-                                 success_predicate=lambda s: all([x in s for x in expected_strings]))
-            return_code += handle_errors(errors)
+            expected_strings = [
+                '-- Configuring done',
+                '-- Generating done',
+                ]
+            skip_predicate = lambda stdout, stderr: False
+            success_predicate = lambda stdout: all([x in stdout for x in expected_strings])
+            return_code += run_command(step=step,
+                                       command=command,
+                                       expect_failure=expect_failure,
+                                       skip_predicate=skip_predicate,
+                                       success_predicate=success_predicate)
+
+            os.chdir(build_directory)
 
             # build step
-            os.chdir(build_directory)
-            sys.stdout.write('    building ... ')
-            sys.stdout.flush()
-            expected_strings = ['Built target', 'Built edge']
-            errors = run_command(command='cmake --build . -- {0}'.format(buildflags),
-                                 success_predicate=lambda s: any([x in s for x in expected_strings]))
-            return_code += handle_errors(errors)
+            step = 'building'
+            command = 'cmake --build . -- {0}'.format(buildflags)
+            expected_strings = [
+                'Built target',
+                'Built edge',
+                ]
+            skip_predicate = lambda stdout, stderr: False
+            success_predicate = lambda stdout: any([x in stdout for x in expected_strings])
+            return_code += run_command(step=step,
+                                       command=command,
+                                       expect_failure=expect_failure,
+                                       skip_predicate=skip_predicate,
+                                       success_predicate=success_predicate)
+
+            # test step
+            step = 'testing'
+            command = 'ctest'
+            skip_predicate = lambda stdout, stderr: 'No test configuration file found!' in stderr
+            success_predicate = lambda stdout: '100% tests passed, 0 tests failed' in stdout
+            return_code += run_command(step=step,
+                                       command=command,
+                                       expect_failure=expect_failure,
+                                       skip_predicate=skip_predicate,
+                                       success_predicate=success_predicate)
 
     sys.exit(return_code)
 
