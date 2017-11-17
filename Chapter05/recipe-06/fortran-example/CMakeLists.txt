@@ -22,7 +22,7 @@ message(STATUS "Result of try_compile: ${HDF5_Fortran2003_test1}")
 
 include(CheckFortranSourceCompiles)
 file(READ ${PROJECT_SOURCE_DIR}/compound_complex_fortran2003.f90 _snippet)
-check_fortran_source_compiles(${_snippet} HDF5_Fortran2003_test2)
+check_fortran_source_compiles("${_snippet}" HDF5_Fortran2003_test2)
 
 if(NOT HDF5_Fortran2003_test1 OR NOT HDF5_Fortran2003_test2)
   message(STATUS "HDF5 was NOT compiled with Fortran 2003 bindings (--enable-fortran2003)")
