@@ -5,10 +5,12 @@ appveyor:
 drone:
   definitions:
     - CMAKE_Fortran_COMPILER: 'gfortran'
+    - HDF5_ROOT: '$HOME/Deps/hdf5'
 
 travis-linux:
   definitions:
     - CMAKE_Fortran_COMPILER: 'gfortran'
+    - HDF5_ROOT: '$HOME/Deps/hdf5'
 
 travis-osx:
   definitions:

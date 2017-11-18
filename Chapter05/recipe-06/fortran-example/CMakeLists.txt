@@ -1,7 +1,5 @@
-# set minimum cmake version
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
-# project name and language
 project(recipe-09 Fortran)
 
 find_package(HDF5 1.8 REQUIRED COMPONENTS Fortran)
@@ -22,6 +20,9 @@ message(STATUS "Result of try_compile: ${HDF5_Fortran2003_test1}")
 
 include(CheckFortranSourceCompiles)
 file(READ ${PROJECT_SOURCE_DIR}/compound_complex_fortran2003.f90 _snippet)
+set(CMAKE_REQUIRED_FLAGS -ffree-form)
+set(CMAKE_REQUIRED_INCLUDES ${HDF5_INCLUDE_DIRS})
+set(CMAKE_REQUIRED_LIBRARIES ${HDF5_Fortran_LIBRARIES})
 check_fortran_source_compiles("${_snippet}" HDF5_Fortran2003_test2)
 
 if(NOT HDF5_Fortran2003_test1 OR NOT HDF5_Fortran2003_test2)
