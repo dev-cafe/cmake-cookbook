@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-OUPUT=$(./replicate 2 "hello echo")
+OUPUT=$(./sum_up 1 2 3 4)
 
-if [ "$OUPUT" = "hello echo hello echo" ]
+if [ "$OUPUT" = "10" ]
 then
     exit 0
 else

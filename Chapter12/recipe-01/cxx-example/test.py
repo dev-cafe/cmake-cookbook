@@ -2,8 +2,11 @@
 
 import subprocess
 
-output = subprocess.check_output(['./replicate', '2', 'one two three four'])
-assert output == b'one two three four one two three four\n'
+# [1, 2, ..., 100]
+# we collect these as a list of strings
+integers = [str(i) for i in range(1, 101)]
 
-output = subprocess.check_output(['./replicate', '3', '1 2'])
-assert output == b'1 2 1 2 1 2\n'
+output = subprocess.check_output(['./sum_up'] + integers)
+output = int(output)
+
+assert output == 5050

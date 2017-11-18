@@ -4,11 +4,15 @@ cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 # project name and language
 project(recipe-01 CXX)
 
-# define executable and its dependencies
-add_executable(replicate replicate.cpp)
+add_library(sum_integers sum_integers.cpp)
 
+add_executable(sum_up main.cpp)
+target_link_libraries(sum_up sum_integers)
+
+#add_executable(cpp_test test.cpp)
+#target_link_libraries(cpp_test sum_integers)
+
+# define tests
 enable_testing()
-
-# define two tests
 add_test(bash_test ${PROJECT_SOURCE_DIR}/test.sh)
 add_test(python_test ${PROJECT_SOURCE_DIR}/test.py)
