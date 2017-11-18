@@ -59,8 +59,8 @@ install:
       # Get HDF5 1.10.1
       curl -L https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.1/src/hdf5-1.10.1.tar.gz | tar xz
       cd hdf5-1.10.1
-      cmake -H. -Bbuild_hdf5 -DCMAKE_INSTALL_PREFIX=${PWD}/hdf5 -DHDF5_BUILD_FORTRAN=ON -DHDF5_ENABLE_F2003=ON -DHDF5_ENABLE_PARALLEL=ON > /dev/null 2>&1
-      cmake --build build_hdf5 -- install > /dev/null 2>&1
+      ./configure --prefix=${HOME}/Deps/hdf5 --enable-fortran --enable-parallel > /dev/null 2>&1;
+      make install > /dev/null 2&>1
       pip install --user virtualenv
       cd ${TRAVIS_BUILD_DIR}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
