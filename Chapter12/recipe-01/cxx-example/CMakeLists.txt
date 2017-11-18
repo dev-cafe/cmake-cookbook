@@ -15,5 +15,6 @@ target_link_libraries(cpp_test sum_integers)
 # define tests
 enable_testing()
 add_test(bash_test ${PROJECT_SOURCE_DIR}/test.sh)
-add_test(python_test ${PROJECT_SOURCE_DIR}/test.py)
 add_test(cpp_test ${PROJECT_BINARY_DIR}/cpp_test)
+add_test(python_test_short ${PROJECT_SOURCE_DIR}/test.py --short)
+add_test(python_test_long ${PROJECT_SOURCE_DIR}/test.py --long)
