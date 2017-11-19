@@ -57,8 +57,9 @@ install:
       cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=${PWD}/eigen-3.3.4 >/dev/null 2>&1
       cmake --build build_eigen -- install >/dev/null 2>&1
       # Get HDF5 1.10.1
-      git clone --branch hdf5_1_10_1 https://git.hdfgroup.org/scm/hdffv/hdf5.git hdf5_1_10_1
-      cd hdf5_1_10_1
+      cd ${DEPS}
+      curl -L https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.1/src/hdf5-1.10.1.tar.gz | tar xz
+      cd hdf5-1.10.1
       ./configure --prefix=${HOME}/Deps/hdf5 --enable-shared --enable-fortran --enable-parallel > /dev/null 2>&1
       make install > /dev/null 2&>1
       pip install --user virtualenv
