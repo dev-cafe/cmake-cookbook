@@ -1,21 +1,19 @@
 appveyor:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'g++'
+    - CMAKE_CXX_COMPILER: 'g++'
 
 drone:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'g++'
+    - CMAKE_CXX_COMPILER: 'g++'
 
 travis-linux:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'g++'
+    - CMAKE_CXX_COMPILER: 'g++'
 
 travis-osx:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'g++'
+    - CMAKE_CXX_COMPILER: 'g++'
 
 local:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'g++'
-  failing_generators:
-    - 'Ninja'
+    - CMAKE_CXX_COMPILER: 'g++'
