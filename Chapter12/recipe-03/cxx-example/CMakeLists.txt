@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 # project name and language
-project(recipe-01 CXX)
+project(recipe-03 CXX)
 
 add_library(sum_integers sum_integers.cpp)
 
