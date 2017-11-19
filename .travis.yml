@@ -20,6 +20,9 @@ matrix:
       env:
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
+        - LC_ALL="en_US.UTF-8"
+        - LANG="en_US.UTF-8"
+        - LANGUAGE="en_US.UTF-8"
     - os: linux
       addons: *1
       env:
