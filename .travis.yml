@@ -13,8 +13,8 @@ matrix:
             - liblapack-dev
             - libopenmpi-dev
             - openmpi-bin
-            - libboost1.55-all-dev
             - libhdf5-openmpi-dev
+            - libboost1.55-all-dev
             - uuid-dev
             - pkg-config
       env:
