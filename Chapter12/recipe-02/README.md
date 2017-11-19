@@ -1,1 +1,1 @@
-# Define a unit test and link against Google test
+# Define a unit test using the Catch library
