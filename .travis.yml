@@ -23,12 +23,17 @@ matrix:
         - LC_ALL="en_US.UTF-8"
         - LANG="en_US.UTF-8"
         - LANGUAGE="en_US.UTF-8"
+        - PYTHONIOENCODING=UTF-8
     - os: linux
       addons: *1
       env:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
         - NINJA_URL="https://goo.gl/4g5Jjv"
+        - LC_ALL="en_US.UTF-8"
+        - LANG="en_US.UTF-8"
+        - LANGUAGE="en_US.UTF-8"
+        - PYTHONIOENCODING=UTF-8
     - os: osx
       env:
         - GENERATOR="Unix Makefiles"
