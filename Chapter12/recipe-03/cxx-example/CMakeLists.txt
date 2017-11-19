@@ -23,10 +23,18 @@ if(ENABLE_UNIT_TESTS)
 
     ExternalProject_Add(
         gtest
-        PREFIX "${PROJECT_BINARY_DIR}/gtest"
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG release-1.8.0
-        INSTALL_COMMAND true # prevent gtest from installing itself system-wide
+        PREFIX
+          "${PROJECT_BINARY_DIR}/gtest"
+        GIT_REPOSITORY
+          https://github.com/google/googletest.git
+        GIT_TAG
+          release-1.8.0
+        INSTALL_COMMAND
+          true # prevent gtest from installing itself system-wide
+        BUILD_BYPRODUCTS
+          # this is here otherwise Ninja will complain
+          # that there is no rule to build libgtest.a
+          ${PROJECT_BINARY_DIR}/gtest/src/gtest-build/googlemock/gtest/libgtest.a
         )
 
     add_executable(cpp_test test.cpp)
