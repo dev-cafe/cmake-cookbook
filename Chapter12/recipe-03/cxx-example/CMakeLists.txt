@@ -32,7 +32,7 @@ if(ENABLE_UNIT_TESTS)
         CMAKE_ARGS
           "-Dgtest_disable_pthreads=ON"
         INSTALL_COMMAND
-          true # prevent gtest from installing itself system-wide
+          "" # prevent gtest from installing itself system-wide
         BUILD_BYPRODUCTS
           # this is here otherwise Ninja will complain
           # that there is no rule to build libgtest.a
