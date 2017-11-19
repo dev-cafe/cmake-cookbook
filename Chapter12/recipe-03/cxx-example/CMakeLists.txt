@@ -29,6 +29,8 @@ if(ENABLE_UNIT_TESTS)
           https://github.com/google/googletest.git
         GIT_TAG
           release-1.8.0
+        CMAKE_ARGS
+          "-Dgtest_disable_pthreads=ON"
         INSTALL_COMMAND
           true # prevent gtest from installing itself system-wide
         BUILD_BYPRODUCTS
@@ -49,7 +51,6 @@ if(ENABLE_UNIT_TESTS)
         cpp_test
         sum_integers
         ${PROJECT_BINARY_DIR}/gtest/src/gtest-build/googlemock/gtest/libgtest.a
-        pthread
         )
 
     # make sure that gtest is built before we build cpp_test
