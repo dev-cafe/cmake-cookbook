@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-list(APPEND CXX_BASIC_FLAGS "-g3" "-O2")
+list(APPEND CXX_BASIC_FLAGS "-g3" "-O1")
 
 include(CheckCXXCompilerFlag)
 
@@ -28,7 +28,7 @@ if(asan_works)
     )
 endif()
 
-set(TSAN_FLAGS "-fsanitize=thread -fno-omit-frame-pointer -fPIE -pie")
+set(TSAN_FLAGS "-fsanitize=thread -fno-omit-frame-pointer -fPIE")
 set(CMAKE_REQUIRED_FLAGS ${TSAN_FLAGS})
 check_cxx_compiler_flag(${TSAN_FLAGS} tsan_works)
 unset(CMAKE_REQUIRED_FLAGS)
@@ -45,10 +45,11 @@ if(tsan_works)
     PUBLIC
       Threads::Threads
       ${_tsan_flags}
+      -pie
     )
 endif()
 
-set(MSAN_FLAGS "-fsanitize=memory -fno-omit-frame-pointer -fPIE -pie")
+set(MSAN_FLAGS "-fsanitize=memory -fno-omit-frame-pointer -fPIE")
 set(CMAKE_REQUIRED_FLAGS ${MSAN_FLAGS})
 check_cxx_compiler_flag(${MSAN_FLAGS} msan_works)
 unset(CMAKE_REQUIRED_FLAGS)
@@ -63,6 +64,7 @@ if(msan_works)
   target_link_libraries(msan-example
     PUBLIC
       ${_msan_flags}
+      -pie
     )
 endif()
 
