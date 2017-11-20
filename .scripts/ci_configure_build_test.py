@@ -161,7 +161,7 @@ def main():
             # we append a time stamp to the build directory
             # to avoid it being re-used when running tests multiple times
             # when debugging on a laptop
-            time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
+            time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
             build_directory = 'build-{0}'.format(time_stamp)
 
             config = parse_yaml()
