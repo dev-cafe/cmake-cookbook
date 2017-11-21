@@ -26,9 +26,7 @@ in
       atlas
       boost
       ccache
-      clang
       clang-tools
-      clang-analyzer
       cmake
       doxygen
       exa
