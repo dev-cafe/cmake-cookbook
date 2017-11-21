@@ -15,7 +15,6 @@ if(TARGET Eigen3::Eigen)
   message(STATUS "Eigen3 version ${EIGEN3_VERSION_STRING} found in ${EIGEN3_INCLUDE_DIR}")
 endif()
 
-find_package(BLAS)
 find_package(LAPACK)
 
 add_executable(linear-algebra linear-algebra.cpp)
@@ -33,10 +32,9 @@ if(BLAS_FOUND AND LAPACK_FOUND)
   target_link_libraries(linear-algebra
     PUBLIC
       Eigen3::Eigen
-      ${BLAS_LIBRARIES}
-      ${LAPACK_LIBRARIES}
     )
 else()
+  message(STATUS "BLAS and LAPACK not found. Using Eigen own functions")
   target_link_libraries(linear-algebra
     PUBLIC
       Eigen3::Eigen

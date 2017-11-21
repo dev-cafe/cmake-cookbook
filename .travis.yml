@@ -9,11 +9,11 @@ matrix:
           packages:
             - gfortran
             - python-dev
+            - libatlas-dev
             - libblas-dev
             - liblapack-dev
             - libopenmpi-dev
             - openmpi-bin
-            - libhdf5-openmpi-dev
             - libboost1.55-all-dev
             - uuid-dev
             - pkg-config
@@ -66,6 +66,12 @@ install:
       cd eigen-eigen-5a0156e40feb
       cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=${PWD}/eigen-3.3.4 >/dev/null 2>&1
       cmake --build build_eigen -- install >/dev/null 2>&1
+      # Download and install HDF5 1.10.1
+      curl -L https://goo.gl/Pvreb8 | tar -xj -C hdf5-1.10.1 --strip-components=1
+      cd hdf5-1.10.1
+      ./configure --prefix=$HOME/Deps/hdf5-1.10.1 --enable-fortran --enable-shared --enable-parallel > /dev/null 2>&1
+      make install > /dev/null 2>&1
+      export LD_LIBRARY_PATH=$HOME/Deps/hdf5-1.10.1/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
       pip install --user virtualenv
       cd ${TRAVIS_BUILD_DIR}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
