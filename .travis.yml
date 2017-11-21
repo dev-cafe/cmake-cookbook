@@ -52,7 +52,7 @@ before_install:
 install:
   - mkdir -p ${HOME}/Deps
   - DEPS=${HOME}/Deps
-  - CMAKE_VERSION=3.7.2
+  - CMAKE_VERSION=3.10.0
   - |
     # Install CMake and Kitware-maintained version of Ninja
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
@@ -67,7 +67,7 @@ install:
       cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=${PWD}/eigen-3.3.4 >/dev/null 2>&1
       cmake --build build_eigen -- install >/dev/null 2>&1
       # Download and install HDF5 1.10.1
-      curl -L https://goo.gl/Pvreb8 | tar -xj #-C hdf5-1.10.1 --strip-components=1
+      curl -L https://goo.gl/Pvreb8 | tar -xj
       cd hdf5-1.10.1
       ./configure --prefix=$HOME/Deps/hdf5-1.10.1 --enable-fortran --enable-shared --enable-parallel > /dev/null 2>&1
       make install > /dev/null 2>&1
