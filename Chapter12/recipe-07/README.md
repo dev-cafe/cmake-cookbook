@@ -1,1 +1,0 @@
-# Dynamic analysis to detect memory defects
