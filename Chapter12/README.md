@@ -3,5 +3,7 @@
 - [Define a unit test and link against Google test](recipe-03/README.md)
 - [Define a unit test and link against Boost test](recipe-04/README.md)
 - [Dynamic analysis to detect memory defects](recipe-05/README.md)
+- [Testing failures](recipe-06/README.md)
+- [Using timeouts](recipe-07/README.md)
 - [Running tests in parallel](recipe-08/README.md)
 - [Running a subset of tests](recipe-09/README.md)
