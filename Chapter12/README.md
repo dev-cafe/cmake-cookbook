@@ -4,3 +4,4 @@
 - [Define a unit test and link against Boost test](recipe-04/README.md)
 - [Using test labels](recipe-05/README.md)
 - [Running tests in parallel](recipe-06/README.md)
+- [Dynamic analysis to detect memory defects](recipe-07/README.md)
