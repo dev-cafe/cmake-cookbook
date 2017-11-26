@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--short',
                     default=False,
                     action='store_true',
-                    help='only run the short test')
+                    help='run a shorter test')
 args = parser.parse_args()
 
 
