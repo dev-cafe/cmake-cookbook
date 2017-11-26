@@ -7,3 +7,4 @@
 - [Using timeouts for long tests](recipe-07/README.md)
 - [Running tests in parallel](recipe-08/README.md)
 - [Running a subset of tests](recipe-09/README.md)
+- [Using test fixtures](recipe-10/README.md)
