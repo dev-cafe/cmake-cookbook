@@ -1,5 +1,5 @@
 - [Creating a simple unit test example](recipe-01/README.md)
-- [Define a unit test using the Catch library](recipe-02/README.md)
+- [Define a unit test using the Catch2 library](recipe-02/README.md)
 - [Define a unit test and link against Google test](recipe-03/README.md)
 - [Define a unit test and link against Boost test](recipe-04/README.md)
 - [Dynamic analysis to detect memory defects](recipe-05/README.md)

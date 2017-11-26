@@ -1,1 +1,1 @@
-# Define a unit test using the Catch library
+# Define a unit test using the Catch2 library
