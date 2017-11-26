@@ -75,11 +75,8 @@ install:
       pip install --user virtualenv
       cd ${TRAVIS_BUILD_DIR}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      # Install latest available CMake
-      brew upgrade cmake
-      # Get GFortran
-      brew install gcc eigen boost mpich hdf5 pkg-config ossp-uuid
-      # virtual environments
+      brew update
+      brew install cmake gcc eigen boost mpich hdf5 pkg-config ossp-uuid
       pip install virtualenv
     fi
   - virtualenv venv
@@ -94,8 +91,6 @@ install:
       cd ${TRAVIS_BUILD_DIR}
     fi
 
-before_script:
-  - ./.scripts/report_versions.sh
-
 script:
+  - ./.scripts/report_versions.sh
   - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
