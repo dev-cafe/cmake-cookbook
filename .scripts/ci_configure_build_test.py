@@ -146,7 +146,7 @@ def main():
                     print('\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
-        examples = [e for e in sorted(glob.glob(os.path.join(recipe, '*-example')))]
+        examples = [e for e in sorted(glob.glob(os.path.join(recipe, '*example')))]
 
         # TODO we need to get rid of this
         # Remove Fortran examples if generator is Visual Studio
