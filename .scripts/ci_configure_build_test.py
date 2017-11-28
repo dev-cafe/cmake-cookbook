@@ -146,7 +146,7 @@ def main():
                     print('\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
-        examples = [e for e in sorted(glob.glob(os.path.join(recipe, '*-example')))]
+        examples = [e for e in sorted(glob.glob(os.path.join(recipe, '*example')))]
 
         # TODO we need to get rid of this
         # Remove Fortran examples if generator is Visual Studio
@@ -211,7 +211,9 @@ def main():
                 'Built target',
                 'Built edge',
                 ]
-            skip_predicate = lambda stdout, stderr: False
+            skip_predicate = lambda stdout, stderr: stdout == ''  # skip if build step produces zero output
+                                                                  # in this case we only configure and test
+                                                                  # used in chapter 12
             success_predicate = lambda stdout: any([x in stdout for x in expected_strings])
             return_code += run_command(step=step,
                                        command=command,
