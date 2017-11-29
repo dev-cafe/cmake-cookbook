@@ -60,7 +60,7 @@ install:
       mkdir -p cmake-${CMAKE_VERSION}
       curl -L https://goo.gl/dSVHTh | tar -xz -C cmake-${CMAKE_VERSION} --strip-components=1
       export PATH=$PWD/cmake-${CMAKE_VERSION}/bin:$PATH
-      export LD_LIBARY_PATH=$PWD/cmake-${CMAKE_VERSION}/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+      export LD_LIBRARY_PATH=$PWD/cmake-${CMAKE_VERSION}/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
       # Get Eigen
       curl -L http://bitbucket.org/eigen/eigen/get/3.3.4.tar.gz | tar xz
       cd eigen-eigen-5a0156e40feb
