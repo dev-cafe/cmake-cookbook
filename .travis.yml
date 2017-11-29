@@ -52,15 +52,14 @@ before_install:
 install:
   - mkdir -p ${HOME}/Deps
   - DEPS=${HOME}/Deps
-  - CMAKE_VERSION=3.10.0
   - |
     # Install CMake and Kitware-maintained version of Ninja
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       cd ${DEPS}
-      mkdir -p cmake-${CMAKE_VERSION}
-      curl -L https://goo.gl/dSVHTh | tar -xz -C cmake-${CMAKE_VERSION} --strip-components=1
-      export PATH=$PWD/cmake-${CMAKE_VERSION}/bin:$PATH
-      export LD_LIBRARY_PATH=$PWD/cmake-${CMAKE_VERSION}/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+      mkdir -p cmake
+      curl -L https://cmake.org/files/v3.10/cmake-3.10.0-Linux-x86_64.tar.gz | tar -xz -C cmake --strip-components=1
+      export PATH=$PWD/cmake/bin:$PATH
+      export LD_LIBRARY_PATH=$PWD/cmake/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
       # Get Eigen
       curl -L http://bitbucket.org/eigen/eigen/get/3.3.4.tar.gz | tar xz
       cd eigen-eigen-5a0156e40feb
