@@ -12,7 +12,7 @@ travis-linux:
 
 travis-osx:
   definitions:
-    - CMAKE_CXX_COMPILER: 'gfortran'
+    - CMAKE_CXX_COMPILER: 'gfortran-7'
 
 local:
   definitions:

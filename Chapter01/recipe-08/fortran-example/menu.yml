@@ -15,7 +15,7 @@ travis-linux:
 
 travis-osx:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_Fortran_COMPILER: 'gfortran-7'
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
 
 local:
