@@ -78,7 +78,7 @@ install:
       brew update
       brew install cmake gcc eigen boost mpich hdf5 pkg-config ossp-uuid
       brew upgrade cmake
-      pip install virtualenv
+      brew install pyenv-virtualenv
     fi
   - cd ${TRAVIS_BUILD_DIR}
   - virtualenv venv
