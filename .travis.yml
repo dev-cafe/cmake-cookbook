@@ -72,13 +72,13 @@ install:
       travis_wait make install > /dev/null 2>&1
       export LD_LIBRARY_PATH=$HOME/Deps/hdf5-1.10.1/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
       pip install --user virtualenv
-      cd ${TRAVIS_BUILD_DIR}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       brew update
       brew install cmake gcc eigen boost mpich hdf5 pkg-config ossp-uuid
       brew upgrade cmake
       pip install virtualenv
     fi
+  - cd ${TRAVIS_BUILD_DIR}
   - virtualenv venv
   - source venv/bin/activate
   - pip install -r requirements.txt
