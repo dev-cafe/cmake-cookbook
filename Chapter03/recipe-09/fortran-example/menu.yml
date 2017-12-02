@@ -14,7 +14,7 @@ travis-linux:
 
 travis-osx:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_Fortran_COMPILER: 'gfortran-7'
 
 local:
   definitions:

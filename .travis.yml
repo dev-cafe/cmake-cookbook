@@ -35,10 +35,12 @@ matrix:
         - LANGUAGE="en_US.UTF-8"
         - PYTHONIOENCODING=UTF-8
     - os: osx
+      osx_image: xcode7.3
       env:
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: osx
+      osx_image: xcode7.3
       env:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
@@ -76,7 +78,7 @@ install:
       export LD_LIBRARY_PATH=$HOME/Deps/hdf5-1.10.1/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       brew update > /dev/null
-      brew install gcc eigen boost mpich hdf5 pkg-config ossp-uuid
+      brew install gcc@7 eigen boost mpich hdf5 pkg-config ossp-uuid
       brew upgrade cmake
       brew install pyenv-virtualenv
     fi
