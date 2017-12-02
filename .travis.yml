@@ -11,6 +11,7 @@ matrix:
             - python-dev
             - libatlas-dev
             - liblapack-dev
+            - liblapacke-dev
             - libopenmpi-dev
             - openmpi-bin
             - libboost1.55-all-dev
