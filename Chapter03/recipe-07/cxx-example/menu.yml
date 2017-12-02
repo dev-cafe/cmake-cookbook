@@ -17,6 +17,9 @@ travis-osx:
   definitions:
     - CMAKE_CXX_COMPILER: 'g++'
     - Eigen3_DIR: '$HOME/Deps/eigen-3.3.4/share/eigen3/cmake/'
+  failing_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
 
 local:
   definitions:

@@ -13,6 +13,9 @@ travis-linux:
 travis-osx:
   definitions:
     - CMAKE_CXX_COMPILER: 'g++'
+  failing_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
 
 local:
   definitions:
