@@ -53,19 +53,21 @@ install:
   - mkdir -p ${HOME}/Deps
   - DEPS=${HOME}/Deps
   - |
-    # Install CMake and Kitware-maintained version of Ninja
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      # CMake
       cd ${DEPS}
       mkdir -p cmake
       curl -L https://cmake.org/files/v3.10/cmake-3.10.0-Linux-x86_64.tar.gz | tar -xz -C cmake --strip-components=1
       export PATH=$PWD/cmake/bin:$PATH
       export LD_LIBRARY_PATH=$PWD/cmake/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
-      # Get Eigen
+      # Eigen
+      cd ${DEPS}
       curl -L http://bitbucket.org/eigen/eigen/get/3.3.4.tar.gz | tar xz
       cd eigen-eigen-5a0156e40feb
       cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=${PWD}/eigen-3.3.4 >/dev/null 2>&1
       cmake --build build_eigen -- install >/dev/null 2>&1
-      # Download and install HDF5 1.10.1
+      # HDF5
+      cd ${DEPS}
       curl -L https://goo.gl/Pvreb8 | tar -xj
       cd hdf5-1.10.1
       ./configure --prefix=$HOME/Deps/hdf5-1.10.1 --enable-build-mode=debug --enable-fortran --enable-shared --enable-parallel > /dev/null 2>&1
