@@ -141,10 +141,10 @@ target_compile_options(asan-example
   )
 
 set(_whathaveyou
-    item1
-    item2
-    item3
-    )
+  item1
+  item2
+  item3
+  )
 ```
 
 
