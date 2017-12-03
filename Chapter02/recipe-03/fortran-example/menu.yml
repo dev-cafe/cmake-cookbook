@@ -4,7 +4,7 @@ appveyor:
 
 drone:
   definitions:
-    - CMAKE_CXX_COMPILER: 'gfortran'
+    - CMAKE_CXX_COMPILER: 'pgfortran'
 
 travis-linux:
   definitions:
