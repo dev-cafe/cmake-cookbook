@@ -32,7 +32,9 @@
 - [Chapter 16: Porting a Project to CMake](Chapter16/README.md)
 
 
-## Conventions
+## Contributing
+
+### Conventions
 
 - Folders for recipes are named `ChapterN/recipe-M`, where `N` is the chapter number and `M` is a number, _i.e._
   `01`, `02`, etc. In each chapter we restart the recipe counter.
@@ -42,7 +44,7 @@
   subdirectory.
 
 
-## Configuring tests
+### Configuring tests
 
 You have to place a file `menu.yml` in the recipe directory, next to `CMakeLists.txt`.
 The test script will parse it to set environment variables and CMake definitions for a particular recipe.
@@ -78,7 +80,8 @@ drone:
   ...
 ```
 
-## Expected failures
+
+### Expected failures
 
 Sometimes we expect a failure. For instance let us imagine we expect
 a test to fail on AppVeyor when using the Ninja generator. We can express this using:
@@ -92,7 +95,7 @@ appveyor:
 ```
 
 
-## Running tests on your computer
+### Running tests on your computer
 
 ```shell
 virtualenv venv
