@@ -10,8 +10,8 @@ matrix:
             - gfortran
             - python-dev
             - libatlas-dev
-            - libblas-dev
             - liblapack-dev
+            - liblapacke-dev
             - libopenmpi-dev
             - openmpi-bin
             - libboost1.55-all-dev
