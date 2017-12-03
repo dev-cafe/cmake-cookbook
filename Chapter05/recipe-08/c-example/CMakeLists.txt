@@ -20,7 +20,7 @@ set(_test_uuid
 int main(int argc, char * argv[]) {
   uuid_t uuid;
 
-  uuid_generate_time_safe(uuid);
+  uuid_generate(uuid);
 
   return 0;
 }
