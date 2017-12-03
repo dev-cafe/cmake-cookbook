@@ -35,6 +35,8 @@ in
       gcc
       gfortran
       hdf5
+      blas
+      liblapack
       libuuid
       ninja
       openmpi
