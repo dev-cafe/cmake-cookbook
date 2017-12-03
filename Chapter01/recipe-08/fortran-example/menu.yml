@@ -5,7 +5,7 @@ appveyor:
 
 drone:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_Fortran_COMPILER: 'pgfortran'
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
 
 travis-linux:
