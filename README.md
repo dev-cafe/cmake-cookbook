@@ -12,6 +12,26 @@
 # Experimental collection of CMake recipes
 
 
+## Recipes
+
+- [Chapter 1: From a Simple Executable to Libraries](Chapter01/README.md)
+- [Chapter 2: Detecting the Environment](Chapter02/README.md)
+- [Chapter 3: Detecting External Libraries and Programs](Chapter03/README.md)
+- [Chapter 4: Creating and Running Tests](Chapter04/README.md)
+- [Chapter 5: Configure-time and Build-time Operations](Chapter05/README.md)
+- [Chapter 6: Generating Source Code](Chapter06/README.md)
+- [Chapter 7: Fetching, Building, and Linking External Sources](Chapter07/README.md)
+- [Chapter 8: Structuring Projects](Chapter08/README.md)
+- [Chapter 9: Mixed-language Projects](Chapter09/README.md)
+- [Chapter 10: Writing an Installer](Chapter10/README.md)
+- [Chapter 11: Generating Source Archives and Binary Distributions](Chapter11/README.md)
+- [Chapter 12: Creating Python Packages Which Require CMake](Chapter12/README.md)
+- [Chapter 13: Building Documentation](Chapter03/README.md)
+- [Chapter 14: Alternatives to Makefiles and Cross-compilation](Chapter04/README.md)
+- [Chapter 15: Testing Dashboards](Chapter15/README.md)
+- [Chapter 16: Porting a Project to CMake](Chapter16/README.md)
+
+
 ## Conventions
 
 - Folders for recipes are named `ChapterN/recipe-M`, where `N` is the chapter number and `M` is a number, _i.e._
@@ -80,23 +100,3 @@ source venv/bin/activate
 pip install -r requirements.txt
 python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
 ```
-
-
-## Recipes
-
-- [Chapter 1: From a Simple Executable to Libraries](Chapter01/README.md)
-- [Chapter 2: Detecting the Environment](Chapter02/README.md)
-- [Chapter 3: Detecting External Libraries and Programs](Chapter03/README.md)
-- [Chapter 4: Creating and Running Tests](Chapter04/README.md)
-- [Chapter 5: Configure-time and Build-time Operations](Chapter05/README.md)
-- [Chapter 6: Generating Source Code](Chapter06/README.md)
-- [Chapter 7: Fetching, Building, and Linking External Sources](Chapter07/README.md)
-- [Chapter 8: Structuring Projects](Chapter08/README.md)
-- [Chapter 9: Mixed-language Projects](Chapter09/README.md)
-- [Chapter 10: Writing an Installer](Chapter10/README.md)
-- [Chapter 11: Generating Source Archives and Binary Distributions](Chapter11/README.md)
-- [Chapter 12: Creating Python Packages Which Require CMake](Chapter12/README.md)
-- [Chapter 13: Building Documentation](Chapter03/README.md)
-- [Chapter 14: Alternatives to Makefiles and Cross-compilation](Chapter04/README.md)
-- [Chapter 15: Testing Dashboards](Chapter15/README.md)
-- [Chapter 16: Porting a Project to CMake](Chapter16/README.md)
