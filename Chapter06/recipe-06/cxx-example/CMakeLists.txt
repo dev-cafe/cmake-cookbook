@@ -23,6 +23,8 @@ if(GIT_FOUND)
     )
 endif()
 
+message(STATUS "Git hash is ${GIT_HASH}")
+
 # generate file version.h based on version.h.in
 configure_file(
   ${PROJECT_SOURCE_DIR}/version.h.in
