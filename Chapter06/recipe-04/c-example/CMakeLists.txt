@@ -4,11 +4,6 @@ cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 # project name and language
 project(recipe-04 C)
 
-# require C++11
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 # version of our project
 set(VERSION_MAJOR 2)
 set(VERSION_MINOR 0)
