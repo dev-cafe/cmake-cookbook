@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-/*
- * Print the configuration/build info generated at build time by the executable.
- * We do this from C and not from Fortran because Fortran has trouble with long
- * lines.
- */
-
 void print_info(void) {
   printf("Configuration and build information\n");
   printf("-----------------------------------\n");
