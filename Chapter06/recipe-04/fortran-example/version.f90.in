@@ -1,0 +1,11 @@
+module version
+
+  implicit none
+
+  integer, parameter :: VERSION_MAJOR = @VERSION_MAJOR@
+  integer, parameter :: VERSION_MINOR = @VERSION_MINOR@
+  integer, parameter :: VERSION_PATCH = @VERSION_PATCH@
+
+  character(*), parameter :: VERSION_STRING = "v@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@"
+
+end module
