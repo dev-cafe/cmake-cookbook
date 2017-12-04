@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-05 CXX)
+project(recipe-06 CXX)
 
 # require C++11
 set(CMAKE_CXX_STANDARD 11)
