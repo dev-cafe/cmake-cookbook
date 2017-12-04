@@ -15,8 +15,8 @@ travis-linux:
 
 travis-osx:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
-    - CMAKE_C_COMPILER: 'gcc'
+    - CMAKE_CXX_COMPILER: 'clang++'
+    - CMAKE_C_COMPILER: 'clang'
 
 local:
   definitions:

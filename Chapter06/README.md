@@ -1,0 +1,5 @@
+- [Generating sources at configure time](recipe-01/README.md)
+- [Generating source code at build-time using CMake](recipe-02/README.md)
+- [Generating source code at build-time using Python](recipe-03/README.md)
+- [Recording version information for reproducibility](recipe-04/README.md)
+- [Recording Git hash for reproducibility](recipe-05/README.md)
