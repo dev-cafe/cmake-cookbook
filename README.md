@@ -109,8 +109,8 @@ python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
 
 #### Indentation
 
-We use 2 spaces instead of 4 spaces to reduce the printed page with of
-examples. No tabs.
+We use 2 spaces instead of 4 spaces to reduce the printed page width.
+No tabs.
 
 
 #### Case of commands
