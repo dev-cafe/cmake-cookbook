@@ -9,8 +9,9 @@ matrix:
           packages:
             - gfortran
             - python-dev
-            - libblas-dev
+            - libatlas-dev
             - liblapack-dev
+            - liblapacke-dev
             - libopenmpi-dev
             - openmpi-bin
             - libboost1.55-all-dev
@@ -77,4 +78,4 @@ before_script:
 
 script:
   - ./.scripts/report_versions.sh
-  - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
+  - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*' --verbose

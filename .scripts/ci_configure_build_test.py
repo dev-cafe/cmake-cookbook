@@ -7,6 +7,7 @@ import os
 import sys
 import datetime
 import time
+import docopt
 
 
 def get_ci_environment():
@@ -57,13 +58,15 @@ def run_command(step,
                 command,
                 expect_failure,
                 skip_predicate,
-                success_predicate):
+                success_predicate,
+                verbose):
     """
     step: string (e.g. 'configuring', 'building', ...); only used in printing
     command: string; this is the command to be run
     expect_failure: bool; if True we do not panic if the command fails
     skip_predicate: bool(stdout, stderr)
     success_predicate: bool(stdout)
+    verbose: bool; if True always print stdout and stderr from command
     """
     popen = subprocess.Popen(command,
                              shell=True,
@@ -74,14 +77,14 @@ def run_command(step,
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
 
-    print(stdout)
-    print(stderr)
     return_code = 0
     if not skip_predicate(stdout, stderr):
         sys.stdout.write('  {0} ... '.format(step))
         if success_predicate(stdout):
             # we found all strings, assume there are no errors
             sys.stdout.write('OK\n')
+            if verbose:
+                sys.stdout.write(stdout + stderr + '\n')
         else:
             if expect_failure:
                 sys.stdout.write('EXPECTED TO FAIL\n')
@@ -93,20 +96,6 @@ def run_command(step,
         sys.stderr.flush()
 
     return return_code
-
-
-def get_list_of_recipes_to_run(topdir):
-    # we expect the script to be executed as: python .scripts/ci_configure_build_test.py regex
-    # stop here if the number of arguments is not right
-    if len(sys.argv) == 2:
-        # we assume the last positional argument to be the regex to glob after
-        glob_regex = sys.argv[-1]
-    else:
-        sys.stderr.write('ERROR: script expects one argument, example:\n')
-        sys.stderr.write("python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'\n")
-        sys.exit(1)
-    # glob recipes
-    return [r for r in sorted(glob.glob(os.path.join(topdir, glob_regex)))]
 
 
 def parse_yaml():
@@ -127,11 +116,12 @@ def parse_yaml():
     return {}
 
 
-def main():
+def main(arguments):
     topdir = get_topdir()
     buildflags = get_buildflags()
     generator = get_generator()
-    recipes = get_list_of_recipes_to_run(topdir)
+    # glob recipes
+    recipes = [r for r in sorted(glob.glob(os.path.join(topdir, arguments['<regex>'])))]
     ci_environment = get_ci_environment()
 
     # Set NINJA_STATUS environment variable
@@ -202,7 +192,8 @@ def main():
                                        command=command,
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
-                                       success_predicate=success_predicate)
+                                       success_predicate=success_predicate,
+                                       verbose=arguments['--verbose'])
 
             os.chdir(build_directory)
 
@@ -222,7 +213,8 @@ def main():
                                        command=command,
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
-                                       success_predicate=success_predicate)
+                                       success_predicate=success_predicate,
+                                       verbose=arguments['--verbose'])
 
             # test step
             step = 'testing'
@@ -233,10 +225,30 @@ def main():
                                        command=command,
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
-                                       success_predicate=success_predicate)
+                                       success_predicate=success_predicate,
+                                       verbose=arguments['--verbose'])
 
     sys.exit(return_code)
 
 
 if __name__ == '__main__':
-    main()
+    options="""Run continuous integration
+
+    Usage:
+        ci_configure_build_test.py <regex>
+        ci_configure_build_test.py <regex> (-v | --verbose)
+        ci_configure_build_test.py (-h | --help)
+
+    Options:
+        -h --help     Show this screen.
+        -v --verbose  Print (almost) everything
+
+    """
+    # parse command line args
+    try:
+        arguments = docopt.docopt(options, argv=None)
+    except docopt.DocoptExit:
+        sys.stderr.write('ERROR: bad input to {0}\n'.format(sys.argv[0]))
+        sys.stderr.write(options)
+        sys.exit(-1)
+    main(arguments)

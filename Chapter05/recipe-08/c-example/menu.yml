@@ -2,28 +2,23 @@ appveyor:
   definitions:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_C_COMPILER: 'gcc'
-    - CMAKE_Fortran_COMPILER: 'gfortran'
 
 drone:
   definitions:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_C_COMPILER: 'gcc'
-    - CMAKE_Fortran_COMPILER: 'gfortran'
 
 travis-linux:
   definitions:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_C_COMPILER: 'gcc'
-    - CMAKE_Fortran_COMPILER: 'gfortran'
 
 travis-osx:
   definitions:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_C_COMPILER: 'gcc'
-    - CMAKE_Fortran_COMPILER: 'gfortran'
 
 local:
   definitions:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_C_COMPILER: 'gcc'
-    - CMAKE_Fortran_COMPILER: 'gfortran'
