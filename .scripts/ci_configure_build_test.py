@@ -74,6 +74,8 @@ def run_command(step,
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
 
+    print(stdout)
+    print(stderr)
     return_code = 0
     if not skip_predicate(stdout, stderr):
         sys.stdout.write('  {0} ... '.format(step))
