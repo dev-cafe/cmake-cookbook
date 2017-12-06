@@ -10,11 +10,12 @@ drone:
 travis-linux:
   definitions:
     - CMAKE_Fortran_COMPILER: 'gfortran'
-    - HDF5_ROOT: '$HOME/Deps/hdf5-1.10.1'
+    - HDF5_ROOT: '$HOME/Deps/hdf5'
 
 travis-osx:
   definitions:
     - CMAKE_Fortran_COMPILER: 'gfortran-7'
+    - HDF5_ROOT: '$HOME/Deps/hdf5'
 
 local:
   definitions:

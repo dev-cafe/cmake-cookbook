@@ -9,9 +9,8 @@ matrix:
           packages:
             - gfortran
             - python-dev
-            - libatlas-dev
+            - libblas-dev
             - liblapack-dev
-            - liblapacke-dev
             - libopenmpi-dev
             - openmpi-bin
             - libboost1.55-all-dev
@@ -29,71 +28,52 @@ matrix:
       env:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
-        - NINJA_URL="https://goo.gl/4g5Jjv"
         - LC_ALL="en_US.UTF-8"
         - LANG="en_US.UTF-8"
         - LANGUAGE="en_US.UTF-8"
         - PYTHONIOENCODING=UTF-8
     - os: osx
-      osx_image: xcode7.3
       env:
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: osx
-      osx_image: xcode7.3
       env:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
-        - NINJA_URL="https://goo.gl/qLgScp"
+
+cache:
+  pip: true
+  directories:
+    - $HOME/Deps/cmake
+    - $HOME/Deps/eigen
+    - $HOME/Deps/hdf5
+    - $HOME/Deps/ninja
+
+env:
+  global:
+    - PATH=$HOME/Deps/cmake/bin:$HOME/Deps/ninja${PATH:+:$PATH}
+    - LD_LIBRARY_PATH=$HOME/Deps/hdf5/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 
 before_install:
-  - test -n $CC && unset CC
-  - test -n $CXX && unset CXX
-  - test -n $FC && unset FC
+  # Dependencies are downloaded in $HOME/Downloads and installed in $HOME/Deps
+  - mkdir -p $HOME/Downloads $HOME/Deps
 
 install:
-  - mkdir -p ${HOME}/Deps
-  - DEPS=${HOME}/Deps
-  - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      # CMake
-      cd ${DEPS}
-      mkdir -p cmake
-      curl -L https://cmake.org/files/v3.10/cmake-3.10.0-Linux-x86_64.tar.gz | tar -xz -C cmake --strip-components=1
-      export PATH=$PWD/cmake/bin:$PATH
-      export LD_LIBRARY_PATH=$PWD/cmake/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
-      # Eigen
-      cd ${DEPS}
-      curl -L http://bitbucket.org/eigen/eigen/get/3.3.4.tar.gz | tar xz
-      cd eigen-eigen-5a0156e40feb
-      cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=${PWD}/eigen-3.3.4 >/dev/null 2>&1
-      cmake --build build_eigen -- install >/dev/null 2>&1
-      # HDF5
-      cd ${DEPS}
-      curl -L https://goo.gl/Pvreb8 | tar -xj
-      cd hdf5-1.10.1
-      ./configure --prefix=$HOME/Deps/hdf5-1.10.1 --enable-build-mode=debug --enable-fortran --enable-shared --enable-parallel > /dev/null 2>&1
-      make -j2 > /dev/null 2>&1
-      make install > /dev/null 2>&1
-      export LD_LIBRARY_PATH=$HOME/Deps/hdf5-1.10.1/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
-    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew update > /dev/null
-      brew install gcc@7 eigen boost mpich hdf5 pkg-config ossp-uuid
-      brew upgrade cmake
-      brew install pyenv-virtualenv
-    fi
-  - cd ${TRAVIS_BUILD_DIR}
+  - ./.scripts/install_deps.sh
+  - ls $HOME/Deps/cmake
+  - ls $HOME/Deps/eigen
+  - ls $HOME/Deps/hdf5
+  - ls $HOME/Deps/ninja
+  - echo $PATH
+  - echo $LD_LIBRARY_PATH
   - virtualenv venv
   - source venv/bin/activate
   - pip install -r requirements.txt
-  - |
-    if [[ "${GENERATOR}" == "Ninja" ]]; then
-      cd ${DEPS}
-      mkdir -p ninja-1.7.2
-      curl -L ${NINJA_URL} | tar -xz -C ninja-1.7.2 --strip-components=1
-      export PATH=$PWD/ninja-1.7.2:$PATH
-      cd ${TRAVIS_BUILD_DIR}
-    fi
+
+before_script:
+  - test -n $CC && unset CC
+  - test -n $CXX && unset CXX
+  - test -n $FC && unset FC
 
 script:
   - ./.scripts/report_versions.sh
