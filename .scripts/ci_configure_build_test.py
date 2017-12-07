@@ -77,6 +77,8 @@ def run_command(step,
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
 
+    child_return_code = child.returncode
+
     return_code = 0
     if not skip_predicate(stdout, stderr):
         sys.stdout.write('  {0} ... '.format(step))
@@ -91,7 +93,7 @@ def run_command(step,
             else:
                 sys.stdout.write('FAILED\n')
                 sys.stderr.write(stdout + stderr + '\n')
-                return_code = 1
+                return_code = child_return_code
         sys.stdout.flush()
         sys.stderr.flush()
 
