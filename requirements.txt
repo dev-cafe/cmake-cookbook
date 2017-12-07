@@ -2,3 +2,4 @@ numpy
 pyyaml
 pycodestyle
 docopt
+colorama
