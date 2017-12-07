@@ -58,30 +58,29 @@ def run_command(step,
                 command,
                 expect_failure,
                 skip_predicate,
-                success_predicate,
                 verbose):
     """
     step: string (e.g. 'configuring', 'building', ...); only used in printing
     command: string; this is the command to be run
     expect_failure: bool; if True we do not panic if the command fails
     skip_predicate: bool(stdout, stderr)
-    success_predicate: bool(stdout)
     verbose: bool; if True always print stdout and stderr from command
     """
-    popen = subprocess.Popen(command,
+    child = subprocess.Popen(command,
                              shell=True,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
 
-    stdout_coded, stderr_coded = popen.communicate()
+    stdout_coded, stderr_coded = child.communicate()
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
+
+    child_return_code = child.returncode
 
     return_code = 0
     if not skip_predicate(stdout, stderr):
         sys.stdout.write('  {0} ... '.format(step))
-        if success_predicate(stdout):
-            # we found all strings, assume there are no errors
+        if child_return_code == 0:
             sys.stdout.write('OK\n')
             if verbose:
                 sys.stdout.write(stdout + stderr + '\n')
@@ -91,7 +90,7 @@ def run_command(step,
             else:
                 sys.stdout.write('FAILED\n')
                 sys.stderr.write(stdout + stderr + '\n')
-                return_code = 1
+                return_code = child_return_code
         sys.stdout.flush()
         sys.stderr.flush()
 
@@ -182,17 +181,11 @@ def main(arguments):
             # configure step
             step = 'configuring'
             command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
-            expected_strings = [
-                '-- Configuring done',
-                '-- Generating done',
-                ]
             skip_predicate = lambda stdout, stderr: False
-            success_predicate = lambda stdout: all([x in stdout for x in expected_strings])
             return_code += run_command(step=step,
                                        command=command,
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
-                                       success_predicate=success_predicate,
                                        verbose=arguments['--verbose'])
 
             os.chdir(build_directory)
@@ -200,32 +193,24 @@ def main(arguments):
             # build step
             step = 'building'
             command = 'cmake --build . -- {0}'.format(buildflags)
-            expected_strings = [
-                'Built target',
-                'Built edge',
-                ]
             # skip if build step produces zero output
             # in this case we only configure and test
             # used in chapter 12
             skip_predicate = lambda stdout, stderr: ('Nothing to be done' in stdout or 'ninja: no work to do.' in stdout)
-            success_predicate = lambda stdout: any([x in stdout for x in expected_strings])
             return_code += run_command(step=step,
                                        command=command,
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
-                                       success_predicate=success_predicate,
                                        verbose=arguments['--verbose'])
 
             # test step
             step = 'testing'
             command = 'ctest'
             skip_predicate = lambda stdout, stderr: 'No test configuration file found!' in stderr
-            success_predicate = lambda stdout: '100% tests passed, 0 tests failed' in stdout
             return_code += run_command(step=step,
                                        command=command,
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
-                                       success_predicate=success_predicate,
                                        verbose=arguments['--verbose'])
 
     sys.exit(return_code)
