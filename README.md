@@ -12,21 +12,42 @@
 # Experimental collection of CMake recipes
 
 
-## Conventions
+## Recipes
+
+- [Chapter 1: From a Simple Executable to Libraries](Chapter01/README.md)
+- [Chapter 2: Detecting the Environment](Chapter02/README.md)
+- [Chapter 3: Detecting External Libraries and Programs](Chapter03/README.md)
+- [Chapter 4: Creating and Running Tests](Chapter04/README.md)
+- [Chapter 5: Configure-time and Build-time Operations](Chapter05/README.md)
+- [Chapter 6: Generating Source Code](Chapter06/README.md)
+- [Chapter 7: Fetching, Building, and Linking External Sources](Chapter07/README.md)
+- [Chapter 8: Structuring Projects](Chapter08/README.md)
+- [Chapter 9: Mixed-language Projects](Chapter09/README.md)
+- [Chapter 10: Writing an Installer](Chapter10/README.md)
+- [Chapter 11: Generating Source Archives and Binary Distributions](Chapter11/README.md)
+- [Chapter 12: Creating Python Packages Which Require CMake](Chapter12/README.md)
+- [Chapter 13: Building Documentation](Chapter03/README.md)
+- [Chapter 14: Alternatives to Makefiles and Cross-compilation](Chapter04/README.md)
+- [Chapter 15: Testing Dashboards](Chapter15/README.md)
+- [Chapter 16: Porting a Project to CMake](Chapter16/README.md)
+
+
+## Contributing
+
+### Conventions
 
 - Folders for recipes are named `ChapterN/recipe-M`, where `N` is the chapter number and `M` is a number, _i.e._
-  `0000`, `0001` and so forth.
+  `01`, `02`, etc. In each chapter we restart the recipe counter.
 - Each recipe can have more than one example subfolder. These subfolders are
-  named `prefix-example`. `prefix` can be anything of your choice, _e.g._
-`cxx-example` is a valid name.
+  named `*-example`.
 - Any code for the recipes **must be stored** in a `prefix-example`
   subdirectory.
 
 
-## Configuring tests
+### Configuring tests
 
-You can place an optional `menu.yml` file in the recipe directory, next to `CMakeLists.txt`.
-If present, the test script will parse it to set environment variables and CMake definitions for a particular recipe.
+You have to place a file `menu.yml` in the recipe directory, next to `CMakeLists.txt`.
+The test script will parse it to set environment variables and CMake definitions for a particular recipe.
 
 Example:
 ```yaml
@@ -59,7 +80,8 @@ drone:
   ...
 ```
 
-## Expected failures
+
+### Expected failures
 
 Sometimes we expect a failure. For instance let us imagine we expect
 a test to fail on AppVeyor when using the Ninja generator. We can express this using:
@@ -73,7 +95,7 @@ appveyor:
 ```
 
 
-## Running tests on your computer
+### Running tests on your computer
 
 ```shell
 virtualenv venv
@@ -83,21 +105,55 @@ python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
 ```
 
 
-## Recipes
+### Coding style
 
-- [Chapter 1: From a Simple Executable to Libraries](Chapter01/README.md)
-- [Chapter 2: Detecting the Environment](Chapter02/README.md)
-- [Chapter 3: Detecting External Libraries and Programs](Chapter03/README.md)
-- [Chapter 4: Creating and Running Tests](Chapter04/README.md)
-- [Chapter 5: Configure-time and Build-time Operations](Chapter05/README.md)
-- [Chapter 6: Generating Source Code](Chapter06/README.md)
-- [Chapter 7: Fetching, Building, and Linking External Sources](Chapter07/README.md)
-- [Chapter 8: Structuring Projects](Chapter08/README.md)
-- [Chapter 9: Mixed-language Projects](Chapter09/README.md)
-- [Chapter 10: Writing an Installer](Chapter10/README.md)
-- [Chapter 11: Generating Source Archives and Binary Distributions](Chapter11/README.md)
-- [Chapter 12: Creating Python Packages Which Require CMake](Chapter12/README.md)
-- [Chapter 13: Building Documentation](Chapter03/README.md)
-- [Chapter 14: Alternatives to Makefiles and Cross-compilation](Chapter04/README.md)
-- [Chapter 15: Testing Dashboards](Chapter15/README.md)
-- [Chapter 16: Porting a Project to CMake](Chapter16/README.md)
+#### Indentation
+
+We use 2 spaces instead of 4 spaces to reduce the printed page width.
+No tabs.
+
+
+#### Case of commands
+
+We use lowercase for commands, i.e.:
+```cmake
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+```
+and not:
+```cmake
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10 FATAL_ERROR)
+```
+
+
+#### Line continuation
+
+It is OK to put commands on one line if it improves readability, e.g.:
+```cmake
+list(APPEND CXX_BASIC_FLAGS "-g3" "-O1")
+```
+
+For line continuation we use the following style:
+```cmake
+target_compile_options(asan-example
+  PUBLIC
+    ${CXX_BASIC_FLAGS}
+    ${_asan_flags}
+  )
+
+set(_whathaveyou
+  item1
+  item2
+  item3
+  )
+```
+
+
+#### Variable names
+
+Start an internal variable (i.e. one that is not exposed to the user) with an
+underscore:
+```cmake
+set(PUBLIC_VARIABLE "this one is exposed")
+
+set(_temp "this one is internal")
+```
