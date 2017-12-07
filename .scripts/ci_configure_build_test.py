@@ -8,6 +8,7 @@ import sys
 import datetime
 import time
 import docopt
+import colorama
 
 
 def get_ci_environment():
@@ -66,6 +67,7 @@ def run_command(step,
     skip_predicate: bool(stdout, stderr)
     verbose: bool; if True always print stdout and stderr from command
     """
+    colorama.init()
     child = subprocess.Popen(command,
                              shell=True,
                              stdout=subprocess.PIPE,
@@ -79,9 +81,10 @@ def run_command(step,
 
     return_code = 0
     if not skip_predicate(stdout, stderr):
-        sys.stdout.write('  {0} ... '.format(step))
+        sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + '  {0} ... '.format(step))
         if child_return_code == 0:
             sys.stdout.write('OK\n')
+            print(colorama.Style.RESET_ALL)
             if verbose:
                 sys.stdout.write(stdout + stderr + '\n')
         else:
