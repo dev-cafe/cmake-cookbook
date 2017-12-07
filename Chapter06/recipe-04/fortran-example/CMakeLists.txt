@@ -11,8 +11,8 @@ set(VERSION_PATCH 1)
 
 # generate version module based on version.f90.in
 configure_file(
-  ${PROJECT_SOURCE_DIR}/version.f90.in
-  ${PROJECT_BINARY_DIR}/generated/version.f90
+  version.f90.in
+  generated/version.f90
   @ONLY
   )
 

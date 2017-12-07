@@ -11,8 +11,8 @@ set(VERSION_PATCH 1)
 
 # generate file version.h based on version.h.in
 configure_file(
-  ${PROJECT_SOURCE_DIR}/version.h.in
-  ${PROJECT_BINARY_DIR}/generated/version.h
+  version.h.in
+  generated/version.h
   @ONLY
   )
 
