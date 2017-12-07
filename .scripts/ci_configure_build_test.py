@@ -193,10 +193,7 @@ def main(arguments):
             # build step
             step = 'building'
             command = 'cmake --build . -- {0}'.format(buildflags)
-            # skip if build step produces zero output
-            # in this case we only configure and test
-            # used in chapter 12
-            skip_predicate = lambda stdout, stderr: ('Nothing to be done' in stdout or 'ninja: no work to do.' in stdout)
+            skip_predicate = lambda stdout, stderr: False
             return_code += run_command(step=step,
                                        command=command,
                                        expect_failure=expect_failure,
