@@ -68,12 +68,12 @@ def run_command(step,
     success_predicate: bool(stdout)
     verbose: bool; if True always print stdout and stderr from command
     """
-    popen = subprocess.Popen(command,
+    child = subprocess.Popen(command,
                              shell=True,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
 
-    stdout_coded, stderr_coded = popen.communicate()
+    stdout_coded, stderr_coded = child.communicate()
     stdout = stdout_coded.decode('UTF-8')
     stderr = stderr_coded.decode('UTF-8')
 
