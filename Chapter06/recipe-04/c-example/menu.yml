@@ -1,0 +1,19 @@
+appveyor:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'gcc'
+
+drone:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'gcc'
+
+travis-linux:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'gcc'
+
+travis-osx:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'clang'
+
+local:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'gcc'

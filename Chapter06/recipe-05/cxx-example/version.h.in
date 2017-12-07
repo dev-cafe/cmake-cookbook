@@ -1,0 +1,5 @@
+#pragma once
+
+#include <string>
+
+const std::string PROGRAM_VERSION = "@PROGRAM_VERSION@";
