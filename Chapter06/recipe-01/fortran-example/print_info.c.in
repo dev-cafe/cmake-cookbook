@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <unistd.h>
+
+void print_info(void) {
+  printf("Configuration and build information\n");
+  printf("-----------------------------------\n");
+  printf("\n");
+  printf("Who compiled                | %s\n", "@_user_name@");
+  printf("Compilation hostname        | %s\n", "@_host_name@");
+  printf("Fully qualified domain name | %s\n", "@_fqdn@");
+  printf("Operating system            | %s\n",
+         "@_os_name@, @_os_release@, @_os_version@");
+  printf("Platform                    | %s\n", "@_os_platform@");
+  printf("Processor info              | %s\n",
+         "@_processor_name@, @_processor_description@");
+  printf("CMake version               | %s\n", "@CMAKE_VERSION@");
+  printf("CMake generator             | %s\n", "@CMAKE_GENERATOR@");
+  printf("CMake build type            | %s\n", "@CMAKE_BUILD_TYPE@");
+  printf("Configuration time          | %s\n", "@_configuration_time@");
+  printf("Fortran compiler            | %s\n", "@CMAKE_Fortran_COMPILER@");
+  printf("C compiler                  | %s\n", "@CMAKE_C_COMPILER@");
+  printf("\n");
+
+  fflush(stdout);
+}

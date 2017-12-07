@@ -12,7 +12,7 @@ travis-linux:
 
 travis-osx:
   definitions:
-    - CMAKE_C_COMPILER: 'gcc'
+    - CMAKE_C_COMPILER: 'clang'
 
 local:
   definitions:
