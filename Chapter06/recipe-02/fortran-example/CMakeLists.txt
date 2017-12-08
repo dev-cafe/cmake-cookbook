@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
-project(recipe-01 Fortran C)
+project(recipe-02 Fortran C)
 
 # Get username
 execute_process(
@@ -42,7 +42,6 @@ void print_info(void) {
   printf(\"Processor info              | %s\\n\", \"${_processor_name}, ${_processor_description}\");
   printf(\"CMake version               | %s\\n\", \"${CMAKE_VERSION}\");
   printf(\"CMake generator             | %s\\n\", \"${CMAKE_GENERATOR}\");
-  printf(\"CMake build type            | %s\\n\", \"${CMAKE_BUILD_TYPE}\");
   printf(\"Configuration time          | %s\\n\", \"${_configuration_time}\");
   printf(\"Fortran compiler            | %s\\n\", \"${CMAKE_Fortran_COMPILER}\");
   printf(\"C compiler                  | %s\\n\", \"${CMAKE_C_COMPILER}\");
@@ -51,6 +50,11 @@ void print_info(void) {
   fflush(stdout);
 }
   "
+  )
+
+add_custom_target(build_info
+  ALL DEPENDS
+    ${CMAKE_CURRENT_BINARY_DIR}/print_info.c
   )
 
 add_executable(hello-world hello-world.f90)
@@ -62,3 +66,4 @@ target_sources(hello-world
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/print_info.c
   )
+add_dependencies(hello-world build_info)
