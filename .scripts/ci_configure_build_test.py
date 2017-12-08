@@ -67,7 +67,6 @@ def run_command(step,
     skip_predicate: bool(stdout, stderr)
     verbose: bool; if True always print stdout and stderr from command
     """
-    colorama.init()
     child = subprocess.Popen(command,
                              shell=True,
                              stdout=subprocess.PIPE,
@@ -82,19 +81,15 @@ def run_command(step,
     return_code = 0
     if not skip_predicate(stdout, stderr):
         sys.stdout.write(colorama.Fore.BLUE + colorama.Style.BRIGHT + '  {0} ... '.format(step))
-        sys.stdout.write(colorama.Style.RESET_ALL)
         if child_return_code == 0:
             sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
-            sys.stdout.write(colorama.Style.RESET_ALL)
             if verbose:
                 sys.stdout.write(stdout + stderr + '\n')
         else:
             if expect_failure:
                 sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT + 'EXPECTED TO FAIL\n')
-                sys.stdout.write(colorama.Style.RESET_ALL)
             else:
                 sys.stdout.write(colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED\n')
-                sys.stdout.write(colorama.Style.RESET_ALL)
                 sys.stderr.write(stdout + stderr + '\n')
                 return_code = child_return_code
         sys.stdout.flush()
@@ -132,6 +127,7 @@ def main(arguments):
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
 
+    colorama.init(autoreset=True)
     return_code = 0
     for recipe in recipes:
         os.chdir(recipe)
@@ -140,7 +136,7 @@ def main(arguments):
         with open('README.md', 'r') as f:
             for line in f.read().splitlines():
                 if line[0:2] == '# ':
-                    print('\nrecipe: {0}'.format(line[2:]))
+                    print(colorama.Back.BLUE + '\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
         examples = [e for e in sorted(glob.glob(os.path.join(recipe, '*example')))]
@@ -216,6 +212,7 @@ def main(arguments):
                                        skip_predicate=skip_predicate,
                                        verbose=arguments['--verbose'])
 
+    colorama.deinit()
     sys.exit(return_code)
 
 

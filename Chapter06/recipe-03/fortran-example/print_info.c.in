@@ -13,11 +13,11 @@ void print_info(void) {
   printf("Platform                    | %s\n", "@_os_platform@");
   printf("Processor info              | %s\n",
          "@_processor_name@, @_processor_description@");
-  printf("CMake version               | %s\n", "@CMAKE_VERSION@");
-  printf("CMake generator             | %s\n", "@CMAKE_GENERATOR@");
+  printf("CMake version               | %s\n", "@_cmake_version@");
+  printf("CMake generator             | %s\n", "@_cmake_generator@");
   printf("Configuration time          | %s\n", "@_configuration_time@");
-  printf("Fortran compiler            | %s\n", "@CMAKE_Fortran_COMPILER@");
-  printf("C compiler                  | %s\n", "@CMAKE_C_COMPILER@");
+  printf("Fortran compiler            | %s\n", "@_Fortran_compiler@");
+  printf("C compiler                  | %s\n", "@_C_compiler@");
   printf("\n");
 
   fflush(stdout);
