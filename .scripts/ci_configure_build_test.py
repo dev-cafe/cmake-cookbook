@@ -182,8 +182,13 @@ def main(arguments):
 
             sys.stdout.write('\n  {}\n'.format(example))
 
+            # extract local settings
             menu_file = os.path.join(recipe, example, 'menu.yml')
-            expect_failure, env, definitions = extract_menu_file(menu_file, generator, ci_environment)
+            expect_failure_local, env_local, definitions_local = extract_menu_file(menu_file, generator, ci_environment)
+
+            expect_failure = expect_failure_local
+            env = env_local
+            definitions = definitions_local
 
             env_string = ' '.join('{0}={1}'.format(entry, env[entry]) for entry in env)
             definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry]) for entry in definitions)
