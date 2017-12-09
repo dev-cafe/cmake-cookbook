@@ -98,13 +98,13 @@ def run_command(step,
     return return_code
 
 
-def parse_yaml():
+def parse_yaml(file_name):
     '''
-    If recipe directory contains a file called menu.yml, we parse it.
+    Parse file_name and return dictionary.
+    If file does not exist, return empty dictionary.
     '''
     import yaml
     import sys
-    file_name = 'menu.yml'
     if os.path.isfile(file_name):
         with open(file_name, 'r') as f:
             try:
@@ -130,10 +130,9 @@ def main(arguments):
     colorama.init(autoreset=True)
     return_code = 0
     for recipe in recipes:
-        os.chdir(recipe)
 
         # extract title from README.md
-        with open('README.md', 'r') as f:
+        with open(os.path.join(recipe, 'README.md'), 'r') as f:
             for line in f.read().splitlines():
                 if line[0:2] == '# ':
                     print(colorama.Back.BLUE + '\nrecipe: {0}'.format(line[2:]))
@@ -148,10 +147,9 @@ def main(arguments):
 
         for example in examples:
 
-            os.chdir(example)
             sys.stdout.write('\n  {}\n'.format(example))
 
-            config = parse_yaml()
+            config = parse_yaml(os.path.join(recipe, example, 'menu.yml'))
 
             failing_generators = []
             if 'failing_generators' in config[ci_environment]:
@@ -178,11 +176,12 @@ def main(arguments):
             # to avoid it being re-used when running tests multiple times
             # when debugging on a laptop
             time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-            build_directory = 'build-{0}'.format(time_stamp)
+            build_directory = os.path.join(recipe, example, 'build-{0}'.format(time_stamp))
+            cmakelists_path = os.path.join(recipe, example)
 
             # configure step
             step = 'configuring'
-            command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
+            command = '{0} cmake -H{1} -B{2} -G"{3}"{4}'.format(env, cmakelists_path, build_directory, generator, definitions)
             skip_predicate = lambda stdout, stderr: False
             return_code += run_command(step=step,
                                        command=command,
@@ -211,6 +210,8 @@ def main(arguments):
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
                                        verbose=arguments['--verbose'])
+
+            os.chdir(topdir)
 
     colorama.deinit()
     sys.exit(return_code)
