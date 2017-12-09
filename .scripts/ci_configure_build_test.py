@@ -116,6 +116,39 @@ def parse_yaml(file_name):
     return {}
 
 
+def extract_menu_file(file_name, generator, ci_environment):
+    '''
+    Reads file_name in yml format and returns:
+    expected_failure (bool): if True, then the current generator is not supported
+    env: dictionary of environment variables passed to CMake
+    definitions: dictionary of CMake configure-step definitions
+    '''
+    config = parse_yaml(file_name)
+
+    failing_generators = []
+    if 'failing_generators' in config[ci_environment]:
+        failing_generators = config[ci_environment]['failing_generators']
+    expect_failure = generator in failing_generators
+
+    # assemble env vars
+    env = {}
+    if 'env' in config[ci_environment]:
+        for entry in config[ci_environment]['env']:
+            for k in entry.keys():
+                v = entry[k]
+                env[k] = v
+
+    # assemble definitions
+    definitions = {}
+    if 'definitions' in config[ci_environment]:
+        for entry in config[ci_environment]['definitions']:
+            for k in entry.keys():
+                v = entry[k]
+                definitions[k] = v
+
+    return expect_failure, env, definitions
+
+
 def main(arguments):
     topdir = get_topdir()
     buildflags = get_buildflags()
@@ -149,28 +182,11 @@ def main(arguments):
 
             sys.stdout.write('\n  {}\n'.format(example))
 
-            config = parse_yaml(os.path.join(recipe, example, 'menu.yml'))
+            menu_file = os.path.join(recipe, example, 'menu.yml')
+            expect_failure, env, definitions = extract_menu_file(menu_file, generator, ci_environment)
 
-            failing_generators = []
-            if 'failing_generators' in config[ci_environment]:
-                failing_generators = config[ci_environment]['failing_generators']
-            expect_failure = generator in failing_generators
-
-            # assemble env vars
-            env = ''
-            if 'env' in config[ci_environment]:
-                for entry in config[ci_environment]['env']:
-                    for k in entry.keys():
-                        v = entry[k]
-                        env += '{0}={1} '.format(k, v)
-
-            # assemble definitions
-            definitions = ''
-            if 'definitions' in config[ci_environment]:
-                for entry in config[ci_environment]['definitions']:
-                    for k in entry.keys():
-                        v = entry[k]
-                        definitions += ' -D{0}={1}'.format(k, v)
+            env_string = ' '.join('{0}={1}'.format(entry, env[entry]) for entry in env)
+            definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry]) for entry in definitions)
 
             # we append a time stamp to the build directory
             # to avoid it being re-used when running tests multiple times
@@ -181,7 +197,11 @@ def main(arguments):
 
             # configure step
             step = 'configuring'
-            command = '{0} cmake -H{1} -B{2} -G"{3}"{4}'.format(env, cmakelists_path, build_directory, generator, definitions)
+            command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(env_string,
+                                                                 cmakelists_path,
+                                                                 build_directory,
+                                                                 generator,
+                                                                 definitions_string)
             skip_predicate = lambda stdout, stderr: False
             return_code += run_command(step=step,
                                        command=command,
