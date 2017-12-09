@@ -1,24 +1,19 @@
 appveyor:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
 
 drone:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'pgfortran'
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
 
 travis-linux:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
 
 travis-osx:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran-7'
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
 
 local:
   definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
