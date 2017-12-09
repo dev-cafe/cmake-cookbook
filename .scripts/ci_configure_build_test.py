@@ -125,6 +125,9 @@ def extract_menu_file(file_name, generator, ci_environment):
     '''
     config = parse_yaml(file_name)
 
+    if ci_environment not in config:
+        return False, {}, {}
+
     failing_generators = []
     if 'failing_generators' in config[ci_environment]:
         failing_generators = config[ci_environment]['failing_generators']
@@ -190,9 +193,17 @@ def main(arguments):
             menu_file = os.path.join(recipe, example, 'menu.yml')
             expect_failure_local, env_local, definitions_local = extract_menu_file(menu_file, generator, ci_environment)
 
-            expect_failure = expect_failure_local
-            env = env_local
-            definitions = definitions_local
+            expect_failure = expect_failure_global or expect_failure_local
+
+            # local env vars override global ones
+            env = env_global.copy()
+            for entry in env_local:
+                env[entry] = env_local[entry]
+
+            # local definitions override global ones
+            definitions = definitions_global.copy()
+            for entry in definitions_local:
+                definitions[entry] = definitions_local[entry]
 
             env_string = ' '.join('{0}={1}'.format(entry, env[entry]) for entry in env)
             definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry]) for entry in definitions)
