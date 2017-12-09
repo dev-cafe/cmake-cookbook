@@ -13,9 +13,6 @@ travis-linux:
 travis-osx:
   definitions:
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
-  failing_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'
 
 local:
   definitions:
