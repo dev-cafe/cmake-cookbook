@@ -160,6 +160,10 @@ def main(arguments):
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
 
+    # extract global menu
+    menu_file = os.path.join(topdir, '.scripts', 'menu.yml')
+    expect_failure_global, env_global, definitions_global = extract_menu_file(menu_file, generator, ci_environment)
+
     colorama.init(autoreset=True)
     return_code = 0
     for recipe in recipes:
@@ -182,7 +186,7 @@ def main(arguments):
 
             sys.stdout.write('\n  {}\n'.format(example))
 
-            # extract local settings
+            # extract local menu
             menu_file = os.path.join(recipe, example, 'menu.yml')
             expect_failure_local, env_local, definitions_local = extract_menu_file(menu_file, generator, ci_environment)
 
