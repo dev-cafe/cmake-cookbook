@@ -8,7 +8,7 @@ drone:
 
 travis-linux:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
+    - CMAKE_CXX_COMPILER: 'g++-7'
 
 travis-osx:
   definitions:
