@@ -16,17 +16,17 @@ add_test(benchmark-a ${PROJECT_SOURCE_DIR}/test/benchmark-a.sh)
 add_test(benchmark-b ${PROJECT_SOURCE_DIR}/test/benchmark-b.sh)
 
 set_tests_properties(
-    feature-a
-    feature-b
-    feature-c
-    PROPERTIES
-      LABELS "quick"
-    )
+  feature-a
+  feature-b
+  feature-c
+  PROPERTIES
+    LABELS "quick"
+  )
 
 set_tests_properties(
-    feature-d
-    benchmark-a
-    benchmark-b
-    PROPERTIES
-      LABELS "long"
-    )
+  feature-d
+  benchmark-a
+  benchmark-b
+  PROPERTIES
+    LABELS "long"
+  )
