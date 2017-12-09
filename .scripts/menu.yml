@@ -14,7 +14,7 @@ travis-linux:
   definitions:
     - CMAKE_C_COMPILER: 'gcc'
     - CMAKE_CXX_COMPILER: 'g++-7'
-    - CMAKE_Fortran_COMPILER: 'pgfortran'
+    - CMAKE_Fortran_COMPILER: 'gfortran'
 
 travis-osx:
   definitions:
