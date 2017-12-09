@@ -151,12 +151,6 @@ def main(arguments):
             os.chdir(example)
             sys.stdout.write('\n  {}\n'.format(example))
 
-            # we append a time stamp to the build directory
-            # to avoid it being re-used when running tests multiple times
-            # when debugging on a laptop
-            time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-            build_directory = 'build-{0}'.format(time_stamp)
-
             config = parse_yaml()
 
             failing_generators = []
@@ -179,6 +173,12 @@ def main(arguments):
                     for k in entry.keys():
                         v = entry[k]
                         definitions += ' -D{0}={1}'.format(k, v)
+
+            # we append a time stamp to the build directory
+            # to avoid it being re-used when running tests multiple times
+            # when debugging on a laptop
+            time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+            build_directory = 'build-{0}'.format(time_stamp)
 
             # configure step
             step = 'configuring'
