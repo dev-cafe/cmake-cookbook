@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-04 CXX)
+project(recipe-06 CXX)
 
 # expose options to the user
 option(USE_LIBRARY "Compile sources into a library" OFF)
