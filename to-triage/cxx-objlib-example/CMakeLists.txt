@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-0003 CXX)
+project(recipe-X CXX)
 
 # generate an object library from sources
 set(_sources Message.hpp Message.cpp)
