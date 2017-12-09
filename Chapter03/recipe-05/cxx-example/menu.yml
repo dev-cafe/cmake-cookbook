@@ -1,22 +1,5 @@
-appveyor:
-  definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
-
-drone:
-  definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
-
-travis-linux:
-  definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
-
+# OpenMP does not work with clang
 travis-osx:
-  definitions:
-    - CMAKE_CXX_COMPILER: 'clang++'
   failing_generators:
     - 'Unix Makefiles'
     - 'Ninja'
-
-local:
-  definitions:
-    - CMAKE_CXX_COMPILER: 'g++'

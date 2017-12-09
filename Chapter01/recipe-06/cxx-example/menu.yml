@@ -1,24 +1,19 @@
 appveyor:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - USE_LIBRARY: 'ON'
 
 drone:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - USE_LIBRARY: 'ON'
 
 travis-linux:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - USE_LIBRARY: 'ON'
 
 travis-osx:
   definitions:
-    - CMAKE_CXX_COMPILER: 'clang++'
     - USE_LIBRARY: 'ON'
 
 local:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - USE_LIBRARY: 'ON'

@@ -1,27 +1,19 @@
 appveyor:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
 
 drone:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
 
 travis-linux:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
 
 travis-osx:
   definitions:
-    - CMAKE_CXX_COMPILER: 'clang++'
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
-  failing_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'
 
 local:
   definitions:
-    - CMAKE_CXX_COMPILER: 'g++'
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'

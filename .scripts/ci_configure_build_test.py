@@ -98,13 +98,13 @@ def run_command(step,
     return return_code
 
 
-def parse_yaml():
+def parse_yaml(file_name):
     '''
-    If recipe directory contains a file called menu.yml, we parse it.
+    Parse file_name and return dictionary.
+    If file does not exist, return empty dictionary.
     '''
     import yaml
     import sys
-    file_name = 'menu.yml'
     if os.path.isfile(file_name):
         with open(file_name, 'r') as f:
             try:
@@ -114,6 +114,42 @@ def parse_yaml():
                 sys.exit(-1)
         return config
     return {}
+
+
+def extract_menu_file(file_name, generator, ci_environment):
+    '''
+    Reads file_name in yml format and returns:
+    expected_failure (bool): if True, then the current generator is not supported
+    env: dictionary of environment variables passed to CMake
+    definitions: dictionary of CMake configure-step definitions
+    '''
+    config = parse_yaml(file_name)
+
+    if ci_environment not in config:
+        return False, {}, {}
+
+    failing_generators = []
+    if 'failing_generators' in config[ci_environment]:
+        failing_generators = config[ci_environment]['failing_generators']
+    expect_failure = generator in failing_generators
+
+    # assemble env vars
+    env = {}
+    if 'env' in config[ci_environment]:
+        for entry in config[ci_environment]['env']:
+            for k in entry.keys():
+                v = entry[k]
+                env[k] = v
+
+    # assemble definitions
+    definitions = {}
+    if 'definitions' in config[ci_environment]:
+        for entry in config[ci_environment]['definitions']:
+            for k in entry.keys():
+                v = entry[k]
+                definitions[k] = v
+
+    return expect_failure, env, definitions
 
 
 def main(arguments):
@@ -127,13 +163,16 @@ def main(arguments):
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
 
+    # extract global menu
+    menu_file = os.path.join(topdir, '.scripts', 'menu.yml')
+    expect_failure_global, env_global, definitions_global = extract_menu_file(menu_file, generator, ci_environment)
+
     colorama.init(autoreset=True)
     return_code = 0
     for recipe in recipes:
-        os.chdir(recipe)
 
         # extract title from README.md
-        with open('README.md', 'r') as f:
+        with open(os.path.join(recipe, 'README.md'), 'r') as f:
             for line in f.read().splitlines():
                 if line[0:2] == '# ':
                     print(colorama.Back.BLUE + '\nrecipe: {0}'.format(line[2:]))
@@ -148,41 +187,41 @@ def main(arguments):
 
         for example in examples:
 
-            os.chdir(example)
             sys.stdout.write('\n  {}\n'.format(example))
+
+            # extract local menu
+            menu_file = os.path.join(recipe, example, 'menu.yml')
+            expect_failure_local, env_local, definitions_local = extract_menu_file(menu_file, generator, ci_environment)
+
+            expect_failure = expect_failure_global or expect_failure_local
+
+            # local env vars override global ones
+            env = env_global.copy()
+            for entry in env_local:
+                env[entry] = env_local[entry]
+
+            # local definitions override global ones
+            definitions = definitions_global.copy()
+            for entry in definitions_local:
+                definitions[entry] = definitions_local[entry]
+
+            env_string = ' '.join('{0}={1}'.format(entry, env[entry]) for entry in env)
+            definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry]) for entry in definitions)
 
             # we append a time stamp to the build directory
             # to avoid it being re-used when running tests multiple times
             # when debugging on a laptop
             time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-            build_directory = 'build-{0}'.format(time_stamp)
-
-            config = parse_yaml()
-
-            failing_generators = []
-            if 'failing_generators' in config[ci_environment]:
-                failing_generators = config[ci_environment]['failing_generators']
-            expect_failure = generator in failing_generators
-
-            # assemble env vars
-            env = ''
-            if 'env' in config[ci_environment]:
-                for entry in config[ci_environment]['env']:
-                    for k in entry.keys():
-                        v = entry[k]
-                        env += '{0}={1} '.format(k, v)
-
-            # assemble definitions
-            definitions = ''
-            if 'definitions' in config[ci_environment]:
-                for entry in config[ci_environment]['definitions']:
-                    for k in entry.keys():
-                        v = entry[k]
-                        definitions += ' -D{0}={1}'.format(k, v)
+            build_directory = os.path.join(recipe, example, 'build-{0}'.format(time_stamp))
+            cmakelists_path = os.path.join(recipe, example)
 
             # configure step
             step = 'configuring'
-            command = '{0} cmake -H. -B{1} -G"{2}"{3}'.format(env, build_directory, generator, definitions)
+            command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(env_string,
+                                                                 cmakelists_path,
+                                                                 build_directory,
+                                                                 generator,
+                                                                 definitions_string)
             skip_predicate = lambda stdout, stderr: False
             return_code += run_command(step=step,
                                        command=command,
@@ -211,6 +250,8 @@ def main(arguments):
                                        expect_failure=expect_failure,
                                        skip_predicate=skip_predicate,
                                        verbose=arguments['--verbose'])
+
+            os.chdir(topdir)
 
     colorama.deinit()
     sys.exit(return_code)
