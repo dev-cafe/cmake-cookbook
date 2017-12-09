@@ -6,7 +6,10 @@ matrix:
     - os: linux
       addons: &1
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
+            - g++-7
             - gfortran
             - python-dev
             - libatlas-dev
