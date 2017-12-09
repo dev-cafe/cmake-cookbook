@@ -52,6 +52,11 @@ target_include_directories(math
   INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
+target_link_libraries(math
+  PRIVATE
+    ${BLAS_LIBRARIES}
+    ${LAPACK_LIBRARIES}
+  )
 
 add_executable(linear-algebra linear-algebra.cpp)
 target_link_libraries(linear-algebra
