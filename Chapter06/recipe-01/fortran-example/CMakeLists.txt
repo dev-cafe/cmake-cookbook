@@ -28,10 +28,6 @@ string(TIMESTAMP _configuration_time "%Y-%m-%d %H:%M:%S [UTC]" UTC)
 configure_file(print_info.c.in print_info.c @ONLY)
 
 add_executable(hello-world hello-world.f90)
-target_compile_options(hello-world
-  PUBLIC
-    -std=f2003
-  )
 target_sources(hello-world
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/print_info.c

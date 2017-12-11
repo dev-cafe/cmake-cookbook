@@ -40,10 +40,6 @@ add_custom_target(build_info
   )
 
 add_executable(hello-world hello-world.f90)
-target_compile_options(hello-world
-  PUBLIC
-    -std=f2003
-  )
 target_sources(hello-world
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/print_info.c
