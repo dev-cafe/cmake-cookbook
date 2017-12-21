@@ -1,1 +1,1 @@
-# Generating sources at configure time
+# Generating sources at configure-time
