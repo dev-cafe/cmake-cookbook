@@ -38,12 +38,16 @@ in
       blas
       liblapack
       libuuid
-      ninja
+      ninja-kitware
       openmpi
-      python36Packages.matplotlib
-      python36Packages.numpy
-      python36Packages.pyyaml
-      python36Packages.virtualenvwrapper
+      python3Packages.colorama
+      python3Packages.docopt
+      python3Packages.matplotlib
+      python3Packages.numpy
+      python3Packages.pycodestyle
+      python3Packages.pycodestyle
+      python3Packages.pyyaml
+      python3Packages.virtualenvwrapper
       valgrind
       zlib
     ];
