@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
-project(recipe-03 Fortran C)
+project(recipe-02 Fortran C)
 
 # Get processor name
 cmake_host_system_information(RESULT _processor_name QUERY PROCESSOR_NAME)
