@@ -1,5 +1,5 @@
-- [Generating sources at configure time](recipe-01/README.md)
-- [Generating source code at build-time using CMake](recipe-02/README.md)
+- [Generating sources at configure-time](recipe-01/README.md)
+- [Generating source code at configure-time using Python](recipe-02/README.md)
 - [Generating source code at build-time using Python](recipe-03/README.md)
 - [Recording the project version information for reproducibility](recipe-04/README.md)
 - [Recording the project version from a file](recipe-05/README.md)

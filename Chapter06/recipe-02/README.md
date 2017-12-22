@@ -1,1 +1,1 @@
-# Generating source code at build-time using CMake
+# Generating source code at build-time using Python
