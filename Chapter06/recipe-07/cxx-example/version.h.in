@@ -1,1 +1,5 @@
-../../recipe-06/cxx-example/version.h.in
+#pragma once
+
+#include <string>
+
+const std::string GIT_HASH = "@GIT_HASH@";
