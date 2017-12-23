@@ -3,8 +3,8 @@ let
   nixpkgs = (hostPkgs.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs-channels";
-    rev = "nixos-unstable";
-    sha256 = "1i3p5m0pnn86lzni5y1win0sacckw3wlg9kqaw15nszhykgz22zq";
+    rev = "nixos-17.09";
+    sha256 = "0x7n6mz0gxvvjwshwdlfi1ypd84z9v9s3qpkixgjhzr1lx6q94ag";
   });
 in
   with import nixpkgs {
@@ -35,7 +35,6 @@ in
       gcc
       gfortran
       hdf5
-      blas
       liblapack
       libuuid
       ninja-kitware
