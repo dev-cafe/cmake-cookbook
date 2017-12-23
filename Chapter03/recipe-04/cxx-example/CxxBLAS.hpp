@@ -5,13 +5,11 @@
 
 #include <cstddef>
 
-#include "FortranC.hpp"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define F_DGEMM FortranCInterface_GLOBAL(dgemm, DGEMM)
+#define F_DGEMM dgemm_
 extern void F_DGEMM(char *,
                     char *,
                     int *,
@@ -26,7 +24,7 @@ extern void F_DGEMM(char *,
                     double *,
                     int *);
 
-#define F_DSCAL FortranCInterface_GLOBAL(dscal, DSCAL)
+#define F_DSCAL dscal_
 extern void F_DSCAL(int * n, double * alpha, double * vec, int * inc);
 
 #ifdef __cplusplus

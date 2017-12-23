@@ -11,27 +11,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
 
-include(FortranCInterface)
-FortranCInterface_VERIFY(CXX)
-FortranCInterface_HEADER(FortranC.hpp)
-
 add_library(math CxxBLAS.cpp CxxLAPACK.cpp)
 target_include_directories(math
   PUBLIC
     ${PROJECT_SOURCE_DIR}
-    ${PROJECT_BINARY_DIR}
   )
 target_link_libraries(math
-  PRIVATE
-    ${BLAS_LIBRARIES}
+  PUBLIC
     ${LAPACK_LIBRARIES}
   )
 
 add_executable(linear-algebra linear-algebra.cpp)
 target_link_libraries(linear-algebra
-  PUBLIC
-    ${BLAS_LIBRARIES}
-    ${LAPACK_LIBRARIES}
   PRIVATE
     math
   )

@@ -3,16 +3,14 @@
 
 #pragma once
 
-#include "FortranC.hpp"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define F_DGESV FortranCInterface_GLOBAL(dgesv, DGESV)
+#define F_DGESV dgesv_
 extern int F_DGESV(int *, int *, double *, int *, int *, double *, int *, int *);
 
-#define F_DSYEV FortranCInterface_GLOBAL(dsyev, DSYEV)
+#define F_DSYEV dsyev_
 extern int
 F_DSYEV(char *, char *, int *, double *, int *, double *, double *, int *, int *);
 
