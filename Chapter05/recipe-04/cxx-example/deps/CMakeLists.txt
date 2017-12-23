@@ -1,7 +1,3 @@
-include(FortranCInterface)
-FortranCInterface_VERIFY(CXX)
-FortranCInterface_HEADER(FortranC.hpp)
-
 add_custom_target(BLAS_LAPACK_wrappers
   COMMAND
     ${CMAKE_COMMAND} -E tar xzf ${CMAKE_CURRENT_SOURCE_DIR}/wrap_BLAS_LAPACK.tar.gz
@@ -28,7 +24,6 @@ target_sources(math
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.cpp
   PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}/FortranC.hpp
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.hpp
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.hpp
   )
@@ -39,8 +34,7 @@ target_include_directories(math
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
 target_link_libraries(math
-  PRIVATE
-    ${BLAS_LIBRARIES}
+  PUBLIC
     ${LAPACK_LIBRARIES}
   )
 add_dependencies(math BLAS_LAPACK_wrappers)
