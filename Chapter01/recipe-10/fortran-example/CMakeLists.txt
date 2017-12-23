@@ -11,6 +11,10 @@ file(GLOB _sources geometry_*)
 add_library(geometry SHARED ${_sources})
 
 add_executable(compute-areas compute-areas.f90)
+target_compile_options(geometry
+  PRIVATE
+    "-std=f2008"
+  )
 target_link_libraries(compute-areas
   PUBLIC
     geometry

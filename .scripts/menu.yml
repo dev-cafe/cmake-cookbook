@@ -6,8 +6,8 @@ appveyor:
 
 drone:
   definitions:
-    - CMAKE_C_COMPILER: 'pgcc'
-    - CMAKE_CXX_COMPILER: 'pgc++'
+    - CMAKE_C_COMPILER: 'gcc'
+    - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'pgfortran'
 
 travis-linux:
