@@ -1,3 +1,6 @@
+include(FortranCInterface)
+FortranCInterface_VERIFY()
+
 find_package(PkgConfig REQUIRED QUIET)
 pkg_search_module(UUID REQUIRED uuid)
 if(UUID_FOUND)
