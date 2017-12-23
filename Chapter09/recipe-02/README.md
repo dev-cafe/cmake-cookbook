@@ -1,1 +1,1 @@
-# Building C/C++ projects using Fortran
+# Building C/C++ projects that use Fortran libraries

@@ -1,5 +1,5 @@
-- [Building Fortran projects using C/C++](recipe-01/README.md)
-- [Building C/C++ projects using Fortran](recipe-02/README.md)
+- [Building Fortran projects that use C/C++ libraries](recipe-01/README.md)
+- [Building C/C++ projects that use Fortran libraries](recipe-02/README.md)
 - [Building C++ and Python projects using Boost.Python](recipe-03/README.md)
 - [Building C++ and Python projects using pybind11](recipe-04/README.md)
 - [Mixing C, Fortran, and Python using Python CFFI](recipe-05/README.md)

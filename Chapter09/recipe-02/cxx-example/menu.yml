@@ -1,0 +1,4 @@
+drone:
+  definitions:
+    - CMAKE_C_COMPILER: 'pgcc'
+    - CMAKE_CXX_COMPILER: 'pgc++'
