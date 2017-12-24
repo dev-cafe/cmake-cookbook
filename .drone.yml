@@ -1,6 +1,6 @@
 pipeline:
   build:
-    image: robertodr/ubuntu-16.04_mkl2017.4.239-pgi17.4:latest
+    image: robertodr/ubuntu-16.04_pgi17.4:latest
     commands:
       - virtualenv venv
       - . venv/bin/activate
