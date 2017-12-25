@@ -22,16 +22,12 @@ target_include_directories(math
     ${PROJECT_BINARY_DIR}
   )
 target_link_libraries(math
-  PRIVATE
-    ${BLAS_LIBRARIES}
+  PUBLIC
     ${LAPACK_LIBRARIES}
   )
 
 add_executable(linear-algebra linear-algebra.cpp)
 target_link_libraries(linear-algebra
-  PUBLIC
-    ${BLAS_LIBRARIES}
-    ${LAPACK_LIBRARIES}
   PRIVATE
     math
   )
