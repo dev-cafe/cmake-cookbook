@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 project(recipe-02 Fortran C)
 
-# Get processor name
 cmake_host_system_information(RESULT _processor_name QUERY PROCESSOR_NAME)
 cmake_host_system_information(RESULT _processor_description QUERY PROCESSOR_DESCRIPTION)
 cmake_host_system_information(RESULT _os_name QUERY OS_NAME)
@@ -31,7 +30,7 @@ cf.configure_file(conf_dict, 'print_info.c', in_path=os.getcwd(), out_path='${CM
 find_package(PythonInterp QUIET REQUIRED)
 execute_process(
   COMMAND
-  ${PYTHON_EXECUTABLE} "-c" ${_config_script}
+    ${PYTHON_EXECUTABLE} "-c" ${_config_script}
   )
 
 add_custom_target(build_info

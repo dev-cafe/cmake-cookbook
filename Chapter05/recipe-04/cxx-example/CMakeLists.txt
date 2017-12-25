@@ -13,9 +13,6 @@ add_subdirectory(deps)
 
 add_executable(linear-algebra linear-algebra.cpp)
 target_link_libraries(linear-algebra
-  PUBLIC
-    ${BLAS_LIBRARIES}
-    ${LAPACK_LIBRARIES}
   PRIVATE
     math
   )
