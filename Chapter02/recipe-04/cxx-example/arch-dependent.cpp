@@ -8,7 +8,8 @@ std::string say_hello() {
 #elif IS_64_BIT_ARCH
   return std::string("this code is compiled on a 64 bit host processor");
 #else
-  return std::string("this code is compiled on a host processor with unknown architecture");
+  return std::string(
+      "this code is compiled on a host processor with unknown architecture");
 #endif
 }
 
