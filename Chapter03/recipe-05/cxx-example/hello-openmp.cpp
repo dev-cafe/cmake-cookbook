@@ -21,7 +21,7 @@
  *    Roberto Di Remigio
  */
 
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
   std::cout << "\n";
   std::cout << "HELLO_OPENMP" << std::endl;
   std::cout << "  C++11/OpenMP version" << std::endl;

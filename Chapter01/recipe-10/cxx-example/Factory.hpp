@@ -44,7 +44,7 @@ protected:
   /*! \brief Retrieve constant iterator from map given object identifier
    * \param[in] objID  the object's identification string
    */
-  CallbackConstIter retrieve(const std::string & objID) const {
+  CallbackConstIter retrieve(const std::string &objID) const {
     if (objID.empty())
       ERROR("No object identification string provided to the Factory.");
     CallbackConstIter i = callbacks_.find(objID);
@@ -58,13 +58,13 @@ private:
    * \param[in] objID  the object's identification string
    * \param[in] functor the creation function related to the object type given
    */
-  bool registerObject(const std::string & objID, const CreateObject & functor) {
+  bool registerObject(const std::string &objID, const CreateObject &functor) {
     return callbacks_.insert(CallbackPair(objID, functor)).second;
   }
   /*! \brief Returns true if objID was already registered
    *  \param objID the object's identification string
    */
-  bool unRegisterObject(const std::string & objID) {
+  bool unRegisterObject(const std::string &objID) {
     return callbacks_.erase(objID) == 1;
   }
 
@@ -73,7 +73,7 @@ public:
    * \param[in] objID  the object's identification string
    * \param[in] functor the creation function related to the object type given
    */
-  void subscribe(const std::string & objID, const CreateObject & functor) {
+  void subscribe(const std::string &objID, const CreateObject &functor) {
     bool done = this->registerObject(objID, functor);
     if (!done)
       ERROR("Subscription of object ID " + objID + " to factory failed!");
@@ -81,7 +81,7 @@ public:
   /*! \brief Unsubscribes object with objID from factory
    *  \param objID the object's identification string
    */
-  void unsubscribe(const std::string & objID) {
+  void unsubscribe(const std::string &objID) {
     bool done = this->unRegisterObject(objID);
     if (!done)
       ERROR("Unsubscription of object ID " + objID + " from factory failed!");
@@ -113,7 +113,7 @@ public:
    */
   template <typename... ObjectInputArgs>
   typename std::result_of<CreateObject(ObjectInputArgs...)>::type create(
-      const std::string & objID,
+      const std::string &objID,
       ObjectInputArgs... data) const {
     return (this->retrieve(objID)->second)(data...);
   }

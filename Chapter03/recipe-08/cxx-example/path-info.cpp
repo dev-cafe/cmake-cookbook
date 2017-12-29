@@ -15,9 +15,9 @@
 using namespace std;
 using namespace boost::filesystem;
 
-const char * say_what(bool b) { return b ? "true" : "false"; }
+const char *say_what(bool b) { return b ? "true" : "false"; }
 
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
   if (argc < 2) {
     cout
         << "Usage: path_info path-element [path-element...]\n"

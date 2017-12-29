@@ -5,8 +5,8 @@
 
 typedef std::map<std::string, std::string> map_t;
 
-void * threadfunc(void * p) {
-  map_t & m = *(map_t *)p;
+void *threadfunc(void *p) {
+  map_t &m = *(map_t *)p;
   m["foo"] = "bar";
   return 0;
 }

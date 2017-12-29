@@ -4,7 +4,5 @@
 #include "version.h"
 
 int main() {
-  std::cout << "This code has been built from version "
-            << GIT_HASH
-            << std::endl;
+  std::cout << "This code has been built from version " << GIT_HASH << std::endl;
 }
