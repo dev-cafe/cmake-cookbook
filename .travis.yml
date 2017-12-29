@@ -82,3 +82,4 @@ before_script:
 script:
   - ./.scripts/report_versions.sh
   - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
+  - python .scripts/ci_configure_build_test.py 'to-triage/recipe-*'
