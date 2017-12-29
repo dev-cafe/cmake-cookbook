@@ -20,13 +20,13 @@ F_DSYEV(char *, char *, int *, double *, int *, double *, double *, int *, int *
 }
 #endif
 
-int C_DGESV(int n, int nrhs, double * a, int lda, int * ipiv, double * b, int ldb);
+int C_DGESV(int n, int nrhs, double *a, int lda, int *ipiv, double *b, int ldb);
 
 int C_DSYEV(char jobz,
             char uplo,
             int n,
-            double * a,
+            double *a,
             int lda,
-            double * w,
-            double * work,
+            double *w,
+            double *work,
             int lwork);

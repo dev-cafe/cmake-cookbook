@@ -55,7 +55,7 @@
  *                singular, so the solution could not be computed.
  *
  */
-int C_DGESV(int n, int nrhs, double * a, int lda, int * ipiv, double * b, int ldb) {
+int C_DGESV(int n, int nrhs, double *a, int lda, int *ipiv, double *b, int ldb) {
   int info;
   ::F_DGESV(&n, &nrhs, a, &lda, ipiv, b, &ldb, &info);
   return info;
@@ -101,10 +101,10 @@ int C_DGESV(int n, int nrhs, double * a, int lda, int * ipiv, double * b, int ld
 int C_DSYEV(char jobz,
             char uplo,
             int n,
-            double * A,
+            double *A,
             int lda,
-            double * w,
-            double * work,
+            double *w,
+            double *work,
             int lwork) {
   int info;
 

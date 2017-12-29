@@ -27,7 +27,7 @@ extern void F_DGEMM(char *,
                     int *);
 
 #define F_DSCAL FortranCInterface_GLOBAL(dscal, DSCAL)
-extern void F_DSCAL(int * n, double * alpha, double * vec, int * inc);
+extern void F_DSCAL(int *n, double *alpha, double *vec, int *inc);
 
 #ifdef __cplusplus
 }
@@ -39,12 +39,12 @@ void C_DGEMM(char transa,
              int n,
              int k,
              double alpha,
-             double * a,
+             double *a,
              int lda,
-             double * b,
+             double *b,
              int ldb,
              double beta,
-             double * c,
+             double *c,
              int ldc);
 
 /*!
@@ -56,4 +56,4 @@ void C_DGEMM(char transa,
  * \param inc    how many places to skip to get to next element in vec
  *
  */
-void C_DSCAL(size_t length, double alpha, double * vec, int inc);
+void C_DSCAL(size_t length, double alpha, double *vec, int inc);

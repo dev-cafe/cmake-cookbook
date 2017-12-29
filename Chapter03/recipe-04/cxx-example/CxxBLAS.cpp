@@ -122,23 +122,23 @@ void C_DGEMM(char transa,
              int n,
              int k,
              double alpha,
-             double * a,
+             double *a,
              int lda,
-             double * b,
+             double *b,
              int ldb,
              double beta,
-             double * c,
+             double *c,
              int ldc) {
   if (m == 0 || n == 0 || k == 0)
     return;
   ::F_DGEMM(&transb, &transa, &n, &m, &k, &alpha, b, &ldb, a, &lda, &beta, c, &ldc);
 }
 
-void C_DSCAL(size_t length, double alpha, double * vec, int inc) {
+void C_DSCAL(size_t length, double alpha, double *vec, int inc) {
   int big_blocks = (int)(length / INT_MAX);
   int small_size = (int)(length % INT_MAX);
   for (int block = 0; block <= big_blocks; block++) {
-    double * vec_s = &vec[block * inc * (size_t)INT_MAX];
+    double *vec_s = &vec[block * inc * (size_t)INT_MAX];
     signed int length_s = (block == big_blocks) ? small_size : INT_MAX;
     ::F_DSCAL(&length_s, &alpha, vec_s, &inc);
   }

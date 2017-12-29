@@ -7,7 +7,7 @@
 
 #include "Report.hpp"
 
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
   PyObject *pName, *pModule, *pDict, *pFunc;
   PyObject *pArgs, *pValue;
   int i;

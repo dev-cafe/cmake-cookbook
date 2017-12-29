@@ -5,7 +5,7 @@
 class Animal {
 public:
   Animal() = delete;
-  explicit Animal(const std::string & n);
+  explicit Animal(const std::string &n);
   std::string name() const;
 
 protected:

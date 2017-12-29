@@ -6,7 +6,7 @@
 
 #include <Eigen/Dense>
 
-int main(int argc, char ** argv) {
+int main(int argc, char **argv) {
   if (argc != 2) {
     std::cout << "Usage: ./linear-algebra dim" << std::endl;
     return EXIT_FAILURE;
