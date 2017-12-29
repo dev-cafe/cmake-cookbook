@@ -24,7 +24,7 @@ conf_dict = cf.prepare_configuration_dictionary(processor_name='${_processor_nam
             cmake_generator='${CMAKE_GENERATOR}',
             fc='${CMAKE_Fortran_COMPILER}',
             cc='${CMAKE_C_COMPILER}')
-cf.configure_file(conf_dict, 'print_info.c', in_path=os.getcwd(), out_path='${CMAKE_CURRENT_BINARY_DIR}', suffix='.in')
+cf.configure_file(conf_dict, 'print_info.c', in_path='${CMAKE_CURRENT_SOURCE_DIR}', out_path='${CMAKE_CURRENT_BINARY_DIR}', suffix='.in')
 ")
 
 find_package(PythonInterp QUIET REQUIRED)
