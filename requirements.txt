@@ -3,3 +3,5 @@ pyyaml
 pycodestyle
 docopt
 colorama
+cffi
+cython
