@@ -1,1 +1,1 @@
-# Building C++ and Python projects using pybind11
+# Building C++ and Python projects using Boost.Python

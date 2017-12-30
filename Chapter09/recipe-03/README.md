@@ -1,1 +1,1 @@
-# Building C++ and Python projects using Boost.Python
+# Building C++ and Python projects using Cython
