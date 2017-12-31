@@ -1,4 +1,3 @@
-- [Setting up your system](recipe-00/README.md)
 - [Compiling a Single Source File Into an Executable](recipe-01/README.md)
 - [Switching Generators](recipe-02/README.md)
 - [Building and Linking Static and Shared Libraries](recipe-03/README.md)
