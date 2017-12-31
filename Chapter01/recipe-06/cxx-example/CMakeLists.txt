@@ -2,41 +2,27 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-06 CXX)
+project(recipe-05 CXX)
 
-# expose options to the user
-option(USE_LIBRARY "Compile sources into a library" OFF)
+# list sources by globbing
+file(GLOB _sources geometry_*)
 
-include(CMakeDependentOption)
-# second option depends on the value of the first
-cmake_dependent_option(MAKE_STATIC_LIBRARY "Compile sources into a static library" OFF
-                       "USE_LIBRARY" ON)
-# third option depends on the value of the first
-cmake_dependent_option(MAKE_SHARED_LIBRARY "Compile sources into a shared library" ON
-                       "USE_LIBRARY" ON)
+# try the IN LISTS foreach syntax
+message(STATUS "List sources using IN LISTS syntax")
+foreach(_source IN LISTS _sources)
+  get_filename_component(_tmp ${_source} NAME)
+  message(${_tmp})
+endforeach()
+# try the plain foreach syntax
+# requires to expand the contents of the variable
+message(STATUS "List sources using plain syntax")
+foreach(_source ${_sources})
+  get_filename_component(_tmp ${_source} NAME)
+  message(${_tmp})
+endforeach()
 
-# list sources
-set(_sources Message.hpp Message.cpp)
+add_library(geometry STATIC ${_sources})
 
-message(STATUS "Compile sources into a library? ${USE_LIBRARY}")
+add_executable(compute-areas compute-areas.cpp)
 
-if(USE_LIBRARY)
-  message(STATUS "Compile sources into a STATIC library? ${MAKE_STATIC_LIBRARY}")
-  message(STATUS "Compile sources into a SHARED library? ${MAKE_SHARED_LIBRARY}")
-  if(MAKE_SHARED_LIBRARY)
-    add_library(message SHARED ${_sources})
-
-    add_executable(hello-world hello-world.cpp)
-
-    target_link_libraries(hello-world message)
-  endif()
-  if(MAKE_STATIC_LIBRARY)
-    add_library(message STATIC ${_sources})
-
-    add_executable(hello-world hello-world.cpp)
-
-    target_link_libraries(hello-world message)
-  endif()
-else()
-  add_executable(hello-world hello-world.cpp ${_sources})
-endif()
+target_link_libraries(compute-areas geometry)
