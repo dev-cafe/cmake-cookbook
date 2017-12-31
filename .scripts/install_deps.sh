@@ -21,8 +21,9 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew update &> /dev/null
   brew cask uninstall --force oclint
-  brew install gcc@7 boost mpich pkg-config ossp-uuid
+  brew install gcc@7 mpich pkg-config ossp-uuid
   brew upgrade cmake
+  brew upgrade boost
   brew install pyenv-virtualenv
   Ninja_URL="https://goo.gl/qLgScp"
 fi
