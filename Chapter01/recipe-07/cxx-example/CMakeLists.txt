@@ -2,27 +2,17 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-07 CXX)
+project(recipe-08 CXX)
 
-message("Is the C++ compiler loaded? ${CMAKE_CXX_COMPILER_LOADED}")
-if(CMAKE_CXX_COMPILER_LOADED)
-  message("The C++ compiler ID is: ${CMAKE_CXX_COMPILER_ID}")
-  message("Is the C++ from GNU? ${CMAKE_COMPILER_IS_GNUCXX}")
-  message("The C++ compiler version is: ${CMAKE_CXX_COMPILER_VERSION}")
-endif()
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message("C++ compiler flags, debug mode: ${CMAKE_CXX_FLAGS_DEBUG}")
+message("C++ compiler flags, release mode: ${CMAKE_CXX_FLAGS_RELEASE}")
+message("C++ compiler flags, release with debug info mode: ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+message("C++ compiler flags, minimal release mode: ${CMAKE_CXX_FLAGS_MINSIZEREL}")
 
-message("Is the C compiler loaded? ${CMAKE_C_COMPILER_LOADED}")
-if(CMAKE_C_COMPILER_LOADED)
-  message("The C compiler ID is: ${CMAKE_C_COMPILER_ID}")
-  message("Is the C from GNU? ${CMAKE_COMPILER_IS_GNUCC}")
-  message("The C compiler version is: ${CMAKE_C_COMPILER_VERSION}")
-endif()
+file(GLOB _sources geometry_*)
 
-message("Is the Fortran compiler loaded? ${CMAKE_Fortran_COMPILER_LOADED}")
-if(CMAKE_Fortran_COMPILER_LOADED)
-  message("The Fortran compiler ID is: ${CMAKE_Fortran_COMPILER_ID}")
-  message("Is the Fortran from GNU? ${CMAKE_COMPILER_IS_GNUG77}")
-  message("The Fortran compiler version is: ${CMAKE_Fortran_COMPILER_VERSION}")
-endif()
+add_library(geometry STATIC ${_sources})
 
-add_executable(hello-world hello-world.cpp)
+add_executable(compute-areas compute-areas.cpp)
+target_link_libraries(compute-areas geometry)
