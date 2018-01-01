@@ -11,6 +11,7 @@ matrix:
           packages:
             - g++-7
             - gfortran
+            - gfortran-7
             - python-dev
             - libatlas-dev
             - liblapack-dev
