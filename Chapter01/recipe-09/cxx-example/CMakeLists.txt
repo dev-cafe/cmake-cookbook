@@ -2,24 +2,30 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-09 CXX)
+project(recipe-10 CXX)
 
-message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
-
-# list sources by globbing
-file(GLOB _sources geometry_*)
-
-# These compiler flags will not work on Windows
-add_library(geometry STATIC ${_sources})
-target_compile_options(geometry
-  PRIVATE
-    "-fPIC;-Wall;-Wextra;-Wpedantic"
+add_library(animals SHARED
+  Animal.cpp
+  Animal.hpp
+  Cat.cpp
+  Cat.hpp
+  Dog.cpp
+  Dog.hpp
+  Factory.hpp
+  )
+set_target_properties(animals
+  PROPERTIES
+    CXX_STANDARD 14
+    CXX_EXTENSIONS OFF
+    CXX_STANDARD_REQUIRED ON
+    POSITION_INDEPENDENT_CODE 1
   )
 
-add_executable(compute-areas compute-areas.cpp)
-target_compile_options(compute-areas
-  PRIVATE
-    "-fPIC"
+add_executable(animal-farm animal-farm.cpp)
+set_target_properties(animal-farm
+  PROPERTIES
+    CXX_STANDARD 14
+    CXX_EXTENSIONS OFF
+    CXX_STANDARD_REQUIRED ON
   )
-
-target_link_libraries(compute-areas geometry)
+target_link_libraries(animal-farm animals)

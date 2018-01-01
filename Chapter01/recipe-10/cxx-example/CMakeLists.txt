@@ -2,30 +2,27 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-10 CXX)
+project(recipe-05 CXX)
 
-add_library(animals SHARED
-  Animal.cpp
-  Animal.hpp
-  Cat.cpp
-  Cat.hpp
-  Dog.cpp
-  Dog.hpp
-  Factory.hpp
-  )
-set_target_properties(animals
-  PROPERTIES
-    CXX_STANDARD 14
-    CXX_EXTENSIONS OFF
-    CXX_STANDARD_REQUIRED ON
-    POSITION_INDEPENDENT_CODE 1
-  )
+# list sources by globbing
+file(GLOB _sources geometry_*)
 
-add_executable(animal-farm animal-farm.cpp)
-set_target_properties(animal-farm
-  PROPERTIES
-    CXX_STANDARD 14
-    CXX_EXTENSIONS OFF
-    CXX_STANDARD_REQUIRED ON
-  )
-target_link_libraries(animal-farm animals)
+# try the IN LISTS foreach syntax
+message(STATUS "List sources using IN LISTS syntax")
+foreach(_source IN LISTS _sources)
+  get_filename_component(_tmp ${_source} NAME)
+  message(${_tmp})
+endforeach()
+# try the plain foreach syntax
+# requires to expand the contents of the variable
+message(STATUS "List sources using plain syntax")
+foreach(_source ${_sources})
+  get_filename_component(_tmp ${_source} NAME)
+  message(${_tmp})
+endforeach()
+
+add_library(geometry STATIC ${_sources})
+
+add_executable(compute-areas compute-areas.cpp)
+
+target_link_libraries(compute-areas geometry)

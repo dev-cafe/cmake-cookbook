@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-07 CXX)
+project(recipe-07 Fortran)
 
 message("Is the C++ compiler loaded? ${CMAKE_CXX_COMPILER_LOADED}")
 if(CMAKE_CXX_COMPILER_LOADED)
@@ -25,4 +25,4 @@ if(CMAKE_Fortran_COMPILER_LOADED)
   message("The Fortran compiler version is: ${CMAKE_Fortran_COMPILER_VERSION}")
 endif()
 
-add_executable(hello-world hello-world.cpp)
+add_executable(hello-world hello-world.f90)

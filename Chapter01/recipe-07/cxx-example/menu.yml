@@ -1,3 +1,20 @@
+appveyor:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+
 drone:
   definitions:
     - CMAKE_CXX_COMPILER: 'pgc++'
+    - CMAKE_BUILD_TYPE: 'Release'
+
+travis-linux:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+
+travis-osx:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+
+local:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
