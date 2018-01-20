@@ -24,7 +24,7 @@ in
   stdenv.mkDerivation {
     name = "CMake-recipes";
     buildInputs = [
-      boost
+      boost155
       ccache
       clang-tools
       cmake_3_10
