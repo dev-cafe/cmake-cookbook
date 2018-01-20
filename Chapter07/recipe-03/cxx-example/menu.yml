@@ -1,0 +1,15 @@
+drone:
+  definitions:
+    - FORCE_CUSTOM_BOOST: 'ON'
+
+travis-linux:
+  definitions:
+    - FORCE_CUSTOM_BOOST: 'ON'
+
+travis-osx:
+  definitions:
+    - FORCE_CUSTOM_BOOST: 'ON'
+
+local:
+  definitions:
+    - FORCE_CUSTOM_BOOST: 'ON'

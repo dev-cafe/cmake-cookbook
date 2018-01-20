@@ -4,7 +4,7 @@ let
     owner = "NixOS";
     repo = "nixpkgs-channels";
     rev = "nixos-unstable";
-    sha256 = "1icphqpdcl8akqhfij2pxkfr7wfn86z5sr3jdjh88p9vv1550dx7";
+    sha256 = "15fcl29a97f68j1pjywmrjm31rdh1a21jz9airlsbzpl4lc3zhfi";
   });
 in
   with import nixpkgs {
@@ -33,11 +33,13 @@ in
       exa
       gcc
       gfortran
+      gfortran.cc.lib
       hdf5
       liblapack
       libuuid
       ninja-kitware
       openmpi
+      pkgconfig
       python3Full
       python3Packages.cffi
       python3Packages.colorama
@@ -51,7 +53,7 @@ in
     ];
     src = null;
     shellHook = ''
-      NINJA_STATUS="[Built edge %f of %t in %e sec]"
-      SOURCE_DATE_EPOCH=$(date +%s)
+    export NINJA_STATUS="[Built edge %f of %t in %e sec]"
+    SOURCE_DATE_EPOCH=$(date +%s)
     '';
   }
