@@ -6,12 +6,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# User options:
-# FORCE_CUSTOM_BOOST
-
-find_package(PythonInterp REQUIRED)
-find_package(PythonLibs REQUIRED)
-
 include(ExternalProject)
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -21,35 +15,39 @@ message(STATUS "${PROJECT_NAME} install: ${CMAKE_INSTALL_PREFIX}")
 set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage${CMAKE_INSTALL_PREFIX})
 message(STATUS "${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}")
 
-set(Boost_USE_STATIC_LIBS    ON)
+set(Boost_USE_STATIC_LIBS    OFF)
 set(Boost_USE_MULTITHREADED  ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 set(Boost_DEBUG OFF)
 set(Boost_DETAILED_FAILURE_MESSAGE OFF)
 list(APPEND BOOST_COMPONENTS_REQUIRED filesystem system)
-find_package(Boost 1.64.0 COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
+find_package(Boost 1.64.0 COMPONENTS "${BOOST_COMPONENTS_REQUIRED}" QUIET)
 if(Boost_FOUND)
   message(STATUS "Found Boost: ${Boost_LIBRARY_DIRS} (found version ${Boost_VERSION})")
-  add_library(custom_boost INTERFACE)  # dummy
+  add_library(custom_boost INTERFACE)
 else()
-  ## Preliminary work
-  # Select toolset according to compilers specified by the user
-  if(CMAKE_CXX_COMPILER_ID MATCHES Intel)
-      set(toolset "intel-linux")
-  elseif(CMAKE_CXX_COMPILER_ID MATCHES Clang)
-      set(toolset "clang")
-  else()
-      if(CMAKE_SYSTEM_NAME MATCHES Darwin)
-          set(toolset "darwin")
-      else()
-          set(toolset "gcc")
-      endif()
-  endif()
-  message(STATUS "  Toolset to be used: ${toolset}")
+  message(STATUS "Suitable Boost could not be located. Downloading and building!")
 
-  if(NOT DEFINED CMAKE_BUILD_TYPE OR "${CMAKE_BUILD_TYPE}" STREQUAL "")
-    set(type "release")
+  if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    if(APPLE)
+      set(toolset "darwin")
+    else()
+      set(toolset "gcc")
+    endif()
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    set(toolset "clang")
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
+    set(toolset "intel")
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    set(toolset "msvc")
   endif()
+
+  if(WIN32)
+    set(Boost_BOOTSTRAP "bootstrap.bat")
+  else()
+    set(Boost_BOOTSTRAP "bootstrap.sh")
+  endif()
+
   if(NOT "${BOOST_COMPONENTS_REQUIRED}" STREQUAL "")
     # Non-empty list. Compiled libraries needed
     # Transform the ;-separated list to a ,-separated list (digested by the Boost build toolchain!)
@@ -61,7 +59,10 @@ else()
     message(STATUS "  Libraries to be built: ${printout}")
   endif()
 
-  message(STATUS "Suitable Boost could not be located. Downloading and building!")
+  set(Boost_USER_CONFIG_JAMFILE "${PROJECT_BINARY_DIR}/user-config.jam")
+  file(WRITE "${Boost_USER_CONFIG_JAMFILE}" "using ${toolset} : : ${CMAKE_CXX_COMPILER} : <cxxflags>\"-std=c++11\" <linkflags>\"-std=c++11\" ;")
+  set(Boost_BUILD_USER_CONFIG_ARGS "--user-config=${PROJECT_BINARY_DIR}/user-config.jam")
+
   ExternalProject_Add(custom_boost
     PREFIX
       external
@@ -76,28 +77,32 @@ else()
     BUILD_IN_SOURCE
       1
     CONFIGURE_COMMAND
-      <SOURCE_DIR>/bootstrap.sh
+      <SOURCE_DIR>/${Boost_BOOTSTRAP}
       --with-toolset=${toolset}
       --prefix=${STAGED_INSTALL_PREFIX}/boost
-      --with-python=${PYTHON_EXECUTABLE}
       ${select_libraries}
     BUILD_COMMAND
       ""
     INSTALL_COMMAND
-      ./b2 -d2 -q install
-           link=static
+      <SOURCE_DIR>/b2 -q install
+           link=shared
            threading=multi
-           variant=${type}
+           variant=release
            toolset=${toolset}
+           ${Boost_BUILD_USER_CONFIG_ARGS}
+    LOG_BUILD
+      1
+    LOG_INSTALL
+      1
     STEP_TARGETS
       download update configure install
     )
 
   # Set all variables related to Boost that find_package would have set
    set(Boost_FOUND TRUE)
-   math(EXPR Boost_MAJOR_VERSION 1)
-   math(EXPR Boost_MINOR_VERSION 64)
-   math(EXPR Boost_SUBMINOR_VERSION 0)
+   set(Boost_MAJOR_VERSION 1)
+   set(Boost_MINOR_VERSION 64)
+   set(Boost_SUBMINOR_VERSION 0)
    set(Boost_LIB_VERSION ${Boost_MAJOR_VERSION}_${Boost_MINOR_VERSION})
    set(Boost_INCLUDE_DIR ${STAGED_INSTALL_PREFIX}/boost/include CACHE PATH "Boost include directory" FORCE)
    set(Boost_LIBRARY_DIR ${STAGED_INSTALL_PREFIX}/boost/lib CACHE PATH "Boost library directory" FORCE)
@@ -105,7 +110,7 @@ else()
    foreach(_component ${BOOST_COMPONENTS_REQUIRED})
      string(TOUPPER ${_component} _COMP)
      set(Boost_${_COMP}_FOUND TRUE)
-     set(Boost_${_COMP}_LIBRARY ${Boost_LIBRARY_DIR}/libboost_${_component}.a)
+     set(Boost_${_COMP}_LIBRARY ${Boost_LIBRARY_DIR}/libboost_${_component}${CMAKE_SHARED_LIBRARY_SUFFIX})
      set(Boost_${_COMP}_LIBRARY_DEBUG ${Boost_LIBRARY_DIR}/${Boost_${_COMP}_LIBRARY} CACHE FILEPATH "Boost ${_component} library (debug)" FORCE)
      set(Boost_${_COMP}_LIBRARY_RELEASE ${Boost_LIBRARY_DIR}/${Boost_${_COMP}_LIBRARY} CACHE FILEPATH "Boost ${_component} library (release)" FORCE)
      list(APPEND Boost_LIBRARIES ${Boost_${_COMP}_LIBRARY})
@@ -113,9 +118,6 @@ else()
 
    set(Boost_INCLUDE_DIRS ${Boost_INCLUDE_DIR})
    set(Boost_LIBRARY_DIRS ${Boost_LIBRARY_DIR})
-   #if(CMAKE_SYSTEM_NAME MATCHES Linux)
-   #  list(APPEND Boost_LIBRARIES rt)
-   #endif()
 endif()
 
 add_executable(path-info path-info.cpp)
