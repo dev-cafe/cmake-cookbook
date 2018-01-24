@@ -1,0 +1,46 @@
+add_library(message-objs OBJECT "")
+target_sources(message-objs
+  PUBLIC
+    Message.hpp
+  PRIVATE
+    Message.cpp
+  )
+
+add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
+set_target_properties(message-shared PROPERTIES
+  VERSION 0
+  SOVERSION 1
+  OUTPUT_NAME "message")
+
+add_library(message-static STATIC $<TARGET_OBJECTS:message-objs>)
+set_target_properties(message-static PROPERTIES
+  OUTPUT_NAME "message")
+
+add_executable(hello-world hello-world.cpp)
+
+target_link_libraries(hello-world
+  PUBLIC
+    message-shared
+  )
+
+# <<<  RPATH  >>>
+
+list(APPEND project_RPATH "${CMAKE_INSTALL_PREFIX}/lib" "${STAGED_INSTALL_PREFIX}/lib")
+message(STATUS "Project RPATH is ${project_RPATH}")
+
+set_target_properties(hello-world
+  PROPERTIES
+    MACOSX_RPATH ON
+    INSTALL_RPATH "${project_RPATH}"
+    INSTALL_RPATH_USE_LINK_PATH ON
+    BUILD_WITH_INSTALL_RPATH ON
+  )
+
+install(TARGETS hello-world message-shared message-static
+  RUNTIME DESTINATION
+    bin
+  LIBRARY DESTINATION
+    lib
+  ARCHIVE DESTINATION
+    lib
+  )
