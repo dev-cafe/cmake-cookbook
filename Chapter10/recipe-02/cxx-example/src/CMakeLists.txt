@@ -5,7 +5,7 @@ target_sources(message-objs
   PRIVATE
     Message.cpp
   )
-file(INSTALL Message.hpp DESTINATION ${STAGED_INSTALL_PREFIX}/include)
+file(INSTALL Message.hpp DESTINATION ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR})
 
 add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-shared PROPERTIES
@@ -26,7 +26,7 @@ target_link_libraries(hello-world
 
 # <<<  RPATH  >>>
 
-list(APPEND project_RPATH "${CMAKE_INSTALL_PREFIX}/lib" "${STAGED_INSTALL_PREFIX}/lib")
+list(APPEND project_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}" "${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
 message(STATUS "Project RPATH is ${project_RPATH}")
 
 set_target_properties(hello-world
@@ -39,11 +39,11 @@ set_target_properties(hello-world
 
 install(TARGETS hello-world message-shared message-static
   RUNTIME DESTINATION
-    bin
+    ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION
-    lib
+    ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION
-    lib
+    ${CMAKE_INSTALL_LIBDIR}
   )
 
-install(FILES Message.hpp DESTINATION include)
+install(FILES Message.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
