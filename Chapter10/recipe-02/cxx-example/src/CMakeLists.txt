@@ -5,7 +5,10 @@ target_sources(message-objs
   PRIVATE
     Message.cpp
   )
-file(INSTALL Message.hpp DESTINATION ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR})
+file(INSTALL Message.hpp
+     DESTINATION
+       ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/message
+    )
 
 add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-shared PROPERTIES
@@ -46,4 +49,4 @@ install(TARGETS hello-world message-shared message-static
     ${CMAKE_INSTALL_LIBDIR}
   )
 
-install(FILES Message.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES Message.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/message)

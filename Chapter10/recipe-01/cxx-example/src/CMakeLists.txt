@@ -5,7 +5,7 @@ target_sources(message-objs
   PRIVATE
     Message.cpp
   )
-file(INSTALL Message.hpp DESTINATION ${STAGED_INSTALL_PREFIX}/include)
+file(INSTALL Message.hpp DESTINATION ${STAGED_INSTALL_PREFIX}/include/message)
 
 add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-shared PROPERTIES
@@ -46,4 +46,4 @@ install(TARGETS hello-world message-shared message-static
     lib
   )
 
-install(FILES Message.hpp DESTINATION include)
+install(FILES Message.hpp DESTINATION include/message)
