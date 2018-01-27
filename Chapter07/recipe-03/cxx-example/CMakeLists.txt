@@ -96,6 +96,9 @@ else()
       1
     STEP_TARGETS
       download update configure install
+    BUILD_BYPRODUCTS
+      ${STAGED_INSTALL_PREFIX}/boost/lib/libboost_system${CMAKE_SHARED_LIBRARY_SUFFIX}
+      ${STAGED_INSTALL_PREFIX}/boost/lib/libboost_filesystem${CMAKE_SHARED_LIBRARY_SUFFIX}
     )
 
   # Set all variables related to Boost that find_package would have set

@@ -5,6 +5,9 @@ target_sources(message-objs
   PRIVATE
     Message.cpp
   )
+set_target_properties(message-objs PROPERTIES
+  POSITION_INDEPENDENT_CODE 1
+  )
 file(INSTALL Message.hpp
      DESTINATION
        ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/message

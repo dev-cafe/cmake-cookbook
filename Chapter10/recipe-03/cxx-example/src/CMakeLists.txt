@@ -6,6 +6,7 @@ target_sources(message
     Message.cpp
   )
 set_target_properties(message PROPERTIES
+  POSITION_INDEPENDENT_CODE 1
   CXX_VISIBILITY_PRESET hidden
   VISIBILITY_INLINES_HIDDEN 1
   )
