@@ -20,6 +20,7 @@ for number in numbers:
 
 primes = (number for number in numbers if is_prime[number])
 with open(output_file_name, 'w') as f:
+    f.write('#pragma once\n\n')
     f.write('const size_t max_number = {0};\n'.format(max_number))
     f.write('std::vector<size_t> & primes() {\n')
     f.write('  static std::vector<size_t> primes;\n')

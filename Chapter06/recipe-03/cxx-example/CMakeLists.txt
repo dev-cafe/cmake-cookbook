@@ -23,14 +23,13 @@ add_custom_command(
     generate.py
   )
 
-add_executable(
-  example.x
-  example.cpp
-  ${PROJECT_BINARY_DIR}/generated/primes.h
-  )
-
-target_include_directories(
-  example.x
+add_executable(example.x "")
+target_sources(example.x
   PRIVATE
-  ${PROJECT_BINARY_DIR}/generated
+    example.cpp
+    ${PROJECT_BINARY_DIR}/generated/primes.h
+  )
+target_include_directories(example.x
+  PRIVATE
+    ${PROJECT_BINARY_DIR}/generated
   )
