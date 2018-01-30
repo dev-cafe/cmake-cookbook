@@ -1,19 +1,18 @@
-add_library(message OBJECT "")
-target_sources(message
+add_library(message-objs OBJECT "")
+target_sources(message-objs
   PUBLIC
     Message.hpp
   PRIVATE
     Message.cpp
   )
-set_target_properties(message PROPERTIES
+set_target_properties(message-objs PROPERTIES
   POSITION_INDEPENDENT_CODE 1
   CXX_VISIBILITY_PRESET hidden
   VISIBILITY_INLINES_HIDDEN 1
   )
-file(INSTALL Message.hpp DESTINATION ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/message)
 
 include(GenerateExportHeader)
-generate_export_header(message
+generate_export_header(message-objs
   BASE_NAME "message"
   EXPORT_MACRO_NAME "message_EXPORT"
   EXPORT_FILE_NAME "messageExport.h"
@@ -21,23 +20,21 @@ generate_export_header(message
   NO_EXPORT_MACRO_NAME "message_NO_EXPORT"
   STATIC_DEFINE "message_STATIC_DEFINE"
   NO_DEPRECATED_MACRO_NAME "message_NO_DEPRECATED"
-  DEFINE_NO_DEPRECATED)
-file(INSTALL ${CMAKE_CURRENT_BINARY_DIR}/messageExport.h DESTINATION ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/message)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/messageExport.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/message)
-target_include_directories(message
+  DEFINE_NO_DEPRECATED
+  )
+target_include_directories(message-objs
   PRIVATE
-    ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/message
+    ${CMAKE_CURRENT_BINARY_DIR}
   )
 
-add_library(message-static STATIC $<TARGET_OBJECTS:message>)
+add_library(message-static STATIC $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-static PROPERTIES
   COMPILE_DEFINITIONS message_STATIC_DEFINE
   OUTPUT_NAME "message"
   )
 
-add_library(message-shared SHARED $<TARGET_OBJECTS:message>)
+add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-shared PROPERTIES
-  VERSION 0
   SOVERSION 1
   CXX_VISIBILITY_PRESET hidden
   VISIBILITY_INLINES_HIDDEN 1
@@ -52,20 +49,16 @@ target_link_libraries(hello-world
   )
 target_include_directories(hello-world
   PRIVATE
-    ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/message
+    ${CMAKE_CURRENT_BINARY_DIR}
   )
-
-# <<<  RPATH  >>>
-
-list(APPEND project_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}" "${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
-message(STATUS "Project RPATH is ${project_RPATH}")
 
 set_target_properties(hello-world
   PROPERTIES
     MACOSX_RPATH ON
-    INSTALL_RPATH "${project_RPATH}"
+    SKIP_BUILD_RPATH OFF
+    BUILD_WITH_INSTALL_RPATH OFF
+    INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
     INSTALL_RPATH_USE_LINK_PATH ON
-    BUILD_WITH_INSTALL_RPATH ON
   )
 
 install(TARGETS hello-world message-static message-shared
@@ -77,4 +70,4 @@ install(TARGETS hello-world message-static message-shared
     ${CMAKE_INSTALL_LIBDIR}
   )
 
-install(FILES Message.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/message)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/messageExport.h Message.hpp DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/message)

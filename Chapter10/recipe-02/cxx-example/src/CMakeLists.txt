@@ -8,20 +8,17 @@ target_sources(message-objs
 set_target_properties(message-objs PROPERTIES
   POSITION_INDEPENDENT_CODE 1
   )
-file(INSTALL Message.hpp
-     DESTINATION
-       ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/message
-    )
 
 add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-shared PROPERTIES
-  VERSION 0
   SOVERSION 1
-  OUTPUT_NAME "message")
+  OUTPUT_NAME "message"
+  )
 
 add_library(message-static STATIC $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-static PROPERTIES
-  OUTPUT_NAME "message")
+  OUTPUT_NAME "message"
+  )
 
 add_executable(hello-world hello-world.cpp)
 
@@ -30,17 +27,13 @@ target_link_libraries(hello-world
     message-shared
   )
 
-# <<<  RPATH  >>>
-
-list(APPEND project_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}" "${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
-message(STATUS "Project RPATH is ${project_RPATH}")
-
 set_target_properties(hello-world
   PROPERTIES
     MACOSX_RPATH ON
-    INSTALL_RPATH "${project_RPATH}"
+    SKIP_BUILD_RPATH OFF
+    BUILD_WITH_INSTALL_RPATH OFF
+    INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
     INSTALL_RPATH_USE_LINK_PATH ON
-    BUILD_WITH_INSTALL_RPATH ON
   )
 
 install(TARGETS hello-world message-shared message-static
