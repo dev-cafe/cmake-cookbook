@@ -22,12 +22,6 @@ target_link_libraries(
   pybind11::module
   )
 
-target_include_directories(
-  account
-  PRIVATE
-  ${PYBIND11_DIR}/include
-  )
-
 set_target_properties(
   account
   PROPERTIES
