@@ -18,7 +18,7 @@ add_library(
 
 target_link_libraries(
   account
-  PRIVATE
+  PUBLIC
   pybind11::module
   )
 
