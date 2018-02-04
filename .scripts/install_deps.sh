@@ -20,11 +20,11 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   Ninja_URL="https://goo.gl/4g5Jjv"
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew update &> /dev/null
-  brew cask uninstall --force oclint
+  brew cask uninstall --force oclint boost
   brew install gcc@7 mpich pkg-config ossp-uuid
   brew upgrade cmake
-  brew upgrade boost --with-python
-  brew install boost-python
+  brew install boost@1.62 --with-python
+  brew install boost-python@1.62
   brew install pyenv-virtualenv
   Ninja_URL="https://goo.gl/qLgScp"
 fi
