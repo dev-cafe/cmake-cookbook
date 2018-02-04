@@ -4,7 +4,7 @@ let
     owner = "NixOS";
     repo = "nixpkgs-channels";
     rev = "nixos-unstable";
-    sha256 = "15fcl29a97f68j1pjywmrjm31rdh1a21jz9airlsbzpl4lc3zhfi";
+    sha256 = "1zcbvzxk1vyk4ngfdyss8mlb3mqp050ygpnwqny0bxbzlqkrc4bh";
   });
 in
   with import nixpkgs {
