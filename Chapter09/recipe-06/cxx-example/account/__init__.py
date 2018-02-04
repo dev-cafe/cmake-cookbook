@@ -27,7 +27,8 @@ _lib = get_lib_handle(['-DACCOUNT_API=', '-DACCOUNT_NOINCLUDE'],
                       _library_dir,
                       _include_dir)
 
-# we change names to get a more pythonic API
+
+# we change names to obtain a more pythonic API
 new = _lib.account_new
 free = _lib.account_free
 deposit = _lib.account_deposit

@@ -13,7 +13,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake-cython)
 # this defines cython_add_module
 include(UseCython)
 
-# specify that account.pyx is a c++ file
+# tells UseCython to compile this file as a c++ file
 set_source_files_properties(account.pyx PROPERTIES CYTHON_IS_CXX TRUE)
 
 # create python module
