@@ -3,9 +3,12 @@
 set -euo pipefail
 
 Ninja_URL=""
+CMake_VERSION="3.10.2"
+CMake_URL=""
 # OS-dependent operations
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  CMake_VERSION="3.10.0"
+  CMake_URL="https://cmake.org/files/v${CMake_VERSION%.*}/cmake-${CMake_VERSION}-Linux-x86_64.tar.gz"
+  Ninja_URL="https://goo.gl/4g5Jjv"
   echo "-- Installing CMake $CMake_VERSION"
   if [[ -f $HOME/Deps/cmake/bin/cmake ]]; then
     echo "-- CMake $CMake_VERSION FOUND in cache"
@@ -13,19 +16,20 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     echo "-- CMake $CMake_VERSION NOT FOUND in cache"
     cd $HOME/Deps
     mkdir -p cmake
-    curl -Ls https://cmake.org/files/v${CMake_VERSION%.*}/cmake-${CMake_VERSION}-Linux-x86_64.tar.gz | tar -xz -C cmake --strip-components=1
+    curl -Ls $CMake_URL | tar -xz -C cmake --strip-components=1
     cd $TRAVIS_BUILD_DIR
   fi
-  echo "-- Done with CMake $CMake_VERSION"
-  Ninja_URL="https://goo.gl/4g5Jjv"
+  echo "-- Done with CMake"
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew update &> /dev/null
   brew cask uninstall --force oclint
-  brew install gcc@7 mpich pkg-config ossp-uuid
+  brew uninstall --force --ignore-dependencies boost
+  brew install gcc mpich pkg-config ossp-uuid python3 pyenv-virtualenv
   brew upgrade cmake
-  brew install boost@1.62 --with-python
-  brew install boost-python@1.62
-  brew install pyenv-virtualenv
+  brew install boost@1.59
+  brew install boost-python@1.59
+  # Symlink the installed Boost.Python to where all the rest of Boost resides
+  ln -sf /usr/local/opt/boost-python@1.59/lib/* /usr/local/opt/boost@1.59/lib
   Ninja_URL="https://goo.gl/qLgScp"
 fi
 

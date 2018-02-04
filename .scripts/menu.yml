@@ -21,6 +21,7 @@ travis-osx:
     - CMAKE_C_COMPILER: 'clang'
     - CMAKE_CXX_COMPILER: 'clang++'
     - CMAKE_Fortran_COMPILER: 'gfortran-7'
+    - BOOST_ROOT: '/usr/local/opt/boost@1.59'
 
 local:
   definitions:
