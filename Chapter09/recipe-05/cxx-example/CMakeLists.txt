@@ -68,13 +68,3 @@ set_property(
   PROPERTY ENVIRONMENT
     PYTHONPATH=${PROJECT_BINARY_DIR}/account
   )
-
-# install step is important for pip to work
-install(
-  DIRECTORY
-    ${PROJECT_BINARY_DIR}/install/
-  DESTINATION
-    .
-  PATTERN
-    "*"
-  )

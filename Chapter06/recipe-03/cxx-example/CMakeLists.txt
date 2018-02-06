@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 project(recipe-03 CXX)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # we require Python for this recipe to work
 find_package(PythonInterp QUIET REQUIRED)
 
@@ -23,14 +27,13 @@ add_custom_command(
     generate.py
   )
 
-add_executable(
-  example.x
-  example.cpp
-  ${PROJECT_BINARY_DIR}/generated/primes.h
-  )
-
-target_include_directories(
-  example.x
+add_executable(example.x "")
+target_sources(example.x
   PRIVATE
-  ${PROJECT_BINARY_DIR}/generated
+    example.cpp
+    ${PROJECT_BINARY_DIR}/generated/primes.h
+  )
+target_include_directories(example.x
+  PRIVATE
+    ${PROJECT_BINARY_DIR}/generated
   )

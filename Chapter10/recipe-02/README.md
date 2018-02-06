@@ -1,0 +1,1 @@
+# Installing following GNU standards

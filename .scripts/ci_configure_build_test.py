@@ -38,7 +38,7 @@ def get_buildflags():
     buildflags = os.environ.get('BUILDFLAGS')
     if buildflags is None:
         # this fails on my laptop with Unix Makefiles (?)
-#       buildflags = '-v'
+        #       buildflags = '-v'
         buildflags = ''
     return buildflags
 
@@ -55,11 +55,7 @@ def get_topdir():
     return topdir
 
 
-def run_command(step,
-                command,
-                expect_failure,
-                skip_predicate,
-                verbose):
+def run_command(step, command, expect_failure, skip_predicate, verbose):
     """
     step: string (e.g. 'configuring', 'building', ...); only used in printing
     command: string; this is the command to be run
@@ -67,10 +63,8 @@ def run_command(step,
     skip_predicate: bool(stdout, stderr)
     verbose: bool; if True always print stdout and stderr from command
     """
-    child = subprocess.Popen(command,
-                             shell=True,
-                             stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE)
+    child = subprocess.Popen(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     stdout_coded, stderr_coded = child.communicate()
     stdout = stdout_coded.decode('UTF-8')
@@ -80,16 +74,20 @@ def run_command(step,
 
     return_code = 0
     if not skip_predicate(stdout, stderr):
-        sys.stdout.write(colorama.Fore.BLUE + colorama.Style.BRIGHT + '  {0} ... '.format(step))
+        sys.stdout.write(colorama.Fore.BLUE + colorama.Style.BRIGHT +
+                         '  {0} ... '.format(step))
         if child_return_code == 0:
-            sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
+            sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT +
+                             'OK\n')
             if verbose:
                 sys.stdout.write(stdout + stderr + '\n')
         else:
             if expect_failure:
-                sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT + 'EXPECTED TO FAIL\n')
+                sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
+                                 'EXPECTED TO FAIL\n')
             else:
-                sys.stdout.write(colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED\n')
+                sys.stdout.write(colorama.Fore.RED + colorama.Style.BRIGHT +
+                                 'FAILED\n')
                 sys.stderr.write(stdout + stderr + '\n')
                 return_code = child_return_code
         sys.stdout.flush()
@@ -157,7 +155,10 @@ def main(arguments):
     buildflags = get_buildflags()
     generator = get_generator()
     # glob recipes
-    recipes = [r for r in sorted(glob.glob(os.path.join(topdir, arguments['<regex>'])))]
+    recipes = [
+        r
+        for r in sorted(glob.glob(os.path.join(topdir, arguments['<regex>'])))
+    ]
     ci_environment = get_ci_environment()
 
     # Set NINJA_STATUS environment variable
@@ -165,7 +166,8 @@ def main(arguments):
 
     # extract global menu
     menu_file = os.path.join(topdir, '.scripts', 'menu.yml')
-    expect_failure_global, env_global, definitions_global = extract_menu_file(menu_file, generator, ci_environment)
+    expect_failure_global, env_global, definitions_global = extract_menu_file(
+        menu_file, generator, ci_environment)
 
     colorama.init(autoreset=True)
     return_code = 0
@@ -175,10 +177,13 @@ def main(arguments):
         with open(os.path.join(recipe, 'README.md'), 'r') as f:
             for line in f.read().splitlines():
                 if line[0:2] == '# ':
-                    print(colorama.Back.BLUE + '\nrecipe: {0}'.format(line[2:]))
+                    print(colorama.Back.BLUE +
+                          '\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
-        examples = [e for e in sorted(glob.glob(os.path.join(recipe, '*example')))]
+        examples = [
+            e for e in sorted(glob.glob(os.path.join(recipe, '*example')))
+        ]
 
         # TODO we need to get rid of this
         # Remove Fortran examples if generator is Visual Studio
@@ -191,7 +196,8 @@ def main(arguments):
 
             # extract local menu
             menu_file = os.path.join(recipe, example, 'menu.yml')
-            expect_failure_local, env_local, definitions_local = extract_menu_file(menu_file, generator, ci_environment)
+            expect_failure_local, env_local, definitions_local = extract_menu_file(
+                menu_file, generator, ci_environment)
 
             expect_failure = expect_failure_global or expect_failure_local
 
@@ -205,29 +211,32 @@ def main(arguments):
             for entry in definitions_local:
                 definitions[entry] = definitions_local[entry]
 
-            env_string = ' '.join('{0}={1}'.format(entry, env[entry]) for entry in env)
-            definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry]) for entry in definitions)
+            env_string = ' '.join('{0}={1}'.format(entry, env[entry])
+                                  for entry in env)
+            definitions_string = ' '.join('-D{0}={1}'.format(
+                entry, definitions[entry]) for entry in definitions)
 
             # we append a time stamp to the build directory
             # to avoid it being re-used when running tests multiple times
             # when debugging on a laptop
-            time_stamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-            build_directory = os.path.join(recipe, example, 'build-{0}'.format(time_stamp))
+            time_stamp = datetime.datetime.fromtimestamp(
+                time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+            build_directory = os.path.join(recipe, example,
+                                           'build-{0}'.format(time_stamp))
             cmakelists_path = os.path.join(recipe, example)
 
             # configure step
             step = 'configuring'
-            command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(env_string,
-                                                                 cmakelists_path,
-                                                                 build_directory,
-                                                                 generator,
-                                                                 definitions_string)
+            command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
+                env_string, cmakelists_path, build_directory, generator,
+                definitions_string)
             skip_predicate = lambda stdout, stderr: False
-            return_code += run_command(step=step,
-                                       command=command,
-                                       expect_failure=expect_failure,
-                                       skip_predicate=skip_predicate,
-                                       verbose=arguments['--verbose'])
+            return_code += run_command(
+                step=step,
+                command=command,
+                expect_failure=expect_failure,
+                skip_predicate=skip_predicate,
+                verbose=arguments['--verbose'])
 
             os.chdir(build_directory)
 
@@ -235,21 +244,23 @@ def main(arguments):
             step = 'building'
             command = 'cmake --build . -- {0}'.format(buildflags)
             skip_predicate = lambda stdout, stderr: False
-            return_code += run_command(step=step,
-                                       command=command,
-                                       expect_failure=expect_failure,
-                                       skip_predicate=skip_predicate,
-                                       verbose=arguments['--verbose'])
+            return_code += run_command(
+                step=step,
+                command=command,
+                expect_failure=expect_failure,
+                skip_predicate=skip_predicate,
+                verbose=arguments['--verbose'])
 
             # test step
             step = 'testing'
             command = 'ctest'
             skip_predicate = lambda stdout, stderr: 'No test configuration file found!' in stderr
-            return_code += run_command(step=step,
-                                       command=command,
-                                       expect_failure=expect_failure,
-                                       skip_predicate=skip_predicate,
-                                       verbose=arguments['--verbose'])
+            return_code += run_command(
+                step=step,
+                command=command,
+                expect_failure=expect_failure,
+                skip_predicate=skip_predicate,
+                verbose=arguments['--verbose'])
 
             os.chdir(topdir)
 
@@ -258,7 +269,7 @@ def main(arguments):
 
 
 if __name__ == '__main__':
-    options="""Run continuous integration
+    options = """Run continuous integration
 
     Usage:
         ci_configure_build_test.py <regex>

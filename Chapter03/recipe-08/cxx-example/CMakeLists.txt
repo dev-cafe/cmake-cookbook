@@ -11,11 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Boost 1.54 REQUIRED COMPONENTS filesystem)
 
 add_executable(path-info path-info.cpp)
-target_include_directories(path-info
-  PUBLIC
-    ${Boost_INCLUDE_DIRS}
-  )
 target_link_libraries(path-info
   PUBLIC
-    ${Boost_LIBRARIES}
+    Boost::filesystem
   )

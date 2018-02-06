@@ -14,5 +14,4 @@ target_include_directories(linalg_wrap
 target_link_libraries(linalg_wrap
   PUBLIC
     ${LAPACK_LIBRARIES}
-    ${CMAKE_Fortran_IMPLICIT_LINK_LIBRARIES}
   )

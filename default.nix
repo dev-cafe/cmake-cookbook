@@ -3,8 +3,8 @@ let
   nixpkgs = (hostPkgs.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs-channels";
-    rev = "nixos-17.09";
-    sha256 = "0x7n6mz0gxvvjwshwdlfi1ypd84z9v9s3qpkixgjhzr1lx6q94ag";
+    rev = "nixos-unstable";
+    sha256 = "1zcbvzxk1vyk4ngfdyss8mlb3mqp050ygpnwqny0bxbzlqkrc4bh";
   });
 in
   with import nixpkgs {
@@ -24,30 +24,36 @@ in
   stdenv.mkDerivation {
     name = "CMake-recipes";
     buildInputs = [
-      atlas
-      boost
+      boost155
       ccache
       clang-tools
       cmake_3_10
       doxygen
-      exa
       eigen3_3
+      exa
       gcc
       gfortran
+      gfortran.cc.lib
       hdf5
       liblapack
       libuuid
       ninja-kitware
       openmpi
+      pkgconfig
+      python3Full
+      python3Packages.cffi
       python3Packages.colorama
+      python3Packages.cython
       python3Packages.docopt
-      python3Packages.matplotlib
       python3Packages.numpy
       python3Packages.pycodestyle
-      python3Packages.pycodestyle
       python3Packages.pyyaml
-      python3Packages.virtualenvwrapper
       valgrind
       zlib
     ];
+    src = null;
+    shellHook = ''
+    export NINJA_STATUS="[Built edge %f of %t in %e sec]"
+    SOURCE_DATE_EPOCH=$(date +%s)
+    '';
   }

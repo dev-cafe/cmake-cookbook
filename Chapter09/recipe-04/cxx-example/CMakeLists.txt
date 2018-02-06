@@ -19,8 +19,9 @@ add_library(
 
 target_link_libraries(
   account
-  PRIVATE
+  PUBLIC
   Boost::python
+  ${PYTHON_LIBRARIES}
   )
 
 target_include_directories(
