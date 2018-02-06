@@ -11,6 +11,7 @@ set_target_properties(message-objs PROPERTIES
 
 add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
 set_target_properties(message-shared PROPERTIES
+  MACOSX_RPATH ON
   SOVERSION 1
   OUTPUT_NAME "message"
   )
