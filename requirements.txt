@@ -5,3 +5,4 @@ docopt
 colorama
 cffi
 cython
+cmake_format
