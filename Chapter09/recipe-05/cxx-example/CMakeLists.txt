@@ -1,5 +1,5 @@
 # define minimum cmake version
-cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and supported language
 project(recipe-05 CXX)
@@ -31,7 +31,7 @@ ExternalProject_Add(
 
 # process our source code as if it was an external project
 ExternalProject_Add(
-  account_path
+  account_project
   INSTALL_DIR
     ${PROJECT_BINARY_DIR}/install
   SOURCE_DIR
@@ -45,8 +45,8 @@ ExternalProject_Add(
 )
 
 # we need to first fetch pybind11_sources
-# before we can use them in account_path
-ExternalProject_Add_StepDependencies(account_path configure pybind11_sources)
+# before we can use them in account_project
+ExternalProject_Add_StepDependencies(account_project configure pybind11_sources)
 
 # turn on testing
 enable_testing()
@@ -56,9 +56,9 @@ add_test(
   NAME
     python_test
   COMMAND
-    ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.py
+    ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/account/test.py
   WORKING_DIRECTORY
-    ${PROJECT_BINARY_DIR}/account
+    ${PROJECT_BINARY_DIR}
   )
 
 # test needs to know the location of the compiled module
@@ -66,5 +66,5 @@ set_property(
   TEST
     python_test
   PROPERTY ENVIRONMENT
-    PYTHONPATH=${PROJECT_BINARY_DIR}/account:$ENV{PYTHONPATH}
+    PYTHONPATH=${PROJECT_BINARY_DIR}:$ENV{PYTHONPATH}
   )

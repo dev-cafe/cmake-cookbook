@@ -1,4 +1,5 @@
 from .cffi_helpers import get_lib_handle
+from .version import __version__
 import os
 import sys
 
@@ -34,3 +35,12 @@ free = _lib.account_free
 deposit = _lib.account_deposit
 withdraw = _lib.account_withdraw
 get_balance = _lib.account_get_balance
+
+__all__ = [
+    '__version__',
+    'new',
+    'free',
+    'deposit',
+    'withdraw',
+    'get_balance',
+]
