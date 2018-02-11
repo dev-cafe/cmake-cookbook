@@ -1,0 +1,21 @@
+package:
+  name: conda-example
+  version: "0.0.0"
+
+source:
+  path: ../  # this can be changed to git-url
+
+build:
+  number: 0
+  script:
+    - cmake -H. -Bbuild_conda -DCMAKE_INSTALL_PREFIX=${PREFIX}
+    - cmake --build build_conda --target install
+
+requirements:
+  build:
+    - cmake >=3.0
+
+about:
+  home: http://www.example.com
+  license: MIT
+  summary: "Summary in here ..."
