@@ -1,15 +1,8 @@
 find_package(Boost 1.64 QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
 if(Boost_FOUND)
-  add_library(boost_external INTERFACE)  # dummy
+  add_library(boost_external INTERFACE)
 else()
-  include(ExternalProject)
   message(STATUS "Suitable Boost could not be located, Building Boost instead.")
-
-  set(Boost_USE_STATIC_LIBS    OFF)
-  set(Boost_USE_MULTITHREADED  ON)
-  set(Boost_USE_STATIC_RUNTIME OFF)
-  set(Boost_DEBUG OFF)
-  set(Boost_DETAILED_FAILURE_MESSAGE OFF)
 
   if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     if(APPLE)
@@ -51,6 +44,7 @@ else()
   file(WRITE "${Boost_USER_CONFIG_JAMFILE}" "using ${toolset} : : ${CMAKE_CXX_COMPILER} : <cxxflags>\"-std=c++11\" <linkflags>\"-std=c++11\" ;")
   set(Boost_BUILD_USER_CONFIG_ARGS "--user-config=${PROJECT_BINARY_DIR}/user-config.jam")
 
+  include(ExternalProject)
   ExternalProject_Add(boost_external
     URL
       https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip
@@ -85,8 +79,6 @@ else()
       1
     LOG_INSTALL
       1
-    STEP_TARGETS
-      download update configure install
     BUILD_BYPRODUCTS
       "${_build_byproducts}"
     )
