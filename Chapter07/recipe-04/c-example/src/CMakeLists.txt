@@ -6,8 +6,6 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-include(GNUInstallDirs)
-
 find_package(FFTW3 CONFIG REQUIRED)
 
 add_executable(fftw_example fftw_example.c)
@@ -21,5 +19,9 @@ target_link_libraries(fftw_example
     FFTW3::fftw3
   )
 
-install(PROGRAMS ${CMAKE_BINARY_DIR}/fftw_example
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
+install(
+  PROGRAMS
+    ${CMAKE_BINARY_DIR}/fftw_example
+  DESTINATION
+    ${CMAKE_INSTALL_PREFIX}/bin
+  )
