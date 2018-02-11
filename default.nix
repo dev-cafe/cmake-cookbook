@@ -39,6 +39,7 @@ in
       libuuid
       ninja-kitware
       openmpi
+      pipenv
       pkgconfig
       python3Full
       python3Packages.cffi
@@ -48,6 +49,7 @@ in
       python3Packages.numpy
       python3Packages.pycodestyle
       python3Packages.pyyaml
+      stdenv
       valgrind
       zlib
     ];
