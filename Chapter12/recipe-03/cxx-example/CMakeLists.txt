@@ -11,7 +11,7 @@ add_executable(hello-conda "")
 target_sources(
   hello-conda
   PRIVATE
-  hello.cpp
+  example.cpp
   )
 
 # install the binary
