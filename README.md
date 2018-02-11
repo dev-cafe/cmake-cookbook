@@ -119,11 +119,11 @@ No tabs.
 
 We use lowercase for commands, i.e.:
 ```cmake
-cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 ```
 and not:
 ```cmake
-CMAKE_MINIMUM_REQUIRED(VERSION 3.10 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5 FATAL_ERROR)
 ```
 
 
