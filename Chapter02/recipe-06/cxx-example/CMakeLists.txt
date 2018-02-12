@@ -26,7 +26,6 @@ add_executable(linear-algebra linear-algebra.cpp)
 target_compile_options(linear-algebra
   PRIVATE
     ${_CXX_FLAGS}
-    -save-temps
   )
 target_link_libraries(linear-algebra
   PRIVATE
