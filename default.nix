@@ -10,9 +10,6 @@ in
   with import nixpkgs {
     overlays = [(self: super:
     {
-      cmake_3_10 = super.libsForQt5.callPackage ./.pkgs/cmake_3_10.nix {
-        inherit (self.darwin) ps;
-      };
       hdf5 = super.hdf5.override {
         gfortran = self.gfortran;
         mpi = self.openmpi;
@@ -27,7 +24,7 @@ in
       boost155
       ccache
       clang-tools
-      cmake_3_10
+      cmake
       doxygen
       eigen3_3
       exa
