@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PkgConfig REQUIRED QUIET)
-pkg_search_module(UUID REQUIRED uuid)
+pkg_search_module(UUID REQUIRED uuid IMPORTED_TARGET)
 if(UUID_FOUND)
   message(STATUS "Found libuuid")
 endif()
@@ -33,11 +33,7 @@ if(NOT _runs)
 endif()
 
 add_executable(use-uuid use-uuid.cpp)
-target_include_directories(use-uuid
-  PUBLIC
-    ${UUID_INCLUDE_DIRS}
-  )
 target_link_libraries(use-uuid
   PUBLIC
-    ${UUID_LIBRARIES}
+  PkgConfig::UUID
   )
