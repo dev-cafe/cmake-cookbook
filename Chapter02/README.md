@@ -2,5 +2,5 @@
 - [Dealing with platform-dependent source code](recipe-02/README.md)
 - [Dealing with compiler-dependent source code](recipe-03/README.md)
 - [Discovering the host processor architecture](recipe-04/README.md)
-- Discovering the host processor instruction set
+- [Discovering the host processor instruction set](recipe-05/README.md)
 - Assisting the Eigen library in selecting the instruction set
