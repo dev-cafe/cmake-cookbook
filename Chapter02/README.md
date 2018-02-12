@@ -4,5 +4,3 @@
 - [Discovering the host processor architecture](recipe-04/README.md)
 - Discovering the host processor instruction set
 - Assisting the Eigen library in selecting the instruction set
-- Detecting CUDA capabilities
-- Building CUDA code with CMake
