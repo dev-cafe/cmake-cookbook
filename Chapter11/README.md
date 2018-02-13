@@ -1,0 +1,5 @@
+- [Generating source archives](recipe-01/README.md)
+- [Generating binary distributions for Linux](recipe-02/README.md)
+- [Generating binary distributions for Cygwin](recipe-03/README.md)
+- [Generating binary distributions for Windows](recipe-04/README.md)
+- [Generating binary distributions for Mac OS X](recipe-05/README.md)
