@@ -1,1 +1,1 @@
-# Generating binary distributions for Mac OS X
+# Generating an NSIS installer for Windows

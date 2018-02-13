@@ -1,1 +1,1 @@
-# Generating binary distributions for Windows
+# Generating binary distributions for Cygwin

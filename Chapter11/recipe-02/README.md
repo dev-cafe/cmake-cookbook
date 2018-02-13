@@ -1,1 +1,1 @@
-# Generating binary distributions for Linux
+# Generating DEB package for Linux
