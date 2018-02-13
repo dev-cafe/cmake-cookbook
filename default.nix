@@ -51,6 +51,7 @@ in
       python3Packages.pycodestyle
       python3Packages.pyyaml
       python3Packages.sphinx
+      rpm
       valgrind
       zlib
     ];
