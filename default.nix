@@ -25,6 +25,7 @@ in
       ccache
       clang-tools
       cmake
+      dpkg
       doxygen_gui
       eigen3_3
       exa

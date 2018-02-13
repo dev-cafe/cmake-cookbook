@@ -1,0 +1,50 @@
+# messageConfig.cmake
+# ---------------------
+#
+# message cmake module.
+# This module sets the following variables in your project:
+#
+# ::
+#
+#   message_FOUND - true if message found on the system
+#   message_VERSION - message version in format Major.Minor.Release
+#
+#
+# Exported targets:
+#
+# ::
+#
+# If message is found, this module defines the following :prop_tgt:`IMPORTED`
+# targets. ::
+#   message::message-shared - the main message shared library with header & defs attached.
+#   message::message-static - the main message static library with header & defs attached.
+#   message::message-hello-world - the hello-world program for the message.
+#
+#
+# Suggested usage:
+#
+# ::
+#
+#   find_package(message)
+#   find_package(message 1.1.7 CONFIG REQUIRED)
+#
+#
+# The following variables can be set to guide the search for this package:
+#
+# ::
+#
+#   message_DIR - CMake variable, set to directory containing this Config file
+#   CMAKE_PREFIX_PATH - CMake variable, set to root directory of this package
+#   PATH - environment variable, set to bin directory of this package
+#   CMAKE_DISABLE_FIND_PACKAGE_message - CMake variable, disables
+#       find_package(message) perhaps to force internal build
+
+@PACKAGE_INIT@
+
+include("${CMAKE_CURRENT_LIST_DIR}/messageTargets-hello-world.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/messageTargets-shared.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/messageTargets-static.cmake")
+if(NOT TARGET PkgConfig::UUID)
+  find_package(PkgConfig REQUIRED QUIET)
+  pkg_search_module(UUID REQUIRED uuid IMPORTED_TARGET)
+endif()
