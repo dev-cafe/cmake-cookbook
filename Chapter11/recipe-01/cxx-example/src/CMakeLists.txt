@@ -1,25 +1,35 @@
-find_package(PkgConfig REQUIRED QUIET)
-pkg_search_module(UUID REQUIRED uuid IMPORTED_TARGET)
-if(UUID_FOUND)
-  message(STATUS "Found libuuid")
-endif()
-
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 set(CMAKECONFIG_INSTALL_DIR ${CMAKE_INSTALL_DATADIR}/cmake/message)
 
-add_library(message-objs OBJECT "")
+add_library(message-objs OBJECT Message.cpp)
 target_sources(message-objs
   PUBLIC
     Message.hpp
-  PRIVATE
-    Message.cpp
   )
 set_target_properties(message-objs PROPERTIES
   POSITION_INDEPENDENT_CODE 1
   CXX_VISIBILITY_PRESET hidden
   VISIBILITY_INLINES_HIDDEN 1
   )
+# Remove dependency on UUID if on Windows
+if(WIN32)
+  target_compile_definitions(message-objs
+    PUBLIC
+      EXCLUDE_UUID
+      message_objs_EXPORTS
+    )
+else()
+  find_package(PkgConfig REQUIRED QUIET)
+  pkg_search_module(UUID REQUIRED uuid IMPORTED_TARGET)
+  if(UUID_FOUND)
+    message(STATUS "Found libuuid")
+  endif()
+  target_compile_definitions(message-objs
+    PUBLIC
+      message_objs_EXPORTS
+    )
+endif()
 
 include(GenerateExportHeader)
 generate_export_header(message-objs
@@ -43,18 +53,19 @@ install(
 add_library(message-static STATIC $<TARGET_OBJECTS:message-objs>)
 target_link_libraries(message-static
   PUBLIC
-    PkgConfig::UUID
+    $<$<NOT:$<BOOL:${WIN32}>>:PkgConfig::UUID>
   )
 target_compile_definitions(message-static
   INTERFACE
     $<INSTALL_INTERFACE:USING_message>
+  PRIVATE
+    message_STATIC_DEFINE
   )
 target_include_directories(message-static
   INTERFACE
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   )
 set_target_properties(message-static PROPERTIES
-  COMPILE_DEFINITIONS message_STATIC_DEFINE
   OUTPUT_NAME "message"
   )
 install(
@@ -79,7 +90,7 @@ install(
 add_library(message-shared SHARED $<TARGET_OBJECTS:message-objs>)
 target_link_libraries(message-shared
   PUBLIC
-    PkgConfig::UUID
+    $<$<NOT:$<BOOL:${WIN32}>>:PkgConfig::UUID>
   )
 target_compile_definitions(message-shared
   INTERFACE
@@ -99,6 +110,8 @@ install(
     message-shared
   EXPORT
     "messageTargets-shared"
+  RUNTIME DESTINATION
+    ${CMAKE_INSTALL_LIBDIR}
   LIBRARY DESTINATION
     ${CMAKE_INSTALL_LIBDIR}
   INCLUDES DESTINATION
@@ -172,6 +185,7 @@ set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_VERSION_MAJOR "1")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
+set(CPACK_GENERATOR "ZIP;TGZ")
 set(CPACK_SOURCE_GENERATOR "ZIP;TGZ")
 set(CPACK_SOURCE_IGNORE_FILES "/build/;/.git/;.gitignore;/external/")
 
