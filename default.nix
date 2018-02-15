@@ -25,12 +25,13 @@ in
       ccache
       clang-tools
       cmake
-      doxygen
+      doxygen_gui
       eigen3_3
       exa
       gcc
       gfortran
       gfortran.cc.lib
+      graphviz
       hdf5
       lcov
       liblapack
