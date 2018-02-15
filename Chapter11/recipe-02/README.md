@@ -1,1 +1,1 @@
-# Generating DEB package for Linux
+# Generating binary archives

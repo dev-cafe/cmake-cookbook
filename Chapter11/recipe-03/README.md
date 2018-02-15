@@ -1,1 +1,1 @@
-# Generating RPM package for Linux
+# Generating DEB packages

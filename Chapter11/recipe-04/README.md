@@ -1,1 +1,1 @@
-# Generating binary distributions for Cygwin
+# Generating RPM packages
