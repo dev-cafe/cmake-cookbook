@@ -1,0 +1,15 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+Sphinx = "*"
+sphinx_rtd_theme = "*"
+
+
+[dev-packages]
+
