@@ -187,6 +187,6 @@ set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
 set(CPACK_SOURCE_IGNORE_FILES "/build/;/.git/;.gitignore;/external/")
 
-set(CPACK_SOURCE_GENERATOR "ZIP;TGZ")
+set(CPACK_GENERATOR "ZIP;TGZ")
 
 include(CPack)
