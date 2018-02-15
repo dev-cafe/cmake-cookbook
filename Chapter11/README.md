@@ -3,4 +3,3 @@
 - [Generating DEB packages](recipe-03/README.md)
 - [Generating RPM packages](recipe-04/README.md)
 - [Generating an NSIS installer for Windows](recipe-05/README.md)
-- [Generating a DMG package for Mac OS X](recipe-06/README.md)
