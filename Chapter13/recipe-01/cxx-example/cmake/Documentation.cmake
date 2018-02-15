@@ -1,5 +1,6 @@
 find_package(Perl REQUIRED)
 find_package(Doxygen REQUIRED)
+
 set(DOXYGEN_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_build")
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in

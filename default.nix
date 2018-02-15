@@ -41,6 +41,7 @@ in
       pipenv
       pkgconfig
       python3Full
+      python3Packages.breathe
       python3Packages.cffi
       python3Packages.colorama
       python3Packages.cython
