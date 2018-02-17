@@ -12,12 +12,15 @@ set_target_properties(message-objs PROPERTIES
   CXX_VISIBILITY_PRESET hidden
   VISIBILITY_INLINES_HIDDEN 1
   )
+target_compile_definitions(message-objs
+  PUBLIC
+    message_objs_EXPORTS
+  )
 # Remove dependency on UUID if on Windows
 if(WIN32)
   target_compile_definitions(message-objs
     PUBLIC
       EXCLUDE_UUID
-      message_objs_EXPORTS
     )
 else()
   find_package(PkgConfig REQUIRED QUIET)
@@ -25,10 +28,6 @@ else()
   if(UUID_FOUND)
     message(STATUS "Found libuuid")
   endif()
-  target_compile_definitions(message-objs
-    PUBLIC
-      message_objs_EXPORTS
-    )
 endif()
 
 include(GenerateExportHeader)
