@@ -130,11 +130,6 @@ def main(arguments):
             e for e in sorted(glob.glob(os.path.join(recipe, '*example')))
         ]
 
-        # TODO we need to get rid of this
-        # Remove Fortran examples if generator is Visual Studio
-        if generator == 'Visual Studio 14 2015':
-            examples = filter(lambda x: 'fortran' not in x, examples)
-
         for example in examples:
 
             sys.stdout.write('\n  {}\n'.format(example))
