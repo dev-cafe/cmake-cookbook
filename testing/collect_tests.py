@@ -51,6 +51,84 @@ def run_command(step, command, expect_failure, verbose):
     return return_code
 
 
+def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
+
+    # extract global menu
+    menu_file = os.path.join(topdir, 'testing', 'menu.yml')
+    expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
+        menu_file, generator, ci_environment)
+
+    sys.stdout.write('\n  {}\n'.format(example))
+
+    # extract local menu
+    menu_file = os.path.join(recipe, example, 'menu.yml')
+    expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
+        menu_file, generator, ci_environment)
+
+    expect_failure = expect_failure_global or expect_failure_local
+
+    # local env vars override global ones
+    env = env_global.copy()
+    for entry in env_local:
+        env[entry] = env_local[entry]
+
+    # local definitions override global ones
+    definitions = definitions_global.copy()
+    for entry in definitions_local:
+        definitions[entry] = definitions_local[entry]
+
+    # local targets extend global targets
+    targets = targets_global + targets_local
+
+    env_string = ' '.join('{0}={1}'.format(entry, env[entry])
+                          for entry in env)
+    definitions_string = ' '.join('-D{0}={1}'.format(
+        entry, definitions[entry]) for entry in definitions)
+
+    # we append a time stamp to the build directory
+    # to avoid it being re-used when running tests multiple times
+    # when debugging on a laptop
+    time_stamp = datetime.datetime.fromtimestamp(
+        time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+    build_directory = os.path.join(recipe, example,
+                                   'build-{0}'.format(time_stamp))
+    cmakelists_path = os.path.join(recipe, example)
+
+    return_code = 0
+
+    # configure step
+    step = 'configuring'
+    command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
+        env_string, cmakelists_path, build_directory, generator,
+        definitions_string)
+    return_code += run_command(
+        step=step,
+        command=command,
+        expect_failure=expect_failure,
+        verbose=arguments['--verbose'])
+
+    # build step
+    step = 'building'
+    command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
+    return_code += run_command(
+        step=step,
+        command=command,
+        expect_failure=expect_failure,
+        verbose=arguments['--verbose'])
+
+    # extra targets
+    for target in targets:
+        step = target
+        command = 'cmake --build {0} --target {1}'.format(build_directory, target)
+        return_code += run_command(
+            step=step,
+            command=command,
+            expect_failure=expect_failure,
+            verbose=arguments['--verbose'])
+
+    return return_code
+
+
 def main(arguments):
     topdir = get_topdir()
     buildflags = get_buildflags()
@@ -65,11 +143,6 @@ def main(arguments):
 
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
-
-    # extract global menu
-    menu_file = os.path.join(topdir, 'testing', 'menu.yml')
-    expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
-        menu_file, generator, ci_environment)
 
     colorama.init(autoreset=True)
     return_code = 0
@@ -88,72 +161,8 @@ def main(arguments):
         ]
 
         for example in examples:
+            return_code += run_example(topdir, generator, ci_environment, buildflags, recipe, example)
 
-            sys.stdout.write('\n  {}\n'.format(example))
-
-            # extract local menu
-            menu_file = os.path.join(recipe, example, 'menu.yml')
-            expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
-                menu_file, generator, ci_environment)
-
-            expect_failure = expect_failure_global or expect_failure_local
-
-            # local env vars override global ones
-            env = env_global.copy()
-            for entry in env_local:
-                env[entry] = env_local[entry]
-
-            # local definitions override global ones
-            definitions = definitions_global.copy()
-            for entry in definitions_local:
-                definitions[entry] = definitions_local[entry]
-
-            # local targets extend global targets
-            targets = targets_global + targets_local
-
-            env_string = ' '.join('{0}={1}'.format(entry, env[entry])
-                                  for entry in env)
-            definitions_string = ' '.join('-D{0}={1}'.format(
-                entry, definitions[entry]) for entry in definitions)
-
-            # we append a time stamp to the build directory
-            # to avoid it being re-used when running tests multiple times
-            # when debugging on a laptop
-            time_stamp = datetime.datetime.fromtimestamp(
-                time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-            build_directory = os.path.join(recipe, example,
-                                           'build-{0}'.format(time_stamp))
-            cmakelists_path = os.path.join(recipe, example)
-
-            # configure step
-            step = 'configuring'
-            command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
-                env_string, cmakelists_path, build_directory, generator,
-                definitions_string)
-            return_code += run_command(
-                step=step,
-                command=command,
-                expect_failure=expect_failure,
-                verbose=arguments['--verbose'])
-
-            # build step
-            step = 'building'
-            command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
-            return_code += run_command(
-                step=step,
-                command=command,
-                expect_failure=expect_failure,
-                verbose=arguments['--verbose'])
-
-            # extra targets
-            for target in targets:
-                step = target
-                command = 'cmake --build {0} --target {1}'.format(build_directory, target)
-                return_code += run_command(
-                    step=step,
-                    command=command,
-                    expect_failure=expect_failure,
-                    verbose=arguments['--verbose'])
 
     colorama.deinit()
     sys.exit(return_code)
