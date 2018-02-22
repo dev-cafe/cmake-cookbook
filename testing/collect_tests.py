@@ -9,15 +9,14 @@ import docopt
 import colorama
 
 from parse import extract_menu_file
-from env import get_ci_environment, get_generator, get_buildflags, get_topdir
+from env import get_ci_environment, get_generator, get_buildflags, get_topdir, verbose_output
 
 
-def run_command(step, command, expect_failure, verbose):
+def run_command(step, command, expect_failure):
     """
     step: string (e.g. 'configuring', 'building', ...); only used in printing
     command: string; this is the command to be run
     expect_failure: bool; if True we do not panic if the command fails
-    verbose: bool; if True always print stdout and stderr from command
     """
     child = subprocess.Popen(
         command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -34,7 +33,7 @@ def run_command(step, command, expect_failure, verbose):
     if child_return_code == 0:
         sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT +
                          'OK\n')
-        if verbose:
+        if verbose_output():
             sys.stdout.write(stdout + stderr + '\n')
     else:
         if expect_failure:
@@ -104,8 +103,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     return_code += run_command(
         step=step,
         command=command,
-        expect_failure=expect_failure,
-        verbose=arguments['--verbose'])
+        expect_failure=expect_failure)
 
     # build step
     step = 'building'
@@ -113,8 +111,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     return_code += run_command(
         step=step,
         command=command,
-        expect_failure=expect_failure,
-        verbose=arguments['--verbose'])
+        expect_failure=expect_failure)
 
     # extra targets
     for target in targets:
@@ -123,8 +120,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
         return_code += run_command(
             step=step,
             command=command,
-            expect_failure=expect_failure,
-            verbose=arguments['--verbose'])
+            expect_failure=expect_failure)
 
     return return_code
 
@@ -173,12 +169,10 @@ if __name__ == '__main__':
 
     Usage:
         collect_tests.py <regex>
-        collect_tests.py <regex> (-v | --verbose)
         collect_tests.py (-h | --help)
 
     Options:
         -h --help     Show this screen.
-        -v --verbose  Print (almost) everything
 
     """
     # parse command line args

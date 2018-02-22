@@ -33,6 +33,10 @@ def get_buildflags():
     return buildflags
 
 
+def verbose_output():
+    return os.getenv('VERBOSE_OUTPUT', False)
+
+
 def get_topdir():
     if os.environ.get('TRAVIS'):
         topdir = os.environ.get('TRAVIS_BUILD_DIR')
