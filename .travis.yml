@@ -65,7 +65,7 @@ before_install:
   - mkdir -p $HOME/Downloads $HOME/Deps
 
 install:
-  - ./.scripts/install_deps.sh
+  - ./dependencies/install_dependencies.sh
   - ls $HOME/Deps/cmake
   - ls $HOME/Deps/eigen
   - ls $HOME/Deps/hdf5
@@ -82,6 +82,6 @@ before_script:
   - test -n $FC && unset FC
 
 script:
-  - ./.scripts/report_versions.sh
+  - ./dependencies/report_versions.sh
   - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
   - python .scripts/ci_configure_build_test.py 'to-triage/recipe-*'
