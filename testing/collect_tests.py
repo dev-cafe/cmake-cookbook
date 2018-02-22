@@ -172,9 +172,9 @@ if __name__ == '__main__':
     options = """Run continuous integration
 
     Usage:
-        ci_configure_build_test.py <regex>
-        ci_configure_build_test.py <regex> (-v | --verbose)
-        ci_configure_build_test.py (-h | --help)
+        collect_tests.py <regex>
+        collect_tests.py <regex> (-v | --verbose)
+        collect_tests.py (-h | --help)
 
     Options:
         -h --help     Show this screen.
