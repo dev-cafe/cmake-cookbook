@@ -99,12 +99,13 @@ def main(arguments):
     topdir = get_topdir()
     buildflags = get_buildflags()
     generator = get_generator()
+    ci_environment = get_ci_environment()
+
     # glob recipes
     recipes = [
         r
         for r in sorted(glob.glob(os.path.join(topdir, arguments['<regex>'])))
     ]
-    ci_environment = get_ci_environment()
 
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
