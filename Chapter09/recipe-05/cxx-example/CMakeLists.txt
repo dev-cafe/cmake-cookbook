@@ -66,5 +66,5 @@ set_property(
   TEST
     python_test
   PROPERTY ENVIRONMENT
-    PYTHONPATH=${PROJECT_BINARY_DIR}/account
+    PYTHONPATH=${PROJECT_BINARY_DIR}/account:$ENV{PYTHONPATH}
   )
