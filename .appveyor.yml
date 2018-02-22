@@ -42,11 +42,11 @@ install:
 
 before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
-  - pip install -r requirements.txt
   - cmake --version
   - ninja.exe --version
+  - pipenv install
 
 build_script:
-  - python testing\collect_tests.py Chapter*/recipe-*
+  - pipenv run python testing\collect_tests.py Chapter*/recipe-*
 
 deploy: off

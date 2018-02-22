@@ -66,15 +66,8 @@ before_install:
 
 install:
   - ./dependencies/install_dependencies.sh
-  - ls $HOME/Deps/cmake
-  - ls $HOME/Deps/eigen
-  - ls $HOME/Deps/hdf5
-  - ls $HOME/Deps/ninja
-  - echo $PATH
-  - echo $LD_LIBRARY_PATH
-  - virtualenv venv
-  - source venv/bin/activate
-  - pip install -r requirements.txt
+  - pipenv install
+  - pipenv run python --version
 
 before_script:
   - test -n $CC && unset CC
@@ -83,5 +76,5 @@ before_script:
 
 script:
   - ./dependencies/report_versions.sh
-  - python testing/collect_tests.py 'Chapter*/recipe-*'
-  - python testing/collect_tests.py 'to-triage/recipe-*'
+  - pipenv run python testing/collect_tests.py 'Chapter*/recipe-*'
+  - pipenv run python testing/collect_tests.py 'to-triage/recipe-*'

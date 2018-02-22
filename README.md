@@ -109,9 +109,7 @@ targets:
 ### Running tests on your computer
 
 ```shell
-virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
+pipenv install
 python testing/collect_tests.py 'Chapter*/recipe-*'
 ```
 
