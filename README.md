@@ -97,6 +97,15 @@ appveyor:
 ```
 
 
+### Bulding targets
+
+```
+targets:
+  - test
+  - docs
+```
+
+
 ### Running tests on your computer
 
 ```shell

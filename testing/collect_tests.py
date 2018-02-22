@@ -12,12 +12,11 @@ from parse import extract_menu_file
 from env import get_ci_environment, get_generator, get_buildflags, get_topdir
 
 
-def run_command(step, command, expect_failure, skip_predicate, verbose):
+def run_command(step, command, expect_failure, verbose):
     """
     step: string (e.g. 'configuring', 'building', ...); only used in printing
     command: string; this is the command to be run
     expect_failure: bool; if True we do not panic if the command fails
-    skip_predicate: bool(stdout, stderr)
     verbose: bool; if True always print stdout and stderr from command
     """
     child = subprocess.Popen(
@@ -30,25 +29,24 @@ def run_command(step, command, expect_failure, skip_predicate, verbose):
     child_return_code = child.returncode
 
     return_code = 0
-    if not skip_predicate(stdout, stderr):
-        sys.stdout.write(colorama.Fore.BLUE + colorama.Style.BRIGHT +
-                         '  {0} ... '.format(step))
-        if child_return_code == 0:
-            sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT +
-                             'OK\n')
-            if verbose:
-                sys.stdout.write(stdout + stderr + '\n')
+    sys.stdout.write(colorama.Fore.BLUE + colorama.Style.BRIGHT +
+                     '  {0} ... '.format(step))
+    if child_return_code == 0:
+        sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT +
+                         'OK\n')
+        if verbose:
+            sys.stdout.write(stdout + stderr + '\n')
+    else:
+        if expect_failure:
+            sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
+                             'EXPECTED TO FAIL\n')
         else:
-            if expect_failure:
-                sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
-                                 'EXPECTED TO FAIL\n')
-            else:
-                sys.stdout.write(colorama.Fore.RED + colorama.Style.BRIGHT +
-                                 'FAILED\n')
-                sys.stderr.write(stdout + stderr + '\n')
-                return_code = child_return_code
-        sys.stdout.flush()
-        sys.stderr.flush()
+            sys.stdout.write(colorama.Fore.RED + colorama.Style.BRIGHT +
+                             'FAILED\n')
+            sys.stderr.write(stdout + stderr + '\n')
+            return_code = child_return_code
+    sys.stdout.flush()
+    sys.stderr.flush()
 
     return return_code
 
@@ -70,7 +68,7 @@ def main(arguments):
 
     # extract global menu
     menu_file = os.path.join(topdir, 'testing', 'menu.yml')
-    expect_failure_global, env_global, definitions_global = extract_menu_file(
+    expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
     colorama.init(autoreset=True)
@@ -95,7 +93,7 @@ def main(arguments):
 
             # extract local menu
             menu_file = os.path.join(recipe, example, 'menu.yml')
-            expect_failure_local, env_local, definitions_local = extract_menu_file(
+            expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
                 menu_file, generator, ci_environment)
 
             expect_failure = expect_failure_global or expect_failure_local
@@ -109,6 +107,9 @@ def main(arguments):
             definitions = definitions_global.copy()
             for entry in definitions_local:
                 definitions[entry] = definitions_local[entry]
+
+            # local targets extend global targets
+            targets = targets_global + targets_local
 
             env_string = ' '.join('{0}={1}'.format(entry, env[entry])
                                   for entry in env)
@@ -129,39 +130,30 @@ def main(arguments):
             command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
                 env_string, cmakelists_path, build_directory, generator,
                 definitions_string)
-            skip_predicate = lambda stdout, stderr: False
             return_code += run_command(
                 step=step,
                 command=command,
                 expect_failure=expect_failure,
-                skip_predicate=skip_predicate,
                 verbose=arguments['--verbose'])
-
-            os.chdir(build_directory)
 
             # build step
             step = 'building'
-            command = 'cmake --build . -- {0}'.format(buildflags)
-            skip_predicate = lambda stdout, stderr: False
+            command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
             return_code += run_command(
                 step=step,
                 command=command,
                 expect_failure=expect_failure,
-                skip_predicate=skip_predicate,
                 verbose=arguments['--verbose'])
 
-            # test step
-            step = 'testing'
-            command = 'ctest'
-            skip_predicate = lambda stdout, stderr: 'No test configuration file found!' in stderr
-            return_code += run_command(
-                step=step,
-                command=command,
-                expect_failure=expect_failure,
-                skip_predicate=skip_predicate,
-                verbose=arguments['--verbose'])
-
-            os.chdir(topdir)
+            # extra targets
+            for target in targets:
+                step = target
+                command = 'cmake --build {0} --target {1}'.format(build_directory, target)
+                return_code += run_command(
+                    step=step,
+                    command=command,
+                    expect_failure=expect_failure,
+                    verbose=arguments['--verbose'])
 
     colorama.deinit()
     sys.exit(return_code)

@@ -1,3 +1,6 @@
+targets:
+  - test
+
 travis-osx:
   failing_generators:
     - 'Unix Makefiles'

@@ -25,11 +25,18 @@ def extract_menu_file(file_name, generator, ci_environment):
     expected_failure (bool): if True, then the current generator is not supported
     env: dictionary of environment variables passed to CMake
     definitions: dictionary of CMake configure-step definitions
+    targets: list of targets to build
     '''
     config = parse_yaml(file_name)
 
+    # assemble targets
+    targets = []
+    if 'targets' in config:
+        for entry in config['targets']:
+            targets.append(entry)
+
     if ci_environment not in config:
-        return False, {}, {}
+        return False, {}, {}, targets
 
     failing_generators = []
     if 'failing_generators' in config[ci_environment]:
@@ -52,4 +59,4 @@ def extract_menu_file(file_name, generator, ci_environment):
                 v = entry[k]
                 definitions[k] = v
 
-    return expect_failure, env, definitions
+    return expect_failure, env, definitions, targets
