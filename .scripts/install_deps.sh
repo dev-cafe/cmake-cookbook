@@ -3,13 +3,10 @@
 # https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
 set -euo pipefail
 
-Ninja_URL=""
 CMake_VERSION="3.10.2"
-CMake_URL=""
 # OS-dependent operations
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   CMake_URL="https://cmake.org/files/v${CMake_VERSION%.*}/cmake-${CMake_VERSION}-Linux-x86_64.tar.gz"
-  Ninja_URL="https://goo.gl/4g5Jjv"
   echo "-- Installing CMake $CMake_VERSION"
   if [[ -f $HOME/Deps/cmake/bin/cmake ]]; then
     echo "-- CMake $CMake_VERSION FOUND in cache"
@@ -31,10 +28,14 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew install boost-python@1.59
   # Symlink the installed Boost.Python to where all the rest of Boost resides
   ln -sf /usr/local/opt/boost-python@1.59/lib/* /usr/local/opt/boost@1.59/lib
-  Ninja_URL="https://goo.gl/qLgScp"
 fi
 
 echo "-- Installing Ninja"
+if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  Ninja_URL="https://goo.gl/4g5Jjv"
+elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  Ninja_URL="https://goo.gl/qLgScp"
+fi
 if [[ -f $HOME/Deps/ninja/ninja ]]; then
   echo "-- Ninja FOUND in cache"
 else
