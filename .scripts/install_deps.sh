@@ -15,7 +15,6 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 fi
 
 CMake_VERSION="3.10.2"
-# OS-dependent operations
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   CMake_URL="https://cmake.org/files/v${CMake_VERSION%.*}/cmake-${CMake_VERSION}-Linux-x86_64.tar.gz"
   echo "-- Installing CMake $CMake_VERSION"
@@ -50,20 +49,19 @@ else
 fi
 echo "-- Done with Ninja"
 
-cd $HOME/Downloads
-
 Eigen_VERSION="3.3.4"
 echo "-- Installing Eigen $Eigen_VERSION"
 if [[ -f $HOME/Deps/eigen/include/eigen3/signature_of_eigen3_matrix_library ]]; then
   echo "-- Eigen $Eigen_VERSION FOUND in cache"
 else
   echo "-- Eigen $Eigen_VERSION NOT FOUND in cache"
+  cd $HOME/Downloads
   mkdir -p eigen
   curl -Ls http://bitbucket.org/eigen/eigen/get/${Eigen_VERSION}.tar.gz | tar -xz -C eigen --strip-components=1
   cd eigen
   cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=$HOME/Deps/eigen &> /dev/null
   cmake --build build_eigen -- install &> /dev/null
-  cd $HOME/Downloads
+  cd $TRAVIS_BUILD_DIR
 fi
 echo "-- Done with Eigen $Eigen_VERSION"
 
@@ -74,13 +72,12 @@ if [[ -f $HOME/Deps/hdf5/lib/libhdf5_fortran.so ]]; then
   echo "-- HDF5 $HDF5_VERSION FOUND in cache"
 else
   echo "-- HDF5 $HDF5_VERSION NOT FOUND in cache"
+  cd $HOME/Downloads
   curl -Ls $HDF5_URL | tar -xj
   cd hdf5-$HDF5_VERSION
   CC=mpicc FC=mpif90 CXX=mpic++ ./configure --prefix=$HOME/Deps/hdf5 --enable-build-mode=debug \
               --enable-fortran --enable-parallel &> /dev/null
   make install --jobs=2 &> /dev/null
-  cd $HOME/Downloads
+  cd $TRAVIS_BUILD_DIR
 fi
 echo "-- Done with HDF5 $HDF5_VERSION"
-
-cd $TRAVIS_BUILD_DIR
