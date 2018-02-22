@@ -165,7 +165,7 @@ def main(arguments):
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
 
     # extract global menu
-    menu_file = os.path.join(topdir, '.scripts', 'menu.yml')
+    menu_file = os.path.join(topdir, 'testing', 'menu.yml')
     expect_failure_global, env_global, definitions_global = extract_menu_file(
         menu_file, generator, ci_environment)
 

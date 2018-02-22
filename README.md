@@ -49,7 +49,7 @@
 You can place a file `menu.yml` in the recipe directory, next to `CMakeLists.txt`.
 The test script will parse it to set environment variables and CMake definitions for a particular recipe.
 
-You can place global settings under `.scripts/menu.yml` with the same structure.
+You can place global settings under `testing/menu.yml` with the same structure.
 
 Example:
 ```yaml
@@ -103,7 +103,7 @@ appveyor:
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
+python testing/collect_tests.py 'Chapter*/recipe-*'
 ```
 
 

@@ -83,5 +83,5 @@ before_script:
 
 script:
   - ./dependencies/report_versions.sh
-  - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
-  - python .scripts/ci_configure_build_test.py 'to-triage/recipe-*'
+  - python testing/collect_tests.py 'Chapter*/recipe-*'
+  - python testing/collect_tests.py 'to-triage/recipe-*'
