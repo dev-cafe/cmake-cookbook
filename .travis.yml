@@ -9,6 +9,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - doxygen
             - g++-7
             - gfortran
             - gfortran-7

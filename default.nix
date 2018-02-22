@@ -4,7 +4,7 @@ let
     owner = "NixOS";
     repo = "nixpkgs-channels";
     rev = "nixos-unstable";
-    sha256 = "1zcbvzxk1vyk4ngfdyss8mlb3mqp050ygpnwqny0bxbzlqkrc4bh";
+    sha256 = "1ig27lcx533jjdxg9f7wj7n9bwkd12yj5zpzkn4qx60kpbvla27c";
   });
 in
   with import nixpkgs {
@@ -25,19 +25,23 @@ in
       ccache
       clang-tools
       cmake
-      doxygen
+      doxygen_gui
       eigen3_3
       exa
       gcc
       gfortran
       gfortran.cc.lib
+      graphviz
       hdf5
+      lcov
       liblapack
       libuuid
       ninja-kitware
       openmpi
+      pipenv
       pkgconfig
       python3Full
+      python3Packages.breathe
       python3Packages.cffi
       python3Packages.colorama
       python3Packages.cython
@@ -45,6 +49,7 @@ in
       python3Packages.numpy
       python3Packages.pycodestyle
       python3Packages.pyyaml
+      python3Packages.sphinx
       valgrind
       zlib
     ];

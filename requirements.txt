@@ -1,7 +1,11 @@
-numpy
-pyyaml
-pycodestyle
-docopt
-colorama
+breathe
 cffi
+colorama
 cython
+docopt
+numpy
+pycodestyle
+pyyaml
+sphinx
+sphinx-rtd-theme
+sphinxcontrib-bibtex

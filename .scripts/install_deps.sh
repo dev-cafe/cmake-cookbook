@@ -24,7 +24,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew update &> /dev/null
   brew cask uninstall --force oclint
   brew uninstall --force --ignore-dependencies boost
-  brew install gcc mpich pkg-config ossp-uuid python3 pyenv-virtualenv
+  brew install gcc mpich pkg-config ossp-uuid python3 pyenv-virtualenv doxygen
   brew upgrade cmake
   brew install boost@1.59
   brew install boost-python@1.59
