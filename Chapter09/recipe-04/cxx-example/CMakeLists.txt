@@ -12,46 +12,23 @@ find_package(PythonLibs REQUIRED)
 find_package(Boost REQUIRED COMPONENTS python)
 
 # create python module
-add_library(
-  account
-  MODULE
-  account.cpp)
+add_library(account MODULE account.cpp)
 
-target_link_libraries(
-  account
-  PUBLIC
-  Boost::python
-  ${PYTHON_LIBRARIES}
-  )
+target_link_libraries(account PUBLIC Boost::python ${PYTHON_LIBRARIES})
 
-target_include_directories(
-  account
-  PRIVATE
-  ${PYTHON_INCLUDE_DIRS}
-  )
+target_include_directories(account PRIVATE ${PYTHON_INCLUDE_DIRS})
 
 # prevent cmake from creating a "lib" prefix
-set_target_properties(
-  account
-  PROPERTIES
-    PREFIX ""
-  )
+set_target_properties(account PROPERTIES PREFIX "")
 
 # turn on testing
 enable_testing()
 
 # define test
-add_test(
-  NAME
-    python_test
-  COMMAND
-    ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.py
-  )
+add_test(NAME python_test
+         COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.py)
 
 # test needs to know the location of the compiled module
-set_property(
-  TEST
-    python_test
-  PROPERTY ENVIRONMENT
-    PYTHONPATH=${PROJECT_BINARY_DIR}:$ENV{PYTHONPATH}
-  )
+set_property(TEST python_test
+             PROPERTY ENVIRONMENT
+                      PYTHONPATH=${PROJECT_BINARY_DIR}:$ENV{PYTHONPATH})

@@ -14,34 +14,21 @@ find_package(PythonLibs 2.7 REQUIRED)
 # Find NumPy version
 execute_process(
   COMMAND
-    ${PYTHON_EXECUTABLE} "-c" "import re, numpy; print(re.compile('/__init__.py.*').sub('',numpy.__version__))"
-  OUTPUT_VARIABLE NumPy_VERSION
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-  )
+    ${PYTHON_EXECUTABLE} "-c"
+    "import re, numpy; print(re.compile('/__init__.py.*').sub('',numpy.__version__))"
+  OUTPUT_VARIABLE NumPy_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
 message(STATUS "NumPy version: ${NumPy_VERSION}")
 configure_file(Report.hpp.in Report.hpp @ONLY)
 
 add_executable(pure-embedding "")
-if (PYTHON_VERSION_MAJOR VERSION_LESS 3)
-  target_sources(pure-embedding
-    PRIVATE
-      Py2-pure-embedding.cpp
-    )
+if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
+  target_sources(pure-embedding PRIVATE Py2-pure-embedding.cpp)
 else()
-  target_sources(pure-embedding
-    PRIVATE
-      Py3-pure-embedding.cpp
-    )
+  target_sources(pure-embedding PRIVATE Py3-pure-embedding.cpp)
 endif()
 target_include_directories(pure-embedding
-  PRIVATE
-    ${PYTHON_INCLUDE_DIRS}
-    ${PROJECT_BINARY_DIR}
-  )
-target_link_libraries(pure-embedding
-  PRIVATE
-    ${PYTHON_LIBRARIES}
-  )
-file(COPY ${PROJECT_SOURCE_DIR}/use_numpy.py
-     DESTINATION ${PROJECT_BINARY_DIR}
-    )
+                           PRIVATE
+                           ${PYTHON_INCLUDE_DIRS}
+                           ${PROJECT_BINARY_DIR})
+target_link_libraries(pure-embedding PRIVATE ${PYTHON_LIBRARIES})
+file(COPY ${PROJECT_SOURCE_DIR}/use_numpy.py DESTINATION ${PROJECT_BINARY_DIR})

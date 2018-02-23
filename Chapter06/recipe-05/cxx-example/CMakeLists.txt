@@ -18,18 +18,10 @@ else()
 endif()
 
 # generate file version.h based on version.h.in
-configure_file(
-  version.h.in
-  generated/version.h
-  @ONLY
-  )
+configure_file(version.h.in generated/version.h @ONLY)
 
 # example code
 add_executable(example example.cpp)
 
 # needs to find the generated header file
-target_include_directories(
-  example
-  PRIVATE
-    ${PROJECT_BINARY_DIR}/generated
-  )
+target_include_directories(example PRIVATE ${PROJECT_BINARY_DIR}/generated)

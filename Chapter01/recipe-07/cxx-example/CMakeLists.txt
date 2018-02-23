@@ -7,8 +7,11 @@ project(recipe-08 CXX)
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message("C++ compiler flags, debug mode: ${CMAKE_CXX_FLAGS_DEBUG}")
 message("C++ compiler flags, release mode: ${CMAKE_CXX_FLAGS_RELEASE}")
-message("C++ compiler flags, release with debug info mode: ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
-message("C++ compiler flags, minimal release mode: ${CMAKE_CXX_FLAGS_MINSIZEREL}")
+message(
+  "C++ compiler flags, release with debug info mode: ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}"
+  )
+message(
+  "C++ compiler flags, minimal release mode: ${CMAKE_CXX_FLAGS_MINSIZEREL}")
 
 file(GLOB _sources geometry_*)
 

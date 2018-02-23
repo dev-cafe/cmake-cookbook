@@ -18,11 +18,8 @@ string(REPLACE " " ";" _asan_flags ${ASAN_FLAGS})
 
 add_executable(asan-example asan-example.cpp)
 target_compile_options(asan-example
-  PUBLIC
-    ${CXX_BASIC_FLAGS}
-    $<$<BOOL:${asan_works}>:${_asan_flags}>
-  )
-target_link_libraries(asan-example
-  PUBLIC
-    $<$<BOOL:${asan_works}>:${ASAN_FLAGS}>
-  )
+                       PUBLIC
+                       ${CXX_BASIC_FLAGS}
+                       $<$<BOOL:${asan_works}>:${_asan_flags}>)
+target_link_libraries(asan-example PUBLIC
+                      $<$<BOOL:${asan_works}>:${ASAN_FLAGS}>)

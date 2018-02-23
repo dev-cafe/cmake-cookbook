@@ -12,14 +12,11 @@ find_package(LAPACK REQUIRED)
 add_subdirectory(deps)
 
 add_executable(linear-algebra linear-algebra.cpp)
-target_link_libraries(linear-algebra
-  PRIVATE
-    math
-  )
+target_link_libraries(linear-algebra PRIVATE math)
 set_source_files_properties(
   ${PROJECT_BINARY_DIR}/deps/wrap_BLAS_LAPACK/CxxBLAS.hpp
   ${PROJECT_BINARY_DIR}/deps/wrap_BLAS_LAPACK/CxxLAPACK.hpp
   PROPERTIES
-    GENERATED TRUE
-  )
+  GENERATED
+  TRUE)
 add_dependencies(linear-algebra BLAS_LAPACK_wrappers)

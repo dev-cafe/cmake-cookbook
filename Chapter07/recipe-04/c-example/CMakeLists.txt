@@ -7,7 +7,9 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "/usr/local/${PROJECT_NAME}" CACHE PATH "Install path" FORCE)
+  set(CMAKE_INSTALL_PREFIX "/usr/local/${PROJECT_NAME}"
+      CACHE PATH "Install path"
+      FORCE)
 endif()
 message(STATUS "${PROJECT_NAME} install: ${CMAKE_INSTALL_PREFIX}")
 
@@ -18,17 +20,18 @@ add_subdirectory(external/upstream)
 
 include(ExternalProject)
 ExternalProject_Add(fftw_example
-  DEPENDS
-    fftw3_external
-  SOURCE_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-  CMAKE_ARGS
-    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-    -DFFTW3_DIR=${FFTW3_DIR}
-  CMAKE_CACHE_ARGS
-    -DCMAKE_PREFIX_PATH:PATH=${CMAKE_PREFIX_PATH}
-  BUILD_ALWAYS
-    1
-  INSTALL_COMMAND
-    DESTDIR=${CMAKE_BINARY_DIR}/stage ${CMAKE_MAKE_PROGRAM} install
-  )
+                    DEPENDS
+                    fftw3_external
+                    SOURCE_DIR
+                    ${CMAKE_CURRENT_SOURCE_DIR}/src
+                    CMAKE_ARGS
+                    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+                    -DFFTW3_DIR=${FFTW3_DIR}
+                    CMAKE_CACHE_ARGS
+                    -DCMAKE_PREFIX_PATH:PATH=${CMAKE_PREFIX_PATH}
+                    BUILD_ALWAYS
+                    1
+                    INSTALL_COMMAND
+                    DESTDIR=${CMAKE_BINARY_DIR}/stage
+                    ${CMAKE_MAKE_PROGRAM}
+                    install)

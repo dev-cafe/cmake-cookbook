@@ -16,24 +16,15 @@ file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/generated)
 set(MAX_NUMBER "100" CACHE STRING "Upper bound for primes")
 
 # generate code
-add_custom_command(
-  OUTPUT
-    ${PROJECT_BINARY_DIR}/generated/primes.h
-  COMMAND
-    ${PYTHON_EXECUTABLE} generate.py ${MAX_NUMBER} ${PROJECT_BINARY_DIR}/generated/primes.h
-  WORKING_DIRECTORY
-    ${PROJECT_SOURCE_DIR}
-  DEPENDS
-    generate.py
-  )
+add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/generated/primes.h
+                   COMMAND ${PYTHON_EXECUTABLE} generate.py ${MAX_NUMBER}
+                           ${PROJECT_BINARY_DIR}/generated/primes.h
+                   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+                   DEPENDS generate.py)
 
 add_executable(example.x "")
 target_sources(example.x
-  PRIVATE
-    example.cpp
-    ${PROJECT_BINARY_DIR}/generated/primes.h
-  )
-target_include_directories(example.x
-  PRIVATE
-    ${PROJECT_BINARY_DIR}/generated
-  )
+               PRIVATE
+               example.cpp
+               ${PROJECT_BINARY_DIR}/generated/primes.h)
+target_include_directories(example.x PRIVATE ${PROJECT_BINARY_DIR}/generated)

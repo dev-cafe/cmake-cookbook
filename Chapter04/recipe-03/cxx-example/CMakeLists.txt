@@ -16,8 +16,8 @@ add_library(sum_integers sum_integers.cpp)
 add_executable(sum_up main.cpp)
 target_link_libraries(sum_up sum_integers)
 
-# we will use the network to fetch Google Test sources
-# make it possible to disable unit tests when not on network
+# we will use the network to fetch Google Test sources make it possible to
+# disable unit tests when not on network
 option(ENABLE_UNIT_TESTS "Enable unit tests" ON)
 message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
 
@@ -27,34 +27,27 @@ if(ENABLE_UNIT_TESTS)
   ExternalProject_Add(
     gtest
     PREFIX
-      "${PROJECT_BINARY_DIR}/gtest"
+    "${PROJECT_BINARY_DIR}/gtest"
     GIT_REPOSITORY
-      https://github.com/google/googletest.git
+    https://github.com/google/googletest.git
     GIT_TAG
-      release-1.8.0
+    release-1.8.0
     CMAKE_ARGS
-      "-Dgtest_disable_pthreads=ON"
+    "-Dgtest_disable_pthreads=ON"
     INSTALL_COMMAND
-      "" # prevent gtest from installing itself system-wide
-    BUILD_BYPRODUCTS
-      # this is here otherwise Ninja will complain
-      # that there is no rule to build libgtest.a
-      ${PROJECT_BINARY_DIR}/gtest/src/gtest-build/googlemock/gtest/libgtest.a
-    )
+    "" # prevent gtest from installing itself system-wide
+    BUILD_BYPRODUCTS # this is here otherwise Ninja will complain that there is
+                     # no rule to build libgtest.a
+    ${PROJECT_BINARY_DIR}/gtest/src/gtest-build/googlemock/gtest/libgtest.a)
 
   add_executable(cpp_test test.cpp)
 
   target_include_directories(
-    cpp_test
-    PRIVATE
-    ${PROJECT_BINARY_DIR}/gtest/src/gtest/googletest/include
-    )
+    cpp_test PRIVATE ${PROJECT_BINARY_DIR}/gtest/src/gtest/googletest/include)
 
   target_link_libraries(
-    cpp_test
-    sum_integers
-    ${PROJECT_BINARY_DIR}/gtest/src/gtest-build/googlemock/gtest/libgtest.a
-    )
+    cpp_test sum_integers
+    ${PROJECT_BINARY_DIR}/gtest/src/gtest-build/googlemock/gtest/libgtest.a)
 
   # make sure that gtest is built before we build cpp_test
   add_dependencies(cpp_test gtest)

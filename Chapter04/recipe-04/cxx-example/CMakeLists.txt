@@ -24,11 +24,7 @@ add_executable(cpp_test test.cpp)
 target_link_libraries(cpp_test sum_integers Boost::unit_test_framework)
 
 # avoid undefined reference to "main" in test.cpp
-target_compile_definitions(
-  cpp_test
-  PRIVATE
-  -DBOOST_TEST_DYN_LINK
-  )
+target_compile_definitions(cpp_test PRIVATE -DBOOST_TEST_DYN_LINK)
 
 enable_testing()
 add_test(boost_test ${PROJECT_BINARY_DIR}/cpp_test)

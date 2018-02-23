@@ -10,15 +10,7 @@ set(VERSION_MINOR 0)
 set(VERSION_PATCH 1)
 
 # generate version module based on version.f90.in
-configure_file(
-  version.f90.in
-  generated/version.f90
-  @ONLY
-  )
+configure_file(version.f90.in generated/version.f90 @ONLY)
 
 # example code
-add_executable(
-  example
-  example.f90
-  ${PROJECT_BINARY_DIR}/generated/version.f90
-  )
+add_executable(example example.f90 ${PROJECT_BINARY_DIR}/generated/version.f90)

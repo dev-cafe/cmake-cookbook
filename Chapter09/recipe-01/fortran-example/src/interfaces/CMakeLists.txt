@@ -9,12 +9,8 @@ endif()
 find_package(Backtrace REQUIRED)
 
 add_library(bt-uuid-wrap SHARED interface_backtrace.f90 interface_uuid.f90)
-target_include_directories(bt-uuid-wrap
-  PUBLIC
-    ${Backtrace_INCLUDE_DIRS}
-  )
+target_include_directories(bt-uuid-wrap PUBLIC ${Backtrace_INCLUDE_DIRS})
 target_link_libraries(bt-uuid-wrap
-  PUBLIC
-    PkgConfig::UUID
-    ${Backtrace_LIBRARIES}
-  )
+                      PUBLIC
+                      PkgConfig::UUID
+                      ${Backtrace_LIBRARIES})
