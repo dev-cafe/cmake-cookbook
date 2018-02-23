@@ -2,11 +2,10 @@ pipeline:
   build:
     image: robertodr/ubuntu-16.04_pgi17.4_hdf5:latest
     commands:
-      - virtualenv venv
-      - . venv/bin/activate
-      - pip install -r requirements.txt
-      - ./.scripts/report_versions.sh
-      - python .scripts/ci_configure_build_test.py 'Chapter*/recipe-*'
+      - pip install --user pipenv --upgrade
+      - pipenv install
+      - ./dependencies/report_versions.sh
+      - pipenv run python testing/collect_tests.py 'Chapter*/recipe-*'
 
 matrix:
   include:
@@ -14,4 +13,3 @@ matrix:
       BUILDFLAGS: 'VERBOSE=1'
     - GENERATOR: 'Ninja'
       BUILDFLAGS: '-v'
-
