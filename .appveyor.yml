@@ -44,6 +44,8 @@ before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
   - cmake --version
   - ninja.exe --version
+  - pip install --disable-pip-version-check --user --upgrade pip
+  - pip install --user --upgrade pipenv
   - pipenv install
 
 build_script:
