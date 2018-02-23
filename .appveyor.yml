@@ -39,14 +39,16 @@ install:
   - appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
   - 7z e ninja.zip -oC:\projects\deps\ninja > nul
   - set PATH=%PATH%;C:\projects\deps\ninja
+  - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  - set PYTHONIOENCODING=utf-8
+  - pip install --disable-pip-version-check --user --upgrade pip
+  - pip install --user --upgrade pipenv
+  - pipenv install
 
 before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
   - cmake --version
   - ninja.exe --version
-  - pip install --disable-pip-version-check --user --upgrade pip
-  - pip install --user --upgrade pipenv
-  - pipenv install
 
 build_script:
   - pipenv run python testing\collect_tests.py Chapter*/recipe-*
