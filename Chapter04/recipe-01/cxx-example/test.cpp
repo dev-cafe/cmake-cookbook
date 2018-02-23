@@ -1,7 +1,7 @@
 #include <cassert>
 #include <vector>
 
-#include "sum_integers.h"
+#include "sum_integers.hpp"
 
 int main() {
   std::vector<int> integers = {1, 2, 3, 4, 5};

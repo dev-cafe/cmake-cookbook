@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "sum_integers.h"
+#include "sum_integers.hpp"
 
 #define BOOST_TEST_MODULE example_test_suite
 #include <boost/test/unit_test.hpp>

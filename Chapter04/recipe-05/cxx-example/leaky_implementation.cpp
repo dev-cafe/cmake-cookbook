@@ -1,4 +1,4 @@
-#include "leaky_implementation.h"
+#include "leaky_implementation.hpp"
 
 int do_some_work() {
 

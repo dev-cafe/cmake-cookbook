@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "sum_integers.h"
+#include "sum_integers.hpp"
 #include "gtest/gtest.h"
 
 int main(int argc, char **argv) {
