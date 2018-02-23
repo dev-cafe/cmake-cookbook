@@ -17,11 +17,5 @@ else()
   add_executable(hello-embedded-python hello-embedded-python3.c)
 endif()
 
-target_include_directories(hello-embedded-python
-  PRIVATE
-    ${PYTHON_INCLUDE_DIRS}
-  )
-target_link_libraries(hello-embedded-python
-  PRIVATE
-    ${PYTHON_LIBRARIES}
-  )
+target_include_directories(hello-embedded-python PRIVATE ${PYTHON_INCLUDE_DIRS})
+target_link_libraries(hello-embedded-python PRIVATE ${PYTHON_LIBRARIES})

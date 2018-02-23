@@ -12,17 +12,8 @@ find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
 
 add_library(math CxxBLAS.cpp CxxLAPACK.cpp)
-target_include_directories(math
-  PUBLIC
-    ${PROJECT_SOURCE_DIR}
-  )
-target_link_libraries(math
-  PUBLIC
-    ${LAPACK_LIBRARIES}
-  )
+target_include_directories(math PUBLIC ${PROJECT_SOURCE_DIR})
+target_link_libraries(math PUBLIC ${LAPACK_LIBRARIES})
 
 add_executable(linear-algebra linear-algebra.cpp)
-target_link_libraries(linear-algebra
-  PRIVATE
-    math
-  )
+target_link_libraries(linear-algebra PRIVATE math)

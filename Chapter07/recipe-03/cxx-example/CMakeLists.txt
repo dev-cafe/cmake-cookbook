@@ -7,7 +7,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "/usr/local/${PROJECT_NAME}" CACHE PATH "Install path" FORCE)
+  set(CMAKE_INSTALL_PREFIX "/usr/local/${PROJECT_NAME}"
+      CACHE PATH "Install path"
+      FORCE)
 endif()
 message(STATUS "${PROJECT_NAME} install: ${CMAKE_INSTALL_PREFIX}")
 
@@ -19,26 +21,27 @@ add_subdirectory(external/upstream)
 
 include(ExternalProject)
 ExternalProject_Add(${PROJECT_NAME}_core
-  DEPENDS
-    boost_external
-  SOURCE_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-  CMAKE_ARGS
-    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-    -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
-    -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
-    -DCMAKE_CXX_STANDARD=11
-    -DCMAKE_CXX_EXTENSIONS=OFF
-    -DCMAKE_CXX_STANDARD_REQUIRED=ON
-    -DCMAKE_INCLUDE_PATH=${BOOST_INCLUDEDIR}
-    -DCMAKE_LIBRARY_PATH=${BOOST_LIBRARYDIR}
-  CMAKE_CACHE_ARGS
-    -DBoost_NO_SYSTEM_PATHS:BOOL=${Boost_NO_SYSTEM_PATHS}
-    -DBOOST_ROOT:PATH=${BOOST_ROOT}
-    -DBOOST_INCLUDEDIR:PATH=${BOOST_INCLUDEDIR}
-    -DBOOST_LIBRARYDIR:PATH=${BOOST_LIBRARYDIR}
-  BUILD_ALWAYS
-    1
-  INSTALL_COMMAND
-    DESTDIR=${CMAKE_BINARY_DIR}/stage ${CMAKE_MAKE_PROGRAM} install
-  )
+                    DEPENDS
+                    boost_external
+                    SOURCE_DIR
+                    ${CMAKE_CURRENT_SOURCE_DIR}/src
+                    CMAKE_ARGS
+                    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+                    -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+                    -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+                    -DCMAKE_CXX_STANDARD=11
+                    -DCMAKE_CXX_EXTENSIONS=OFF
+                    -DCMAKE_CXX_STANDARD_REQUIRED=ON
+                    -DCMAKE_INCLUDE_PATH=${BOOST_INCLUDEDIR}
+                    -DCMAKE_LIBRARY_PATH=${BOOST_LIBRARYDIR}
+                    CMAKE_CACHE_ARGS
+                    -DBoost_NO_SYSTEM_PATHS:BOOL=${Boost_NO_SYSTEM_PATHS}
+                    -DBOOST_ROOT:PATH=${BOOST_ROOT}
+                    -DBOOST_INCLUDEDIR:PATH=${BOOST_INCLUDEDIR}
+                    -DBOOST_LIBRARYDIR:PATH=${BOOST_LIBRARYDIR}
+                    BUILD_ALWAYS
+                    1
+                    INSTALL_COMMAND
+                    DESTDIR=${CMAKE_BINARY_DIR}/stage
+                    ${CMAKE_MAKE_PROGRAM}
+                    install)

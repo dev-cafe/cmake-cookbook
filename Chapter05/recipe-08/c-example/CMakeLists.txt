@@ -13,7 +13,8 @@ if(UUID_FOUND)
 endif()
 
 include(CheckCSourceRuns)
-set(_test_uuid
+set(
+  _test_uuid
   "
 #include <uuid/uuid.h>
 
@@ -24,7 +25,8 @@ int main(int argc, char * argv[]) {
 
   return 0;
 }
-  ")
+  "
+  )
 set(CMAKE_REQUIRED_INCLUDES ${UUID_INCLUDE_DIRS})
 set(CMAKE_REQUIRED_LIBRARIES ${UUID_LDFLAGS})
 check_c_source_runs("${_test_uuid}" _runs)
@@ -33,7 +35,4 @@ if(NOT _runs)
 endif()
 
 add_executable(use-uuid use-uuid.cpp)
-target_link_libraries(use-uuid
-  PUBLIC
-  PkgConfig::UUID
-  )
+target_link_libraries(use-uuid PUBLIC PkgConfig::UUID)

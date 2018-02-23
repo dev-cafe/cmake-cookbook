@@ -13,8 +13,7 @@ foreach(_source IN LISTS _sources)
   get_filename_component(_tmp ${_source} NAME)
   message(${_tmp})
 endforeach()
-# try the plain foreach syntax
-# requires to expand the contents of the variable
+# try the plain foreach syntax requires to expand the contents of the variable
 message(STATUS "List sources using plain syntax")
 foreach(_source ${_sources})
   get_filename_component(_tmp ${_source} NAME)

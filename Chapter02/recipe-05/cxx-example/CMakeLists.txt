@@ -8,42 +8,33 @@ project(recipe-05 CXX)
 add_executable(processor-info "")
 
 # and its source file
-target_sources(
-  processor-info
-  PRIVATE
-  processor-info.cpp
-  )
+target_sources(processor-info PRIVATE processor-info.cpp)
 
 # and its source file
-target_include_directories(
-  processor-info
-  PRIVATE
-  ${PROJECT_BINARY_DIR}
-  )
+target_include_directories(processor-info PRIVATE ${PROJECT_BINARY_DIR})
 
-foreach(
-  key
-  NUMBER_OF_LOGICAL_CORES
-  NUMBER_OF_PHYSICAL_CORES
-  TOTAL_VIRTUAL_MEMORY
-  AVAILABLE_VIRTUAL_MEMORY
-  TOTAL_PHYSICAL_MEMORY
-  AVAILABLE_PHYSICAL_MEMORY
-  IS_64BIT
-  HAS_FPU
-  HAS_MMX
-  HAS_MMX_PLUS
-  HAS_SSE
-  HAS_SSE2
-  HAS_SSE_FP
-  HAS_SSE_MMX
-  HAS_AMD_3DNOW
-  HAS_AMD_3DNOW_PLUS
-  HAS_IA64
-  OS_NAME
-  OS_RELEASE
-  OS_VERSION
-  OS_PLATFORM)
+foreach(key
+        NUMBER_OF_LOGICAL_CORES
+        NUMBER_OF_PHYSICAL_CORES
+        TOTAL_VIRTUAL_MEMORY
+        AVAILABLE_VIRTUAL_MEMORY
+        TOTAL_PHYSICAL_MEMORY
+        AVAILABLE_PHYSICAL_MEMORY
+        IS_64BIT
+        HAS_FPU
+        HAS_MMX
+        HAS_MMX_PLUS
+        HAS_SSE
+        HAS_SSE2
+        HAS_SSE_FP
+        HAS_SSE_MMX
+        HAS_AMD_3DNOW
+        HAS_AMD_3DNOW_PLUS
+        HAS_IA64
+        OS_NAME
+        OS_RELEASE
+        OS_VERSION
+        OS_PLATFORM)
   cmake_host_system_information(RESULT _${key} QUERY ${key})
 endforeach()
 

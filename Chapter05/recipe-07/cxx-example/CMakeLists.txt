@@ -17,15 +17,8 @@ unset(CMAKE_REQUIRED_FLAGS)
 if(asan_works)
   string(REPLACE " " ";" _asan_flags ${ASAN_FLAGS})
   add_executable(asan-example asan-example.cpp)
-  target_compile_options(asan-example
-    PUBLIC
-      ${CXX_BASIC_FLAGS}
-      ${_asan_flags}
-    )
-  target_link_libraries(asan-example
-    PUBLIC
-      ${_asan_flags}
-    )
+  target_compile_options(asan-example PUBLIC ${CXX_BASIC_FLAGS} ${_asan_flags})
+  target_link_libraries(asan-example PUBLIC ${_asan_flags})
 endif()
 
 set(TSAN_FLAGS "-fsanitize=thread -fno-omit-frame-pointer -fPIE")
@@ -36,17 +29,9 @@ if(tsan_works)
   string(REPLACE " " ";" _tsan_flags ${TSAN_FLAGS})
   find_package(Threads REQUIRED)
   add_executable(tsan-example tsan-example.cpp)
-  target_compile_options(tsan-example
-    PUBLIC
-      ${CXX_BASIC_FLAGS}
-      ${_tsan_flags}
-    )
-  target_link_libraries(tsan-example
-    PUBLIC
-      Threads::Threads
-      ${_tsan_flags}
-      -pie
-    )
+  target_compile_options(tsan-example PUBLIC ${CXX_BASIC_FLAGS} ${_tsan_flags})
+  target_link_libraries(
+    tsan-example PUBLIC Threads::Threads ${_tsan_flags} -pie)
 endif()
 
 set(MSAN_FLAGS "-fsanitize=memory -fno-omit-frame-pointer -fPIE")
@@ -56,16 +41,8 @@ unset(CMAKE_REQUIRED_FLAGS)
 if(msan_works)
   string(REPLACE " " ";" _msan_flags ${MSAN_FLAGS})
   add_executable(msan-example msan-example.cpp)
-  target_compile_options(msan-example
-    PUBLIC
-      ${CXX_BASIC_FLAGS}
-      ${_msan_flags}
-    )
-  target_link_libraries(msan-example
-    PUBLIC
-      ${_msan_flags}
-      -pie
-    )
+  target_compile_options(msan-example PUBLIC ${CXX_BASIC_FLAGS} ${_msan_flags})
+  target_link_libraries(msan-example PUBLIC ${_msan_flags} -pie)
 endif()
 
 set(UBSAN_FLAGS "-fsanitize=undefined -fno-omit-frame-pointer")
@@ -76,8 +53,7 @@ if(ubsan_works)
   string(REPLACE " " ";" _ubsan_flags ${UBSAN_FLAGS})
   add_executable(ubsan-example ubsan-example.cpp)
   target_compile_options(ubsan-example
-    PUBLIC
-      ${CXX_BASIC_FLAGS}
-      ${_ubsan_flags}
-    )
+                         PUBLIC
+                         ${CXX_BASIC_FLAGS}
+                         ${_ubsan_flags})
 endif()
