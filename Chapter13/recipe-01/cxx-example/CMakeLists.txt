@@ -10,7 +10,12 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-include(Documentation)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(UseDoxygenDoc)
 
 add_subdirectory(src)
+
+add_doxygen_doc(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/_build
+                DOXY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
+                TARGET_NAME "docs"
+                COMMENT "HTML documentation")
