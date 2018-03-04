@@ -4,7 +4,7 @@ let
     owner = "NixOS";
     repo = "nixpkgs-channels";
     rev = "nixos-unstable";
-    sha256 = "1ig27lcx533jjdxg9f7wj7n9bwkd12yj5zpzkn4qx60kpbvla27c";
+    sha256 = "0ff6kxb0l6i9kchhnjyhj5kf2lngjq3d3nrjmpdnj952s56mpjjx";
   });
 in
   with import nixpkgs {
@@ -25,6 +25,7 @@ in
       ccache
       clang-tools
       cmake
+      dpkg
       doxygen_gui
       eigen3_3
       exa
@@ -50,6 +51,7 @@ in
       python3Packages.pycodestyle
       python3Packages.pyyaml
       python3Packages.sphinx
+      rpm
       valgrind
       zlib
     ];
