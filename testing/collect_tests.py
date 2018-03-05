@@ -95,17 +95,17 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     return_code = 0
 
-    test_sh_path = os.path.join(cmakelists_path, 'test.sh')
-    if os.path.exists(test_sh_path):
-        # if this directory contains a test.sh script, we launch it
-        step = 'test.sh'
-        command = '{0} {1}'.format(test_sh_path, build_directory)
+    custom_sh_path = os.path.join(cmakelists_path, 'custom.sh')
+    if os.path.exists(custom_sh_path):
+        # if this directory contains a custom.sh script, we launch it
+        step = 'custom.sh'
+        command = '{0} {1}'.format(custom_sh_path, build_directory)
         return_code += run_command(
             step=step,
             command=command,
             expect_failure=expect_failure)
     else:
-        # if there is no test script, we run tests "normally"
+        # if there is no custom script, we run tests "normally"
 
         # configure step
         step = 'configuring'
