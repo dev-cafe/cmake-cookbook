@@ -152,9 +152,7 @@ def main(arguments):
                           '\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
-        examples = [
-            e for e in sorted(glob.glob(os.path.join(recipe, '*example')))
-        ]
+        examples = sorted(glob.glob(os.path.join(recipe, '*example')))
 
         for example in examples:
             return_code += run_example(topdir, generator, ci_environment, buildflags, recipe, example)
