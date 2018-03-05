@@ -89,3 +89,17 @@ else
   cd $TRAVIS_BUILD_DIR
 fi
 echo "-- Done with HDF5 $HDF5_VERSION"
+
+cd $HOME/Downloads
+if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  curl -Ls https://repo.continuum.io/archive/Anaconda2-5.1.0-Linux-x86_64.sh > conda.sh
+elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  curl -Ls https://repo.continuum.io/archive/Anaconda3-5.1.0-MacOSX-x86_64.sh > conda.sh
+fi
+bash conda.sh -b -p $HOME/Deps/conda
+PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
+conda config --set always_yes yes --set changeps1 no
+conda update -q conda
+conda info -a
+cd $TRAVIS_BUILD_DIR
+echo "-- Done with Conda"
