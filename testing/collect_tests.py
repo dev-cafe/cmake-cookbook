@@ -95,32 +95,44 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     return_code = 0
 
-    # configure step
-    step = 'configuring'
-    command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
-        env_string, cmakelists_path, build_directory, generator,
-        definitions_string)
-    return_code += run_command(
-        step=step,
-        command=command,
-        expect_failure=expect_failure)
-
-    # build step
-    step = 'building'
-    command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
-    return_code += run_command(
-        step=step,
-        command=command,
-        expect_failure=expect_failure)
-
-    # extra targets
-    for target in targets:
-        step = target
-        command = 'cmake --build {0} --target {1}'.format(build_directory, target)
+    test_sh_path = os.path.join(cmakelists_path, 'test.sh')
+    if os.path.exists(test_sh_path):
+        # if this directory contains a test.sh script, we launch it
+        step = 'test.sh'
+        command = '{0} {1}'.format(test_sh_path, build_directory)
         return_code += run_command(
             step=step,
             command=command,
             expect_failure=expect_failure)
+    else:
+        # if there is no test script, we run tests "normally"
+
+        # configure step
+        step = 'configuring'
+        command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
+            env_string, cmakelists_path, build_directory, generator,
+            definitions_string)
+        return_code += run_command(
+            step=step,
+            command=command,
+            expect_failure=expect_failure)
+
+        # build step
+        step = 'building'
+        command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
+        return_code += run_command(
+            step=step,
+            command=command,
+            expect_failure=expect_failure)
+
+        # extra targets
+        for target in targets:
+            step = target
+            command = 'cmake --build {0} --target {1}'.format(build_directory, target)
+            return_code += run_command(
+                step=step,
+                command=command,
+                expect_failure=expect_failure)
 
     return return_code
 
