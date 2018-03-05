@@ -9,6 +9,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 find_package(FFTW3 CONFIG REQUIRED)
 
 add_executable(fftw_example fftw_example.c)
+# target_include_directories is needed because FFTW does not export headers
 target_include_directories(fftw_example
   SYSTEM
   PRIVATE
