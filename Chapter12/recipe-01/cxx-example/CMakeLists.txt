@@ -31,7 +31,7 @@ ExternalProject_Add(
   INSTALL_COMMAND
     ""
   CMAKE_ARGS
-    "-DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}"
+    -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}
   )
 
 # process our source code as if it was an external project
@@ -44,9 +44,9 @@ ExternalProject_Add(
   BINARY_DIR
     ${PROJECT_BINARY_DIR}/account
   CMAKE_ARGS
-    "-DCMAKE_INSTALL_PREFIX=${PROJECT_BINARY_DIR}/install"
-    "-DPYBIND11_DIR=${PROJECT_BINARY_DIR}/pybind11/src/pybind11_sources/"
-    "-DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}"
+    -DCMAKE_INSTALL_PREFIX=${PROJECT_BINARY_DIR}/install
+    -DPYBIND11_DIR=${PROJECT_BINARY_DIR}/pybind11/src/pybind11_sources/
+    -DPYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}
 )
 
 # we need to first fetch pybind11_sources
