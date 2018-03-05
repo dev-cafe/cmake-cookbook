@@ -4,6 +4,11 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 # project name and supported language
 project(account-project CXX)
 
+# require C++11
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # the pybind11 subdirectory will provide pybind11::module
 add_subdirectory(
   ${PYBIND11_DIR}

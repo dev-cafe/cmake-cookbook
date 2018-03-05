@@ -4,6 +4,11 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 # project name and supported language
 project(recipe-01 CXX)
 
+# require C++11
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # for testing we will need the python interpreter
 find_package(PythonInterp REQUIRED)
 
