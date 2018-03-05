@@ -79,7 +79,7 @@ install(
   DIRECTORY
     ${PROJECT_BINARY_DIR}/install/
   DESTINATION
-    .
+    ${CMAKE_INSTALL_PREFIX}
   PATTERN
     "*"
   )
