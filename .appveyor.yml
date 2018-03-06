@@ -52,6 +52,5 @@ before_build:
 
 build_script:
   - pipenv run python testing\collect_tests.py Chapter*/recipe-*
-  - pipenv run python testing\collect_tests.py to-triage/recipe-*
 
 deploy: off
