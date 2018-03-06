@@ -67,7 +67,7 @@ before_install:
   - mkdir -p $HOME/Downloads $HOME/Deps
 
 install:
-  - ./dependencies/install_dependencies.sh
+  - ./testing/dependencies/install_dependencies.sh
   - pipenv install
   - pipenv run python --version
 
@@ -77,5 +77,5 @@ before_script:
   - test -n $FC && unset FC
 
 script:
-  - ./dependencies/report_versions.sh
+  - ./testing/dependencies/report_versions.sh
   - pipenv run python testing/collect_tests.py 'Chapter*/recipe-*'
