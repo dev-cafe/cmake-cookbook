@@ -22,23 +22,21 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   ln -sf /usr/local/opt/boost-python@1.59/lib/* /usr/local/opt/boost@1.59/lib
 fi
 
-CMake_VERSION="3.10.2"
+echo "-- Installing CMake"
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  CMake_URL="https://cmake.org/files/v${CMake_VERSION%.*}/cmake-${CMake_VERSION}-Linux-x86_64.tar.gz"
-  echo "-- Installing CMake $CMake_VERSION"
-  if [[ -f $HOME/Deps/cmake/bin/cmake ]]; then
-    echo "-- CMake $CMake_VERSION FOUND in cache"
+  if [[ -f $HOME/Deps/cmake/$CMAKE_VERSION/bin/cmake ]]; then
+    echo "-- CMake $CMAKE_VERSION FOUND in cache"
   else
-    echo "-- CMake $CMake_VERSION NOT FOUND in cache"
-    cd $HOME/Deps
-    mkdir -p cmake
-    curl -Ls $CMake_URL | tar -xz -C cmake --strip-components=1
-    cd $TRAVIS_BUILD_DIR
+    echo "-- CMake $CMAKE_VERSION NOT FOUND in cache"
+    target_path=$HOME/Deps/cmake/$CMAKE_VERSION
+    cmake_url="https://cmake.org/files/v${CMAKE_VERSION%.*}/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz"
+    mkdir -p $target_path
+    curl -Ls $cmake_url | tar -xz -C $target_path --strip-components=1
   fi
-  echo "-- Done with CMake"
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew upgrade cmake
 fi
+echo "-- Done installing CMake"
 
 echo "-- Installing Ninja"
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
