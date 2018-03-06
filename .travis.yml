@@ -54,6 +54,7 @@ cache:
     - $HOME/Deps/eigen
     - $HOME/Deps/hdf5
     - $HOME/Deps/ninja
+    - $HOME/Deps/conda
 
 env:
   global:
