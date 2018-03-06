@@ -101,6 +101,9 @@ else
   elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     curl -Ls https://repo.continuum.io/archive/Anaconda3-${Anaconda_VERSION}-MacOSX-x86_64.sh > conda.sh
   fi
+  # Travis creates the cached directories for us.
+  # This is problematic when wanting to install Anaconda for the first time...
+  rm -rf $HOME/Deps/conda
   bash conda.sh -b -p $HOME/Deps/conda
   PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
   conda config --set always_yes yes --set changeps1 no
