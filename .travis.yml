@@ -78,4 +78,3 @@ before_script:
 script:
   - ./dependencies/report_versions.sh
   - pipenv run python testing/collect_tests.py 'Chapter*/recipe-*'
-  - pipenv run python testing/collect_tests.py 'to-triage/recipe-*'
