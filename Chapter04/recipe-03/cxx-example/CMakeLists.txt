@@ -33,7 +33,7 @@ if(ENABLE_UNIT_TESTS)
     GIT_TAG
       release-1.8.0
     CMAKE_ARGS
-      "-Dgtest_disable_pthreads=ON"
+      -Dgtest_disable_pthreads=ON
     INSTALL_COMMAND
       "" # prevent gtest from installing itself system-wide
     BUILD_BYPRODUCTS

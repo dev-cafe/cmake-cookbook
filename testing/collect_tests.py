@@ -95,32 +95,44 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     return_code = 0
 
-    # configure step
-    step = 'configuring'
-    command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
-        env_string, cmakelists_path, build_directory, generator,
-        definitions_string)
-    return_code += run_command(
-        step=step,
-        command=command,
-        expect_failure=expect_failure)
-
-    # build step
-    step = 'building'
-    command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
-    return_code += run_command(
-        step=step,
-        command=command,
-        expect_failure=expect_failure)
-
-    # extra targets
-    for target in targets:
-        step = target
-        command = 'cmake --build {0} --target {1}'.format(build_directory, target)
+    custom_sh_path = os.path.join(cmakelists_path, 'custom.sh')
+    if os.path.exists(custom_sh_path):
+        # if this directory contains a custom.sh script, we launch it
+        step = 'custom.sh'
+        command = '{0} {1}'.format(custom_sh_path, build_directory)
         return_code += run_command(
             step=step,
             command=command,
             expect_failure=expect_failure)
+    else:
+        # if there is no custom script, we run tests "normally"
+
+        # configure step
+        step = 'configuring'
+        command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
+            env_string, cmakelists_path, build_directory, generator,
+            definitions_string)
+        return_code += run_command(
+            step=step,
+            command=command,
+            expect_failure=expect_failure)
+
+        # build step
+        step = 'building'
+        command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
+        return_code += run_command(
+            step=step,
+            command=command,
+            expect_failure=expect_failure)
+
+        # extra targets
+        for target in targets:
+            step = target
+            command = 'cmake --build {0} --target {1}'.format(build_directory, target)
+            return_code += run_command(
+                step=step,
+                command=command,
+                expect_failure=expect_failure)
 
     return return_code
 
@@ -152,9 +164,7 @@ def main(arguments):
                           '\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
-        examples = [
-            e for e in sorted(glob.glob(os.path.join(recipe, '*example')))
-        ]
+        examples = sorted(glob.glob(os.path.join(recipe, '*example')))
 
         for example in examples:
             return_code += run_example(topdir, generator, ci_environment, buildflags, recipe, example)

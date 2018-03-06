@@ -57,7 +57,8 @@ cache:
 
 env:
   global:
-    - PATH=$HOME/Deps/cmake/bin:$HOME/Deps/ninja${PATH:+:$PATH}
+    - PATH=$HOME/Deps/cmake/bin${PATH:+:$PATH}
+    - PATH=$HOME/Deps/ninja${PATH:+:$PATH}
     - LD_LIBRARY_PATH=$HOME/Deps/hdf5/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 
 before_install:

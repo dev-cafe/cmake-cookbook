@@ -1,5 +1,5 @@
 # define minimum cmake version
-cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and supported language
 project(recipe-06 CXX)
@@ -19,13 +19,14 @@ enable_testing()
 find_package(PythonInterp REQUIRED)
 
 # define test
-add_test(python_test ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.py)
+add_test(python_test ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/account/test.py)
 
 # export environment variables needed by the test
 set_property(
   TEST
     python_test
   PROPERTY ENVIRONMENT
+    PYTHONPATH=${PROJECT_SOURCE_DIR}
     ACCOUNT_LIBRARY_DIR=${PROJECT_BINARY_DIR}/lib
     ACCOUNT_INCLUDE_DIR=${PROJECT_SOURCE_DIR}/account
   )

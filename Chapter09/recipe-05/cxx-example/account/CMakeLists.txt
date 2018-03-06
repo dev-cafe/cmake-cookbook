@@ -1,8 +1,13 @@
 # define minimum cmake version
-cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and supported language
-project(recipe-05-sources CXX)
+project(account-project CXX)
+
+# require C++11
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # the pybind11 subdirectory will provide pybind11::module
 add_subdirectory(
@@ -14,7 +19,8 @@ add_subdirectory(
 add_library(
   account
   MODULE
-  account.cpp)
+  account.cpp
+  )
 
 target_link_libraries(
   account
@@ -29,7 +35,14 @@ set_target_properties(
     SUFFIX "${PYTHON_MODULE_EXTENSION}"
   )
 
-# install step is important for pip to work
+file(
+  COPY
+    __init__.py
+    version.py
+  DESTINATION
+    ${PROJECT_BINARY_DIR}
+  )
+
 install(
   TARGETS
     account

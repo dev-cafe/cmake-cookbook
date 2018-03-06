@@ -25,7 +25,7 @@
 - [Chapter 9: Mixed-language Projects](Chapter09/README.md)
 - [Chapter 10: Writing an Installer](Chapter10/README.md)
 - [Chapter 11: Generating Source Archives and Binary Distributions](Chapter11/README.md)
-- [Chapter 12: Creating Python Packages Which Require CMake](Chapter12/README.md)
+- [Chapter 12: Distributing CMake projects via PyPI or Conda](Chapter12/README.md)
 - [Chapter 13: Building Documentation](Chapter13/README.md)
 - [Chapter 14: Alternatives to Makefiles and Cross-compilation](Chapter14/README.md)
 - [Chapter 15: Testing Dashboards](Chapter15/README.md)
