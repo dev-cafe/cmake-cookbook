@@ -37,6 +37,7 @@ in
       lcov
       liblapack
       libuuid
+      mercurial
       ninja-kitware
       openmpi
       pipenv
