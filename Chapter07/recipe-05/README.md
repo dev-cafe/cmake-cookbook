@@ -1,1 +1,1 @@
-# Using the fetch-build-link approach to modularize own projects
+# Managing your project as a superbuild
