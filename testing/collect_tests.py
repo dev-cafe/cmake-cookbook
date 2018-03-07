@@ -7,9 +7,17 @@ import datetime
 import time
 import docopt
 import colorama
+import re
+from packaging import version
 
 from parse import extract_menu_file
 from env import get_ci_environment, get_generator, get_buildflags, get_topdir, verbose_output
+
+
+def get_cmake_version():
+    output = subprocess.check_output(['cmake', '--version']).decode('utf-8')
+    cmake_version = re.search(r'cmake version (.*?)\n', output).group(1)
+    return cmake_version
 
 
 def run_command(step, command, expect_failure):
@@ -54,17 +62,23 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     # extract global menu
     menu_file = os.path.join(topdir, 'testing', 'menu.yml')
-    expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
+    expect_failure_global, env_global, definitions_global, targets_global, _ = extract_menu_file(
         menu_file, generator, ci_environment)
 
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
     menu_file = os.path.join(recipe, example, 'menu.yml')
-    expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
+    expect_failure_local, env_local, definitions_local, targets_local, min_cmake_version_local = extract_menu_file(
         menu_file, generator, ci_environment)
 
     expect_failure = expect_failure_global or expect_failure_local
+
+    cmake_version = get_cmake_version()
+
+    if version.parse(cmake_version) < version.parse(min_cmake_version_local):
+        sys.stdout.write('\nSKIPPING (CMake version too low)\n')
+        return 0
 
     # local env vars override global ones
     env = env_global.copy()

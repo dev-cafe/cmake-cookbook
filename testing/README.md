@@ -54,6 +54,14 @@ appveyor:
 ```
 
 
+## Skipping tests if CMake version is too low
+
+```
+travis-linux:
+  min_cmake_version: '3.10'
+```
+
+
 ## Bulding targets
 
 ```
