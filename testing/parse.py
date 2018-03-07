@@ -36,7 +36,7 @@ def extract_menu_file(file_name, generator, ci_environment):
             targets.append(entry)
 
     if ci_environment not in config:
-        return False, {}, {}, targets, '0.0.0'
+        return False, {}, {}, targets
 
     failing_generators = []
     if 'failing_generators' in config[ci_environment]:
@@ -59,9 +59,4 @@ def extract_menu_file(file_name, generator, ci_environment):
                 v = entry[k]
                 definitions[k] = v
 
-    # minimum cmake version
-    min_cmake_version = '0.0.0'
-    if 'min_cmake_version' in config[ci_environment]:
-        min_cmake_version = str(config[ci_environment]['min_cmake_version'])
-
-    return expect_failure, env, definitions, targets, min_cmake_version
+    return expect_failure, env, definitions, targets
