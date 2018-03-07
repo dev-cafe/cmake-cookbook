@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(PythonInterp REQUIRED)
 
 # directory contains UseCython.cmake and FindCython.cmake
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake-cython)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake-cython)
 
 # this defines cython_add_module
 include(UseCython)
