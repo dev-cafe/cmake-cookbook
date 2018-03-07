@@ -92,10 +92,11 @@ echo "-- Done with HDF5 $HDF5_VERSION"
 
 Anaconda_VERSION="5.1.0"
 echo "-- Installing Anaconda $Anaconda_VERSION"
-if [[ -f $HOME/Deps/conda/bin/conda ]]; then
+if [[ -d $HOME/Deps/conda/bin ]]; then
   echo "-- Anaconda $Anaconda_VERSION FOUND in cache"
 else
   cd $HOME/Downloads
+  echo "-- Anaconda $Anaconda_VERSION NOT FOUND in cache"
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     curl -Ls https://repo.continuum.io/archive/Anaconda2-${Anaconda_VERSION}-Linux-x86_64.sh > conda.sh
   elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -110,8 +111,5 @@ else
   conda update -q conda
   conda info -a
   cd $TRAVIS_BUILD_DIR
-  echo "Check what's in $HOME/Deps/conda"
-  ls $HOME/Deps/conda
-  ls $HOME/Deps/conda/bin
 fi
 echo "-- Done with Anaconda $Anaconda_VERSION"
