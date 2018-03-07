@@ -23,7 +23,7 @@
 - [Chapter 4: Creating and Running Tests](Chapter04/README.md)
 - [Chapter 5: Configure-time and Build-time Operations](Chapter05/README.md)
 - [Chapter 6: Generating Source Code](Chapter06/README.md)
-- [Chapter 7: Fetching, Building, and Linking External Sources](Chapter07/README.md)
+- [Chapter 7: The Superbuild Pattern](Chapter07/README.md)
 - [Chapter 8: Structuring Projects](Chapter08/README.md)
 - [Chapter 9: Mixed-language Projects](Chapter09/README.md)
 - [Chapter 10: Writing an Installer](Chapter10/README.md)

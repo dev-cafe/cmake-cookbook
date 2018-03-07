@@ -16,11 +16,11 @@ else()
     UPDATE_COMMAND
       ""
     CMAKE_ARGS
-      -DCMAKE_INSTALL_PREFIX=${STAGED_INSTALL_PREFIX}
+      -DCMAKE_INSTALL_PREFIX=${DEPS_INSTALL_PREFIX}
     INSTALL_COMMAND
       ${CMAKE_MAKE_PROGRAM} install
     )
   include(GNUInstallDirs)
-  set(FFTW3_DIR ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/fftw3
+  set(FFTW3_DIR ${DEPS_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/fftw3
     CACHE PATH "Path to internally built FFTW3Config.cmake" FORCE)
 endif()

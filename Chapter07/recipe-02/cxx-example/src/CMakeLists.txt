@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-03_core CXX)
+project(recipe-02_core CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -17,11 +17,4 @@ target_include_directories(path-info
 target_link_libraries(path-info
   PUBLIC
     Boost::filesystem
-  )
-
-install(
-  PROGRAMS
-    ${CMAKE_CURRENT_BINARY_DIR}/path-info
-  DESTINATION
-    ${CMAKE_INSTALL_PREFIX}/bin
   )

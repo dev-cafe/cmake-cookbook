@@ -32,7 +32,7 @@ else()
     # Generate argument for BUILD_BYPRODUCTS
     set(_build_byproducts)
     foreach(_lib IN LISTS b2_needed_components)
-      list(APPEND _build_byproducts ${STAGED_INSTALL_PREFIX}/boost/lib/libboost_${_lib}${CMAKE_SHARED_LIBRARY_SUFFIX})
+      list(APPEND _build_byproducts ${DEPS_INSTALL_PREFIX}/boost/lib/libboost_${_lib}${CMAKE_SHARED_LIBRARY_SUFFIX})
     endforeach()
     # Transform the ;-separated list to a ,-separated list (digested by the Boost build toolchain!)
     string(REPLACE ";" "," b2_needed_components "${b2_needed_components}")
@@ -60,7 +60,7 @@ else()
     CONFIGURE_COMMAND
       <SOURCE_DIR>/${Boost_BOOTSTRAP}
       --with-toolset=${toolset}
-      --prefix=${STAGED_INSTALL_PREFIX}/boost
+      --prefix=${DEPS_INSTALL_PREFIX}/boost
       ${select_libraries}
     BUILD_COMMAND
       <SOURCE_DIR>/b2 -q
@@ -86,7 +86,7 @@ else()
 
   set(Boost_NO_SYSTEM_PATHS ON
     CACHE BOOL "Whether to look into system locations for Boost" FORCE)
-  set(BOOST_ROOT ${STAGED_INSTALL_PREFIX}/boost
+  set(BOOST_ROOT ${DEPS_INSTALL_PREFIX}/boost
     CACHE PATH "Path to internally built Boost installation root" FORCE)
   set(BOOST_INCLUDEDIR ${BOOST_ROOT}/include
     CACHE PATH "Path to internally built Boost include directories" FORCE)
