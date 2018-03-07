@@ -1,7 +1,7 @@
 #!@PYTHON_EXECUTABLE@
 # -*- coding: utf-8 -*-
 #
-# recipe-02 documentation build configuration file, created by
+# recipe-03 documentation build configuration file, created by
 # sphinx-quickstart on Thu Feb 15 17:02:41 2018.
 #
 # This file is execfile()d with the current directory set to its
@@ -109,7 +109,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'recipe-02doc'
+htmlhelp_basename = 'recipe-03doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -135,7 +135,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'recipe-02.tex', 'recipe-02 Documentation',
+    (master_doc, 'recipe-03.tex', 'recipe-03 Documentation',
      'Radovan Bast, Roberto Di Remigio', 'manual'),
 ]
 
@@ -143,7 +143,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, 'recipe-02', 'recipe-02 Documentation', [author], 1)]
+man_pages = [(master_doc, 'recipe-03', 'recipe-03 Documentation', [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -151,11 +151,11 @@ man_pages = [(master_doc, 'recipe-02', 'recipe-02 Documentation', [author], 1)]
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'recipe-02', 'recipe-02 Documentation', author, 'recipe-02',
+    (master_doc, 'recipe-03', 'recipe-03 Documentation', author, 'recipe-03',
      'One line description of project.', 'Miscellaneous'),
 ]
 
-breathe_projects = {'recipe-03': '@SPHINX_BUILD_DIR@/xml'}
+breathe_projects = {'recipe-03': '@BREATHE_DOC_BUILD_DIR@/xml'}
 
 
 def run_doxygen(folder):
@@ -171,4 +171,4 @@ def run_doxygen(folder):
 
 
 def setup(app):
-    run_doxygen('@SPHINX_BUILD_DIR@')
+    run_doxygen('@BREATHE_DOC_BUILD_DIR@')
