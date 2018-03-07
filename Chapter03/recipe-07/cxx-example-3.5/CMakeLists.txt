@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(recipe-07 CXX)
 
@@ -29,8 +29,17 @@ if(BLAS_FOUND)
 else()
   message(STATUS "BLAS not found. Using Eigen own functions")
 endif()
+
 target_link_libraries(linear-algebra
   PUBLIC
     Eigen3::Eigen
-    OpenMP::OpenMP_CXX
+  )
+
+set_target_properties(
+  linear-algebra
+  PROPERTIES
+    COMPILE_FLAGS
+      ${OpenMP_CXX_FLAGS}
+    LINK_FLAGS ${TEMP}
+      ${OpenMP_CXX_FLAGS}
   )

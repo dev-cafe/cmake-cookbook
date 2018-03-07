@@ -7,9 +7,25 @@ import datetime
 import time
 import docopt
 import colorama
+import re
+from packaging import version
 
 from parse import extract_menu_file
 from env import get_ci_environment, get_generator, get_buildflags, get_topdir, verbose_output
+
+
+def get_min_cmake_version(file_name):
+    with open(file_name, 'r') as f:
+        s = re.search(r'cmake_minimum_required\(VERSION (.*?) FATAL_ERROR', f.read())
+        assert s is not None, "get_min_cmake_version had trouble with file {0}".format(file_name)
+        cmake_version = s.group(1)
+    return cmake_version
+
+
+def get_system_cmake_version():
+    output = subprocess.check_output(['cmake', '--version']).decode('utf-8')
+    cmake_version = re.search(r'cmake version (.*?)\n', output).group(1)
+    return cmake_version
 
 
 def run_command(step, command, expect_failure):
@@ -93,6 +109,13 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
                                    'build-{0}'.format(time_stamp))
     cmakelists_path = os.path.join(recipe, example)
 
+    min_cmake_version = get_min_cmake_version(os.path.join(cmakelists_path, 'CMakeLists.txt'))
+    system_cmake_version = get_system_cmake_version()
+
+    if version.parse(system_cmake_version) < version.parse(min_cmake_version):
+        sys.stdout.write('\nSKIPPING (system cmake version < min. cmake version for this recipe)\n')
+        return 0
+
     return_code = 0
 
     custom_sh_path = os.path.join(cmakelists_path, 'custom.sh')
@@ -164,7 +187,7 @@ def main(arguments):
                           '\nrecipe: {0}'.format(line[2:]))
 
         # Glob examples
-        examples = sorted(glob.glob(os.path.join(recipe, '*example')))
+        examples = sorted(glob.glob(os.path.join(recipe, '*example*')))
 
         for example in examples:
             return_code += run_example(topdir, generator, ci_environment, buildflags, recipe, example)

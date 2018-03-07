@@ -4,7 +4,7 @@ pipeline:
     commands:
       - pip install --user pipenv --upgrade
       - pipenv install
-      - ./dependencies/report_versions.sh
+      - ./testing/dependencies/report_versions.sh
       - pipenv run python testing/collect_tests.py 'Chapter*/recipe-*'
 
 matrix:
