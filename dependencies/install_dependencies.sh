@@ -110,5 +110,8 @@ else
   conda update -q conda
   conda info -a
   cd $TRAVIS_BUILD_DIR
+  echo "Check what's in $HOME/Deps/conda"
+  ls $HOME/Deps/conda
+  ls $HOME/Deps/conda/bin
 fi
 echo "-- Done with Anaconda $Anaconda_VERSION"
