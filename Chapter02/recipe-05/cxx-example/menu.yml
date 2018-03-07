@@ -1,0 +1,2 @@
+travis-linux:
+  min_cmake_version: '3.10'
