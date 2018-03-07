@@ -7,6 +7,8 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 find_package(FFTW3 CONFIG REQUIRED)
+get_property(_loc TARGET FFTW3::fftw3 PROPERTY LOCATION)
+message(STATUS "Found FFTW3: ${_loc} (found version ${FFTW3_VERSION})")
 
 add_executable(fftw_example fftw_example.c)
 # target_include_directories is needed because FFTW does not export headers

@@ -1,5 +1,6 @@
 find_package(Boost 1.64 QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
 if(Boost_FOUND)
+  message(STATUS "Found Boost version ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}")
   add_library(boost_external INTERFACE)
 else()
   message(STATUS "Suitable Boost could not be located, Building Boost instead.")

@@ -1,5 +1,7 @@
 find_package(FFTW3 CONFIG QUIET)
 if(FFTW3_FOUND)
+  get_property(_loc TARGET FFTW3::fftw3 PROPERTY LOCATION)
+  message(STATUS "Found FFTW3: ${_loc} (found version ${FFTW3_VERSION})")
   add_library(fftw3_external INTERFACE)  # dummy
 else()
   message(STATUS "Suitable FFTW3 could not be located. Downloading and building!")
