@@ -1,5 +1,5 @@
 # set minimum cmake version
-cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
 project(recipe-06 C)
@@ -12,7 +12,15 @@ find_package(MPI REQUIRED)
 
 add_executable(hello-mpi hello-mpi.c)
 
+target_compile_options(hello-mpi
+  PUBLIC
+    ${MPI_C_COMPILE_FLAGS}
+  )
+target_include_directories(hello-mpi
+  PUBLIC
+    ${MPI_C_INCLUDE_PATH}
+  )
 target_link_libraries(hello-mpi
   PUBLIC
-    MPI::MPI_C
+    ${MPI_C_LIBRARIES}
   )
