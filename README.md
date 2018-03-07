@@ -39,9 +39,7 @@
 - Folders for recipes are named `ChapterN/recipe-M`, where `N` is the chapter number and `M` is a number, _i.e._
   `01`, `02`, etc. In each chapter we restart the recipe counter.
 - Each recipe can have more than one example subfolder. These subfolders are
-  named `*-example`.
-- Any code for the recipes **must be stored** in a `prefix-example`
-  subdirectory.
+  named `*example*`. Any code must reside in these subfolders.
 
 
 ### Testing
