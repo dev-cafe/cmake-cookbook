@@ -1,1 +1,1 @@
-# Probing an external library
+# Using the superbuild pattern
