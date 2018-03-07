@@ -1,1 +1,1 @@
-# Fetching, building and linking to the Boost libraries
+# Managing dependencies with a superbuild I. The Boost libraries

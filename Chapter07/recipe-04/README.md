@@ -1,1 +1,1 @@
-# Fetching, building and linking to the FFTW library
+# Managing dependencies with a superbuild II. The FFTW library
