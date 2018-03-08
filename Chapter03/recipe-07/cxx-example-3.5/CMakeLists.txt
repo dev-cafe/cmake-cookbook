@@ -40,6 +40,6 @@ set_target_properties(
   PROPERTIES
     COMPILE_FLAGS
       ${OpenMP_CXX_FLAGS}
-    LINK_FLAGS ${TEMP}
+    LINK_FLAGS
       ${OpenMP_CXX_FLAGS}
   )

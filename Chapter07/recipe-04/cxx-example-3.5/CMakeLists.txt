@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-05 CXX)
+project(recipe-04 CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -9,10 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(external/upstream)
 
 include(ExternalProject)
-
 ExternalProject_Add(${PROJECT_NAME}_core
   DEPENDS
-    message_external
+    eigen3_external
   SOURCE_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/src
   CMAKE_ARGS
@@ -20,7 +19,7 @@ ExternalProject_Add(${PROJECT_NAME}_core
     -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
     -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
     -DCMAKE_CXX_STANDARD_REQUIRED=${CMAKE_CXX_STANDARD_REQUIRED}
-    -Dmessage_DIR=${message_DIR}
+    -DEigen3_DIR=${Eigen3_DIR}
   CMAKE_CACHE_ARGS
     -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}
     -DCMAKE_PREFIX_PATH:PATH=${CMAKE_PREFIX_PATH}

@@ -1,4 +1,4 @@
-find_package(Boost 1.64 QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
+find_package(Boost 1.61 QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
 if(Boost_FOUND)
   message(STATUS "Found Boost version ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}")
   add_library(boost_external INTERFACE)
@@ -48,9 +48,9 @@ else()
   include(ExternalProject)
   ExternalProject_Add(boost_external
     URL
-      https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip
+      https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.gz
     URL_HASH
-      SHA256=b99973c805f38b549dbeaf88701c0abeff8b0e8eaa4066df47cac10a32097523
+      SHA256=a77c7cc660ec02704c6884fbb20c552d52d60a18f26573c9cee0788bf00ed7e6
     DOWNLOAD_NO_PROGRESS
       1
     UPDATE_COMMAND

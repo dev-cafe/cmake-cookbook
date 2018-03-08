@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(recipe-04_core CXX)
 
@@ -15,5 +15,12 @@ add_executable(linear-algebra linear-algebra.cpp)
 target_link_libraries(linear-algebra
   PUBLIC
     Eigen3::Eigen
-    OpenMP::OpenMP_CXX
+  )
+set_target_properties(
+  linear-algebra
+  PROPERTIES
+    COMPILE_FLAGS
+      ${OpenMP_CXX_FLAGS}
+    LINK_FLAGS
+      ${OpenMP_CXX_FLAGS}
   )

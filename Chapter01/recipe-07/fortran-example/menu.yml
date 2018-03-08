@@ -9,11 +9,17 @@ drone:
 travis-linux:
   definitions:
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
+  failing_generators:
+    - 'Ninja'
 
 travis-osx:
   definitions:
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
+  failing_generators:
+    - 'Ninja'
 
 local:
   definitions:
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
+  failing_generators:
+    - 'Ninja'

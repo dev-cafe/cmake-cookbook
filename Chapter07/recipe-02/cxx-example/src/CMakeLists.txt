@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Boost 1.64 REQUIRED COMPONENTS filesystem)
+find_package(Boost 1.61 REQUIRED COMPONENTS filesystem)
 
 add_executable(path-info path-info.cpp)
 target_include_directories(path-info

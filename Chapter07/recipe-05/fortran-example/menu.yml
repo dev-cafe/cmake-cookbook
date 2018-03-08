@@ -1,6 +1,4 @@
 drone:
-  definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
   failing_generators:
     - 'Ninja'
 
