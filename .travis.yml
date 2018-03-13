@@ -89,4 +89,4 @@ before_script:
 
 script:
   - ./testing/dependencies/report_versions.sh
-  - pipenv run python testing/collect_tests.py 'Chapter*/recipe-*'
+  - pipenv run python testing/collect_tests.py 'Chapter07/recipe-02'
