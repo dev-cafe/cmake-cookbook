@@ -17,6 +17,6 @@ message(STATUS "Git hash is ${GIT_HASH}")
 # generate file version.h based on version.h.in
 configure_file(
   ${CMAKE_CURRENT_LIST_DIR}/version.h.in
-  generated/version.h
+  ${TARGET_DIR}/generated/version.h
   @ONLY
   )

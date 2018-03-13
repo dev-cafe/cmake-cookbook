@@ -24,7 +24,9 @@ add_custom_command(
     ${PROJECT_BINARY_DIR}/generated/version.h
     ALL
   COMMAND
-    ${CMAKE_COMMAND} -P ${PROJECT_SOURCE_DIR}/git-hash.cmake
+    ${CMAKE_COMMAND} -D TARGET_DIR=${PROJECT_BINARY_DIR} -P ${PROJECT_SOURCE_DIR}/git-hash.cmake
+  WORKING_DIRECTORY
+    ${PROJECT_SOURCE_DIR}
   )
 
 # rebuild version.h every time
