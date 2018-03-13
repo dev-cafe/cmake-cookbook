@@ -84,8 +84,6 @@ else()
       "${_build_byproducts}"
     )
 
-  set(Boost_NO_SYSTEM_PATHS ON
-    CACHE BOOL "Whether to look into system locations for Boost" FORCE)
   set(BOOST_ROOT ${DEPS_INSTALL_PREFIX}/boost
     CACHE PATH "Path to internally built Boost installation root" FORCE)
   set(BOOST_INCLUDEDIR ${BOOST_ROOT}/include
