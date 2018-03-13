@@ -20,7 +20,7 @@ def get_ci_environment():
 def get_generator():
     generator = os.environ.get('GENERATOR')
     if generator is None:
-        generator = 'Ninja'
+        generator = 'Unix Makefiles'
     return generator
 
 
