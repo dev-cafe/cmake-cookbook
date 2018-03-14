@@ -17,8 +17,6 @@ else()
       ""
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX=${DEPS_INSTALL_PREFIX}
-    INSTALL_COMMAND
-      ${CMAKE_MAKE_PROGRAM} install
     )
   include(GNUInstallDirs)
   set(FFTW3_DIR ${DEPS_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/fftw3

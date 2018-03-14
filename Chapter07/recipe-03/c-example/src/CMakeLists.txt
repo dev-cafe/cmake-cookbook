@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(recipe-03_core C)
 
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_EXTENSIONS OFF)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-
 find_package(FFTW3 CONFIG REQUIRED)
 get_property(_loc TARGET FFTW3::fftw3 PROPERTY LOCATION)
 message(STATUS "Found FFTW3: ${_loc} (found version ${FFTW3_VERSION})")
