@@ -18,8 +18,6 @@ else()
       -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
     CMAKE_CACHE_ARGS
       -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}
-    INSTALL_COMMAND
-      ${CMAKE_MAKE_PROGRAM} install
     )
   set(message_DIR ${DEPS_INSTALL_PREFIX}/share/cmake/message
     CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
