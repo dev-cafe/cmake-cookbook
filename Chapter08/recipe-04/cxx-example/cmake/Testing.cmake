@@ -1,53 +1,56 @@
 include(CMakeParseArguments)
-macro(add_Catch_test)
+
+macro(add_catch_test)
   set(options)
   set(oneValueArgs NAME COST)
   set(multiValueArgs LABELS DEPENDS REFERENCE_FILES)
-  cmake_parse_arguments(add_Catch_test
+  cmake_parse_arguments(add_catch_test
     "${options}"
     "${oneValueArgs}"
     "${multiValueArgs}"
     ${ARGN}
     )
 
-  message("add_Catch_test_NAME : ${add_Catch_test_NAME}")
-  message("add_Catch_test_LABELS : ${add_Catch_test_LABELS}")
-  message("add_Catch_test_COST : ${add_Catch_test_COST}")
+  message(STATUS "defining a test ...")
+  message(STATUS "    NAME: ${add_catch_test_NAME}")
+  message(STATUS "    LABELS: ${add_catch_test_LABELS}")
+  message(STATUS "    COST: ${add_catch_test_COST}")
+  message(STATUS "    REFERENCE_FILES: ${add_catch_test_REFERENCE_FILES}")
 
   add_test(
     NAME
-      ${add_Catch_test_NAME}
+      ${add_catch_test_NAME}
     COMMAND
       ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/cpp_test
-      [${add_Catch_test_NAME}] --success --out
-      ${PROJECT_BINARY_DIR}/tests/${add_Catch_test_NAME}.log --durations yes
+      [${add_catch_test_NAME}] --success --out
+      ${PROJECT_BINARY_DIR}/tests/${add_catch_test_NAME}.log --durations yes
     WORKING_DIRECTORY
       ${CMAKE_CURRENT_BINARY_DIR}
     )
 
-  set_tests_properties(${add_Catch_test_NAME}
+  set_tests_properties(${add_catch_test_NAME}
     PROPERTIES
-      LABELS "${add_Catch_test_LABELS}"
+      LABELS "${add_catch_test_LABELS}"
     )
 
-  if(add_Catch_test_COST)
-    set_tests_properties(${add_Catch_test_NAME}
+  if(add_catch_test_COST)
+    set_tests_properties(${add_catch_test_NAME}
       PROPERTIES
-        COST ${add_Catch_test_COST}
+        COST ${add_catch_test_COST}
       )
   endif()
 
-  if(add_Catch_test_DEPENDS)
-    set_tests_properties(${add_Catch_test_NAME}
+  if(add_catch_test_DEPENDS)
+    set_tests_properties(${add_catch_test_NAME}
       PROPERTIES
-        DEPENDS ${add_Catch_test_DEPENDS}
+        DEPENDS ${add_catch_test_DEPENDS}
       )
   endif()
 
-  if(add_Catch_test_REFERENCE_FILES)
+  if(add_catch_test_REFERENCE_FILES)
     file(
       COPY
-        ${add_Catch_test_REFERENCE_FILES}
+        ${add_catch_test_REFERENCE_FILES}
       DESTINATION
         ${CMAKE_CURRENT_BINARY_DIR}
       )

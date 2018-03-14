@@ -3,12 +3,22 @@ target_link_libraries(cpp_test sum_integers)
 
 include(Testing)
 
-add_Catch_test(
+add_catch_test(
   NAME
-    sum
+    short
   LABELS
-    sum
+    short
     cpp_test
   COST
     1.5
+  )
+
+add_catch_test(
+  NAME
+    long
+  LABELS
+    long
+    cpp_test
+  COST
+    2.5
   )

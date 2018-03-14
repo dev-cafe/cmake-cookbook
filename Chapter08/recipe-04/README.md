@@ -1,2 +1,1 @@
 # Defining a macro with named arguments
-
