@@ -55,8 +55,6 @@ else()
       1
     UPDATE_COMMAND
       ""
-    BUILD_IN_SOURCE
-      1
     CONFIGURE_COMMAND
       <SOURCE_DIR>/${Boost_BOOTSTRAP}
       --with-toolset=${toolset}
@@ -69,6 +67,8 @@ else()
            variant=release
            toolset=${toolset}
            ${Boost_BUILD_USER_CONFIG_ARGS}
+    BUILD_IN_SOURCE
+      1
     INSTALL_COMMAND
       <SOURCE_DIR>/b2 -q install
            link=shared
