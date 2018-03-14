@@ -1,0 +1,6 @@
+targets:
+  - test
+
+travis-linux:
+  failing_generators:
+    - 'Ninja'
