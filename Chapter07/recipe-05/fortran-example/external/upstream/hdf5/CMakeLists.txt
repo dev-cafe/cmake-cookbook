@@ -25,11 +25,11 @@ else()
       hdf5-1_10_1
     UPDATE_COMMAND
       ""
-    BUILD_IN_SOURCE
-      1
     CONFIGURE_COMMAND
       CC=${CMAKE_C_COMPILER} FC=${CMAKE_Fortran_COMPILER}
         <SOURCE_DIR>/configure --prefix=${DEPS_INSTALL_PREFIX}/hdf5 --enable-fortran
+    BUILD_IN_SOURCE
+      1
     BUILD_COMMAND
       ${CMAKE_MAKE_PROGRAM}
     INSTALL_COMMAND
