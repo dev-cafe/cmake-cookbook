@@ -1,5 +1,5 @@
 add_library(evolution "")
-  
+
 target_sources(
   evolution
   PRIVATE

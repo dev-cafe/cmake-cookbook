@@ -1,7 +1,7 @@
 add_executable(cpp_test test.cpp)
 target_link_libraries(cpp_test sum_integers)
 
-include(Testing)
+include(testing)
 
 add_catch_test(
   NAME

@@ -1,1 +1,1 @@
-# Defining a macro with named arguments
+# Defining a function or macro with named arguments

@@ -13,8 +13,8 @@ int main(int argc, char *argv[]) {
   std::tie(length, num_steps, rule_decimal) = parse_arguments(argc, argv);
 
   // print information about parameters
-  std::cout << "number of steps: " << num_steps << std::endl;
   std::cout << "length: " << length << std::endl;
+  std::cout << "number of steps: " << num_steps << std::endl;
   std::cout << "rule: " << rule_decimal << std::endl;
 
   // obtain binary representation for the rule

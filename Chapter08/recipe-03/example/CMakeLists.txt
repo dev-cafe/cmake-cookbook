@@ -14,7 +14,7 @@ set_compiler_flag(
   "-nope"      # this should fail
   )
 
-message(STATUS "this is a working compile flag: ${working_compile_flag}")
+message(STATUS "working C compile flag: ${working_compile_flag}")
 
 set_compiler_flag(
   working_compile_flag CXX REQUIRED
@@ -22,4 +22,4 @@ set_compiler_flag(
   "-g"    # this should work
   )
 
-message(STATUS "this is a working compile flag: ${working_compile_flag}")
+message(STATUS "working CXX compile flag: ${working_compile_flag}")

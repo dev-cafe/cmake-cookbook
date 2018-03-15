@@ -1,5 +1,5 @@
 add_library(parser "")
-  
+
 target_sources(
   parser
   PUBLIC

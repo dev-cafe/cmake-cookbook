@@ -13,13 +13,13 @@ contains
     integer :: n
 
     binary_representation = 0
-    pos = 8 
+    pos = 8
     n = n_decimal
     do while (n > 0)
       binary_representation(pos) = mod(n, 2)
       n = (n - binary_representation(pos))/2
       pos = pos - 1
-    end do 
+    end do
   end function
 
 end module

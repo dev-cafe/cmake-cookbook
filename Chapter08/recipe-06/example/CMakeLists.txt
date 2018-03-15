@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(recipe-06 LANGUAGES NONE)
 
-set(included_modules)
 macro(custom_include_guard)
+  if(NOT DEFINED included_modules)
+      set(included_modules)
+  endif()
+
   if ("${CMAKE_CURRENT_LIST_FILE}" IN_LIST included_modules)
     message(WARNING "module ${CMAKE_CURRENT_LIST_FILE} processed more than once")
   endif()

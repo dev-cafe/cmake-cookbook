@@ -1,6 +1,6 @@
 include(CMakeParseArguments)
 
-macro(add_catch_test)
+function(add_catch_test)
   set(options)
   set(oneValueArgs NAME COST)
   set(multiValueArgs LABELS DEPENDS REFERENCE_FILES)
@@ -55,4 +55,4 @@ macro(add_catch_test)
         ${CMAKE_CURRENT_BINARY_DIR}
       )
   endif()
-endmacro()
+endfunction()

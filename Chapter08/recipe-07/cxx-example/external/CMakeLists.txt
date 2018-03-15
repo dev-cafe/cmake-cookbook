@@ -3,7 +3,7 @@ add_library(conversion "")
 target_sources(
   conversion
   PRIVATE
-    conversion.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/conversion.cpp
   PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/conversion.hpp
   )
