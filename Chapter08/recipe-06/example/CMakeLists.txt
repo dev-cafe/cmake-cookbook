@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-06 NONE)
+project(recipe-06 LANGUAGES NONE)
 
 set(included_modules)
 macro(custom_include_guard)

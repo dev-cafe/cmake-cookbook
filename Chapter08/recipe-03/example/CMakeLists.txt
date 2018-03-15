@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-03 C CXX)
+project(recipe-03 LANGUAGES C CXX)
 
 include(set_compiler_flag.cmake)
 

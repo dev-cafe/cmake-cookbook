@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-# name of the project and supported language
-project(recipe-09 Fortran)
+# name of the project and supported languages
+project(recipe-09 LANGUAGES Fortran)
 
 # place binaries and libraries according to GNU standards
 include(GNUInstallDirs)
