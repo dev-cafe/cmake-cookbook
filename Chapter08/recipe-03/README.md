@@ -1,0 +1,1 @@
+# Function to test and set compiler flags

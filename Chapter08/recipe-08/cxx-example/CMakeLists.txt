@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-01 LANGUAGES CXX)
+project(recipe-08 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -14,7 +14,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
     ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
-add_subdirectory(src)
+# defines targets and sources
+include(src/CMakeLists.txt)
+include(external/CMakeLists.txt)
 
 enable_testing()
 add_subdirectory(tests)
