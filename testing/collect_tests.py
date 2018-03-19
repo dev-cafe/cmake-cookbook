@@ -16,8 +16,10 @@ from env import get_ci_environment, get_generator, get_buildflags, get_topdir, v
 
 def get_min_cmake_version(file_name):
     with open(file_name, 'r') as f:
-        s = re.search(r'cmake_minimum_required\(VERSION (.*?) FATAL_ERROR', f.read())
-        assert s is not None, "get_min_cmake_version had trouble with file {0}".format(file_name)
+        s = re.search(r'cmake_minimum_required\(VERSION (.*?) FATAL_ERROR',
+                      f.read())
+        assert s is not None, "get_min_cmake_version had trouble with file {0}".format(
+            file_name)
         cmake_version = s.group(1)
     return cmake_version
 
@@ -47,8 +49,7 @@ def run_command(step, command, expect_failure):
     sys.stdout.write(colorama.Fore.BLUE + colorama.Style.BRIGHT +
                      '  {0} ... '.format(step))
     if child_return_code == 0:
-        sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT +
-                         'OK\n')
+        sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
         if verbose_output():
             sys.stdout.write(stdout + stderr + '\n')
     else:
@@ -66,7 +67,8 @@ def run_command(step, command, expect_failure):
     return return_code
 
 
-def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
+def run_example(topdir, generator, ci_environment, buildflags, recipe,
+                example):
 
     # extract global menu
     menu_file = os.path.join(topdir, 'testing', 'menu.yml')
@@ -95,10 +97,9 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     # local targets extend global targets
     targets = targets_global + targets_local
 
-    env_string = ' '.join('{0}={1}'.format(entry, env[entry])
-                          for entry in env)
-    definitions_string = ' '.join('-D{0}={1}'.format(
-        entry, definitions[entry]) for entry in definitions)
+    env_string = ' '.join('{0}={1}'.format(entry, env[entry]) for entry in env)
+    definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry])
+                                  for entry in definitions)
 
     # we append a time stamp to the build directory
     # to avoid it being re-used when running tests multiple times
@@ -109,11 +110,14 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
                                    'build-{0}'.format(time_stamp))
     cmakelists_path = os.path.join(recipe, example)
 
-    min_cmake_version = get_min_cmake_version(os.path.join(cmakelists_path, 'CMakeLists.txt'))
+    min_cmake_version = get_min_cmake_version(
+        os.path.join(cmakelists_path, 'CMakeLists.txt'))
     system_cmake_version = get_system_cmake_version()
 
     if version.parse(system_cmake_version) < version.parse(min_cmake_version):
-        sys.stdout.write('\nSKIPPING (system cmake version < min. cmake version for this recipe)\n')
+        sys.stdout.write(
+            '\nSKIPPING (system cmake version < min. cmake version for this recipe)\n'
+        )
         return 0
 
     return_code = 0
@@ -124,9 +128,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
         step = 'custom.sh'
         command = '{0} {1}'.format(custom_sh_path, build_directory)
         return_code += run_command(
-            step=step,
-            command=command,
-            expect_failure=expect_failure)
+            step=step, command=command, expect_failure=expect_failure)
     else:
         # if there is no custom script, we run tests "normally"
 
@@ -136,26 +138,22 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
             env_string, cmakelists_path, build_directory, generator,
             definitions_string)
         return_code += run_command(
-            step=step,
-            command=command,
-            expect_failure=expect_failure)
+            step=step, command=command, expect_failure=expect_failure)
 
         # build step
         step = 'building'
-        command = 'cmake --build {0} -- {1}'.format(build_directory, buildflags)
+        command = 'cmake --build {0} -- {1}'.format(build_directory,
+                                                    buildflags)
         return_code += run_command(
-            step=step,
-            command=command,
-            expect_failure=expect_failure)
+            step=step, command=command, expect_failure=expect_failure)
 
         # extra targets
         for target in targets:
             step = target
-            command = 'cmake --build {0} --target {1}'.format(build_directory, target)
+            command = 'cmake --build {0} --target {1}'.format(
+                build_directory, target)
             return_code += run_command(
-                step=step,
-                command=command,
-                expect_failure=expect_failure)
+                step=step, command=command, expect_failure=expect_failure)
 
     return return_code
 
@@ -190,8 +188,8 @@ def main(arguments):
         examples = sorted(glob.glob(os.path.join(recipe, '*example*')))
 
         for example in examples:
-            return_code += run_example(topdir, generator, ci_environment, buildflags, recipe, example)
-
+            return_code += run_example(topdir, generator, ci_environment,
+                                       buildflags, recipe, example)
 
     colorama.deinit()
     sys.exit(return_code)
