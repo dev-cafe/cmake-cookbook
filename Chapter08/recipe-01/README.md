@@ -1,1 +1,1 @@
-# Code reuse with functions and macros
+# Defining a macro with named arguments

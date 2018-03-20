@@ -12,9 +12,9 @@ drone:
 
 travis-linux:
   definitions:
-    - CMAKE_C_COMPILER: 'gcc'
+    - CMAKE_C_COMPILER: 'gcc-7'
     - CMAKE_CXX_COMPILER: 'g++-7'
-    - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_Fortran_COMPILER: 'gfortran-7'
 
 travis-osx:
   definitions:

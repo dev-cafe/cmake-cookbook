@@ -1,3 +1,11 @@
+travis-linux:
+  failing_generators:
+    - 'Ninja'
+
+travis-osx:
+  failing_generators:
+    - 'Ninja'
+
 local:
   failing_generators:
     - 'Ninja'

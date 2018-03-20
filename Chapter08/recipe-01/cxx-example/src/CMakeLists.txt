@@ -1,5 +1,3 @@
-# adds current directory to INTERFACE_INCLUDE_DIRECTORIES
-# for targets defined below
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 add_library(sum_integers sum_integers.cpp)

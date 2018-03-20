@@ -1,14 +1,16 @@
 add_executable(cpp_test test.cpp)
 target_link_libraries(cpp_test sum_integers)
 
-function(add_catch_test _name _cost)
+macro(add_catch_test _name _cost)
   math(EXPR num_macro_calls "${num_macro_calls} + 1")
   message(STATUS "add_catch_test called with ${ARGC} arguments: ${ARGV}")
+# message(STATUS "${_name} equals ${ARGV0}")
+# message(STATUS "${_cost} equals ${ARGV1}")
 
-set(_argn "${ARGN}")
-if(_argn)
-  message(STATUS "oops - macro received argument(s) we did not expect: ${ARGN}")
-endif()
+  set(_argn "${ARGN}")
+  if(_argn)
+    message(STATUS "oops - macro received argument(s) we did not expect: ${ARGN}")
+  endif()
 
   add_test(
     NAME
@@ -26,7 +28,7 @@ endif()
     PROPERTIES
       COST ${_cost}
     )
-endfunction()
+endmacro()
 
 set(num_macro_calls 0)
 

@@ -90,7 +90,7 @@ echo "-- Done with HDF5 $HDF5_VERSION"
 
 Anaconda_VERSION="5.1.0"
 echo "-- Installing Anaconda $Anaconda_VERSION"
-if [[ -d $HOME/Deps/conda/bin ]]; then
+if [[ -d "$HOME/Deps/conda/bin" ]]; then
   echo "-- Anaconda $Anaconda_VERSION FOUND in cache"
 else
   cd $HOME/Downloads
