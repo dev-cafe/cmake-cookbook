@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-03 CXX)
+project(recipe-03 LANGUAGES CXX)
 
 # generate a library from sources
 set(_sources Message.hpp Message.cpp)

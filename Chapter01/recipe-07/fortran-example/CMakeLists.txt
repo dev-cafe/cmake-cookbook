@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-08 Fortran)
+project(recipe-07 LANGUAGES Fortran)
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message("Fortran compiler flags, debug mode: ${CMAKE_Fortran_FLAGS_DEBUG}")

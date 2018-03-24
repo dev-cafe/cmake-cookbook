@@ -2,7 +2,9 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-10 CXX)
+project(recipe-09 LANGUAGES CXX)
+
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 add_library(animals SHARED
   Animal.cpp

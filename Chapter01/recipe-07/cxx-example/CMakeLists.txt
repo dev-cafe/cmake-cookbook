@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-08 CXX)
+project(recipe-07 LANGUAGES CXX)
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message("C++ compiler flags, debug mode: ${CMAKE_CXX_FLAGS_DEBUG}")

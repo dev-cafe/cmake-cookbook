@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-07 C)
+project(recipe-06 LANGUAGES C)
 
 message("Is the C++ compiler loaded? ${CMAKE_CXX_COMPILER_LOADED}")
 if(CMAKE_CXX_COMPILER_LOADED)

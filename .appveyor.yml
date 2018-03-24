@@ -10,7 +10,10 @@ platform: x86
 build:
   parallel: true
 
-cache: c:\tools\vcpkg\installed\
+cache:
+ - C:\tools\vcpkg\installed\ -> testing\install.ps1
+ - C:\projects\deps\MSMPI -> testing\install.ps1
+ - C:\projects\deps\ninja -> testing\install.ps1
 
 environment:
   # Create expected SHELL variable for pipenv.
@@ -48,7 +51,10 @@ init:
   - set PATH=%PATH%;C:\tools\vcpkg
 
 install:
-  - ps: .\testing\install.ps1
+  - mkdir C:\projects\deps
+  - cd C:\projects\deps
+  - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\install.ps1
+  - SetEnvMPI.cmd
   - cd %APPVEYOR_BUILD_FOLDER%
   - pipenv install
   - pipenv run python --version

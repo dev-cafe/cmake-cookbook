@@ -15,7 +15,7 @@ All that’s needed to configure and build this minimal project on GNU/Linux, Ma
 ```
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-0001 CXX)
+project(recipe-01 LANGUAGES CXX)
 
 add_executable(hello-world hello-world.cpp)
 ```
@@ -25,7 +25,7 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 ```
 The first line sets a minimum required version for CMake. A fatal error will be issued if a version of CMake lower than that will be used.
 ```
-project(recipe-0001 CXX)
+project(recipe-01 LANGUAGES CXX)
 ```
 The second line declares the name of the project, `recipe-0001`, and the project’s language.
 C++ is the default programming language, but we suggest to always explicitly state the project’s language in the `project` command.
