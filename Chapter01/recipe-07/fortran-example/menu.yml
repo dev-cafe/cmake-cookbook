@@ -1,6 +1,10 @@
 appveyor:
   definitions:
     - CMAKE_BUILD_TYPE: 'RelWithDebInfo'
+  failing_generators:
+    - 'Ninja'
+    - 'Visual Studio 14 2015'
+    - 'Visual Studio 15 2017'
 
 drone:
   definitions:

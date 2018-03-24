@@ -35,9 +35,6 @@ function main () {
   Set-Location -Path C:\projects\deps
   if (($env:GENERATOR -eq "Visual Studio 14 2015") `
       -or ($env:GENERATOR -eq "Visual Studio 15 2017")) {
-      git clone https://github.com/Microsoft/vcpkg
-      Set-Location -Path vcpkg
-      & scripts\bootstrap.ps1
       vcpkg integrate install
       vcpkg install msmpi hdf5
   } else {

@@ -10,6 +10,8 @@ platform: x86
 build:
   parallel: true
 
+cache: c:\tools\vcpkg\installed\
+
 environment:
   # Create expected SHELL variable for pipenv.
   SHELL: "windows"
@@ -25,11 +27,11 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       GENERATOR: "Visual Studio 14 2015"
       BUILDFLAGS: "/verbosity:normal"
-      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/projects/deps/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       GENERATOR: "Visual Studio 15 2017"
       BUILDFLAGS: "/verbosity:normal"
-      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/projects/deps/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
 init:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
@@ -43,6 +45,7 @@ init:
   - set PATH=C:\Users\AppVeyor\AppData\Roaming\Python\Scripts;%PATH%
   - set PATH=%PATH%;C:\projects\deps\ninja
   - set PATH=%PATH%;C:\Libraries\boost_1_63_0;C:\Libraries\boost_1_64_0
+  - set PATH=%PATH%;C:\tools\vcpkg
 
 install:
   - ps: .\testing\install.ps1
