@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-06 CXX)
+project(recipe-05 LANGUAGES CXX)
 
 # expose options to the user
 option(USE_LIBRARY "Compile sources into a library" OFF)
@@ -14,6 +14,8 @@ cmake_dependent_option(MAKE_STATIC_LIBRARY "Compile sources into a static librar
 # third option depends on the value of the first
 cmake_dependent_option(MAKE_SHARED_LIBRARY "Compile sources into a shared library" ON
                        "USE_LIBRARY" ON)
+
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # list sources
 set(_sources Message.hpp Message.cpp)

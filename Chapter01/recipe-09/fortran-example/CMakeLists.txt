@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-10 Fortran)
+project(recipe-09 LANGUAGES Fortran)
 
 # list sources by globbing
 file(GLOB _sources geometry_*)

@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-05 CXX)
+project(recipe-10 LANGUAGES CXX)
 
 # list sources by globbing
 file(GLOB _sources geometry_*)

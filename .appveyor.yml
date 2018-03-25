@@ -5,43 +5,56 @@
 # http://blogs.msdn.com/b/vcblog/archive/2011/01/05/damn-my-vc-project-is-building-slower-in-vs2010-what-do-i-do-now-a-step-by-step-guide.aspx
 version: 'build_{build}-{branch}'
 
-image:
-  - Visual Studio 2015
-
 platform: x86
 
 build:
   parallel: true
 
+cache:
+ - C:\tools\vcpkg\installed\ -> testing\install.ps1
+ - C:\projects\deps\MSMPI -> testing\install.ps1
+ - C:\projects\deps\ninja -> testing\install.ps1
+
 environment:
+  # Create expected SHELL variable for pipenv.
+  SHELL: "windows"
   matrix:
-    - GENERATOR: "Visual Studio 14 2015"
-      BUILDFLAGS: "/verbosity:normal"
-    - GENERATOR: "MinGW Makefiles"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      GENERATOR: "MinGW Makefiles"
       BUILDFLAGS: "VERBOSE=1"
-    - GENERATOR: "Ninja"
+      CMAKARGS: ""
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      GENERATOR: "Ninja"
       BUILDFLAGS: "-v"
+      CMAKARGS: ""
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      GENERATOR: "Visual Studio 14 2015"
+      BUILDFLAGS: "/verbosity:normal"
+      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      GENERATOR: "Visual Studio 15 2017"
+      BUILDFLAGS: "/verbosity:normal"
+      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
 init:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
   - set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
   - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-  - set PATH=C:\MinGW\bin;%PATH%
+  - ps: >-
+      if (($env:GENERATOR -eq "MinGW Makefiles") -or ($env:GENERATOR -eq "Ninja")) {
+        $env:PATH += ";C:\MinGW\bin"
+      }
+  - set PYTHONIOENCODING=utf-8
+  - set PATH=C:\Users\AppVeyor\AppData\Roaming\Python\Scripts;%PATH%
+  - set PATH=%PATH%;C:\projects\deps\ninja
+  - set PATH=%PATH%;C:\Libraries\boost_1_63_0;C:\Libraries\boost_1_64_0
+  - set PATH=%PATH%;C:\tools\vcpkg
 
 install:
-  # Install GFortran
-  - mingw-get install fortran
-  # Install dependencies in C:\projects\deps
   - mkdir C:\projects\deps
   - cd C:\projects\deps
-  # Install Kitware-maintained Ninja
-  - set NINJA_URL="https://github.com/Kitware/ninja/releases/download/v1.7.2.gaad58.kitware.dyndep-1/ninja-1.7.2.gaad58.kitware.dyndep-1_i686-pc-windows-msvc.zip"
-  - appveyor DownloadFile %NINJA_URL% -FileName ninja.zip
-  - 7z e ninja.zip -oC:\projects\deps\ninja > nul
-  - set PATH=%PATH%;C:\projects\deps\ninja
-  - set PYTHONIOENCODING=utf-8
-  - pip install --disable-pip-version-check --upgrade pip
-  - pip install --upgrade pipenv
+  - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\install.ps1
+  - SetEnvMPI.cmd
   - cd %APPVEYOR_BUILD_FOLDER%
   - pipenv install
   - pipenv run python --version
@@ -51,6 +64,6 @@ before_build:
   - ninja.exe --version
 
 build_script:
-  - pipenv run python testing\collect_tests.py Chapter*/recipe-*
+  - pipenv run python testing\collect_tests.py Chapter01/recipe-*
 
 deploy: off
