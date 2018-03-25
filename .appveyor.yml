@@ -11,9 +11,9 @@ build:
   parallel: true
 
 cache:
- - C:\tools\vcpkg\installed\ -> testing\install.ps1
- - C:\projects\deps\MSMPI -> testing\install.ps1
- - C:\projects\deps\ninja -> testing\install.ps1
+ - C:\tools\vcpkg\installed\ -> testing\dependencies\install.ps1
+ - C:\projects\deps\MSMPI -> testing\dependencies\install.ps1
+ - C:\projects\deps\ninja -> testing\dependencies\install.ps1
 
 environment:
   # Create expected SHELL variable for pipenv.
@@ -42,7 +42,7 @@ init:
   - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - ps: >-
       if (($env:GENERATOR -eq "MinGW Makefiles") -or ($env:GENERATOR -eq "Ninja")) {
-        $env:PATH += ";C:\MinGW\bin"
+        $env:PATH += ";C:\\MinGW\\bin"
       }
   - set PYTHONIOENCODING=utf-8
   - set PATH=C:\Users\AppVeyor\AppData\Roaming\Python\Scripts;%PATH%
@@ -51,15 +51,16 @@ init:
   - set PATH=%PATH%;C:\tools\vcpkg
 
 install:
-  - mkdir C:\projects\deps
-  - cd C:\projects\deps
-  - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\install.ps1
-  - SetEnvMPI.cmd
-  - cd %APPVEYOR_BUILD_FOLDER%
+  - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\install.ps1
+  - ps: Get-ChildItem -Force $env:APPVEYOR_BUILD_FOLDER\testing
+  - ps: Get-ChildItem -Force $env:APPVEYOR_BUILD_FOLDER\testing\dependencies
+  - ps: Get-ChildItem -Force C:\projects
+  - ps: Get-ChildItem -Force C:\projects\deps
+  - "SetEnvMPI.cmd"
   - pipenv install
-  - pipenv run python --version
 
 before_build:
+  - pipenv run python --version
   - cmake --version
   - ninja.exe --version
 

@@ -14,7 +14,7 @@ $MSMPI_BASE_URL     = $MS_DOWNLOAD_URL + $MSMPI_HASH_URL_V90
 
 $ScriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 . "$ScriptDir\download.ps1"
-$DOWNLOADS = "C:\projects\deps\MSMPI"
+$DOWNLOADS = "C:\projects\downloads\MSMPI"
 
 function InstallMicrosoftMPISDK ($baseurl, $filename) {
     Write-Host "Installing Microsoft MPI SDK"
