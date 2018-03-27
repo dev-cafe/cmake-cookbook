@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name
-project(recipe-10)
+project(recipe-10 NONE)
 
 # define tests
 enable_testing()
