@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
-project(recipe-05 Fortran)
+project(recipe-05 LANGUAGES Fortran)
 
 add_subdirectory(external/upstream)
 

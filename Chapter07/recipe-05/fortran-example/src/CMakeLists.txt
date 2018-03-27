@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
-project(recipe-05_core Fortran)
+project(recipe-05_core LANGUAGES Fortran)
 
 find_package(HDF5 1.8 REQUIRED COMPONENTS Fortran)
 if(HDF5_FOUND)

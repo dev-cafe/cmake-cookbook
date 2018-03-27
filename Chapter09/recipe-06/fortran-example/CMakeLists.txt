@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and supported languages
-project(recipe-06 CXX Fortran)
+project(recipe-06 LANGUAGES CXX Fortran)
 
 # require C++11
 set(CMAKE_CXX_STANDARD 11)

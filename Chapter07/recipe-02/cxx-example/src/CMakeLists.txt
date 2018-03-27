@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-02_core CXX)
+project(recipe-02_core LANGUAGES CXX)
 
 find_package(Boost 1.61 REQUIRED COMPONENTS filesystem)
 

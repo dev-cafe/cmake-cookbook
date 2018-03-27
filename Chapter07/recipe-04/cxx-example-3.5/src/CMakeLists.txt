@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-04_core CXX)
+project(recipe-04_core LANGUAGES CXX)
 
 find_package(OpenMP REQUIRED)
 
