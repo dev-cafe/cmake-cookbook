@@ -77,7 +77,7 @@ before_install:
   - mkdir -p $HOME/Downloads $HOME/Deps
 
 install:
-  - ./testing/dependencies/install_dependencies.sh
+  - travis_wait 30 ./testing/dependencies/install_dependencies.sh
   - export PATH=$HOME/Deps/cmake/$CMAKE_VERSION/bin${PATH:+:$PATH}
   - pipenv install
   - pipenv run python --version
