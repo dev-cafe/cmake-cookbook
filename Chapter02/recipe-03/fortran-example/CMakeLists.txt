@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(recipe-03 Fortran)
+project(recipe-03 LANGUAGES Fortran)
 
 # define executable and its source file
 add_executable(hello-world hello-world.F90)

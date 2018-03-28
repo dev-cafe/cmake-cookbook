@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # project name and language
-project(recipe-05 CXX)
+project(recipe-05 LANGUAGES CXX)
 
 # define executable
 add_executable(processor-info "")
