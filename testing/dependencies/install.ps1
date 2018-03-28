@@ -28,10 +28,8 @@ function main () {
     $eigenurl = "http://bitbucket.org/eigen/eigen/get/3.3.4.zip"
     Download $eigenurl "eigen.zip" $DownloadDir
     Expand-Archive "$DownloadDir\eigen.zip" -DestinationPath "$pwd"
-    Get-ChildItem -Force "$pwd"
     Set-Location -Path "eigen-eigen-5a0156e40feb"
-    Get-ChildItem -Force "$pwd"
-    cmake -H"$pwd" -Bbuild_eigen -DCMAKE_INSTALL_PREFIX="$DepsDir\eigen"
+    cmake -H"$pwd" -Bbuild_eigen -DCMAKE_INSTALL_PREFIX="$DepsDir\eigen" > $nul
     cmake --build build_eigen -- install > $nul
     Set-Location -Path $DepsDir
   }
