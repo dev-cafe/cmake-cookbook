@@ -2,11 +2,3 @@ appveyor:
   env:
     - BOOST_INCLUDEDIR: 'C:\Libraries\boost_1_66_0\boost'
     - BOOST_LIBRARYDIR: 'C:\Libraries\boost_1_66_0\lib32-msvc-14.0'
-
-targets:
-  - test
-
-travis-osx:
-  failing_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'

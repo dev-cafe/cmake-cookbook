@@ -48,15 +48,10 @@ init:
   - set PYTHONIOENCODING=utf-8
   - set PATH=C:\Users\AppVeyor\AppData\Roaming\Python\Scripts;%PATH%
   - set PATH=%PATH%;C:\projects\deps\ninja
-  - set PATH=%PATH%;C:\Libraries\boost_1_63_0;C:\Libraries\boost_1_64_0
   - set PATH=%PATH%;C:\tools\vcpkg
 
 install:
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\install.ps1
-  - ps: Get-ChildItem -Force $env:APPVEYOR_BUILD_FOLDER\testing
-  - ps: Get-ChildItem -Force $env:APPVEYOR_BUILD_FOLDER\testing\dependencies
-  - ps: Get-ChildItem -Force C:\projects
-  - ps: Get-ChildItem -Force C:\projects\deps
   - "SetEnvMPI.cmd"
   - pipenv install
 
@@ -66,7 +61,8 @@ before_build:
   - ninja.exe --version
 
 build_script:
-  - pipenv run python testing\collect_tests.py chapter-01/recipe-*
-  - pipenv run python testing\collect_tests.py chapter-02/recipe-*
+  #- pipenv run python testing\collect_tests.py chapter-01/recipe-*
+  #- pipenv run python testing\collect_tests.py chapter-02/recipe-*
+  - pipenv run python testing\collect_tests.py chapter-03/recipe-*
 
 deploy: off

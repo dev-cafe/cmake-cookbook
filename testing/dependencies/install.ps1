@@ -29,16 +29,19 @@ function main () {
     Download $eigenurl "eigen.zip" $DownloadDir
     Expand-Archive "$DownloadDir\eigen.zip" -DestinationPath "$pwd"
     Set-Location -Path "eigen-eigen-5a0156e40feb"
-    cmake -H"$pwd" -Bbuild_eigen -DCMAKE_INSTALL_PREFIX="$DepsDir\eigen" > $nul
-    cmake --build build_eigen -- install > $nul
+    (cmake -H"$pwd" -Bbuild_eigen -DCMAKE_INSTALL_PREFIX="$DepsDir\eigen") 2>&1 | out-null
+    (cmake --build build_eigen -- install) 2>&1 | out-null
     Set-Location -Path $DepsDir
   }
+  nuget install OpenBLAS -OutputDirectory "${DepsDir}"
+  nuget install hdf5-v120-complete -OutputDirectory "${DepsDir}"
   if (($env:GENERATOR -eq "Visual Studio 14 2015") `
       -or ($env:GENERATOR -eq "Visual Studio 15 2017")) {
-      vcpkg integrate install
-      # vcpkg install hdf5
+    vcpkg integrate install
   } else {
-      mingw-get install fortran
+    mingw-get help
+    mingw-get install fortran
+    mingw-get search pkg-config
   }
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
