@@ -14,6 +14,7 @@ cache:
  - C:\tools\vcpkg\installed\ -> testing\dependencies\install.ps1
  - C:\projects\deps\MSMPI -> testing\dependencies\install.ps1
  - C:\projects\deps\ninja -> testing\dependencies\install.ps1
+ - C:\projects\deps\eigen -> testing\dependencies\install.ps1
 
 environment:
   # Create expected SHELL variable for pipenv.
