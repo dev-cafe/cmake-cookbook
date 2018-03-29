@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and supported language
-project(recipe-04 CXX)
+project(recipe-04 LANGUAGES CXX)
 
 # require C++11
 set(CMAKE_CXX_STANDARD 11)

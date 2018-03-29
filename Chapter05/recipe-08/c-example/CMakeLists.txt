@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
 
-project(recipe-08 CXX C)
+project(recipe-08 LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)

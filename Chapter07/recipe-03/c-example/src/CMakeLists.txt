@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-03_core C)
+project(recipe-03_core LANGUAGES C)
 
 find_package(FFTW3 CONFIG REQUIRED)
 get_property(_loc TARGET FFTW3::fftw3 PROPERTY LOCATION)
