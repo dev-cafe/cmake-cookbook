@@ -2,10 +2,10 @@ module version
 
   implicit none
 
-  integer, parameter :: VERSION_MAJOR = @VERSION_MAJOR@
-  integer, parameter :: VERSION_MINOR = @VERSION_MINOR@
-  integer, parameter :: VERSION_PATCH = @VERSION_PATCH@
+  integer, parameter :: PROJECT_VERSION_MAJOR = @PROJECT_VERSION_MAJOR@
+  integer, parameter :: PROJECT_VERSION_MINOR = @PROJECT_VERSION_MINOR@
+  integer, parameter :: PROJECT_VERSION_PATCH = @PROJECT_VERSION_PATCH@
 
-  character(*), parameter :: VERSION_STRING = "v@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@"
+  character(*), parameter :: PROJECT_VERSION = "v@PROJECT_VERSION@"
 
 end module
