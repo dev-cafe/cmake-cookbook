@@ -32,4 +32,4 @@
 - [Chapter 13: Building Documentation](Chapter13/README.md)
 - [Chapter 14: Alternatives to Makefiles and Cross-compilation](Chapter14/README.md)
 - [Chapter 15: Testing Dashboards](Chapter15/README.md)
-- [Chapter 16: Porting a Project to CMake](Chapter16/README.md)
+- [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)
