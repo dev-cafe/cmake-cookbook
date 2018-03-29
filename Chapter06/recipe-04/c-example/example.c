@@ -1,13 +1,10 @@
 #include <stdio.h>
 
-// provides VERSION_MAJOR, VERSION_MINOR, and VERSION_PATCH
+// provides PROJECT_VERSION
 #include "version.h"
 
 int main() {
-  printf("This is output from example code v%i.%i.%i:\n",
-         VERSION_MAJOR,
-         VERSION_MINOR,
-         VERSION_PATCH);
+  printf("This is output from example code v%s:\n", PROJECT_VERSION);
 
   printf("Hello CMake world!\n");
 }
