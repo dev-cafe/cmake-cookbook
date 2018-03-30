@@ -1,1 +1,0 @@
-# Discovering the host processor architecture

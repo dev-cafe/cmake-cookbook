@@ -1,1 +1,0 @@
-# Redefining functions and macros

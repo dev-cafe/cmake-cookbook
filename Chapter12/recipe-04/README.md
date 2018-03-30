@@ -1,1 +1,0 @@
-# Distributing a project with dependencies as Conda package

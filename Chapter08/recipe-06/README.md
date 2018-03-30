@@ -1,1 +1,0 @@
-# Deprecating functions, macros, and variables

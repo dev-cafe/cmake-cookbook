@@ -1,1 +1,0 @@
-# Managing your project as a superbuild

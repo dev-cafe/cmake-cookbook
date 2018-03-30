@@ -1,5 +1,0 @@
-- Generating Visual Studio project files
-- Building code with MinGW Makefiles
-- Building code with Ninja
-- Cross-compiling a code for Android
-- Cross-compiling a code for MinGW (Windows)

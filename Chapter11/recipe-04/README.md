@@ -1,1 +1,0 @@
-# Generating RPM packages

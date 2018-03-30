@@ -1,1 +1,0 @@
-# Distributing a simple project as Conda package

@@ -1,1 +1,0 @@
-# Detecting the Python Interpreter

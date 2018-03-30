@@ -66,7 +66,7 @@ before_build:
   - ninja.exe --version
 
 build_script:
-  - pipenv run python testing\collect_tests.py Chapter01/recipe-*
-  - pipenv run python testing\collect_tests.py Chapter02/recipe-*
+  - pipenv run python testing\collect_tests.py chapter-01/recipe-*
+  - pipenv run python testing\collect_tests.py chapter-02/recipe-*
 
 deploy: off

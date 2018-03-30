@@ -1,1 +1,0 @@
-# Avoiding global variables using target_sources

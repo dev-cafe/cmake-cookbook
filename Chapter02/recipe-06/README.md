@@ -1,1 +1,0 @@
-# Enabling vectorization for the Eigen library

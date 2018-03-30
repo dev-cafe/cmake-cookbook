@@ -4,10 +4,20 @@
 
 ### Conventions
 
-- Folders for recipes are named `ChapterN/recipe-M`, where `N` is the chapter number and `M` is a number, _i.e._
+- Folders for recipes are named `chapter-N/recipe-M`, where `N` is the chapter number and `M` is a number, _i.e._
   `01`, `02`, etc. In each chapter we restart the recipe counter.
 - Each recipe can have more than one example subfolder. These subfolders are
   named `*example*`. Any code must reside in these subfolders.
+
+
+### Updating the table of contents and generate README files
+
+The README files that form the table of contents (main README.md, chapter READMEs and recipe READMEs
+are generated from title.txt and abstract.md files.
+
+This means that you should not modify README.md files but rather only edit title.txt and abstract.md files.
+
+To update the README files, run `python contributing/generate-readmes.py` - this file updates READMEs in place.
 
 
 ### Coding style

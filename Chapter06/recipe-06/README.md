@@ -1,1 +1,0 @@
-# Recording the Git hash at configure-time
