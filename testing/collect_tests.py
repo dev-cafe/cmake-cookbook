@@ -177,12 +177,11 @@ def main(arguments):
     return_code = 0
     for recipe in recipes:
 
-        # extract title from README.md
-        with open(os.path.join(recipe, 'README.md'), 'r') as f:
-            for line in f.read().splitlines():
-                if line[0:2] == '# ':
-                    print(colorama.Back.BLUE +
-                          '\nrecipe: {0}'.format(line[2:]))
+        # extract title from title.txt
+        with open(os.path.join(recipe, 'title.txt'), 'r') as f:
+            line = f.readline()
+            print(colorama.Back.BLUE +
+                  '\nrecipe: {0}'.format(line))
 
         # Glob examples
         examples = sorted(glob.glob(os.path.join(recipe, '*example*')))
