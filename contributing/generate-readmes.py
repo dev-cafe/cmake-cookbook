@@ -39,10 +39,14 @@ def generate_main_readme(directory_of_this_script,
 
         for chapter in chapters:
             number = int(chapter.split('-')[-1])
-            f.write('- [Chapter {0}: {1}]({2}/README.md)\n'.format(number, chapter_titles[chapter], chapter))
+            f.write('\n\n### [Chapter {0}: {1}]({2}/README.md)\n\n'.format(number, chapter_titles[chapter], chapter))
+            for recipe in recipes[chapter]:
+                f.write('- [{0}]({1}/{2}/README.md)\n'.format(recipe_titles[(chapter, recipe)],
+                                                                chapter,
+                                                                recipe))
     
         # chapter 16 is hard-coded
-        f.write('- [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)\n')
+        f.write('### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)\n')
 
 
 def locate_chapters_and_recipes(directory_of_this_script):
