@@ -23,6 +23,36 @@ def generate_chapter_readmes(directory_of_this_script,
                                                           recipe))
 
 
+def generate_recipe_readmes(directory_of_this_script,
+                            chapters,
+                            recipes,
+                            recipe_titles):
+
+    default_abstract = 'Abstract to be written ...'
+
+    for chapter in chapters:
+        for recipe in recipes[chapter]:
+            readme = directory_of_this_script / '..' / chapter / recipe / 'README.md'
+
+            abstract_file = directory_of_this_script / '..' / chapter / recipe / 'abstract.md'
+            if os.path.isfile(abstract_file):
+                with open(abstract_file, 'r') as f:
+                    abstract = f.read()
+            else:
+                abstract = default_abstract
+
+            with open(readme, 'w') as f:
+
+                f.write('# {0}\n\n'.format(recipe_titles[(chapter, recipe)]))
+                f.write(abstract)
+                f.write('\n\n')
+
+                paths = pathlib.Path(directory_of_this_script / '..' / chapter / recipe).glob('*example*')
+                examples = sorted((path.parts[-1] for path in paths))
+                for example in examples:
+                    f.write('- [{0}]({1}/)\n'.format(example, example))
+
+
 def generate_main_readme(directory_of_this_script,
                          chapters,
                          chapter_titles,
@@ -119,3 +149,8 @@ if __name__ == '__main__':
                              chapter_titles,
                              recipes,
                              recipe_titles)
+
+    generate_recipe_readmes(directory_of_this_script,
+                            chapters,
+                            recipes,
+                            recipe_titles)
