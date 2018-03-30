@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
-project(recipe-05_core LANGUAGES CXX)
+project(recipe-06_core LANGUAGES CXX)
 
 find_package(message 1 CONFIG REQUIRED)
 get_property(_loc TARGET message::message-shared PROPERTY LOCATION)
