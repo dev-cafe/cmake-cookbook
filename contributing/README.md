@@ -10,6 +10,11 @@
   named `*example*`. Any code must reside in these subfolders.
 
 
+### Updating the table of contents and README files
+
+- For this run `python contributing/generate-readmes.py` - this file updates READMEs in place.
+
+
 ### Coding style
 
 #### Indentation
