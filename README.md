@@ -88,7 +88,7 @@
 ### [Chapter 6: Generating Source Code](chapter-06/README.md)
 
 - [Generating sources at configure-time](chapter-06/recipe-01/README.md)
-- [Generating source code at build-time using Python](chapter-06/recipe-02/README.md)
+- [Generating source code at configure-time using Python](chapter-06/recipe-02/README.md)
 - [Generating source code at build-time using Python](chapter-06/recipe-03/README.md)
 - [Recording the project version information for reproducibility](chapter-06/recipe-04/README.md)
 - [Recording the project version from a file](chapter-06/recipe-05/README.md)
