@@ -67,5 +67,5 @@ targets:
 
 ```shell
 pipenv install
-pipenv run python testing/collect_tests.py 'Chapter*/recipe-*'
+pipenv run python testing/collect_tests.py 'chapter-*/recipe-*'
 ```
