@@ -23,13 +23,13 @@ matrix:
             - uuid-dev
             - pkg-config
       env:
-        - CMAKE_VERSION="3.10.2"
+        - CMAKE_VERSION="3.11.0"
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: linux
       addons: *1
       env:
-        - CMAKE_VERSION="3.10.2"
+        - CMAKE_VERSION="3.11.0"
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
     - os: linux
@@ -57,7 +57,7 @@ cache:
   pip: true
   directories:
     - $HOME/Deps/cmake/3.5.2
-    - $HOME/Deps/cmake/3.10.2
+    - $HOME/Deps/cmake/3.11.0
     - $HOME/Deps/eigen
     - $HOME/Deps/hdf5
     - $HOME/Deps/ninja
