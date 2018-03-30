@@ -7,6 +7,22 @@ import pathlib
 import glob
 
 
+def generate_chapter_readmes(directory_of_this_script,
+                             chapters,
+                             chapter_titles,
+                             recipes,
+                             recipe_titles):
+
+    for chapter in chapters:
+        readme = directory_of_this_script / '..' / chapter / 'README.md'
+        with open(readme, 'w') as f:
+            number = int(chapter.split('-')[-1])
+            f.write('# Chapter {0}: {1}\n\n'.format(number, chapter_titles[chapter]))
+            for recipe in recipes[chapter]:
+                f.write('- [{0}]({1}/README.md)\n'.format(recipe_titles[(chapter, recipe)],
+                                                          recipe))
+
+
 def generate_main_readme(directory_of_this_script,
                          chapters,
                          chapter_titles,
@@ -97,3 +113,9 @@ if __name__ == '__main__':
                          chapter_titles,
                          recipes,
                          recipe_titles)
+
+    generate_chapter_readmes(directory_of_this_script,
+                             chapters,
+                             chapter_titles,
+                             recipes,
+                             recipe_titles)

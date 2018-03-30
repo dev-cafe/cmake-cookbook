@@ -1,3 +1,5 @@
+# Chapter 7: The Superbuild Pattern
+
 - [Using the superbuild pattern](recipe-01/README.md)
 - [Managing dependencies with a superbuild I. The Boost libraries](recipe-02/README.md)
 - [Managing dependencies with a superbuild II. The FFTW library](recipe-03/README.md)

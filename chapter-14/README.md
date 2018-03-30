@@ -1,5 +1,2 @@
-- Generating Visual Studio project files
-- Building code with MinGW Makefiles
-- Building code with Ninja
-- Cross-compiling a code for Android
-- Cross-compiling a code for MinGW (Windows)
+# Chapter 14: Alternatives to Makefiles and Cross-compilation
+

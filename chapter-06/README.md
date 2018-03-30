@@ -1,3 +1,5 @@
+# Chapter 6: Generating Source Code
+
 - [Generating sources at configure-time](recipe-01/README.md)
 - [Generating source code at configure-time using Python](recipe-02/README.md)
 - [Generating source code at build-time using Python](recipe-03/README.md)
