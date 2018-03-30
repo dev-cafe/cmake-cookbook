@@ -10,9 +10,14 @@
   named `*example*`. Any code must reside in these subfolders.
 
 
-### Updating the table of contents and README files
+### Updating the table of contents and generate README files
 
-- For this run `python contributing/generate-readmes.py` - this file updates READMEs in place.
+The README files that form the table of contents (main README.md, chapter READMEs and recipe READMEs
+are generated from title.txt and abstract.md files.
+
+This means that you should not modify README.md files but rather only edit title.txt and abstract.md files.
+
+To update the README files, run `python contributing/generate-readmes.py` - this file updates READMEs in place.
 
 
 ### Coding style
