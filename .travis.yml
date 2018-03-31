@@ -54,6 +54,7 @@ matrix:
         - BUILDFLAGS="-v"
 
 cache:
+  timeout: 1000
   pip: true
   directories:
     - $HOME/Deps/cmake/3.5.2
