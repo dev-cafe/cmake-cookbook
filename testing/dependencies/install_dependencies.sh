@@ -68,6 +68,7 @@ else
   cmake -H. -Bbuild_eigen -DCMAKE_INSTALL_PREFIX=$HOME/Deps/eigen &> /dev/null
   cmake --build build_eigen -- install &> /dev/null
   cd $TRAVIS_BUILD_DIR
+  rm -rf $HOME/Downloads/eigen
 fi
 echo "-- Done with Eigen $Eigen_VERSION"
 
@@ -109,5 +110,6 @@ else
   conda update -q conda
   conda info -a
   cd $TRAVIS_BUILD_DIR
+  rm -f $HOME/Downloads/conda.sh
 fi
 echo "-- Done with Anaconda $Anaconda_VERSION"
