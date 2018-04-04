@@ -39,9 +39,8 @@ function main () {
       -or ($env:GENERATOR -eq "Visual Studio 15 2017")) {
     vcpkg integrate install
   } else {
-    mingw-get help
-    mingw-get install fortran
-    mingw-get search pkg-config
+    mingw-get install fortran mingw32-pthreads-w32
+    pacman --version
   }
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.

@@ -21,6 +21,7 @@ in
   stdenv.mkDerivation {
     name = "CMake-recipes";
     buildInputs = [
+      atlas
       boost155
       ccache
       clang-tools
@@ -35,10 +36,10 @@ in
       graphviz
       hdf5
       lcov
-      liblapack
       libuuid
       mercurial
       ninja-kitware
+      openblas
       openmpi
       pipenv
       pkgconfig
