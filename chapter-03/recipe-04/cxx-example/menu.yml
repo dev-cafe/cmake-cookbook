@@ -1,7 +1,4 @@
 appveyor:
-  definitions:
-    - BLAS_DIR: 'C:\projects\deps\OpenBLAS.0.2.14.1\lib\native\lib\win32'
-    - LAPACK_DIR: 'C:\projects\deps\OpenBLAS.0.2.14.1\lib\native\lib\win32'
   failing_generators:
     - 'Ninja'
     - 'Visual Studio 14 2015'

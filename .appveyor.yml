@@ -49,6 +49,7 @@ init:
   - set PATH=C:\Users\AppVeyor\AppData\Roaming\Python\Scripts;%PATH%
   - set PATH=%PATH%;C:\projects\deps\ninja
   - set PATH=%PATH%;C:\tools\vcpkg
+  - set PATH=%PATH%;C:\projects\deps\OpenBLAS.0.2.14.1\lib\native\lib\win32
 
 install:
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\install.ps1

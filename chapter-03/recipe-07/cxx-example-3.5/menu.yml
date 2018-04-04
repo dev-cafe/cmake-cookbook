@@ -1,7 +1,5 @@
 appveyor:
   definitions:
-    - BLAS_DIR: 'C:\projects\deps\OpenBLAS.0.2.14.1\lib\native\lib\win32'
-    - LAPACK_DIR: 'C:\projects\deps\OpenBLAS.0.2.14.1\lib\native\lib\win32'
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
 
 drone:
