@@ -1,13 +1,11 @@
-#include <vector>
-
 #include "sum_integers.hpp"
 
+#include <vector>
+
 int main() {
-  std::vector<int> integers = {1, 2, 3, 4, 5};
+  auto integers = {1, 2, 3, 4, 5};
 
-  int sum = sum_integers(integers);
-
-  if (sum == 15)
+  if (sum_integers(integers) == 15)
   {
     return 0;
   }

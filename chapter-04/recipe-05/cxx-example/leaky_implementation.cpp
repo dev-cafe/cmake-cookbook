@@ -3,8 +3,7 @@
 int do_some_work() {
 
   // we allocate an array
-  double *my_array;
-  my_array = new double[1000];
+  double *my_array = new double[1000];
 
   // do some work
   // ...
