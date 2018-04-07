@@ -1,4 +1,3 @@
-#include <cassert>
 #include <vector>
 
 #include "sum_integers.hpp"
@@ -8,5 +7,12 @@ int main() {
 
   int sum = sum_integers(integers);
 
-  assert(sum == 15);
+  if (sum == 15)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
 }
