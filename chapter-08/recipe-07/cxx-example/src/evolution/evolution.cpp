@@ -6,21 +6,16 @@
 std::vector<int> evolve(const std::vector<int> row, const std::string rule_binary) {
   std::vector<int> result;
 
-  for (int i = 0; i < row.size(); i++) {
+  for (auto i = 0; i < row.size(); ++i) {
 
-    int left = i - 1;
-    int center = i;
-    int right = i + 1;
+    auto left = (i==0 ? row.size() : i) - 1;
+    auto center = i;
+    auto right = (i + 1) % row.size();
 
-    if (left < 0)
-      left += row.size();
-    if (right >= row.size())
-      right -= row.size();
-
-    int ancestors = 4 * row[left] + 2 * row[center] + 1 * row[right];
+    auto ancestors = 4 * row[left] + 2 * row[center] + 1 * row[right];
     ancestors = 7 - ancestors;
 
-    int new_state = std::stoi(rule_binary.substr(ancestors, 1));
+    auto new_state = std::stoi(rule_binary.substr(ancestors, 1));
 
     result.push_back(new_state);
   }
