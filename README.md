@@ -168,4 +168,10 @@
 
 ### [Chapter 15: Testing Dashboards](chapter-15/README.md)
 
+- [Deploying tests to the CDash dashboard](chapter-15/recipe-01/README.md)
+- [Reporting test coverage to the CDash dashboard](chapter-15/recipe-02/README.md)
+- [Using the AddressSanitizer and reporting memory defects to CDash](chapter-15/recipe-03/README.md)
+- [Using the ThreadSanitizer and reporting data races to CDash](chapter-15/recipe-04/README.md)
+
+
 ### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)
