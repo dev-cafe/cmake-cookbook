@@ -92,7 +92,8 @@ def generate_main_readme(directory_of_this_script,
                                                                 recipe))
     
         # chapter 16 is hard-coded
-        f.write('### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)\n')
+        # since it points to an outside diff
+        f.write('\n\n### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)\n')
 
 
 def locate_chapters_and_recipes(directory_of_this_script):
