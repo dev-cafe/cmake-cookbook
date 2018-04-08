@@ -1,0 +1,49 @@
+# set minimum cmake version
+cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
+
+# project name and language
+project(recipe-04 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(OpenMP REQUIRED)
+
+add_executable(example example.cpp)
+target_link_libraries(
+  example
+  PUBLIC
+    OpenMP::OpenMP_CXX
+  )
+
+option(ENABLE_TSAN "Enable ThreadSanitizer" OFF)
+
+if(ENABLE_TSAN)
+  if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
+    target_compile_options(
+      example
+      PUBLIC
+        -g -O1 -fsanitize=thread -fno-omit-frame-pointer -fPIC
+      )
+    target_link_libraries(
+      example
+      PUBLIC
+        tsan
+      )
+  else()
+    message(WARNING "ThreadSanitizer not supported for this compiler")
+  endif()
+endif()
+
+enable_testing()
+
+# allow to report to a cdash dashboard
+include(CTest)
+
+add_test(
+  NAME
+    example
+  COMMAND
+    ${PROJECT_BINARY_DIR}/example
+  )
