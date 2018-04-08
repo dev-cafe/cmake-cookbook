@@ -1,0 +1,11 @@
+foreach(_test leaky use_after_free)
+  add_executable(${_test} ${_test}.cpp)
+  target_link_libraries(${_test} buggy)
+
+  add_test(
+    NAME
+      ${_test}
+    COMMAND
+      ${PROJECT_BINARY_DIR}/tests/${_test}
+    )
+endforeach()
