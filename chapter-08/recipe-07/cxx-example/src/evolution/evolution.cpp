@@ -8,7 +8,7 @@ std::vector<int> evolve(const std::vector<int> row, const std::string rule_binar
 
   for (auto i = 0; i < row.size(); ++i) {
 
-    auto left = (i==0 ? row.size() : i) - 1;
+    auto left = (i == 0 ? row.size() : i) - 1;
     auto center = i;
     auto right = (i + 1) % row.size();
 

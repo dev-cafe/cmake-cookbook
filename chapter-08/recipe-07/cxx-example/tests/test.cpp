@@ -1,7 +1,7 @@
 #include "evolution.hpp"
 
-#include <vector>
 #include <string>
+#include <vector>
 
 // this tells catch to provide a main()
 // only do this in one cpp file
