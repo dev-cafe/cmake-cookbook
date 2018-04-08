@@ -28,7 +28,7 @@ target_include_directories(
 
 # locate MKL libraries
 set(_mkl_libs)
-foreach(_name mkl_intel_lp64 mkl_gnu_thread mkl_core gomp)
+foreach(_name IN ITEMS mkl_intel_lp64 mkl_gnu_thread mkl_core gomp)
   find_library(
     _lib_${_name}
     ${_name}
