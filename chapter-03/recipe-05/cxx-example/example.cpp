@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <omp.h>
 
 
@@ -8,7 +9,7 @@ int main(int argc, char *argv[]) {
   std::cout << "number of threads: " << omp_get_max_threads()
             << std::endl;
 
-  auto n = atol(argv[1]);
+  auto n = std::stol(argv[1]);
   std::cout << "we will form sum of numbers from 1 to " << n << std::endl;
 
   // start timer
