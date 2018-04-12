@@ -3,8 +3,8 @@ let
   nixpkgs = (hostPkgs.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs-channels";
-    rev = "nixos-unstable";
-    sha256 = "1rc1pjnvfi194gka45zc1nivzsncc819kvxlfv277l2c8ryhgbpc";
+    rev = "nixos-18.03";
+    sha256 = "1q32p61l2y8wcrc8q01k364xsmfpfygbxawwkby3dh199zyhwl6r";
   });
 in
   with import nixpkgs {
@@ -21,6 +21,7 @@ in
   stdenv.mkDerivation {
     name = "CMake-recipes";
     buildInputs = [
+      atlas
       boost155
       ccache
       clang-tools
@@ -35,10 +36,10 @@ in
       graphviz
       hdf5
       lcov
-      liblapack
       libuuid
       mercurial
       ninja-kitware
+      openblas
       openmpi
       pipenv
       pkgconfig

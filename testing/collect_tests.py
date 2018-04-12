@@ -97,7 +97,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe,
     # local targets extend global targets
     targets = targets_global + targets_local
 
-    env_string = ' '.join('{0}={1}'.format(entry, env[entry]) for entry in env)
+    for entry in env:
+        os.environ[entry] = env[entry]
     definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry])
                                   for entry in definitions)
 
@@ -134,9 +135,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe,
 
         # configure step
         step = 'configuring'
-        command = '{0} cmake -H{1} -B{2} -G"{3}" {4}'.format(
-            env_string, cmakelists_path, build_directory, generator,
-            definitions_string)
+        command = 'cmake -H{0} -B{1} -G"{2}" {3}'.format(
+            cmakelists_path, build_directory, generator, definitions_string)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
 
@@ -154,6 +154,9 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe,
                 build_directory, target)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
+
+    for entry in env:
+        os.environ.pop(entry)
 
     return return_code
 
@@ -180,8 +183,7 @@ def main(arguments):
         # extract title from title.txt
         with open(os.path.join(recipe, 'title.txt'), 'r') as f:
             line = f.readline()
-            print(colorama.Back.BLUE +
-                  '\nrecipe: {0}'.format(line))
+            print(colorama.Back.BLUE + '\nrecipe: {0}'.format(line))
 
         # Glob examples
         examples = sorted(glob.glob(os.path.join(recipe, '*example*')))
