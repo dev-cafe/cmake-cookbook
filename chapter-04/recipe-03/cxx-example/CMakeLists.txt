@@ -32,6 +32,8 @@ if(ENABLE_UNIT_TESTS)
       https://github.com/google/googletest.git
     GIT_TAG
       release-1.8.0
+    GIT_SHALLOW
+      1
     CMAKE_ARGS
       -Dgtest_disable_pthreads=ON
     INSTALL_COMMAND
