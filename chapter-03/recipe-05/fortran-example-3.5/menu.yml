@@ -1,5 +1,6 @@
 appveyor:
   failing_generators:
+    - 'Ninja'
     - 'Visual Studio 14 2015'
     - 'Visual Studio 15 2017'
 
