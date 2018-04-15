@@ -9,6 +9,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(PythonInterp REQUIRED)
+find_program(BASH_EXECUTABLE NAMES bash REQUIRED)
+
 # example library
 add_library(sum_integers sum_integers.cpp)
 
@@ -24,7 +27,7 @@ target_link_libraries(cpp_test sum_integers)
 enable_testing()
 
 # define tests
-add_test(bash_test ${PROJECT_SOURCE_DIR}/test.sh)
+add_test(bash_test ${BASH_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.sh)
 add_test(cpp_test ${PROJECT_BINARY_DIR}/cpp_test)
-add_test(python_test_long ${PROJECT_SOURCE_DIR}/test.py)
-add_test(python_test_short ${PROJECT_SOURCE_DIR}/test.py --short)
+add_test(python_test_long ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.py)
+add_test(python_test_short ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.py --short)
