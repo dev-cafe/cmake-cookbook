@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 # C language needed inside FindHDF5
 project(recipe-09 LANGUAGES Fortran C)
 
-find_package(HDF5 1.8 REQUIRED COMPONENTS Fortran)
+find_package(HDF5 1.8)
 # Was the Fortran 2003 interface to HDF5 enabled?
 # Compile an example from the HDF5 website:
 # https://support.hdfgroup.org/HDF5/examples/f-src.html
