@@ -3,67 +3,53 @@
 
 # Speeding up a Visual Studio build.
 # http://blogs.msdn.com/b/vcblog/archive/2011/01/05/damn-my-vc-project-is-building-slower-in-vs2010-what-do-i-do-now-a-step-by-step-guide.aspx
-version: 'build_{build}-{branch}'
+version: 'build-{build}-{branch}'
 
 platform: x86
 
 build:
   parallel: true
 
-cache:
- - C:\tools\vcpkg\installed\ -> testing\dependencies\install.ps1
- - C:\projects\deps\MSMPI -> testing\dependencies\install.ps1
- - C:\projects\deps\ninja -> testing\dependencies\install.ps1
- - C:\projects\deps\eigen -> testing\dependencies\install.ps1
-
 environment:
   # Create expected SHELL variable for pipenv.
   SHELL: "windows"
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      GENERATOR: "MinGW Makefiles"
+      MSYSTEM: MINGW64
+      GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
-      CMAKARGS: ""
+      CMAKEARGS: ""
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
       GENERATOR: "Ninja"
       BUILDFLAGS: "-v"
-      CMAKARGS: ""
+      CMAKEARGS: ""
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 14 2015"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 15 2017"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
-init:
-  # Workaround for CMake not wanting sh.exe on PATH for MinGW
-  - set PATH=%PATH:C:\Program Files (x86)\Git\bin;=%
-  - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-  - ps: >-
-      if (($env:GENERATOR -eq "MinGW Makefiles") -or ($env:GENERATOR -eq "Ninja")) {
-        $env:PATH += ";C:\\MinGW\\bin"
-      }
-  - set PYTHONIOENCODING=utf-8
-  - set PATH=C:\Users\AppVeyor\AppData\Roaming\Python\Scripts;%PATH%
-  - set PATH=%PATH%;C:\projects\deps\ninja
-  - set PATH=%PATH%;C:\tools\vcpkg
-  - set PATH=%PATH%;C:\projects\deps\OpenBLAS.0.2.14.1\lib\native\lib\win32
-
 install:
-  - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\install.ps1
+  - set PATH=C:\Python36;%PATH%
+  - set PATH=C:\Python36\Scripts;%PATH%
+  - python --version
+  - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
+  - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
   - "SetEnvMPI.cmd"
-  - pipenv install
 
+# extract step has to happen before the sh.exe workaround otherwise 7z will complain
 before_build:
-  - pipenv run python --version
-  - cmake --version
-  - ninja.exe --version
+  - cd C:\projects
+  - appveyor DownloadFile https://github.com/bast/cmake-recipes/archive/%APPVEYOR_REPO_COMMIT%.zip
+  - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\extract.bat'
 
 build_script:
-  #- pipenv run python testing\collect_tests.py chapter-01/recipe-*
-  #- pipenv run python testing\collect_tests.py chapter-02/recipe-*
-  - pipenv run python testing\collect_tests.py chapter-03/recipe-*
+  - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\test.bat'
 
 deploy: off
