@@ -27,17 +27,18 @@ if(NOT HDF5_IS_PARALLEL)
   message(STATUS "HDF5 was NOT compiled with parallel I/O (--enable-parallel)")
 endif()
 
-add_executable(refregexample refregexample.f90)
-target_include_directories(refregexample
-  PUBLIC
-    ${HDF5_INCLUDE_DIRS}
-  )
-target_link_libraries(refregexample
-  PUBLIC
-    ${HDF5_Fortran_LIBRARIES}
-  )
-
 if(HDF5_Fortran2003)
+  message(STATUS "Fortran 2003 bindings for HDF5 FOUND. Compiling refregexample.f90")
+  add_executable(refregexample refregexample.f90)
+  target_include_directories(refregexample
+    PUBLIC
+      ${HDF5_INCLUDE_DIRS}
+    )
+  target_link_libraries(refregexample
+    PUBLIC
+      ${HDF5_Fortran_LIBRARIES}
+    )
+
   message(STATUS "Fortran 2003 bindings for HDF5 FOUND. Compiling compound_fortran2003.f90")
   add_executable(compound_fortran2003 compound_fortran2003.f90)
   target_include_directories(compound_fortran2003
