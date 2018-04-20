@@ -35,15 +35,3 @@ def get_buildflags():
 
 def verbose_output():
     return os.getenv('VERBOSE_OUTPUT', False)
-
-
-def get_topdir():
-    if os.environ.get('TRAVIS'):
-        topdir = os.environ.get('TRAVIS_BUILD_DIR')
-    elif os.environ.get('APPVEYOR'):
-        topdir = os.environ.get('APPVEYOR_BUILD_FOLDER')
-    elif os.environ.get('DRONE'):
-        topdir = os.getcwd()
-    else:
-        topdir = os.getcwd()
-    return topdir

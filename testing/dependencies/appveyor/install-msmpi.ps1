@@ -5,16 +5,15 @@
 $MS_DOWNLOAD_URL    = "http://download.microsoft.com/download/"
 $MSMPI_HASH_URL_V5  = "3/7/6/3764A48C-5C4E-4E4D-91DA-68CED9032EDE/"
 $MSMPI_HASH_URL_V6  = "6/4/A/64A7852A-A8C3-476D-908C-30501F761DF3/"
-$MSMPI_HASH_URL_V70 = "D/7/B/D7BBA00F-71B7-436B-80BC-4D22F2EE9862/"
+$MSMPI_HASH_URL_V7  = "D/7/B/D7BBA00F-71B7-436B-80BC-4D22F2EE9862/"
 $MSMPI_HASH_URL_V71 = "E/8/A/E8A080AF-040D-43FF-97B4-065D4F220301/"
-$MSMPI_HASH_URL_V80 = "B/2/E/B2EB83FE-98C2-4156-834A-E1711E6884FB/"
+$MSMPI_HASH_URL_V8  = "B/2/E/B2EB83FE-98C2-4156-834A-E1711E6884FB/"
 $MSMPI_HASH_URL_V81 = "D/B/B/DBB64BA1-7B51-43DB-8BF1-D1FB45EACF7A/"
-$MSMPI_HASH_URL_V90 = "2/E/C/2EC96D7F-687B-4613-80F6-E10F670A2D97/"
-$MSMPI_BASE_URL     = $MS_DOWNLOAD_URL + $MSMPI_HASH_URL_V90
+$MSMPI_BASE_URL     = $MS_DOWNLOAD_URL + $MSMPI_HASH_URL_V81
 
 $ScriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 . "$ScriptDir\download.ps1"
-$DOWNLOADS = "C:\projects\downloads\MSMPI"
+$DOWNLOADS = "C:\Downloads\MSMPI"
 
 function InstallMicrosoftMPISDK ($baseurl, $filename) {
     Write-Host "Installing Microsoft MPI SDK"
@@ -57,3 +56,9 @@ function InstallMicrosoftMPI () {
     InstallMicrosoftMPIRuntime $MSMPI_BASE_URL "MSMpiSetup.exe"
     SaveMicrosoftMPIEnvironment "SetEnvMPI.cmd"
 }
+
+function main () {
+    InstallMicrosoftMPI
+}
+
+main

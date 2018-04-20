@@ -11,7 +11,7 @@ import re
 from packaging import version
 
 from parse import extract_menu_file
-from env import get_ci_environment, get_generator, get_buildflags, get_topdir, verbose_output
+from env import get_ci_environment, get_generator, get_buildflags, verbose_output
 
 
 def get_min_cmake_version(file_name):
@@ -162,7 +162,10 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe,
 
 
 def main(arguments):
-    topdir = get_topdir()
+
+    _this_dir = os.path.dirname(os.path.realpath(__file__))
+    topdir = os.path.join(_this_dir, '..')
+
     buildflags = get_buildflags()
     generator = get_generator()
     ci_environment = get_ci_environment()

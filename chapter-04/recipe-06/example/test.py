@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+import sys
 
 # simulate a failing test
-exit 1
+sys.exit(1)
