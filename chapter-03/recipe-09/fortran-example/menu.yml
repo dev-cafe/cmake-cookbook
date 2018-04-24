@@ -10,17 +10,23 @@ drone:
     - CMAKE_Fortran_COMPILER: 'gfortran'
   env:
     - HDF5_ROOT: '$HOME/Deps/hdf5-1.10.1'
+  definitions:
+    - HDF5_ROOT: '$HOME/Deps/hdf5-1.10.1'
   failing_generators:
     - 'Ninja'
 
 travis-linux:
   env:
     - HDF5_ROOT: '$HOME/Deps/hdf5'
+  definitions:
+    - HDF5_ROOT: '$HOME/Deps/hdf5'
   failing_generators:
     - 'Ninja'
 
 travis-osx:
   env:
+    - HDF5_ROOT: '$HOME/Deps/hdf5'
+  definitions:
     - HDF5_ROOT: '$HOME/Deps/hdf5'
   failing_generators:
     - 'Ninja'
