@@ -29,7 +29,7 @@ unset(CMAKE_REQUIRED_INCLUDES)
 unset(CMAKE_REQUIRED_LIBRARIES)
 
 if(NOT HDF5_Fortran2003_test1 OR NOT HDF5_Fortran2003_test2)
-  message(STATUS "HDF5 was NOT compiled with Fortran 2003 bindings (--enable-fortran2003)")
+  message(STATUS "HDF5 was NOT compiled with Fortran 2003 bindings (--enable-fortran)")
 endif()
 
 if(HDF5_Fortran2003_test1 AND HDF5_Fortran2003_test2)
