@@ -1,1 +1,1 @@
-Alternatives to Makefiles and Cross-compilation
+Alternative Generators and Cross-compilation
