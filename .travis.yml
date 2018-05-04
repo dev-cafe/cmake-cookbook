@@ -22,6 +22,9 @@ matrix:
             - libboost1.55-all-dev
             - uuid-dev
             - pkg-config
+            - gcc-mingw-w64
+            - g++-mingw-w64
+            - gfortran-mingw-w64
       env:
         - CMAKE_VERSION="3.11.0"
         - GENERATOR="Unix Makefiles"
