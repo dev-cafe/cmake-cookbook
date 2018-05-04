@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   name = "ninja-${version}";
-  version = "1.7.2.gaad58.kitware.dyndep-1";
+  version = "1.8.2.g972a7.kitware.dyndep-1";
 
   src = fetchurl {
     url = "https://github.com/Kitware/ninja/archive/v${version}.tar.gz";
-    sha256 = "1y75k8n3b5qvd8sz85cwdmfwihf5i35zlrbkwi99zz3qxznp3jgs";
+    sha256 = "0bhdnwpbmj0bnlr36a06abzlqc2xcvrd54xvlp21lw8wrcqb2z8j";
   };
 
   buildInputs = [ python asciidoc re2c ];
@@ -17,13 +17,13 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    mkdir -p $out/bin
-    cp ninja $out/bin/
-
-    mkdir -p $out/share/doc/ninja
-    cp doc/manual.asciidoc $out/share/doc/ninja/
-    cp doc/manual.html $out/share/doc/ninja/
+    install -Dm555 -t $out/bin ninja
+    install -Dm444 -t $out/share/doc/ninja doc/manual.asciidoc doc/manual.html
+    install -Dm444 misc/bash-completion $out/share/bash-completion/completions/ninja
+    install -Dm444 misc/zsh-completion $out/share/zsh/site-functions/_ninja
   '';
+
+  setupHook = ./setup-hook.sh;
 
   meta = with stdenv.lib; {
     description = "Small build system with a focus on speed";
@@ -39,6 +39,6 @@ stdenv.mkDerivation rec {
     homepage = https://ninja-build.org/;
     license = licenses.asl20;
     platforms = platforms.unix;
-    maintainers = [ maintainers.robertodr ];
+    maintainers = with maintainers; [ robertodr ];
   };
 }

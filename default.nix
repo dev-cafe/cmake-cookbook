@@ -57,6 +57,7 @@ in
       valgrind
       zlib
     ];
+    hardeningDisable = [ "all" ];
     src = null;
     shellHook = ''
     export NINJA_STATUS="[Built edge %f of %t in %e sec]"
