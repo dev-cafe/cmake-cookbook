@@ -40,9 +40,9 @@ echo "-- Done installing CMake"
 
 echo "-- Installing Ninja"
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-  Ninja_URL="https://goo.gl/4g5Jjv"
+  Ninja_URL="https://github.com/Kitware/ninja/releases/download/v1.8.2.g3bbbe.kitware.dyndep-1.jobserver-1/ninja-1.8.2.g3bbbe.kitware.dyndep-1.jobserver-1_x86_64-linux-gnu.tar.gz"
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-  Ninja_URL="https://goo.gl/qLgScp"
+  Ninja_URL="https://github.com/Kitware/ninja/releases/download/v1.8.2.g3bbbe.kitware.dyndep-1.jobserver-1/ninja-1.8.2.g3bbbe.kitware.dyndep-1.jobserver-1_x86_64-apple-darwin.tar.gz"
 fi
 if [[ -f $HOME/Deps/ninja/ninja ]]; then
   echo "-- Ninja FOUND in cache"
