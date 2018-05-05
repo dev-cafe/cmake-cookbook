@@ -72,7 +72,7 @@ else
 fi
 echo "-- Done with Eigen $Eigen_VERSION"
 
-HDF5_VERSION="1.10.1"
+HDF5_VERSION="1.10.2"
 echo "-- Installing HDF5 $HDF5_VERSION"
 HDF5_URL="https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_VERSION%.*}/hdf5-$HDF5_VERSION/src/hdf5-$HDF5_VERSION.tar.bz2"
 if [[ -f $HOME/Deps/hdf5/lib/libhdf5_fortran.so ]]; then
@@ -82,8 +82,8 @@ else
   cd $HOME/Downloads
   curl -Ls $HDF5_URL | tar -xj
   cd hdf5-$HDF5_VERSION
-  CC=mpicc FC=mpif90 CXX=mpic++ ./configure --prefix=$HOME/Deps/hdf5 --enable-build-mode=debug \
-              --enable-fortran --enable-parallel &> /dev/null
+  CC=gcc-7 FC=gfortran-7 CXX=g++-7 ./configure --prefix=$HOME/Deps/hdf5 --enable-build-mode=debug \
+              --enable-fortran &> /dev/null
   make install --jobs=2 &> /dev/null
   cd $TRAVIS_BUILD_DIR
 fi

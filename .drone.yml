@@ -1,6 +1,6 @@
 pipeline:
   build:
-    image: robertodr/ubuntu-16.04_pgi17.4_hdf5:latest
+    image: devcafe/ubuntu16.04-pgi17.4-hdf5:latest
     commands:
       - pip install --user pipenv --upgrade
       - pipenv install
