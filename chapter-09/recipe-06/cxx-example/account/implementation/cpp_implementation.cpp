@@ -1,6 +1,6 @@
-#include <cassert>
-
 #include "cpp_implementation.hpp"
+
+#include <cassert>
 
 Account::Account() {
   balance = 0.0;

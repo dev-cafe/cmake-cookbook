@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include <cstddef>
-
 #include "FortranC.hpp"
+
+#include <cstddef>
 
 #ifdef __cplusplus
 extern "C" {
