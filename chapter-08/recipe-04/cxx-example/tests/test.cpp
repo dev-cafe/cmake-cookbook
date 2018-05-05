@@ -1,12 +1,11 @@
 #include "sum_integers.hpp"
 
-#include <vector>
-
 // this tells catch to provide a main()
 // only do this in one cpp file
 #define CATCH_CONFIG_MAIN
-
 #include "catch.hpp"
+
+#include <vector>
 
 TEST_CASE("Sum of integers for a short vector", "[short]") {
   std::vector<int> integers = {1, 2, 3, 4, 5};
