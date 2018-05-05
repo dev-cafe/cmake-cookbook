@@ -8,5 +8,4 @@
 - [Detecting the MPI Parallel Environment](recipe-06/README.md)
 - [Detecting the Eigen Library](recipe-07/README.md)
 - [Detecting the Boost Libraries](recipe-08/README.md)
-- [Detecting the HDF5 Libraries](recipe-09/README.md)
-- [Writing CMake Code to Detect External Libraries](recipe-10/README.md)
+- [Writing CMake Code to Detect External Libraries](recipe-09/README.md)
