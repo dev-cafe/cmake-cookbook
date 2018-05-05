@@ -1,13 +1,12 @@
 #include "evolution.hpp"
 
-#include <string>
-#include <vector>
-
 // this tells catch to provide a main()
 // only do this in one cpp file
 #define CATCH_CONFIG_MAIN
-
 #include "catch.hpp"
+
+#include <string>
+#include <vector>
 
 TEST_CASE("Apply rule 90", "[rule-90]") {
   std::vector<int> row = {0, 1, 0, 1, 0, 1, 0, 1, 0};

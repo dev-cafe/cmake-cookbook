@@ -1,14 +1,14 @@
 // Original example by Evgenii Rudnyi http://MatrixProgramming.com
 // found at: http://matrixprogramming.com/files/code/LAPACK/dgesv.cpp
 
+#include "CxxBLAS.hpp"
+#include "CxxLAPACK.hpp"
+
 #include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <random>
 #include <vector>
-
-#include "CxxBLAS.hpp"
-#include "CxxLAPACK.hpp"
 
 int main(int argc, char **argv) {
   if (argc != 2) {

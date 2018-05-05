@@ -1,10 +1,10 @@
-#include <cstdlib>
-#include <iostream>
-
 #include "geometry_circle.hpp"
 #include "geometry_polygon.hpp"
 #include "geometry_rhombus.hpp"
 #include "geometry_square.hpp"
+
+#include <cstdlib>
+#include <iostream>
 
 int main() {
   using namespace geometry;

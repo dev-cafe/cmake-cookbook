@@ -1,7 +1,7 @@
-#include <stdio.h>
-
 // provides PROJECT_VERSION, PROJECT_VERSION_MAJOR, PROJECT_VERSION_MINOR
 #include "version.h"
+
+#include <stdio.h>
 
 int main() {
   printf("This is output from example code %s\n", PROJECT_VERSION);

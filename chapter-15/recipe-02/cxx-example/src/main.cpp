@@ -1,8 +1,8 @@
+#include "sum_integers.hpp"
+
 #include <iostream>
 #include <string>
 #include <vector>
-
-#include "sum_integers.hpp"
 
 // we assume all arguments are integers and we sum them up
 // for simplicity we do not verify the type of arguments

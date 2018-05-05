@@ -3,9 +3,9 @@
  *    https://docs.python.org/3.5/extending/embedding.html#pure-embedding
  */
 
-#include <Python.h>
-
 #include "Report.hpp"
+
+#include <Python.h>
 
 int main(int argc, char *argv[]) {
   PyObject *pName, *pModule, *pDict, *pFunc;
