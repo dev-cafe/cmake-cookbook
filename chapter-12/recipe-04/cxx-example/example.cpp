@@ -1,9 +1,9 @@
+#include "mkl.h"
+
 #include <cassert>
 #include <cmath>
 #include <iostream>
 #include <random>
-
-#include "mkl.h"
 
 int main() {
   // generate a uniform distribution of real number between -1.0 and 1.0
