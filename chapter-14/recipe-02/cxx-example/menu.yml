@@ -1,0 +1,13 @@
+targets:
+  - install
+
+# we only test cross-compilation on linux
+travis-osx:
+  failing_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
+travis-linux:
+  definitions:
+    - CMAKE_TOOLCHAIN_FILE: /home/travis/build/bast/cmake-recipes/chapter-14/toolchain-travis-linux.cmake
+    - CMAKE_INSTALL_PREFIX: /home/travis/build/bast/install/

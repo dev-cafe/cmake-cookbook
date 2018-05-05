@@ -162,8 +162,10 @@
 - [Combining Doxygen and Sphinx](chapter-13/recipe-03/README.md)
 
 
-### [Chapter 14: Alternatives to Makefiles and Cross-compilation](chapter-14/README.md)
+### [Chapter 14: Alternative Generators and Cross-compilation](chapter-14/README.md)
 
+- [Hello world example](chapter-14/recipe-01/README.md)
+- [Cross-compiling a Windows binary with OpenMP parallelization](chapter-14/recipe-02/README.md)
 
 
 ### [Chapter 15: Testing Dashboards](chapter-15/README.md)
