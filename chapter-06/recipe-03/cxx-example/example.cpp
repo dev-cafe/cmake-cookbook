@@ -1,7 +1,7 @@
+#include "primes.h"
+
 #include <iostream>
 #include <vector>
-
-#include "primes.h"
 
 int main() {
   std::cout << "all prime numbers up to " << max_number << ":";
