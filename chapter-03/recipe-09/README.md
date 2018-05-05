@@ -1,7 +1,6 @@
-# Detecting the HDF5 Libraries
+# Writing CMake Code to Detect External Libraries
 
-Fortran example will cover how to discover if the Fortran 2003 interface was
-compiled or not showing the `try_compile` command.
+Abstract to be written ...
 
-
-- [fortran-example](fortran-example/)
+- [cxx-example](cxx-example/)
+- [cxx-example-3.5](cxx-example-3.5/)
