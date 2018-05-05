@@ -1,7 +1,7 @@
+#include "Message.hpp"
+
 #include <cstdlib>
 #include <iostream>
-
-#include "Message.hpp"
 
 int main() {
   Message say_hello("Hello, CMake World!");
