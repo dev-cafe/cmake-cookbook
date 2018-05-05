@@ -1,7 +1,7 @@
+#include "config.h"
+
 #include <cstdlib>
 #include <iostream>
-
-#include "config.h"
 
 int main() {
   std::cout << "Number of logical cores: " << NUMBER_OF_LOGICAL_CORES << std::endl;
