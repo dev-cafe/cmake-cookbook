@@ -1,12 +1,12 @@
-#include <cstdlib>
-#include <functional>
-#include <iostream>
-#include <memory>
-
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include "Factory.hpp"
+
+#include <cstdlib>
+#include <functional>
+#include <iostream>
+#include <memory>
 
 typedef std::function<std::unique_ptr<Animal>(const std::string &)> CreateAnimal;
 
