@@ -10,9 +10,18 @@ message("C++ compiler flags, release mode: ${CMAKE_CXX_FLAGS_RELEASE}")
 message("C++ compiler flags, release with debug info mode: ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
 message("C++ compiler flags, minimal release mode: ${CMAKE_CXX_FLAGS_MINSIZEREL}")
 
-file(GLOB _sources geometry_*)
-
-add_library(geometry STATIC ${_sources})
+add_library(
+  geometry
+  STATIC
+  geometry_circle.cpp
+  geometry_circle.hpp
+  geometry_polygon.cpp
+  geometry_polygon.hpp
+  geometry_rhombus.cpp
+  geometry_rhombus.hpp
+  geometry_square.cpp
+  geometry_square.hpp
+  )
 
 add_executable(compute-areas compute-areas.cpp)
 target_link_libraries(compute-areas geometry)
