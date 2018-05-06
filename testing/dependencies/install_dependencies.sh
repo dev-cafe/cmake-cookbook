@@ -72,23 +72,6 @@ else
 fi
 echo "-- Done with Eigen $Eigen_VERSION"
 
-HDF5_VERSION="1.10.2"
-echo "-- Installing HDF5 $HDF5_VERSION"
-HDF5_URL="https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_VERSION%.*}/hdf5-$HDF5_VERSION/src/hdf5-$HDF5_VERSION.tar.bz2"
-if [[ -f $HOME/Deps/hdf5/lib/libhdf5_fortran.so ]]; then
-  echo "-- HDF5 $HDF5_VERSION FOUND in cache"
-else
-  echo "-- HDF5 $HDF5_VERSION NOT FOUND in cache"
-  cd $HOME/Downloads
-  curl -Ls $HDF5_URL | tar -xj
-  cd hdf5-$HDF5_VERSION
-  CC=gcc-7 FC=gfortran-7 CXX=g++-7 ./configure --prefix=$HOME/Deps/hdf5 --enable-build-mode=debug \
-              --enable-fortran &> /dev/null
-  make install --jobs=2 &> /dev/null
-  cd $TRAVIS_BUILD_DIR
-fi
-echo "-- Done with HDF5 $HDF5_VERSION"
-
 Anaconda_VERSION="5.1.0"
 echo "-- Installing Anaconda $Anaconda_VERSION"
 if [[ -d "$HOME/Deps/conda/bin" ]]; then
