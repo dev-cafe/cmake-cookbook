@@ -1,6 +1,14 @@
 pipeline:
-  build:
+  build-pgi:
     image: devcafe/ubuntu16.04-pgi17.4:latest
+    commands:
+      - pip install --user pipenv --upgrade
+      - pipenv install
+      - ./testing/dependencies/report_versions.sh
+      - pipenv run python testing/collect_tests.py 'chapter-*/recipe-*'
+
+  build-intel:
+    image: devcafe/ubuntu16.04-intel2018.1:latest
     commands:
       - pip install --user pipenv --upgrade
       - pipenv install
