@@ -22,7 +22,7 @@ else()
     GIT_REPOSITORY
       https://bitbucket.hdfgroup.org/scm/hdffv/hdf5.git
     GIT_TAG
-      hdf5-1_10_1
+      hdf5-1_10_2
     UPDATE_COMMAND
       ""
     CONFIGURE_COMMAND

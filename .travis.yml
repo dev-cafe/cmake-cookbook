@@ -63,14 +63,12 @@ cache:
     - $HOME/Deps/cmake/3.5.2
     - $HOME/Deps/cmake/3.11.0
     - $HOME/Deps/eigen
-    - $HOME/Deps/hdf5
     - $HOME/Deps/ninja
     - $HOME/Deps/conda
 
 env:
   global:
     - PATH=$HOME/Deps/ninja${PATH:+:$PATH}
-    - LD_LIBRARY_PATH=$HOME/Deps/hdf5/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
     - LC_ALL="en_US.UTF-8"
     - LANG="en_US.UTF-8"
     - LANGUAGE="en_US.UTF-8"

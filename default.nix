@@ -10,10 +10,6 @@ in
   with import nixpkgs {
     overlays = [(self: super:
     {
-      hdf5 = super.hdf5.override {
-        gfortran = self.gfortran;
-        mpi = self.openmpi;
-      };
       ninja-kitware = super.callPackage ./.pkgs/ninja-kitware.nix {};
     }
     )];
@@ -34,7 +30,7 @@ in
       gfortran
       gfortran.cc.lib
       graphviz
-      hdf5
+      hdf5-fortran
       lcov
       libuuid
       mercurial
