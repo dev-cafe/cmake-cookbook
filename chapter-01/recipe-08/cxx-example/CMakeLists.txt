@@ -8,14 +8,24 @@ message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-# list sources by globbing
-file(GLOB _sources geometry_*)
-
 list(APPEND flags "-fPIC" "-Wall")
 if(NOT WIN32)
   list(APPEND flags "-Wextra" "-Wpedantic")
 endif()
-add_library(geometry STATIC ${_sources})
+
+add_library(
+  geometry
+  STATIC
+  geometry_circle.cpp
+  geometry_circle.hpp
+  geometry_polygon.cpp
+  geometry_polygon.hpp
+  geometry_rhombus.cpp
+  geometry_rhombus.hpp
+  geometry_square.cpp
+  geometry_square.hpp
+  )
+
 target_compile_options(geometry
   PRIVATE
     ${flags}
