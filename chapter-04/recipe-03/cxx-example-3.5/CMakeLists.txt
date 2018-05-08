@@ -1,5 +1,5 @@
 # set minimum cmake version
-cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
 project(recipe-03 LANGUAGES CXX)
@@ -21,28 +21,13 @@ target_link_libraries(sum_up sum_integers)
 option(ENABLE_UNIT_TESTS "Enable unit tests" ON)
 message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
 
+include(googletest.cmake)
+
 if(ENABLE_UNIT_TESTS)
-  # the following code to fetch googletest
-  # is inspired by and adapted after:
-  #   - https://cmake.org/cmake/help/git-stage/module/FetchContent.html
-  include(FetchContent)
-
-  FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG        release-1.8.0
-  )
-
-  FetchContent_GetProperties(googletest)
-  if(NOT googletest_POPULATED)
-    FetchContent_Populate(googletest)
-
-    # adds the targers: gtest, gtest_main, gmock, gmock_main
-    add_subdirectory(
-      ${googletest_SOURCE_DIR}
-      ${googletest_BINARY_DIR}
-      )
-  endif()
+  fetch_googletest(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}/googletest
+    )
 
   add_executable(cpp_test "")
 
