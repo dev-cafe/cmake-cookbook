@@ -3,6 +3,7 @@ appveyor:
     - CMAKE_C_COMPILER: 'gcc'
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_CONFIG_TYPES: 'Release'
 
 drone:
   definitions:

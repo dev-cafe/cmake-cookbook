@@ -39,7 +39,7 @@ find_package_handle_standard_args(NumPy
   )
 
 add_executable(pure-embedding "")
-if (PYTHON_VERSION_MAJOR VERSION_LESS 3)
+if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
   target_sources(pure-embedding
     PRIVATE
       Py2-pure-embedding.cpp
@@ -50,10 +50,12 @@ else()
       Py3-pure-embedding.cpp
     )
 endif()
+message("PYTHON_INCLUDE_DIRS : ${PYTHON_INCLUDE_DIRS}")
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
   )
+message("PYTHON_LIBRARIES : ${PYTHON_LIBRARIES}")
 target_link_libraries(pure-embedding
   PRIVATE
     ${PYTHON_LIBRARIES}
