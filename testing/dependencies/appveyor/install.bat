@@ -9,9 +9,6 @@ bash -lc "pacman -Syuu --needed --noconfirm --ask=127"
 rem we will run the tests inside pipenv
 bash -lc "pip install pipenv"
 
-rem query for MPI
-bash -lc "pacman -Ss mpi"
-
 rem more packages
 bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost"
 bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-ninja"
