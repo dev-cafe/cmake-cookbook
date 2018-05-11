@@ -4,3 +4,4 @@ appveyor:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
     - CMAKE_CONFIGURATION_TYPES: 'Release'
+    - MS_WIN64: 'ON'

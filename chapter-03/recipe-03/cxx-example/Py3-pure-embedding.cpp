@@ -3,8 +3,6 @@
  *    https://docs.python.org/3.5/extending/embedding.html#pure-embedding
  */
 
-#include <cmath>
-
 #include <Python.h>
 
 int main(int argc, char *argv[]) {
