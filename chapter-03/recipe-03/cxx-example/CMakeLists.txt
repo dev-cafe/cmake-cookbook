@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(PythonInterp 2.7 REQUIRED)
-find_package(PythonLibs 2.7 REQUIRED)
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
 
 # Find NumPy location
 execute_process(
@@ -50,12 +50,10 @@ else()
       Py3-pure-embedding.cpp
     )
 endif()
-message("PYTHON_INCLUDE_DIRS : ${PYTHON_INCLUDE_DIRS}")
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
   )
-message("PYTHON_LIBRARIES : ${PYTHON_LIBRARIES}")
 target_link_libraries(pure-embedding
   PRIVATE
     ${PYTHON_LIBRARIES}

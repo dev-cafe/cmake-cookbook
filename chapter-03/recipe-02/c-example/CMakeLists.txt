@@ -24,12 +24,10 @@ else()
     )
 endif()
 
-message("PYTHON_INCLUDE_DIRS : ${PYTHON_INCLUDE_DIRS}")
 target_include_directories(hello-embedded-python
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
   )
-message("PYTHON_LIBRARIES : ${PYTHON_LIBRARIES}")
 target_link_libraries(hello-embedded-python
   PRIVATE
     ${PYTHON_LIBRARIES}
