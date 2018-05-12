@@ -1,17 +1,20 @@
 from __future__ import print_function  # Only Python 2.x
-import glob
-import subprocess
-import os
-import sys
+
 import datetime
-import time
-import docopt
-import colorama
+import glob
+import os
 import re
+import subprocess
+import sys
+import time
+
+import colorama
+import docopt
 from packaging import version
 
+from env import (get_buildflags, get_ci_environment, get_generator,
+                 verbose_output)
 from parse import extract_menu_file
-from env import get_ci_environment, get_generator, get_buildflags, verbose_output
 
 
 def get_min_cmake_version(file_name):

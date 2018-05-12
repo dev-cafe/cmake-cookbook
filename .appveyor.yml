@@ -38,6 +38,8 @@ environment:
 install:
   - set PATH=C:\Python36;%PATH%
   - set PATH=C:\Python36\Scripts;%PATH%
+  - set PATH=%PATH:C:\Python27;=%
+  - set PATH=%PATH:C:\Python27\Scripts;=%
   - python --version
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1

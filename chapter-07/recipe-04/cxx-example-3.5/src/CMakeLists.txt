@@ -4,7 +4,7 @@ project(recipe-04_core LANGUAGES CXX)
 
 find_package(OpenMP REQUIRED)
 
-find_package(Eigen3 3.3.4 REQUIRED NO_MODULE)
+find_package(Eigen3 3.3.4 REQUIRED CONFIG)
 message(STATUS "Found Eigen3: ${EIGEN3_INCLUDE_DIR} (found version ${EIGEN3_VERSION_STRING})")
 
 add_executable(linear-algebra linear-algebra.cpp)

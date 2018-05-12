@@ -1,0 +1,7 @@
+appveyor:
+  env:
+    - VERBOSE_OUTPUT: 'True'
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
+    - MS_WIN64: 'ON'

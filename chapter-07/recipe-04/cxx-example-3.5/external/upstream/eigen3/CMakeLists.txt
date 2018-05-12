@@ -1,4 +1,4 @@
-find_package(Eigen3 3.3.4 QUIET NO_MODULE)
+find_package(Eigen3 3.3.4 QUIET CONFIG)
 if(TARGET Eigen3::Eigen)
   message(STATUS "Found Eigen3: ${EIGEN3_INCLUDE_DIR} (found version ${EIGEN3_VERSION_STRING})")
   add_library(eigen3_external INTERFACE)  # dummy
