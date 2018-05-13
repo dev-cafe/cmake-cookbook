@@ -50,6 +50,12 @@ else()
       Py3-pure-embedding.cpp
     )
 endif()
+if(WIN32)
+  target_compile_definitions(pure-embedding
+    PUBLIC
+      "hypot=_hypot"
+    )
+endif()
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}

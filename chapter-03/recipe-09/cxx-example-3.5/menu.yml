@@ -1,6 +1,4 @@
 appveyor:
   failing_generators:
-    - 'MSYS Makefiles'
-    - 'Ninja'
     - 'Visual Studio 14 2015'
     - 'Visual Studio 15 2017'
