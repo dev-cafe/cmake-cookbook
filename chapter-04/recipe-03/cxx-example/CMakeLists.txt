@@ -39,6 +39,12 @@ if(ENABLE_UNIT_TESTS)
   if(NOT googletest_POPULATED)
     FetchContent_Populate(googletest)
 
+    # Prevent GoogleTest from overriding our compiler/linker options
+    # when building with Visual Studio
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    # Prevent GoogleTest from using PThreads
+    set(gtest_disable_pthreads ON CACHE BOOL "" FORCE)
+
     # adds the targers: gtest, gtest_main, gmock, gmock_main
     add_subdirectory(
       ${googletest_SOURCE_DIR}

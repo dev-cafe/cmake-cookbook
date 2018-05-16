@@ -1,7 +1,7 @@
 appveyor:
   env:
-    - BOOST_INCLUDEDIR: 'C:\Libraries\boost_1_66_0\boost'
     - BOOST_LIBRARYDIR: 'C:\Libraries\boost_1_66_0\lib64-msvc-14.0'
+    - BOOST_INCLUDEDIR: 'C:\Libraries\boost_1_66_0\boost'
 
 travis-osx:
   definitions:
