@@ -1,6 +1,7 @@
 appveyor:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
 
 drone:
   definitions:
@@ -18,3 +19,6 @@ travis-osx:
 local:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
+
+configurations:
+  - 'Release'

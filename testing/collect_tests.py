@@ -41,7 +41,6 @@ def run_command(step, command, expect_failure):
     """
     child = subprocess.Popen(
         command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    print('Bobottttto {}'.format(command))
 
     stdout_coded, stderr_coded = child.communicate()
     stdout = stdout_coded.decode('UTF-8')
@@ -100,10 +99,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     # local targets extend global targets
     targets = targets_global + targets_local
 
-    # local configurations override global ones
-    configurations = configurations_global.copy()
-    for entry in configurations_local:
-        configurations[entry] = configurations_local[entry]
+    # local configurations extend global ones
+    configurations = configurations_global + configurations_local
 
     for entry in env:
         os.environ[entry] = env[entry]
