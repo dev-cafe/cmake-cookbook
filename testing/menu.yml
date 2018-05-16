@@ -3,27 +3,36 @@ appveyor:
     - CMAKE_C_COMPILER: 'gcc'
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_BUILD_TYPE: 'Debug'
+    - CMAKE_CONFIGURATION_TYPES: 'Debug'
 
 drone:
   definitions:
     - CMAKE_C_COMPILER: 'gcc'
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'pgfortran'
+    - CMAKE_BUILD_TYPE: 'Debug'
 
 travis-linux:
   definitions:
     - CMAKE_C_COMPILER: 'gcc-7'
     - CMAKE_CXX_COMPILER: 'g++-7'
     - CMAKE_Fortran_COMPILER: 'gfortran-7'
+    - CMAKE_BUILD_TYPE: 'Debug'
 
 travis-osx:
   definitions:
     - CMAKE_C_COMPILER: 'clang'
     - CMAKE_CXX_COMPILER: 'clang++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_BUILD_TYPE: 'Debug'
 
 local:
   definitions:
     - CMAKE_C_COMPILER: 'gcc'
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
+    - CMAKE_BUILD_TYPE: 'Debug'
+
+configurations:
+  - 'Debug'

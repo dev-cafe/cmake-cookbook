@@ -99,8 +99,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     # local targets extend global targets
     targets = targets_global + targets_local
 
-    # local configurations extend global ones
-    configurations = configurations_global + configurations_local
+    # local configurations override global ones
+    configurations = configurations_local.copy() if configurations_local else configurations_global.copy()
 
     for entry in env:
         os.environ[entry] = env[entry]
@@ -149,30 +149,24 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
         # build step
         step = 'building'
-        if configurations:
-            for c in configurations:
-                step += ' configuration {}'.format(c)
-                config = '--config {}'.format(c)
-                # append configuration to base command
-                base_command += ' {0}'.format(config)
-                # form build command by appending tool-native buildflags
-                command = base_command + ' -- {0}'.format(buildflags)
-                # ready to roll
-                return_code += run_command(
-                    step=step, command=command, expect_failure=expect_failure)
-        else:
+        for c in configurations:
+            confstr = ' configuration {}'.format(c)
+            step += confstr
+            config = '--config {}'.format(c)
+            # append configuration to base command
+            base_command += ' {0}'.format(config)
             # form build command by appending tool-native buildflags
             command = base_command + ' -- {0}'.format(buildflags)
             # ready to roll
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
 
-        # extra targets
-        for target in targets:
-            step = target
-            command = base_command + ' --target {0}'.format(target)
-            return_code += run_command(
-                step=step, command=command, expect_failure=expect_failure)
+            # extra targets
+            for target in targets:
+                step = target + confstr
+                command = base_command + ' --target {0}'.format(target)
+                return_code += run_command(
+                    step=step, command=command, expect_failure=expect_failure)
 
     for entry in env:
         os.environ.pop(entry)
