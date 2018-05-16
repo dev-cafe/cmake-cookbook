@@ -21,14 +21,14 @@ environment:
       CMAKEARGS: ""
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       MSYSTEM: MINGW64
-      GENERATOR: "Ninja"
-      BUILDFLAGS: "-v"
-      CMAKEARGS: ""
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 14 2015"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
+      GENERATOR: "Ninja"
+      BUILDFLAGS: "-v"
+      CMAKEARGS: ""
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 15 2017"

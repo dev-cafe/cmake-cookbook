@@ -41,6 +41,7 @@ def run_command(step, command, expect_failure):
     """
     child = subprocess.Popen(
         command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print('Bobottttto {}'.format(command))
 
     stdout_coded, stderr_coded = child.communicate()
     stdout = stdout_coded.decode('UTF-8')
