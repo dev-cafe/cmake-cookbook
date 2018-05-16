@@ -172,7 +172,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
         # extra targets
         for target in targets:
             step = target
-            command = base_command + ' --target {1}'.format(target)
+            command = base_command + ' --target {0}'.format(target)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
 

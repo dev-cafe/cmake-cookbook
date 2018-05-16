@@ -50,10 +50,10 @@ else()
       Py3-pure-embedding.cpp
     )
 endif()
-if(WIN32)
+if(WIN32 AND (NOT MSVC))
   target_compile_definitions(pure-embedding
     PUBLIC
-      "hypot=_hypot"
+      "_hypot=hypot"
     )
 endif()
 target_include_directories(pure-embedding
