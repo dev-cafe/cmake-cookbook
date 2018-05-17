@@ -1,0 +1,29 @@
+# Each line is a file pattern followed by one or more owners.
+# Global owners will be the default owners for everything in the repo. Unless a
+# later match takes precedence, these will be requested for review when someone
+# opens a pull request.
+# Order is important; the last matching pattern takes the most precedence.
+
+# Global owners
+@bast @robertodr
+
+# Owners by chapter
+chapter-01/* @robertodr
+chapter-02/* @bast
+chapter-03/* @robertodr
+chapter-04/* @bast
+chapter-05/* @robertodr
+chapter-06/* @bast
+chapter-07/* @robertodr
+chapter-08/* @bast
+chapter-09/* @bast
+chapter-10/* @robertodr
+chapter-11/* @robertodr
+chapter-12/* @bast
+chapter-13/* @robertodr
+chapter-14/* @bast
+chapter-15/* @bast
+chapter-16/* @bast
+
+# Testing infrastructure owners
+testing/* @bast @robertodr

@@ -2,30 +2,26 @@
 This script updates the table of contents and all readmes in place.
 """
 
+import glob
 import os
 import pathlib
-import glob
 
 
-def generate_chapter_readmes(directory_of_this_script,
-                             chapters,
-                             chapter_titles,
-                             recipes,
-                             recipe_titles):
+def generate_chapter_readmes(directory_of_this_script, chapters, chapter_titles,
+                             recipes, recipe_titles):
 
     for chapter in chapters:
         readme = directory_of_this_script / '..' / chapter / 'README.md'
         with open(readme, 'w') as f:
             number = int(chapter.split('-')[-1])
-            f.write('# Chapter {0}: {1}\n\n'.format(number, chapter_titles[chapter]))
+            f.write('# Chapter {0}: {1}\n\n'.format(number,
+                                                    chapter_titles[chapter]))
             for recipe in recipes[chapter]:
-                f.write('- [{0}]({1}/README.md)\n'.format(recipe_titles[(chapter, recipe)],
-                                                          recipe))
+                f.write('- [{0}]({1}/README.md)\n'.format(
+                    recipe_titles[(chapter, recipe)], recipe))
 
 
-def generate_recipe_readmes(directory_of_this_script,
-                            chapters,
-                            recipes,
+def generate_recipe_readmes(directory_of_this_script, chapters, recipes,
                             recipe_titles):
 
     default_abstract = 'Abstract to be written ...'
@@ -47,17 +43,15 @@ def generate_recipe_readmes(directory_of_this_script,
                 f.write(abstract)
                 f.write('\n\n')
 
-                paths = pathlib.Path(directory_of_this_script / '..' / chapter / recipe).glob('*example*')
+                paths = pathlib.Path(directory_of_this_script / '..' / chapter /
+                                     recipe).glob('*example*')
                 examples = sorted((path.parts[-1] for path in paths))
                 for example in examples:
                     f.write('- [{0}]({1}/)\n'.format(example, example))
 
 
-def generate_main_readme(directory_of_this_script,
-                         chapters,
-                         chapter_titles,
-                         recipes,
-                         recipe_titles):
+def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
+                         recipes, recipe_titles):
 
     readme = directory_of_this_script / '..' / 'README.md'
     with open(readme, 'w') as f:
@@ -85,15 +79,17 @@ def generate_main_readme(directory_of_this_script,
 
         for chapter in chapters:
             number = int(chapter.split('-')[-1])
-            f.write('\n\n### [Chapter {0}: {1}]({2}/README.md)\n\n'.format(number, chapter_titles[chapter], chapter))
+            f.write('\n\n### [Chapter {0}: {1}]({2}/README.md)\n\n'.format(
+                number, chapter_titles[chapter], chapter))
             for recipe in recipes[chapter]:
-                f.write('- [{0}]({1}/{2}/README.md)\n'.format(recipe_titles[(chapter, recipe)],
-                                                                chapter,
-                                                                recipe))
-    
+                f.write('- [{0}]({1}/{2}/README.md)\n'.format(
+                    recipe_titles[(chapter, recipe)], chapter, recipe))
+
         # chapter 16 is hard-coded
         # since it points to an outside diff
-        f.write('\n\n### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)\n')
+        f.write(
+            '\n\n### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)\n'
+        )
 
 
 def locate_chapters_and_recipes(directory_of_this_script):
@@ -105,53 +101,46 @@ def locate_chapters_and_recipes(directory_of_this_script):
 
     recipes = {}
     for chapter in chapters:
-        paths = pathlib.Path(directory_of_this_script / '..' / chapter).glob('recipe-*')
+        paths = pathlib.Path(
+            directory_of_this_script / '..' / chapter).glob('recipe-*')
         _recipes = sorted((path.parts[-1] for path in paths))
         recipes[chapter] = _recipes
 
     return chapters, recipes
 
 
-def get_titles(directory_of_this_script,
-               chapters,
-               recipes):
+def get_titles(directory_of_this_script, chapters, recipes):
 
     chapter_titles = {}
     for chapter in chapters:
-        with open(directory_of_this_script / '..' / chapter / 'title.txt', 'r') as f:
+        with open(directory_of_this_script / '..' / chapter / 'title.txt',
+                  'r') as f:
             chapter_titles[chapter] = f.readline().strip()
 
     recipe_titles = {}
     for chapter in chapters:
         for recipe in recipes[chapter]:
-            with open(directory_of_this_script / '..' / chapter / recipe/ 'title.txt', 'r') as f:
+            with open(directory_of_this_script / '..' / chapter / recipe /
+                      'title.txt', 'r') as f:
                 recipe_titles[(chapter, recipe)] = f.readline().strip()
 
     return chapter_titles, recipe_titles
 
 
 if __name__ == '__main__':
-    directory_of_this_script = pathlib.Path(os.path.dirname(os.path.realpath(__file__)))
+    directory_of_this_script = pathlib.Path(
+        os.path.dirname(os.path.realpath(__file__)))
 
     chapters, recipes = locate_chapters_and_recipes(directory_of_this_script)
 
     chapter_titles, recipe_titles = get_titles(directory_of_this_script,
-                                               chapters,
-                                               recipes)
+                                               chapters, recipes)
 
-    generate_main_readme(directory_of_this_script,
-                         chapters,
-                         chapter_titles,
-                         recipes,
-                         recipe_titles)
+    generate_main_readme(directory_of_this_script, chapters, chapter_titles,
+                         recipes, recipe_titles)
 
-    generate_chapter_readmes(directory_of_this_script,
-                             chapters,
-                             chapter_titles,
-                             recipes,
-                             recipe_titles)
+    generate_chapter_readmes(directory_of_this_script, chapters, chapter_titles,
+                             recipes, recipe_titles)
 
-    generate_recipe_readmes(directory_of_this_script,
-                            chapters,
-                            recipes,
+    generate_recipe_readmes(directory_of_this_script, chapters, recipes,
                             recipe_titles)

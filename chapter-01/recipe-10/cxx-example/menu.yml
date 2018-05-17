@@ -1,3 +1,11 @@
+appveyor:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
+
 drone:
   definitions:
     - CMAKE_CXX_COMPILER: 'pgc++'
+
+configurations:
+  - 'Release'

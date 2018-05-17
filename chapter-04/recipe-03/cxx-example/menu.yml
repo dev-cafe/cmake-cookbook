@@ -1,6 +1,2 @@
-appveyor:
-  definitions:
-    - gtest_disable_pthreads: 'ON'
-
 targets:
   - test

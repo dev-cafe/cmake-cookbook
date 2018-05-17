@@ -1,1 +1,1 @@
-Writing CMake Code to Detect External Libraries
+Detecting External Libraries. I. Using pkg-config

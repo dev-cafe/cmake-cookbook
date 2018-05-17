@@ -1,0 +1,4 @@
+[style]
+COLUMN_LIMIT = 80
+INDENT_WIDTH = 4
+USE_TABS = False

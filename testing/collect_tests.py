@@ -49,8 +49,8 @@ def run_command(step, command, expect_failure):
     child_return_code = child.returncode
 
     return_code = 0
-    sys.stdout.write(colorama.Fore.BLUE + colorama.Style.BRIGHT +
-                     '  {0} ... '.format(step))
+    sys.stdout.write(
+        colorama.Fore.BLUE + colorama.Style.BRIGHT + '  {0} ... '.format(step))
     if child_return_code == 0:
         sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
         if verbose_output():
@@ -60,8 +60,8 @@ def run_command(step, command, expect_failure):
             sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
                              'EXPECTED TO FAIL\n')
         else:
-            sys.stdout.write(colorama.Fore.RED + colorama.Style.BRIGHT +
-                             'FAILED\n')
+            sys.stdout.write(
+                colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED\n')
             sys.stderr.write(stdout + stderr + '\n')
             return_code = child_return_code
     sys.stdout.flush()
@@ -70,19 +70,18 @@ def run_command(step, command, expect_failure):
     return return_code
 
 
-def run_example(topdir, generator, ci_environment, buildflags, recipe,
-                example):
+def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     # extract global menu
     menu_file = os.path.join(topdir, 'testing', 'menu.yml')
-    expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
+    expect_failure_global, env_global, definitions_global, targets_global, configurations_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
     menu_file = os.path.join(recipe, example, 'menu.yml')
-    expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
+    expect_failure_local, env_local, definitions_local, targets_local, configurations_local = extract_menu_file(
         menu_file, generator, ci_environment)
 
     expect_failure = expect_failure_global or expect_failure_local
@@ -100,10 +99,13 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe,
     # local targets extend global targets
     targets = targets_global + targets_local
 
+    # local configurations override global ones
+    configurations = configurations_local[:] if configurations_local else configurations_global[:]
+
     for entry in env:
         os.environ[entry] = env[entry]
-    definitions_string = ' '.join('-D{0}={1}'.format(entry, definitions[entry])
-                                  for entry in definitions)
+    definitions_string = ' '.join(
+        '-D{0}={1}'.format(entry, definitions[entry]) for entry in definitions)
 
     # we append a time stamp to the build directory
     # to avoid it being re-used when running tests multiple times
@@ -143,20 +145,28 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe,
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
 
+        base_command = 'cmake --build {0}'.format(build_directory)
+
         # build step
         step = 'building'
-        command = 'cmake --build {0} -- {1}'.format(build_directory,
-                                                    buildflags)
-        return_code += run_command(
-            step=step, command=command, expect_failure=expect_failure)
-
-        # extra targets
-        for target in targets:
-            step = target
-            command = 'cmake --build {0} --target {1}'.format(
-                build_directory, target)
+        for c in configurations:
+            confstr = ' configuration {}'.format(c)
+            step += confstr
+            config = '--config {}'.format(c)
+            # append configuration to base command
+            base_command += ' {0}'.format(config)
+            # form build command by appending tool-native buildflags
+            command = base_command + ' -- {0}'.format(buildflags)
+            # ready to roll
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
+
+            # extra targets
+            for target in targets:
+                step = target + confstr
+                command = base_command + ' --target {0}'.format(target)
+                return_code += run_command(
+                    step=step, command=command, expect_failure=expect_failure)
 
     for entry in env:
         os.environ.pop(entry)

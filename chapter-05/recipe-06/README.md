@@ -5,4 +5,5 @@ snippet compiles. This will be contrasted with `try_compile`. Finally, we
 discuss how to troubleshoot `try_compile` to avoid false negatives and false positives.
 
 
-- [fortran-example](fortran-example/)
+- [cxx-example](cxx-example/)
+- [cxx-example-3.5](cxx-example-3.5/)

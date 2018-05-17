@@ -37,7 +37,6 @@ in
       ninja-kitware
       openblas
       openmpi
-      pipenv
       pkgconfig
       python3Full
       python3Packages.breathe
@@ -51,6 +50,7 @@ in
       python3Packages.sphinx
       rpm
       valgrind
+      zeromq
       zlib
     ];
     hardeningDisable = [ "all" ];

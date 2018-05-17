@@ -5,10 +5,12 @@
 # http://blogs.msdn.com/b/vcblog/archive/2011/01/05/damn-my-vc-project-is-building-slower-in-vs2010-what-do-i-do-now-a-step-by-step-guide.aspx
 version: 'build-{build}-{branch}'
 
-platform: x86
+platform: x64
 
 build:
   parallel: true
+
+cache: c:\tools\vcpkg\installed\
 
 environment:
   # Create expected SHELL variable for pipenv.
@@ -21,14 +23,14 @@ environment:
       CMAKEARGS: ""
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       MSYSTEM: MINGW64
-      GENERATOR: "Ninja"
-      BUILDFLAGS: "-v"
-      CMAKEARGS: ""
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 14 2015"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
+      GENERATOR: "Ninja"
+      BUILDFLAGS: "-v"
+      CMAKEARGS: ""
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 15 2017"
@@ -44,6 +46,10 @@ install:
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
   - "SetEnvMPI.cmd"
+  - vcpkg install zeromq
+  - cd c:\tools\vcpkg
+  - vcpkg integrate install
+  - cd %APPVEYOR_BUILD_FOLDER%
 
 # extract step has to happen before the sh.exe workaround otherwise 7z will complain
 before_build:
