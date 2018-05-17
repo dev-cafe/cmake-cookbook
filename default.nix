@@ -37,7 +37,6 @@ in
       ninja-kitware
       openblas
       openmpi
-      pipenv
       pkgconfig
       python3Full
       python3Packages.breathe

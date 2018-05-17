@@ -1,7 +1,6 @@
 # Detecting External Libraries. I. Using pkg-config
 
-This recipe shows how to harness `pkg-config` _via_ CMake to detect and use the
-popular ZeroMQ library.
+Abstract to be written ...
 
 - [c-example](c-example/)
 - [c-example-3.5](c-example-3.5/)
