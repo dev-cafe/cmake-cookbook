@@ -2,5 +2,7 @@
 
 Abstract to be written ...
 
-- [cxx-example](cxx-example/)
-- [cxx-example-3.5](cxx-example-3.5/)
+- [c-example](c-example/)
+- [c-example-3.5](c-example-3.5/)
+- [cxx-uuid-example](cxx-uuid-example/)
+- [cxx-uuid-example-3.5](cxx-uuid-example-3.5/)

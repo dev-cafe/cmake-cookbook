@@ -51,6 +51,7 @@ in
       python3Packages.sphinx
       rpm
       valgrind
+      zeromq
       zlib
     ];
     hardeningDisable = [ "all" ];
