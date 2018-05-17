@@ -11,20 +11,21 @@ matrix:
           packages:
             - doxygen
             - g++-7
+            - g++-mingw-w64
+            - gcc-mingw-w64
             - gfortran
             - gfortran-7
-            - python-dev
+            - gfortran-mingw-w64
             - libatlas-dev
+            - libboost1.55-all-dev
             - liblapack-dev
             - liblapacke-dev
             - libopenmpi-dev
+            - libzmq3-dev
             - openmpi-bin
-            - libboost1.55-all-dev
-            - uuid-dev
             - pkg-config
-            - gcc-mingw-w64
-            - g++-mingw-w64
-            - gfortran-mingw-w64
+            - python-dev
+            - uuid-dev
       env:
         - CMAKE_VERSION="3.11.0"
         - GENERATOR="Unix Makefiles"
