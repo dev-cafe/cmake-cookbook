@@ -53,7 +53,8 @@
 - [Detecting the MPI Parallel Environment](chapter-03/recipe-06/README.md)
 - [Detecting the Eigen Library](chapter-03/recipe-07/README.md)
 - [Detecting the Boost Libraries](chapter-03/recipe-08/README.md)
-- [Writing CMake Code to Detect External Libraries](chapter-03/recipe-09/README.md)
+- [Detecting External Libraries. I. Using pkg-config](recipe-09/README.md)
+- [Detecting External Libraries. II. Writing a find-module](recipe-10/README.md)
 
 
 ### [Chapter 4: Creating and Running Tests](chapter-04/README.md)

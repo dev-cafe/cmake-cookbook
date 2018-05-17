@@ -100,7 +100,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     targets = targets_global + targets_local
 
     # local configurations override global ones
-    configurations = configurations_local.copy() if configurations_local else configurations_global.copy()
+    configurations = configurations_local[:] if configurations_local else configurations_global[:]
 
     for entry in env:
         os.environ[entry] = env[entry]
