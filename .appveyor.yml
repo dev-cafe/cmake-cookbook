@@ -18,12 +18,17 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       MSYSTEM: MINGW64
+      GENERATOR: "Visual Studio 14 2015 Win64"
+      BUILDFLAGS: "/verbosity:normal"
+      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
       GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       MSYSTEM: MINGW64
-      GENERATOR: "Visual Studio 14 2015"
+      GENERATOR: "Visual Studio 15 2017 Win64"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -31,11 +36,6 @@ environment:
       GENERATOR: "Ninja"
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      MSYSTEM: MINGW64
-      GENERATOR: "Visual Studio 15 2017"
-      BUILDFLAGS: "/verbosity:normal"
-      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
 install:
   - set PATH=C:\Python36;%PATH%
@@ -46,7 +46,7 @@ install:
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
   - "SetEnvMPI.cmd"
-  - vcpkg install zeromq
+  - vcpkg install zeromq --triplet x64-windows
   - cd c:\tools\vcpkg
   - vcpkg integrate install
   - cd %APPVEYOR_BUILD_FOLDER%
