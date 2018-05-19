@@ -23,5 +23,6 @@ std::string say_hello() {
 
 int main() {
   std::cout << say_hello() << std::endl;
+  std::cout << "compiler name is " COMPILER_NAME << std::endl;
   return EXIT_SUCCESS;
 }

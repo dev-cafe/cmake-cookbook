@@ -7,6 +7,8 @@ project(recipe-03 LANGUAGES CXX)
 # define executable and its source file
 add_executable(hello-world hello-world.cpp)
 
+target_compile_definitions(hello-world PUBLIC "-DCOMPILER_NAME=\"${CMAKE_CXX_COMPILER_ID}\"")
+
 # let the preprocessor know about the compiler vendor
 if(CMAKE_CXX_COMPILER_ID MATCHES Intel)
   target_compile_definitions(hello-world PUBLIC "-DIS_INTEL_CXX_COMPILER")
