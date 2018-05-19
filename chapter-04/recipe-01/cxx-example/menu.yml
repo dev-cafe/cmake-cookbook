@@ -1,6 +1,6 @@
 appveyor:
   env:
-    - BOOST_ROOT: 'C:\Libraries\boost_1_66_0'
+    - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
 
 targets:
   - test

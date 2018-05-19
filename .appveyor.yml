@@ -46,7 +46,7 @@ install:
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
   - "SetEnvMPI.cmd"
-  - vcpkg install zeromq --triplet x64-windows
+  - vcpkg install boost-filesystem boost-system boost-test boost-python zeromq --triplet x64-windows
   - cd c:\tools\vcpkg
   - vcpkg integrate install
   - cd %APPVEYOR_BUILD_FOLDER%
