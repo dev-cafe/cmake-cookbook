@@ -33,6 +33,7 @@ else()
       Py3-pure-embedding.cpp
     )
 endif()
+# MSYS2 on Appveyor-specific
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(pure-embedding
     PUBLIC

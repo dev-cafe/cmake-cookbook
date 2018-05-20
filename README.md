@@ -78,7 +78,7 @@
 - [Running a custom command at build-time I](chapter-05/recipe-03/README.md)
 - [Running a custom command at build-time II](chapter-05/recipe-04/README.md)
 - [Running custom commands for specific targets at build-time](chapter-05/recipe-05/README.md)
-- [Probing compilation](chapter-05/recipe-06/README.md)
+- [Probing compilation and linking](chapter-05/recipe-06/README.md)
 - [Probing compiler flags](chapter-05/recipe-07/README.md)
 - [Probing execution](chapter-05/recipe-08/README.md)
 - [Fine-tuning with generator expressions](chapter-05/recipe-09/README.md)
