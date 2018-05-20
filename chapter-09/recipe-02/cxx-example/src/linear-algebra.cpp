@@ -6,6 +6,7 @@
 
 #include <chrono>
 #include <cstdlib>
+#include <iomanip>
 #include <iostream>
 #include <random>
 #include <vector>
@@ -42,7 +43,8 @@ int main(int argc, char **argv) {
   // Report times
   elapsed_seconds = end - start;
   end_time = std::chrono::system_clock::to_time_t(end);
-  std::cout << "matrices allocated and initialized " << std::ctime(&end_time)
+  std::cout << "matrices allocated and initialized "
+            << std::put_time(std::localtime(&end_time), "%a %b %d %Y %r\n")
             << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
   start = std::chrono::system_clock::now();
@@ -53,7 +55,8 @@ int main(int argc, char **argv) {
   std::vector<double> b1(b);
   end = std::chrono::system_clock::now();
   end_time = std::chrono::system_clock::to_time_t(end);
-  std::cout << "C_DSCAL done, A and b saved " << std::ctime(&end_time)
+  std::cout << "Scaling done, A and b saved "
+            << std::put_time(std::localtime(&end_time), "%a %b %d %Y %r\n")
             << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
   int info;
@@ -64,7 +67,8 @@ int main(int argc, char **argv) {
   elapsed_seconds = end - start;
   end_time = std::chrono::system_clock::to_time_t(end);
 
-  std::cout << "C_DGESV done " << std::ctime(&end_time)
+  std::cout << "C_DGESV done "
+            << std::put_time(std::localtime(&end_time), "%a %b %d %Y %r\n")
             << "elapsed time: " << elapsed_seconds.count() << "s\n";
   std::cout << "info is " << info << std::endl;
 
