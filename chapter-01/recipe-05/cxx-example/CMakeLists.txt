@@ -18,7 +18,7 @@ cmake_dependent_option(MAKE_SHARED_LIBRARY "Compile sources into a shared librar
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # list sources
-set(_sources Message.hpp Message.cpp)
+list(APPEND _sources Message.hpp Message.cpp)
 
 message(STATUS "Compile sources into a library? ${USE_LIBRARY}")
 

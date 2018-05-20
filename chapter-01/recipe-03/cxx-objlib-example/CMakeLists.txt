@@ -5,8 +5,11 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(recipe-03 LANGUAGES CXX)
 
 # generate an object library from sources
-set(_sources Message.hpp Message.cpp)
-add_library(message-objs OBJECT ${_sources})
+add_library(message-objs
+  OBJECT
+    Message.hpp
+    Message.cpp
+  )
 # This is only needed for older compilers, but doesn't hurt either to have it
 set_target_properties(message-objs PROPERTIES POSITION_INDEPENDENT_CODE 1)
 

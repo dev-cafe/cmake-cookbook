@@ -5,8 +5,11 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(recipe-03 LANGUAGES CXX)
 
 # generate a library from sources
-set(_sources Message.hpp Message.cpp)
-add_library(message STATIC ${_sources})
+add_library(message
+  STATIC
+    Message.hpp
+    Message.cpp
+  )
 
 add_executable(hello-world hello-world.cpp)
 

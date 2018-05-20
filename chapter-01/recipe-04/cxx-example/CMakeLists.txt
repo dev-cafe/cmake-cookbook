@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(recipe-04 LANGUAGES CXX)
 
 # list sources
-set(_sources Message.hpp Message.cpp)
+list(APPEND _sources Message.hpp Message.cpp)
 
 # introduce a toggle for using a library
 set(USE_LIBRARY OFF)
