@@ -37,4 +37,14 @@ function(fetch_googletest _download_module_path _download_root)
     ${_download_root}/googletest-src
     ${_download_root}/googletest-build
     )
+
+  # Silence std::tr1 warning on MSVC
+  if(MSVC)
+    foreach(_tgt gtest gtest_main gmock gmock_main)
+      target_compile_definitions(${_tgt}
+        PRIVATE
+          "_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING"
+        )
+    endforeach()
+  endif()
 endfunction()
