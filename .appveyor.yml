@@ -10,10 +10,6 @@ platform: x64
 build:
   parallel: true
 
-cache:
-  - msys64
-  - c:\tools\vcpkg\installed\
-
 environment:
   # Create expected SHELL variable for pipenv.
   SHELL: "windows"
@@ -63,3 +59,9 @@ build_script:
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\test.bat'
 
 deploy: off
+
+cache:
+  - C:\msys64\%MSYSTEM%\bin -> install.bat
+  - C:\msys64\usr\bin -> install.bat
+  - c:\tools\vcpkg\installed\
+  
