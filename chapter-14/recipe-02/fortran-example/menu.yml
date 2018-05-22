@@ -1,7 +1,14 @@
+# we only test cross-compilation on linux
 targets:
   - install
 
-# we only test cross-compilation on linux
+appveyor:
+  failing_generators:
+    - 'MSYS Makefiles'
+    - 'Ninja'
+    - 'Visual Studio 14 2015 Win64'
+    - 'Visual Studio 15 2017 Win64'
+
 travis-osx:
   failing_generators:
     - 'Unix Makefiles'

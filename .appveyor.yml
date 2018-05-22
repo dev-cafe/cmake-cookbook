@@ -10,7 +10,9 @@ platform: x64
 build:
   parallel: true
 
-cache: c:\tools\vcpkg\installed\
+cache:
+  - msys64
+  - c:\tools\vcpkg\installed\
 
 environment:
   # Create expected SHELL variable for pipenv.
