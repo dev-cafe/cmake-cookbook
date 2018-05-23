@@ -4,19 +4,16 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 # project name and language
 project(recipe-10 LANGUAGES CXX)
 
-add_executable(compute-areas compute-areas.cpp)
-
-add_library(
-  geometry
+add_library(geometry
   STATIC
-  geometry_circle.cpp
-  geometry_circle.hpp
-  geometry_polygon.cpp
-  geometry_polygon.hpp
-  geometry_rhombus.cpp
-  geometry_rhombus.hpp
-  geometry_square.cpp
-  geometry_square.hpp
+    geometry_circle.cpp
+    geometry_circle.hpp
+    geometry_polygon.cpp
+    geometry_polygon.hpp
+    geometry_rhombus.cpp
+    geometry_rhombus.hpp
+    geometry_square.cpp
+    geometry_square.hpp
   )
 
 # we wish to compile the library with the optimization flag: -O3
@@ -42,4 +39,5 @@ foreach(_source ${sources_with_lower_optimization})
   message(STATUS "Source ${_source} has the following extra COMPILE_FLAGS: ${_flags}")
 endforeach()
 
+add_executable(compute-areas compute-areas.cpp)
 target_link_libraries(compute-areas geometry)
