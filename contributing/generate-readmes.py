@@ -60,7 +60,6 @@ def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
 
 [![Travis branch](https://img.shields.io/travis/dev-cafe/cmake-cookbook/master.svg?style=flat-square)](https://travis-ci.org/dev-cafe/cmake-cookbook)
 [![AppVeyor branch](https://img.shields.io/appveyor/ci/dev-cafe/cmake-cookbook/master.svg?style=flat-square)](https://ci.appveyor.com/project/dev-cafe/cmake-cookbook/branch/master)
-[![Drone branch](https://www.drone-ci.science/api/badges/dev-cafe/cmake-cookbook/status.svg?style=flat-square)](https://www.drone-ci.science/dev-cafe/cmake-cookbook)
 
 [![GitHub issues](https://img.shields.io/github/issues/dev-cafe/cmake-cookbook.svg?style=flat-square)](https://github.com/dev-cafe/cmake-cookbook/issues)
 [![GitHub forks](https://img.shields.io/github/forks/dev-cafe/cmake-cookbook.svg?style=flat-square)](https://github.com/dev-cafe/cmake-cookbook/network)
