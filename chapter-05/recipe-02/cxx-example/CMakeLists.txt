@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(PythonInterp 2.7 REQUIRED)
-find_package(PythonLibs 2.7 REQUIRED)
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
 
 # Find NumPy version
 execute_process(
@@ -22,7 +22,7 @@ message(STATUS "NumPy version: ${NumPy_VERSION}")
 configure_file(Report.hpp.in Report.hpp @ONLY)
 
 add_executable(pure-embedding "")
-if (PYTHON_VERSION_MAJOR VERSION_LESS 3)
+if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
   target_sources(pure-embedding
     PRIVATE
       Py2-pure-embedding.cpp
@@ -31,6 +31,13 @@ else()
   target_sources(pure-embedding
     PRIVATE
       Py3-pure-embedding.cpp
+    )
+endif()
+# MSYS2 on Appveyor-specific
+if(WIN32 AND (NOT MSVC))
+  target_compile_definitions(pure-embedding
+    PUBLIC
+      "_hypot=hypot"
     )
 endif()
 target_include_directories(pure-embedding

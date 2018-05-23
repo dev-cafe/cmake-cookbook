@@ -1,4 +1,4 @@
-# Probing compilation
+# Probing compilation and linking
 
 We show the usage of `check_<lang>_source_compiles` to check that a small code
 snippet compiles. This will be contrasted with `try_compile`. Finally, we

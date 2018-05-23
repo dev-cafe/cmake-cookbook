@@ -6,3 +6,4 @@ bash -lc "cd /c/projects/cmake-recipes-no-symlinks && pwd && pipenv run python t
 bash -lc "cd /c/projects/cmake-recipes-no-symlinks && pwd && pipenv run python testing/collect_tests.py 'chapter-02/recipe-*'"
 bash -lc "cd /c/projects/cmake-recipes-no-symlinks && pwd && pipenv run python testing/collect_tests.py 'chapter-03/recipe-*'"
 bash -lc "cd /c/projects/cmake-recipes-no-symlinks && pwd && pipenv run python testing/collect_tests.py 'chapter-04/recipe-*'"
+bash -lc "cd /c/projects/cmake-recipes-no-symlinks && pwd && pipenv run python testing/collect_tests.py 'chapter-05/recipe-*'"

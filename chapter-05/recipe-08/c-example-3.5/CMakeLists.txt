@@ -26,7 +26,7 @@ int main(int argc, char * argv[]) {
 }
   ")
 set(CMAKE_REQUIRED_INCLUDES ${UUID_INCLUDE_DIRS})
-set(CMAKE_REQUIRED_LIBRARIES ${UUID_LDFLAGS})
+set(CMAKE_REQUIRED_LIBRARIES ${UUID_LIBRARIES})
 check_c_source_runs("${_test_uuid}" _runs)
 if(NOT _runs)
   message(FATAL_ERROR "Cannot run a simple C executable using libuuid!")
@@ -35,5 +35,5 @@ endif()
 add_executable(use-uuid use-uuid.cpp)
 target_link_libraries(use-uuid
   PUBLIC
-  ${UUID_LIBRARIES}
+    ${UUID_LIBRARIES}
   )
