@@ -27,13 +27,13 @@ matrix:
             - python-dev
             - uuid-dev
       env:
-        - CMAKE_VERSION="3.11.0"
+        - CMAKE_VERSION="3.11.1"
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: linux
       addons: *1
       env:
-        - CMAKE_VERSION="3.11.0"
+        - CMAKE_VERSION="3.11.1"
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
     - os: linux
@@ -62,7 +62,7 @@ cache:
   pip: true
   directories:
     - $HOME/Deps/cmake/3.5.2
-    - $HOME/Deps/cmake/3.11.0
+    - $HOME/Deps/cmake/3.11.1
     - $HOME/Deps/eigen
     - $HOME/Deps/ninja
     - $HOME/Deps/conda
