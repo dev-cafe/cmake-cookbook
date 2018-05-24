@@ -18,7 +18,7 @@ to be offered under terms of the [MIT license](https://tldrlegal.com/license/mit
 
 * Make sure you have a [GitHub account](https://github.com/signup/free).
 * [Fork](https://help.github.com/articles/fork-a-repo/) the
-  [bast/cmake-recipes](https://github.com/bast/cmake-recipes) repository on GitHub.
+  [dev-cafe/cmake-cookbook](https://github.com/dev-cafe/cmake-cookbook) repository on GitHub.
 * On your local machine,
   [clone](https://help.github.com/articles/cloning-a-repository/) your fork of
   the repository.

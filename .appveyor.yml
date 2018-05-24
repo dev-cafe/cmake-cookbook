@@ -54,7 +54,7 @@ install:
 # extract step has to happen before the sh.exe workaround otherwise 7z will complain
 before_build:
   - cd C:\projects
-  - appveyor DownloadFile https://github.com/bast/cmake-recipes/archive/%APPVEYOR_REPO_COMMIT%.zip
+  - appveyor DownloadFile https://github.com/dev-cafe/cmake-cookbook/archive/%APPVEYOR_REPO_COMMIT%.zip
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\extract.bat'
 
 build_script:
