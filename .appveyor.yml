@@ -43,6 +43,7 @@ init:
   - set PATH=%PATH:C:\Python27\Scripts;=%
 
 install:
+  - bash -lc "pip install pipenv"
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
   - "SetEnvMPI.cmd"
