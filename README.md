@@ -175,4 +175,4 @@
 - [Using the ThreadSanitizer and reporting data races to CDash](chapter-15/recipe-04/README.md)
 
 
-### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)
+### [Chapter 16: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)
