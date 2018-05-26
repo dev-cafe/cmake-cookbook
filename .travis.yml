@@ -34,6 +34,13 @@ matrix:
       addons: *1
       env:
         - CMAKE_VERSION="3.11.0"
+        - GENERATOR="Unix Makefiles"
+        - BUILDFLAGS="VERBOSE=1"
+        - ANACONDA_TESTS_ONLY=1
+    - os: linux
+      addons: *1
+      env:
+        - CMAKE_VERSION="3.11.0"
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
     - os: linux
@@ -42,6 +49,13 @@ matrix:
         - CMAKE_VERSION="3.5.2"
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
+    - os: linux
+      addons: *1
+      env:
+        - CMAKE_VERSION="3.5.2"
+        - GENERATOR="Unix Makefiles"
+        - BUILDFLAGS="VERBOSE=1"
+        - ANACONDA_TESTS_ONLY=1
     - os: linux
       addons: *1
       env:
@@ -52,6 +66,11 @@ matrix:
       env:
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
+    - os: osx
+      env:
+        - GENERATOR="Unix Makefiles"
+        - BUILDFLAGS="VERBOSE=1"
+        - ANACONDA_TESTS_ONLY=1
     - os: osx
       env:
         - GENERATOR="Ninja"
@@ -80,7 +99,11 @@ before_install:
   - mkdir -p $HOME/Downloads $HOME/Deps
 
 install:
-  - travis_wait 30 ./testing/dependencies/install_dependencies.sh
+  - ./testing/dependencies/travis/install.sh
+  - ./testing/dependencies/travis/cmake.sh
+  - ./testing/dependencies/travis/ninja.sh
+  - ./testing/dependencies/travis/anaconda.sh
+  - ./testing/dependencies/travis/eigen.sh
   - export PATH=$HOME/Deps/cmake/$CMAKE_VERSION/bin${PATH:+:$PATH}
   - pipenv install
   - pipenv run python --version
@@ -92,4 +115,17 @@ before_script:
 
 script:
   - ./testing/dependencies/report_versions.sh
-  - pipenv run python testing/collect_tests.py 'chapter-*/recipe-*'
+  - if [[ "$ANACONDA_TESTS_ONLY" == 1 ]]; then
+      pipenv run python testing/collect_tests.py 'chapter-12/recipe-03';
+      pipenv run python testing/collect_tests.py 'chapter-12/recipe-04';
+    else
+      pipenv run python testing/collect_tests.py 'chapter-0*/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-10/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-12/recipe-01';
+      pipenv run python testing/collect_tests.py 'chapter-12/recipe-02';
+      pipenv run python testing/collect_tests.py 'chapter-13/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-14/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-15/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-16/recipe-*';
+    fi
