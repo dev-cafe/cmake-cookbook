@@ -5,4 +5,4 @@ rem the 7z that is default on appveyor cannot handle symlinks but p7zip can
 bash -lc "pacman -S --noconfirm p7zip"
 
 bash -lc "cd /c/projects/ && 7z x ${APPVEYOR_REPO_COMMIT}.zip"
-bash -lc "mv /c/projects/cmake-recipes-${APPVEYOR_REPO_COMMIT} /c/projects/cmake-recipes-no-symlinks"
+bash -lc "mv /c/projects/cmake-cookbook-${APPVEYOR_REPO_COMMIT} /c/projects/cmake-cookbook-no-symlinks"
