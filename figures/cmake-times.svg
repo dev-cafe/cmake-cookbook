@@ -15,7 +15,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="cmake-times.svg">
+   sodipodi:docname="cmake-times.svg"
+   inkscape:export-filename="/home/roberto/Workspace/robertodr/cmake-cookbook/figures/cmake-times.png"
+   inkscape:export-xdpi="600"
+   inkscape:export-ydpi="600">
   <defs
      id="defs2">
     <marker
@@ -629,7 +632,9 @@
        style="fill:none;stroke:#ff00e9;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.49019608;marker-end:url(#marker18981)"
        d="m 471.11853,40.652157 22.47836,-20.05763"
        id="path18129"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="299.76999"
+       inkscape:export-ydpi="299.76999" />
     <path
        style="display:inline;fill:none;stroke:#ff00ff;stroke-width:0.70555556;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.49019608"
        d="M -22.354201,154.22228 H 2.5449077"
