@@ -35,22 +35,22 @@ environment:
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
 
-install:
-  - set PATH=C:\Python36;%PATH%
-  - set PATH=C:\Python36\Scripts;%PATH%
+init:
+  - set PATH=C:\msys64\%MSYSTEM%\bin;C:\msys64\usr\bin;%PATH%
+  - set PATH=C:\Python36;C:\Python36\Scripts;%PATH%
+  # Remove Python 2.7 from path
   - set PATH=%PATH:C:\Python27;=%
   - set PATH=%PATH:C:\Python27\Scripts;=%
-  - python --version
+
+install:
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
   - "SetEnvMPI.cmd"
-  - vcpkg install boost-filesystem boost-system boost-test boost-python zeromq --triplet x64-windows
-  - cd c:\tools\vcpkg
-  - vcpkg integrate install
-  - cd %APPVEYOR_BUILD_FOLDER%
 
 # extract step has to happen before the sh.exe workaround otherwise 7z will complain
 before_build:
+  - python --version
+  - cmake --version
   - cd C:\projects
   - appveyor DownloadFile https://github.com/dev-cafe/cmake-cookbook/archive/%APPVEYOR_REPO_COMMIT%.zip
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\extract.bat'
@@ -64,4 +64,3 @@ cache:
   - C:\msys64\%MSYSTEM%\bin -> install.bat
   - C:\msys64\usr\bin -> install.bat
   - c:\tools\vcpkg\installed\
-  
