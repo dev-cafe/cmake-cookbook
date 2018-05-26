@@ -95,27 +95,27 @@
 - [Recording the Git hash at build-time](chapter-06/recipe-07/README.md)
 
 
-### [Chapter 7: The Superbuild Pattern](chapter-07/README.md)
+### [Chapter 7: Structuring Projects](chapter-07/README.md)
 
-- [Using the superbuild pattern](chapter-07/recipe-01/README.md)
-- [Managing dependencies with a superbuild I. The Boost libraries](chapter-07/recipe-02/README.md)
-- [Managing dependencies with a superbuild II. The FFTW library](chapter-07/recipe-03/README.md)
-- [Managing dependencies with a superbuild III. The Eigen library](chapter-07/recipe-04/README.md)
-- [Managing dependencies with a superbuild IV. The HDF5 library](chapter-07/recipe-05/README.md)
-- [Managing your project as a superbuild](chapter-07/recipe-06/README.md)
+- [Defining a macro with named arguments](chapter-07/recipe-01/README.md)
+- [Splitting CMake sources into modules](chapter-07/recipe-02/README.md)
+- [Function to test and set compiler flags](chapter-07/recipe-03/README.md)
+- [Defining a function or macro with named arguments](chapter-07/recipe-04/README.md)
+- [Redefining functions and macros](chapter-07/recipe-05/README.md)
+- [Deprecating functions, macros, and variables](chapter-07/recipe-06/README.md)
+- [Limiting scope with add_subdirectory](chapter-07/recipe-07/README.md)
+- [Avoiding global variables using target_sources](chapter-07/recipe-08/README.md)
+- [Organizing Fortran projects](chapter-07/recipe-09/README.md)
 
 
-### [Chapter 8: Structuring Projects](chapter-08/README.md)
+### [Chapter 8: The Superbuild Pattern](chapter-08/README.md)
 
-- [Defining a macro with named arguments](chapter-08/recipe-01/README.md)
-- [Splitting CMake sources into modules](chapter-08/recipe-02/README.md)
-- [Function to test and set compiler flags](chapter-08/recipe-03/README.md)
-- [Defining a function or macro with named arguments](chapter-08/recipe-04/README.md)
-- [Redefining functions and macros](chapter-08/recipe-05/README.md)
-- [Deprecating functions, macros, and variables](chapter-08/recipe-06/README.md)
-- [Limiting scope with add_subdirectory](chapter-08/recipe-07/README.md)
-- [Avoiding global variables using target_sources](chapter-08/recipe-08/README.md)
-- [Organizing Fortran projects](chapter-08/recipe-09/README.md)
+- [Using the superbuild pattern](chapter-08/recipe-01/README.md)
+- [Managing dependencies with a superbuild I. The Boost libraries](chapter-08/recipe-02/README.md)
+- [Managing dependencies with a superbuild II. The FFTW library](chapter-08/recipe-03/README.md)
+- [Managing dependencies with a superbuild III. The Eigen library](chapter-08/recipe-04/README.md)
+- [Managing dependencies with a superbuild IV. The HDF5 library](chapter-08/recipe-05/README.md)
+- [Managing your project as a superbuild](chapter-08/recipe-06/README.md)
 
 
 ### [Chapter 9: Mixed-language Projects](chapter-09/README.md)

@@ -1,5 +1,5 @@
-# Redefining functions and macros
+# Managing dependencies with a superbuild IV. The HDF5 library
 
 Abstract to be written ...
 
-- [example](example/)
+- [fortran-example](fortran-example/)

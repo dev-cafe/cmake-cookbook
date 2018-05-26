@@ -1,4 +1,4 @@
-# Defining a macro with named arguments
+# Using the superbuild pattern
 
 Abstract to be written ...
 

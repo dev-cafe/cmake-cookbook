@@ -1,1 +1,1 @@
-Managing dependencies with a superbuild II. The FFTW library
+Function to test and set compiler flags

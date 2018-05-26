@@ -1,5 +1,5 @@
-# Deprecating functions, macros, and variables
+# Managing your project as a superbuild
 
 Abstract to be written ...
 
-- [example](example/)
+- [cxx-example](cxx-example/)

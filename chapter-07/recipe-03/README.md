@@ -1,5 +1,5 @@
-# Managing dependencies with a superbuild II. The FFTW library
+# Function to test and set compiler flags
 
 Abstract to be written ...
 
-- [c-example](c-example/)
+- [example](example/)
