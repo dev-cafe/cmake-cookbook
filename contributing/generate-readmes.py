@@ -87,7 +87,7 @@ def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
         # chapter 16 is hard-coded
         # since it points to an outside diff
         f.write(
-            '\n\n### [Chapter 16: Porting a Project to CMake](https://github.com/bast/vim/compare/master...cmake-support)\n'
+            '\n\n### [Chapter 16: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)\n'
         )
 
 
