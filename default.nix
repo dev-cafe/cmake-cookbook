@@ -15,7 +15,7 @@ in
     )];
   };
   stdenv.mkDerivation {
-    name = "CMake-recipes";
+    name = "CMake-Cookbook";
     buildInputs = [
       atlas
       boost155
