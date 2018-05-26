@@ -7,6 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND BOOST_COMPONENTS_REQUIRED filesystem system)
+set(BOOST_MINIMUM_REQUIRED 1.61)
 add_subdirectory(external/upstream)
 
 include(ExternalProject)
