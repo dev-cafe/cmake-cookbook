@@ -43,12 +43,14 @@ else()
     string(REPLACE "unit_test_framework" "test" _b2_needed_components "${BOOST_COMPONENTS_REQUIRED}")
     # Generate argument for BUILD_BYPRODUCTS
     set(_build_byproducts)
+    set(_b2_select_libraries)
     foreach(_lib IN LISTS _b2_needed_components)
       list(APPEND _build_byproducts ${DEPS_INSTALL_PREFIX}/boost/lib/libboost_${_lib}${CMAKE_SHARED_LIBRARY_SUFFIX})
+      set(APPEND _b2_select_libraries ${b2_select_libraries} --with-${_lib})
     endforeach()
     # Transform the ;-separated list to a ,-separated list (digested by the Boost build toolchain!)
     string(REPLACE ";" "," _b2_needed_components "${_b2_needed_components}")
-    set(select_libraries "--with-libraries=${_b2_needed_components}")
+    set(_bootstrap_select_libraries "--with-libraries=${_b2_needed_components}")
     string(REPLACE ";" ", " printout "${BOOST_COMPONENTS_REQUIRED}")
     message(STATUS "  Libraries to be built: ${printout}")
   endif()
@@ -71,27 +73,31 @@ else()
       <SOURCE_DIR>/${_bootstrap}
       --with-toolset=${_toolset}
       --prefix=${DEPS_INSTALL_PREFIX}/boost
-      ${select_libraries}
+      ${_bootstrap_select_libraries}
     BUILD_COMMAND
-      <SOURCE_DIR>/${_b2}
+      <SOURCE_DIR>/${_b2} -q
            address-model=${_address_model}
-           link=shared
+           link=static
+           runtime-link=shared
            threading=multi
            variant=release
            toolset=${_toolset}
+           ${_b2_select_libraries}
            ${_build_user_config_args}
     BUILD_IN_SOURCE
       1
     INSTALL_COMMAND
       <SOURCE_DIR>/${_b2} -q install
            address-model=${_address_model}
-           link=shared
+           link=static
+           runtime-link=shared
            threading=multi
            variant=release
            toolset=${_toolset}
+           ${_b2_select_libraries}
            ${_build_user_config_args}
-    #LOG_BUILD
-    #  1
+    LOG_BUILD
+      1
     LOG_INSTALL
       1
     BUILD_BYPRODUCTS
@@ -112,6 +118,8 @@ else()
   unset(_address_model)
   unset(_b2_needed_components)
   unset(_build_byproducts)
+  unset(_boostrap_select_libraries)
+  unset(_b2_select_libraries)
   unset(_user_config_jamfile)
   unset(_build_user_config_args)
 endif()
