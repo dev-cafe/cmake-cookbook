@@ -59,7 +59,7 @@ def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/dev-cafe/cmake-cookbook/master/LICENSE)
 
 [![Travis branch](https://img.shields.io/travis/dev-cafe/cmake-cookbook/master.svg?style=flat-square)](https://travis-ci.org/dev-cafe/cmake-cookbook)
-[![AppVeyor branch](https://img.shields.io/appveyor/ci/dev-cafe/cmake-cookbook/master.svg?style=flat-square)](https://ci.appveyor.com/project/dev-cafe/cmake-cookbook/branch/master)
+[![AppVeyor branch](https://img.shields.io/appveyor/ci/bast/cmake-cookbook/master.svg?style=flat-square)](https://ci.appveyor.com/project/bast/cmake-cookbook/branch/master)
 
 [![GitHub issues](https://img.shields.io/github/issues/dev-cafe/cmake-cookbook.svg?style=flat-square)](https://github.com/dev-cafe/cmake-cookbook/issues)
 [![GitHub forks](https://img.shields.io/github/forks/dev-cafe/cmake-cookbook.svg?style=flat-square)](https://github.com/dev-cafe/cmake-cookbook/network)
