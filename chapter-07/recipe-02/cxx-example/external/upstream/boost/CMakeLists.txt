@@ -1,81 +1,101 @@
-find_package(Boost 1.61 QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
+find_package(Boost ${BOOST_MINIMUM_REQUIRED} QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
 if(Boost_FOUND)
   message(STATUS "Found Boost version ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}")
   add_library(boost_external INTERFACE)
 else()
-  message(STATUS "Suitable Boost could not be located, Building Boost instead.")
+  message(STATUS "Suitable Boost ${BOOST_MINIMUM_REQUIRED} could not be located, Building Boost 1.65.1 instead.")
 
   if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     if(APPLE)
-      set(toolset "darwin")
+      set(_toolset "darwin")
     else()
-      set(toolset "gcc")
+      set(_toolset "gcc")
     endif()
+    set(_cxx_std_flag "-std=c++11")
   elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    set(toolset "clang")
+    set(_toolset "clang")
+    set(_cxx_std_flag "-std=c++11")
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
-    set(toolset "intel")
+    set(_toolset "intel")
+    set(_cxx_std_flag "-std=c++11")
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    set(toolset "msvc")
+    set(_toolset "msvc")
+    set(_cxx_std_flag "/EHc /std:c++14")
   endif()
 
   if(WIN32)
-    set(Boost_BOOTSTRAP "bootstrap.bat")
+    set(_bootstrap "bootstrap.bat")
+    set(_b2 "b2.exe")
   else()
-    set(Boost_BOOTSTRAP "bootstrap.sh")
+    set(_bootstrap "bootstrap.sh")
+    set(_b2 "b2")
+  endif()
+
+  if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(_address_model 64)
+  else()
+    set(_address_model 32)
   endif()
 
   # Non-empty list. Compiled libraries needed
   if(NOT "${BOOST_COMPONENTS_REQUIRED}" STREQUAL "")
     # Replace unit_test_framework (used by CMake's find_package) with test (understood by Boost build toolchain)
-    string(REPLACE "unit_test_framework" "test" b2_needed_components "${BOOST_COMPONENTS_REQUIRED}")
+    string(REPLACE "unit_test_framework" "test" _b2_needed_components "${BOOST_COMPONENTS_REQUIRED}")
     # Generate argument for BUILD_BYPRODUCTS
     set(_build_byproducts)
-    foreach(_lib IN LISTS b2_needed_components)
+    set(_b2_select_libraries)
+    foreach(_lib IN LISTS _b2_needed_components)
       list(APPEND _build_byproducts ${DEPS_INSTALL_PREFIX}/boost/lib/libboost_${_lib}${CMAKE_SHARED_LIBRARY_SUFFIX})
+      set(APPEND _b2_select_libraries ${b2_select_libraries} --with-${_lib})
     endforeach()
     # Transform the ;-separated list to a ,-separated list (digested by the Boost build toolchain!)
-    string(REPLACE ";" "," b2_needed_components "${b2_needed_components}")
-    set(select_libraries "--with-libraries=${b2_needed_components}")
+    string(REPLACE ";" "," _b2_needed_components "${_b2_needed_components}")
+    set(_bootstrap_select_libraries "--with-libraries=${_b2_needed_components}")
     string(REPLACE ";" ", " printout "${BOOST_COMPONENTS_REQUIRED}")
     message(STATUS "  Libraries to be built: ${printout}")
   endif()
 
-  set(Boost_USER_CONFIG_JAMFILE "${PROJECT_BINARY_DIR}/user-config.jam")
-  file(WRITE "${Boost_USER_CONFIG_JAMFILE}" "using ${toolset} : : ${CMAKE_CXX_COMPILER} : <cxxflags>\"-std=c++11\" <linkflags>\"-std=c++11\" ;")
-  set(Boost_BUILD_USER_CONFIG_ARGS "--user-config=${PROJECT_BINARY_DIR}/user-config.jam")
+  set(_user_config_jamfile "${PROJECT_BINARY_DIR}/user-config.jam")
+  file(WRITE "${_user_config_jamfile}" "using ${_toolset} : : ${CMAKE_CXX_COMPILER} : <cxxflags>\"${_cxx_std_flag}\" <linkflags>\"${_cxx_std_flag}\" ;")
+  set(_build_user_config_args "--user-config=${PROJECT_BINARY_DIR}/user-config.jam")
 
   include(ExternalProject)
   ExternalProject_Add(boost_external
     URL
-      https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.gz
+      https://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_65_1.zip
     URL_HASH
-      SHA256=a77c7cc660ec02704c6884fbb20c552d52d60a18f26573c9cee0788bf00ed7e6
+      SHA256=d1775aef807bd6a14077b450cce2950d8eacd86aaf51015f79e712917f8cc3c2
     DOWNLOAD_NO_PROGRESS
       1
     UPDATE_COMMAND
       ""
     CONFIGURE_COMMAND
-      <SOURCE_DIR>/${Boost_BOOTSTRAP}
-      --with-toolset=${toolset}
+      <SOURCE_DIR>/${_bootstrap}
+      --with-toolset=${_toolset}
       --prefix=${DEPS_INSTALL_PREFIX}/boost
-      ${select_libraries}
+      ${_bootstrap_select_libraries}
     BUILD_COMMAND
-      <SOURCE_DIR>/b2 -q
-           link=shared
+      <SOURCE_DIR>/${_b2} -q
+           address-model=${_address_model}
+           link=static
+           runtime-link=shared
            threading=multi
            variant=release
-           toolset=${toolset}
-           ${Boost_BUILD_USER_CONFIG_ARGS}
+           toolset=${_toolset}
+           ${_b2_select_libraries}
+           ${_build_user_config_args}
     BUILD_IN_SOURCE
       1
     INSTALL_COMMAND
-      <SOURCE_DIR>/b2 -q install
-           link=shared
+      <SOURCE_DIR>/${_b2} -q install
+           address-model=${_address_model}
+           link=static
+           runtime-link=shared
            threading=multi
            variant=release
-           toolset=${toolset}
-           ${Boost_BUILD_USER_CONFIG_ARGS}
+           toolset=${_toolset}
+           ${_b2_select_libraries}
+           ${_build_user_config_args}
     LOG_BUILD
       1
     LOG_INSTALL
@@ -90,4 +110,16 @@ else()
     CACHE PATH "Path to internally built Boost include directories" FORCE)
   set(BOOST_LIBRARYDIR ${BOOST_ROOT}/lib
     CACHE PATH "Path to internally built Boost library directories" FORCE)
+
+  # Unset internal variables
+  unset(_toolset)
+  unset(_bootstrap)
+  unset(_b2)
+  unset(_address_model)
+  unset(_b2_needed_components)
+  unset(_build_byproducts)
+  unset(_boostrap_select_libraries)
+  unset(_b2_select_libraries)
+  unset(_user_config_jamfile)
+  unset(_build_user_config_args)
 endif()

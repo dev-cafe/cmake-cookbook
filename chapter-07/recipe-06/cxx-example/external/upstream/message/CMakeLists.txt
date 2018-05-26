@@ -8,7 +8,7 @@ else()
   message(STATUS "Suitable message could not be located, Building message instead.")
   ExternalProject_Add(message_external
     GIT_REPOSITORY
-      https://github.com/robertodr/message.git
+      https://github.com/dev-cafe/message.git
     GIT_TAG
       master
     UPDATE_COMMAND

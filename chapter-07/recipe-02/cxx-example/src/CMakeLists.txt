@@ -8,7 +8,7 @@ add_executable(path-info path-info.cpp)
 
 # if target_link_libraries uses a properly defined import then
 # target_include_directories is in principle not needed
-# this is kept here ebcause the existence of the SYSTEM flag is used
+# this is kept here because the existence of the SYSTEM flag is used
 # in the text of the book
 target_include_directories(path-info
   SYSTEM
