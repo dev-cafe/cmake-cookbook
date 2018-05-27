@@ -11,7 +11,7 @@ find_package(PythonLibs REQUIRED)
 
 execute_process(
   COMMAND
-    ${PYTHON_EXECUTABLE} "-c" "import re, numpy; print(re.compile('/__init__.py.*').sub('',numpy.__file__))"
+    ${PYTHON_EXECUTABLE} "-c" "import numpy; print(numpy.__file__)"
   RESULT_VARIABLE _numpy_status
   OUTPUT_VARIABLE _numpy_location
   ERROR_QUIET
