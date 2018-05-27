@@ -140,10 +140,10 @@
 ### [Chapter 11: Generating Source Archives and Binary Distributions](chapter-11/README.md)
 
 - [Generating source archives](chapter-11/recipe-01/README.md)
-- [Generating binary archives](chapter-11/recipe-02/README.md)
-- [Generating DEB packages](chapter-11/recipe-03/README.md)
-- [Generating RPM packages](chapter-11/recipe-04/README.md)
-- [Generating an NSIS installer for Windows](chapter-11/recipe-05/README.md)
+- [Generating binary archives](chapter-11/recipe-01b/README.md)
+- [Generating DEB packages](chapter-11/recipe-01c/README.md)
+- [Generating RPM packages](chapter-11/recipe-01d/README.md)
+- [Generating an NSIS installer for Windows](chapter-11/recipe-01e/README.md)
 
 
 ### [Chapter 12: Distributing CMake projects via PyPI or Conda](chapter-12/README.md)
