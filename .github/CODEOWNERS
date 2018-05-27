@@ -18,12 +18,11 @@ chapter-07/* @robertodr
 chapter-08/* @bast
 chapter-09/* @bast
 chapter-10/* @robertodr
-chapter-11/* @robertodr
-chapter-12/* @bast
-chapter-13/* @robertodr
+chapter-11/* @bast @robertodr
+chapter-12/* @robertodr
+chapter-13/* @bast
 chapter-14/* @bast
 chapter-15/* @bast
-chapter-16/* @bast
 
 # Testing infrastructure owners
 testing/* @bast @robertodr

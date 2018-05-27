@@ -150,25 +150,25 @@
 - [Distributing a project with dependencies as Conda package](chapter-11/recipe-05/README.md)
 
 
-### [Chapter 13: Building Documentation](chapter-13/README.md)
+### [Chapter 12: Building Documentation](chapter-12/README.md)
 
-- [Building documentation using Doxygen](chapter-13/recipe-01/README.md)
-- [Building documentation using Sphinx](chapter-13/recipe-02/README.md)
-- [Combining Doxygen and Sphinx](chapter-13/recipe-03/README.md)
-
-
-### [Chapter 14: Alternative Generators and Cross-compilation](chapter-14/README.md)
-
-- [Hello world example](chapter-14/recipe-01/README.md)
-- [Cross-compiling a Windows binary with OpenMP parallelization](chapter-14/recipe-02/README.md)
+- [Building documentation using Doxygen](chapter-12/recipe-01/README.md)
+- [Building documentation using Sphinx](chapter-12/recipe-02/README.md)
+- [Combining Doxygen and Sphinx](chapter-12/recipe-03/README.md)
 
 
-### [Chapter 15: Testing Dashboards](chapter-15/README.md)
+### [Chapter 13: Alternative Generators and Cross-compilation](chapter-13/README.md)
 
-- [Deploying tests to the CDash dashboard](chapter-15/recipe-01/README.md)
-- [Reporting test coverage to the CDash dashboard](chapter-15/recipe-02/README.md)
-- [Using the AddressSanitizer and reporting memory defects to CDash](chapter-15/recipe-03/README.md)
-- [Using the ThreadSanitizer and reporting data races to CDash](chapter-15/recipe-04/README.md)
+- [Hello world example](chapter-13/recipe-01/README.md)
+- [Cross-compiling a Windows binary with OpenMP parallelization](chapter-13/recipe-02/README.md)
 
 
-### [Chapter 16: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)
+### [Chapter 14: Testing Dashboards](chapter-14/README.md)
+
+- [Deploying tests to the CDash dashboard](chapter-14/recipe-01/README.md)
+- [Reporting test coverage to the CDash dashboard](chapter-14/recipe-02/README.md)
+- [Using the AddressSanitizer and reporting memory defects to CDash](chapter-14/recipe-03/README.md)
+- [Using the ThreadSanitizer and reporting data races to CDash](chapter-14/recipe-04/README.md)
+
+
+### [Chapter 15: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)

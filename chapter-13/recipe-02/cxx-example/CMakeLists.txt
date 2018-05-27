@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+# set minimum cmake version
+cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 
+# project name and language
 project(recipe-02 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -11,25 +13,18 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+find_package(OpenMP REQUIRED)
 
-include(UseSphinxDoc)
+add_executable(example example.cpp)
+target_link_libraries(
+  example
+  PUBLIC
+    OpenMP::OpenMP_CXX
+  )
 
-add_subdirectory(src)
-
-add_sphinx_doc(
-  SOURCE_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/docs
-  BUILD_DIR
-    ${CMAKE_CURRENT_BINARY_DIR}/_build
-  CACHE_DIR
-    ${CMAKE_CURRENT_BINARY_DIR}/_doctrees
-  HTML_DIR
-    ${CMAKE_CURRENT_BINARY_DIR}/sphinx_html
-  CONF_FILE
-    ${CMAKE_CURRENT_SOURCE_DIR}/docs/conf.py.in
-  TARGET_NAME
-    docs
-  COMMENT
-    "HTML documentation"
+install(
+  TARGETS
+    example
+  DESTINATION
+    ${CMAKE_INSTALL_BINDIR}
   )

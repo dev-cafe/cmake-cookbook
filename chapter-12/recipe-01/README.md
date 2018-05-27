@@ -1,4 +1,4 @@
-# Reporting test coverage to the CDash dashboard
+# Building documentation using Doxygen
 
 Abstract to be written ...
 

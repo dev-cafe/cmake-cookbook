@@ -124,8 +124,8 @@ script:
       pipenv run python testing/collect_tests.py 'chapter-11/recipe-01*';
       pipenv run python testing/collect_tests.py 'chapter-11/recipe-02';
       pipenv run python testing/collect_tests.py 'chapter-11/recipe-03';
+      pipenv run python testing/collect_tests.py 'chapter-12/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-13/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-14/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-15/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-16/recipe-*';
     fi

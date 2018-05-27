@@ -1,1 +1,1 @@
-Building documentation using Sphinx
+Cross-compiling a Windows binary with OpenMP parallelization

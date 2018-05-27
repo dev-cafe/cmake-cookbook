@@ -1,4 +1,4 @@
-# Deploying tests to the CDash dashboard
+# Building documentation using Sphinx
 
 Abstract to be written ...
 

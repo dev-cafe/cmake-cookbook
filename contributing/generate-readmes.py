@@ -84,10 +84,10 @@ def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
                 f.write('- [{0}]({1}/{2}/README.md)\n'.format(
                     recipe_titles[(chapter, recipe)], chapter, recipe))
 
-        # chapter 16 is hard-coded
+        # chapter 15 is hard-coded
         # since it points to an outside diff
         f.write(
-            '\n\n### [Chapter 16: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)\n'
+            '\n\n### [Chapter 15: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)\n'
         )
 
 

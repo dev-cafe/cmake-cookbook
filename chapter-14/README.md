@@ -1,4 +1,6 @@
-# Chapter 14: Alternative Generators and Cross-compilation
+# Chapter 14: Testing Dashboards
 
-- [Hello world example](recipe-01/README.md)
-- [Cross-compiling a Windows binary with OpenMP parallelization](recipe-02/README.md)
+- [Deploying tests to the CDash dashboard](recipe-01/README.md)
+- [Reporting test coverage to the CDash dashboard](recipe-02/README.md)
+- [Using the AddressSanitizer and reporting memory defects to CDash](recipe-03/README.md)
+- [Using the ThreadSanitizer and reporting data races to CDash](recipe-04/README.md)
