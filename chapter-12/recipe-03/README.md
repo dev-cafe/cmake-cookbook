@@ -1,5 +1,5 @@
-# Distributing a simple project as Conda package
+# Distributing a C/Fortran/Python project build with CMake/CFFI via PyPI
 
 Abstract to be written ...
 
-- [cxx-example](cxx-example/)
+- [fortran-example](fortran-example/)

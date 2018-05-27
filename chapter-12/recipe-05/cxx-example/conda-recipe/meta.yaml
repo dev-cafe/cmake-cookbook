@@ -1,5 +1,5 @@
 package:
-  name: conda-example-simple
+  name: conda-example-dgemm
   version: "0.0.0"
 
 source:
@@ -14,6 +14,7 @@ build:
 requirements:
   build:
     - cmake >=3.0
+    - mkl-devel
 
 about:
   home: http://www.example.com

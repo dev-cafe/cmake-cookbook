@@ -7,16 +7,16 @@ cd ${build_directory}
 
 PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
-conda create -q --name test-environment-simple
-source activate test-environment-simple
+conda create -q --name test-environment-dgemm
+source activate test-environment-dgemm
 
 cp -r ../conda-recipe .
 cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 conda build conda-recipe
-conda install --use-local conda-example-simple
+conda install --use-local conda-example-dgemm
 
-hello-conda
+dgemm-example
 
 exit $?

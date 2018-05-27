@@ -1,4 +1,4 @@
-# Distributing a project with dependencies as Conda package
+# Distributing a simple project as Conda package
 
 Abstract to be written ...
 

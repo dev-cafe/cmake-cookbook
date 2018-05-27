@@ -1,5 +1,5 @@
-# Distributing a C/Fortran/Python project build with CMake/CFFI via PyPI
+# Distributing a C++/Python project built with CMake/pybind11 via PyPI
 
 Abstract to be written ...
 
-- [fortran-example](fortran-example/)
+- [cxx-example](cxx-example/)
