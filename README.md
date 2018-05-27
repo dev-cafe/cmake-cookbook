@@ -137,7 +137,7 @@
 - [Installing a superbuild](chapter-10/recipe-05/README.md)
 
 
-### [Chapter 11: Generating Source Archives and Binary Distributions](chapter-11/README.md)
+### [Chapter 11: Packaging Projects](chapter-11/README.md)
 
 - [Generating source archives](chapter-11/recipe-01/README.md)
 - [Generating binary archives](chapter-11/recipe-01b/README.md)

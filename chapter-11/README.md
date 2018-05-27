@@ -1,4 +1,4 @@
-# Chapter 11: Generating Source Archives and Binary Distributions
+# Chapter 11: Packaging Projects
 
 - [Generating source archives](recipe-01/README.md)
 - [Generating binary archives](recipe-01b/README.md)
