@@ -1,1 +1,1 @@
-Deprecating functions, macros, and variables
+Managing your project as a superbuild

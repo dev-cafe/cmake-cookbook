@@ -1,1 +1,1 @@
-Defining a macro with named arguments
+Using the superbuild pattern

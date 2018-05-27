@@ -1,5 +1,5 @@
-# Managing dependencies with a superbuild I. The Boost libraries
+# Splitting CMake sources into modules
 
 Abstract to be written ...
 
-- [cxx-example](cxx-example/)
+- [example](example/)

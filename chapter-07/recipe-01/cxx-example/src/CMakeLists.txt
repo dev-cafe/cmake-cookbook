@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
-project(recipe-01_core LANGUAGES CXX)
+add_library(sum_integers sum_integers.cpp)
 
-add_executable(hello-world hello-world.cpp)
+add_executable(sum_up main.cpp)
+target_link_libraries(sum_up sum_integers)
