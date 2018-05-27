@@ -116,14 +116,14 @@ before_script:
 script:
   - ./testing/dependencies/report_versions.sh
   - if [[ "$ANACONDA_TESTS_ONLY" == 1 ]]; then
-      pipenv run python testing/collect_tests.py 'chapter-12/recipe-03';
-      pipenv run python testing/collect_tests.py 'chapter-12/recipe-04';
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-04';
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-05';
     else
       pipenv run python testing/collect_tests.py 'chapter-0*/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-10/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-11/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-12/recipe-01';
-      pipenv run python testing/collect_tests.py 'chapter-12/recipe-02';
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-01*';
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-02';
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-03';
       pipenv run python testing/collect_tests.py 'chapter-13/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-14/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-15/recipe-*';
