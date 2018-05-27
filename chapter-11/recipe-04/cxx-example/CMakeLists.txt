@@ -1,25 +1,28 @@
-cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+# define minimum cmake version
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
+# project name and supported language
 project(recipe-04 LANGUAGES CXX)
 
+# require C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "/usr/local/message" CACHE PATH "Install path" FORCE)
-endif()
-message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
+# name of the executable
+add_executable(hello-conda "")
 
-if(NOT DEFINED CMAKE_BUILD_TYPE OR "${CMAKE_BUILD_TYPE}" STREQUAL "")
-  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
-endif()
-message(STATUS "Build type set to ${CMAKE_BUILD_TYPE}")
+# its sources
+target_sources(
+  hello-conda
+  PRIVATE
+  example.cpp
+  )
 
-include(GNUInstallDirs)
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
-
-add_subdirectory(src)
+# install the binary
+install(
+  TARGETS
+    hello-conda
+  DESTINATION
+    bin
+  )

@@ -1,4 +1,4 @@
-# Deploying tests to the CDash dashboard
+# Generating binary archives
 
 Abstract to be written ...
 

@@ -1,4 +1,4 @@
-# Hello world example
+# Deploying tests to the CDash dashboard
 
 Abstract to be written ...
 

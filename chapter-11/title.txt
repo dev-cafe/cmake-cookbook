@@ -1,1 +1,1 @@
-Generating Source Archives and Binary Distributions
+Packaging Projects

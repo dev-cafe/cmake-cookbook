@@ -1,5 +1,5 @@
-# Distributing a C/Fortran/Python project build with CMake/CFFI via PyPI
+# Building documentation using Sphinx
 
 Abstract to be written ...
 
-- [fortran-example](fortran-example/)
+- [cxx-example](cxx-example/)

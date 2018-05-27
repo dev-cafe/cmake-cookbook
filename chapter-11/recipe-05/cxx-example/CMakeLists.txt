@@ -1,25 +1,55 @@
-cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+# define minimum cmake version
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
+# project name and supported language
 project(recipe-05 LANGUAGES CXX)
 
+# require C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "/usr/local/message" CACHE PATH "Install path" FORCE)
-endif()
-message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
+# name of the executable
+add_executable(dgemm-example "")
 
-if(NOT DEFINED CMAKE_BUILD_TYPE OR "${CMAKE_BUILD_TYPE}" STREQUAL "")
-  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
-endif()
-message(STATUS "Build type set to ${CMAKE_BUILD_TYPE}")
+# its sources
+target_sources(
+  dgemm-example
+  PRIVATE
+  example.cpp
+  )
 
-include(GNUInstallDirs)
+# targets needs to find mkl.h
+target_include_directories(
+  dgemm-example
+  PRIVATE
+  ${CMAKE_INSTALL_PREFIX}/include
+  )
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+# locate MKL libraries
+set(_mkl_libs)
+foreach(_name IN ITEMS mkl_intel_lp64 mkl_gnu_thread mkl_core gomp)
+  find_library(
+    _lib_${_name}
+    ${_name}
+    HINTS
+      ${CMAKE_INSTALL_PREFIX}/lib
+    )
+    list(APPEND _mkl_libs ${_lib_${_name}})
+endforeach()
 
-add_subdirectory(src)
+# link to MKL libraries
+target_link_libraries(
+  dgemm-example
+  PRIVATE
+  ${_mkl_libs}
+  m
+  )
+
+# install the binary
+install(
+  TARGETS
+    dgemm-example
+  DESTINATION
+    bin
+  )

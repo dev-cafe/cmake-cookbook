@@ -1,4 +1,4 @@
-# Generating an NSIS installer for Windows
+# Distributing a project with dependencies as Conda package
 
 Abstract to be written ...
 

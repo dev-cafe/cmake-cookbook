@@ -1,4 +1,4 @@
-# Building documentation using Doxygen
+# Generating RPM packages
 
 Abstract to be written ...
 

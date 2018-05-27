@@ -1,4 +1,4 @@
-# Reporting test coverage to the CDash dashboard
+# Generating an NSIS installer for Windows
 
 Abstract to be written ...
 

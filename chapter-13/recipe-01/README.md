@@ -1,4 +1,4 @@
-# Building documentation using Doxygen
+# Hello world example
 
 Abstract to be written ...
 

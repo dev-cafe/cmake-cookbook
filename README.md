@@ -137,42 +137,38 @@
 - [Installing a superbuild](chapter-10/recipe-05/README.md)
 
 
-### [Chapter 11: Generating Source Archives and Binary Distributions](chapter-11/README.md)
+### [Chapter 11: Packaging Projects](chapter-11/README.md)
 
 - [Generating source archives](chapter-11/recipe-01/README.md)
-- [Generating binary archives](chapter-11/recipe-02/README.md)
-- [Generating DEB packages](chapter-11/recipe-03/README.md)
-- [Generating RPM packages](chapter-11/recipe-04/README.md)
-- [Generating an NSIS installer for Windows](chapter-11/recipe-05/README.md)
+- [Generating binary archives](chapter-11/recipe-01b/README.md)
+- [Generating DEB packages](chapter-11/recipe-01c/README.md)
+- [Generating RPM packages](chapter-11/recipe-01d/README.md)
+- [Generating an NSIS installer for Windows](chapter-11/recipe-01e/README.md)
+- [Distributing a C++/Python project built with CMake/pybind11 via PyPI](chapter-11/recipe-02/README.md)
+- [Distributing a C/Fortran/Python project build with CMake/CFFI via PyPI](chapter-11/recipe-03/README.md)
+- [Distributing a simple project as Conda package](chapter-11/recipe-04/README.md)
+- [Distributing a project with dependencies as Conda package](chapter-11/recipe-05/README.md)
 
 
-### [Chapter 12: Distributing CMake projects via PyPI or Conda](chapter-12/README.md)
+### [Chapter 12: Building Documentation](chapter-12/README.md)
 
-- [Distributing a C++/Python project built with CMake/pybind11 via PyPI](chapter-12/recipe-01/README.md)
-- [Distributing a C/Fortran/Python project build with CMake/CFFI via PyPI](chapter-12/recipe-02/README.md)
-- [Distributing a simple project as Conda package](chapter-12/recipe-03/README.md)
-- [Distributing a project with dependencies as Conda package](chapter-12/recipe-04/README.md)
-
-
-### [Chapter 13: Building Documentation](chapter-13/README.md)
-
-- [Building documentation using Doxygen](chapter-13/recipe-01/README.md)
-- [Building documentation using Sphinx](chapter-13/recipe-02/README.md)
-- [Combining Doxygen and Sphinx](chapter-13/recipe-03/README.md)
+- [Building documentation using Doxygen](chapter-12/recipe-01/README.md)
+- [Building documentation using Sphinx](chapter-12/recipe-02/README.md)
+- [Combining Doxygen and Sphinx](chapter-12/recipe-03/README.md)
 
 
-### [Chapter 14: Alternative Generators and Cross-compilation](chapter-14/README.md)
+### [Chapter 13: Alternative Generators and Cross-compilation](chapter-13/README.md)
 
-- [Hello world example](chapter-14/recipe-01/README.md)
-- [Cross-compiling a Windows binary with OpenMP parallelization](chapter-14/recipe-02/README.md)
-
-
-### [Chapter 15: Testing Dashboards](chapter-15/README.md)
-
-- [Deploying tests to the CDash dashboard](chapter-15/recipe-01/README.md)
-- [Reporting test coverage to the CDash dashboard](chapter-15/recipe-02/README.md)
-- [Using the AddressSanitizer and reporting memory defects to CDash](chapter-15/recipe-03/README.md)
-- [Using the ThreadSanitizer and reporting data races to CDash](chapter-15/recipe-04/README.md)
+- [Hello world example](chapter-13/recipe-01/README.md)
+- [Cross-compiling a Windows binary with OpenMP parallelization](chapter-13/recipe-02/README.md)
 
 
-### [Chapter 16: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)
+### [Chapter 14: Testing Dashboards](chapter-14/README.md)
+
+- [Deploying tests to the CDash dashboard](chapter-14/recipe-01/README.md)
+- [Reporting test coverage to the CDash dashboard](chapter-14/recipe-02/README.md)
+- [Using the AddressSanitizer and reporting memory defects to CDash](chapter-14/recipe-03/README.md)
+- [Using the ThreadSanitizer and reporting data races to CDash](chapter-14/recipe-04/README.md)
+
+
+### [Chapter 15: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)

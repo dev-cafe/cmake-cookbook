@@ -1,4 +1,4 @@
-# Distributing a simple project as Conda package
+# Combining Doxygen and Sphinx
 
 Abstract to be written ...
 

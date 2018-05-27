@@ -1,1 +1,1 @@
-Building documentation using Doxygen
+Hello world example

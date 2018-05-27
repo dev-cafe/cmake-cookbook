@@ -1,4 +1,4 @@
-# Generating RPM packages
+# Distributing a simple project as Conda package
 
 Abstract to be written ...
 

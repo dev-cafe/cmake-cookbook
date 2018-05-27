@@ -1,4 +1,4 @@
-# Combining Doxygen and Sphinx
+# Generating DEB packages
 
 Abstract to be written ...
 
