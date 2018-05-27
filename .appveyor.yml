@@ -61,7 +61,7 @@ build_script:
 
 deploy: off
 
-cache:
-  - C:\msys64\%MSYSTEM%\bin -> install.bat
-  - C:\msys64\usr\bin -> install.bat
-  - c:\tools\vcpkg\installed\
+#cache:
+#  - C:\msys64\%MSYSTEM%\bin -> install.bat
+#  - C:\msys64\usr\bin -> install.bat
+#  - c:\tools\vcpkg\installed\
