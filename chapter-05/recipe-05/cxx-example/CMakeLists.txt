@@ -17,9 +17,11 @@ execute_process(
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
+
 if(NOT _numpy_status)
   set(NumPy ${_numpy_location} CACHE STRING "Location of Python module NumPy")
 endif()
+
 execute_process(
   COMMAND
     ${PYTHON_EXECUTABLE} "-c" "import re, numpy; print(re.compile('/__init__.py.*').sub('',numpy.__version__))"
@@ -27,7 +29,9 @@ execute_process(
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
+
 include(FindPackageHandleStandardArgs)
+
 find_package_handle_standard_args(NumPy
   FOUND_VAR NumPy_FOUND
   REQUIRED_VARS NumPy
@@ -46,6 +50,7 @@ else()
       Py3-pure-embedding.cpp
     )
 endif()
+
 # MSYS2 on Appveyor specific
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(pure-embedding
@@ -53,14 +58,17 @@ if(WIN32 AND (NOT MSVC))
       "_hypot=hypot"
     )
 endif()
+
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
   )
+
 target_link_libraries(pure-embedding
   PRIVATE
     ${PYTHON_LIBRARIES}
   )
+
 add_custom_command(
   TARGET
     pure-embedding
