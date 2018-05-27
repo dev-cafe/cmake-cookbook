@@ -43,12 +43,12 @@ endif()
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
-    ${PROJECT_BINARY_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
   )
 target_link_libraries(pure-embedding
   PRIVATE
     ${PYTHON_LIBRARIES}
   )
-file(COPY ${PROJECT_SOURCE_DIR}/use_numpy.py
-     DESTINATION ${PROJECT_BINARY_DIR}
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/use_numpy.py
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
     )

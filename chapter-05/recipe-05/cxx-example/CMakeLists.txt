@@ -66,9 +66,9 @@ add_custom_command(
     pure-embedding
   POST_BUILD
   COMMAND
-    ${CMAKE_COMMAND} -E copy_if_different use_numpy.py ${PROJECT_BINARY_DIR}
+    ${CMAKE_COMMAND} -E copy_if_different use_numpy.py ${CMAKE_CURRENT_BINARY_DIR}
   WORKING_DIRECTORY
-    ${PROJECT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
   COMMENT
     "Copying Python script use_numpy.py"
   VERBATIM

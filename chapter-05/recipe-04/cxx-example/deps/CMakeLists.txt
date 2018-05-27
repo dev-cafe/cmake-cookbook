@@ -29,7 +29,7 @@ target_sources(math
   )
 target_include_directories(math
   PUBLIC
-    ${PROJECT_BINARY_DIR}/deps
+    ${CMAKE_CURRENT_BINARY_DIR}/deps
   INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )

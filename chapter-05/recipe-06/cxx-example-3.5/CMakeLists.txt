@@ -16,7 +16,7 @@ if(OpenMP_FOUND)
     omp_taskloop_test_1
     ${_scratch_directory}
     SOURCES
-      ${PROJECT_SOURCE_DIR}/taskloop.cpp
+      ${CMAKE_CURRENT_SOURCE_DIR}/taskloop.cpp
     COMPILE_DEFINITIONS
       ${OpenMP_CXX_FLAGS}
     LINK_LIBRARIES
@@ -25,7 +25,7 @@ if(OpenMP_FOUND)
   message(STATUS "Result of try_compile: ${omp_taskloop_test_1}")
 
   include(CheckCXXSourceCompiles)
-  file(READ ${PROJECT_SOURCE_DIR}/taskloop.cpp _snippet)
+  file(READ ${CMAKE_CURRENT_SOURCE_DIR}/taskloop.cpp _snippet)
   set(CMAKE_REQUIRED_FLAGS ${OpenMP_CXX_FLAGS})
   set(CMAKE_REQUIRED_LIBRARIES ${OpenMP_CXX_LIBRARIES})
   check_cxx_source_compiles("${_snippet}" omp_taskloop_test_2)
