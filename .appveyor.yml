@@ -43,10 +43,9 @@ init:
   - set PATH=%PATH:C:\Python27\Scripts;=%
 
 install:
-  - bash -lc "pip install pipenv"
+  - python -m pip install pipenv
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
-  - "SetEnvMPI.cmd"
 
 # extract step has to happen before the sh.exe workaround otherwise 7z will complain
 before_build:
@@ -61,7 +60,5 @@ build_script:
 
 deploy: off
 
-#cache:
-#  - C:\msys64\%MSYSTEM%\bin -> install.bat
-#  - C:\msys64\usr\bin -> install.bat
-#  - c:\tools\vcpkg\installed\
+cache:
+  - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat

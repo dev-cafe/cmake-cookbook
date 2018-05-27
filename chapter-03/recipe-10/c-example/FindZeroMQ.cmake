@@ -8,8 +8,6 @@
 # ZeroMQ_INCLUDE_DIRS - Location of ZeroMQ includes
 # ZeroMQ_LIBRARIES - ZeroMQ libraries
 
-include(FindPackageHandleStandardArgs)
-
 if(NOT ZeroMQ_ROOT)
   set(ZeroMQ_ROOT "$ENV{ZeroMQ_ROOT}")
 endif()
@@ -64,6 +62,8 @@ if(ZeroMQ_INCLUDE_DIRS)
   endif()
 endif()
 
+include(FindPackageHandleStandardArgs)
+
 find_package_handle_standard_args(ZeroMQ
   FOUND_VAR
     ZeroMQ_FOUND
@@ -73,14 +73,3 @@ find_package_handle_standard_args(ZeroMQ
   VERSION_VAR
     ZeroMQ_VERSION
   )
-
-if(ZeroMQ_FOUND)
-  mark_as_advanced(
-    ZeroMQ_INCLUDE_DIRS
-    ZeroMQ_LIBRARIES
-    ZeroMQ_VERSION
-    ZeroMQ_VERSION_MAJOR
-    ZeroMQ_VERSION_MINOR
-    ZeroMQ_VERSION_PATCH
-    )
-endif()
