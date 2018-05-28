@@ -1,4 +1,8 @@
-appveyor:
+appveyor-vs:
+  definitions:
+    - CMAKE_CXX_FLAGS: '"/EHsc- /GR-"'
+
+appveyor-msys:
   definitions:
     - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
 

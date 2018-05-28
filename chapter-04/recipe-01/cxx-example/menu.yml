@@ -1,6 +1,10 @@
-appveyor:
+appveyor-vs:
   env:
     - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
+
+travis-osx:
+  definitions:
+    - BOOST_ROOT: '/usr/local/opt/boost@1.59'
 
 targets:
   - test

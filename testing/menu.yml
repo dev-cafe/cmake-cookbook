@@ -1,10 +1,15 @@
-appveyor:
+appveyor-vs:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Debug'
+    - CMAKE_CONFIGURATION_TYPES: 'Debug'
+    - CMAKE_TOOLCHAIN_FILE: 'C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake'
+
+appveyor-msys:
   definitions:
     - CMAKE_C_COMPILER: 'gcc'
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'Debug'
-    - CMAKE_CONFIGURATION_TYPES: 'Debug'
 
 drone:
   definitions:

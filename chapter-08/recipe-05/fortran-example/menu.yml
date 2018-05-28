@@ -1,8 +1,11 @@
-appveyor:
+appveyor-vs:
   failing_generators:
-    - 'Ninja'
     - 'Visual Studio 14 2015 Win64'
     - 'Visual Studio 15 2017 Win64'
+
+appveyor-msys:
+  failing_generators:
+    - 'Ninja'
 
 drone:
   failing_generators:
