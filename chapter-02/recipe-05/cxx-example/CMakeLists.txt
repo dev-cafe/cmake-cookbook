@@ -8,21 +8,18 @@ project(recipe-05 LANGUAGES CXX)
 add_executable(processor-info "")
 
 # and its source file
-target_sources(
-  processor-info
+target_sources(processor-info
   PRIVATE
-  processor-info.cpp
+    processor-info.cpp
   )
 
 # and its source file
-target_include_directories(
-  processor-info
+target_include_directories(processor-info
   PRIVATE
-  ${PROJECT_BINARY_DIR}
+    ${PROJECT_BINARY_DIR}
   )
 
-foreach(
-  key
+foreach(key
   IN ITEMS
     NUMBER_OF_LOGICAL_CORES
     NUMBER_OF_PHYSICAL_CORES
