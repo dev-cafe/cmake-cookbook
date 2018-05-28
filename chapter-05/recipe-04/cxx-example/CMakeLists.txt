@@ -17,8 +17,8 @@ target_link_libraries(linear-algebra
     math
   )
 set_source_files_properties(
-  ${PROJECT_BINARY_DIR}/deps/wrap_BLAS_LAPACK/CxxBLAS.hpp
-  ${PROJECT_BINARY_DIR}/deps/wrap_BLAS_LAPACK/CxxLAPACK.hpp
+  ${CMAKE_CURRENT_BINARY_DIR}/deps/wrap_BLAS_LAPACK/CxxBLAS.hpp
+  ${CMAKE_CURRENT_BINARY_DIR}/deps/wrap_BLAS_LAPACK/CxxLAPACK.hpp
   PROPERTIES
     GENERATED TRUE
   )

@@ -9,6 +9,7 @@ add_custom_target(BLAS_LAPACK_wrappers
     "Unpacking C++ wrappers for BLAS/LAPACK"
   VERBATIM
   )
+
 set_source_files_properties(
   ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.cpp
@@ -29,7 +30,7 @@ target_sources(math
   )
 target_include_directories(math
   PUBLIC
-    ${PROJECT_BINARY_DIR}/deps
+    ${CMAKE_CURRENT_BINARY_DIR}/deps
   INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
