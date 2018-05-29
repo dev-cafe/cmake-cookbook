@@ -14,9 +14,9 @@ endif()
 
 message(STATUS "Git hash is ${GIT_HASH}")
 
-# generate file version.h based on version.h.in
+# generate file version.hpp based on version.hpp.in
 configure_file(
-  ${CMAKE_CURRENT_LIST_DIR}/version.h.in
-  ${TARGET_DIR}/generated/version.h
+  ${CMAKE_CURRENT_LIST_DIR}/version.hpp.in
+  ${TARGET_DIR}/generated/version.hpp
   @ONLY
   )
