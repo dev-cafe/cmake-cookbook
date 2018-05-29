@@ -33,6 +33,7 @@ if(NOT _runs)
 endif()
 
 add_executable(use-uuid use-uuid.cpp)
+
 target_link_libraries(use-uuid
   PUBLIC
     PkgConfig::UUID

@@ -39,7 +39,8 @@ find_package_handle_standard_args(NumPy
   )
 
 add_executable(pure-embedding "")
-if (PYTHON_VERSION_MAJOR VERSION_LESS 3)
+
+if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
   target_sources(pure-embedding
     PRIVATE
       Py2-pure-embedding.cpp
@@ -51,7 +52,7 @@ else()
     )
 endif()
 
-# MSYS2 on Appveyor specific
+# MSYS2 on Appveyor-specific
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(pure-embedding
     PUBLIC
