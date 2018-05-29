@@ -10,13 +10,13 @@ find_package(PythonInterp REQUIRED)
 # define tests
 enable_testing()
 
-add_test(feature-a ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/feature-a.py)
-add_test(feature-b ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/feature-b.py)
-add_test(feature-c ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/feature-c.py)
-add_test(feature-d ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/feature-d.py)
+add_test(feature-a ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/feature-a.py)
+add_test(feature-b ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/feature-b.py)
+add_test(feature-c ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/feature-c.py)
+add_test(feature-d ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/feature-d.py)
 
-add_test(benchmark-a ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/benchmark-a.py)
-add_test(benchmark-b ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/benchmark-b.py)
+add_test(benchmark-a ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/benchmark-a.py)
+add_test(benchmark-b ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/benchmark-b.py)
 
 set_tests_properties(
   feature-a

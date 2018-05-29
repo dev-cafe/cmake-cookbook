@@ -24,4 +24,4 @@ target_link_libraries(cpp_test sum_integers)
 enable_testing()
 
 # define test
-add_test(catch_test ${PROJECT_BINARY_DIR}/cpp_test)
+add_test(catch_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test --success)

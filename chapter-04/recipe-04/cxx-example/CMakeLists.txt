@@ -21,14 +21,17 @@ find_package(Boost 1.54 REQUIRED COMPONENTS unit_test_framework)
 
 add_executable(cpp_test test.cpp)
 
-target_link_libraries(cpp_test sum_integers Boost::unit_test_framework)
+target_link_libraries(cpp_test
+  PRIVATE
+    sum_integers
+    Boost::unit_test_framework
+  )
 
 # avoid undefined reference to "main" in test.cpp
-target_compile_definitions(
-  cpp_test
+target_compile_definitions(cpp_test
   PRIVATE
-  -DBOOST_TEST_DYN_LINK
+    BOOST_TEST_DYN_LINK
   )
 
 enable_testing()
-add_test(boost_test ${PROJECT_BINARY_DIR}/cpp_test)
+add_test(boost_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test)

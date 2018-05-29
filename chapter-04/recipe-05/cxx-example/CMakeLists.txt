@@ -21,4 +21,4 @@ include(CTest)
 
 # define tests
 enable_testing()
-add_test(cpp_test ${PROJECT_BINARY_DIR}/cpp_test)
+add_test(cpp_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test)

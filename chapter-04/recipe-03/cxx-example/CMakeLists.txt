@@ -78,5 +78,5 @@ if(ENABLE_UNIT_TESTS)
     )
 
   enable_testing()
-  add_test(google_test ${PROJECT_BINARY_DIR}/cpp_test)
+  add_test(google_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test)
 endif()

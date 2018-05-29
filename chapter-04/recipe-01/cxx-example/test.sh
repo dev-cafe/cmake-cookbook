@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-OUPUT=$(./sum_up 1 2 3 4)
+OUTPUT=$(./sum_up 1 2 3 4)
 
-if [ "$OUPUT" = "10" ]
+if [ "$OUTPUT" = "10" ]
 then
     exit 0
 else

@@ -33,19 +33,17 @@ if(ENABLE_UNIT_TESTS)
 
   add_executable(cpp_test "")
 
-  target_sources(
-    cpp_test
+  target_sources(cpp_test
     PRIVATE
       test.cpp
     )
 
-  target_link_libraries(
-    cpp_test
+  target_link_libraries(cpp_test
     PRIVATE
       sum_integers
       gtest_main
     )
 
   enable_testing()
-  add_test(google_test ${PROJECT_BINARY_DIR}/cpp_test)
+  add_test(google_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test)
 endif()
