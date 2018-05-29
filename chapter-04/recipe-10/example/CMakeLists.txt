@@ -10,15 +10,15 @@ find_package(PythonInterp REQUIRED)
 # define tests
 enable_testing()
 
-add_test(setup ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/setup.py)
+add_test(setup ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/setup.py)
 set_tests_properties(
   setup
   PROPERTIES
     FIXTURES_SETUP my-fixture
   )
 
-add_test(feature-a ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/feature-a.py)
-add_test(feature-b ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/feature-b.py)
+add_test(feature-a ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/feature-a.py)
+add_test(feature-b ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/feature-b.py)
 set_tests_properties(
   feature-a
   feature-b
@@ -26,7 +26,7 @@ set_tests_properties(
     FIXTURES_REQUIRED my-fixture
   )
 
-add_test(cleanup ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test/cleanup.py)
+add_test(cleanup ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/cleanup.py)
 set_tests_properties(
   cleanup
   PROPERTIES
