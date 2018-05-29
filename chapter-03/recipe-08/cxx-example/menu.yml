@@ -1,4 +1,4 @@
-appveyor:
+appveyor-vs:
   env:
     - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
 

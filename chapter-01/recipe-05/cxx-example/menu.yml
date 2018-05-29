@@ -1,4 +1,8 @@
-appveyor:
+appveyor-vs:
+  definitions:
+    - USE_LIBRARY: 'ON'
+
+appveyor-msys:
   definitions:
     - USE_LIBRARY: 'ON'
 

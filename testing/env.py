@@ -9,7 +9,11 @@ def get_ci_environment():
         else:
             ci_environment = 'travis-linux'
     elif os.environ.get('APPVEYOR'):
-        ci_environment = 'appveyor'
+        generator = os.environ.get('GENERATOR')
+        if 'Visual Studio' in generator:
+            ci_environment = 'appveyor-vs'
+        else:
+            ci_environment = 'appveyor-msys'
     elif os.environ.get('DRONE'):
         ci_environment = 'drone'
     else:

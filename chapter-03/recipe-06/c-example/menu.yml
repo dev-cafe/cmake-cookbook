@@ -1,9 +1,11 @@
-appveyor:
+appveyor-vs:
   env:
     - MSMPI_BIN: 'C:\Program Files\Microsoft MPI\Bin\'
     - MSMPI_INC: 'C:\Program Files (x86)\Microsoft SDKs\MPI\Include\'
     - MSMPI_LIB32: 'C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x86\'
     - MSMPI_LIB64: 'C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64\'
+
+appveyor-msys:
   failing_generators:
     - 'MSYS Makefiles'
     - 'Ninja'

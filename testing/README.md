@@ -30,8 +30,12 @@ travis-linux:
 travis-osx:
   ...
 
-# AppVeyor
-appveyor:
+# AppVeyor Visual Studio generators
+appveyor-vs:
+  ...
+
+# AppVeyor MSYS Makefiles and Ninja generators
+appveyor-msys:
   ...
 
 # Drone CI
