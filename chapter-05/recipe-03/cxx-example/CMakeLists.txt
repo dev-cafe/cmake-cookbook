@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-03 LANGUAGES CXX C Fortran)
+project(recipe-03 LANGUAGES CXX Fortran)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -33,6 +33,7 @@ add_custom_command(
   )
 
 add_library(math "")
+
 target_sources(math
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.cpp
@@ -41,18 +42,21 @@ target_sources(math
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.hpp
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.hpp
   )
+
 target_include_directories(math
   PUBLIC
     ${CMAKE_CURRENT_BINARY_DIR}
   INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
+
 target_link_libraries(math
   PUBLIC
     ${LAPACK_LIBRARIES}
   )
 
 add_executable(linear-algebra linear-algebra.cpp)
+
 target_link_libraries(linear-algebra
   PRIVATE
     math
