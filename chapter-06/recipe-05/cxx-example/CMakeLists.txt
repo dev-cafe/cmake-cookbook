@@ -10,17 +10,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # read PROGRAM_VERSION from file
-if(EXISTS "${PROJECT_SOURCE_DIR}/VERSION")
-  file(READ "${PROJECT_SOURCE_DIR}/VERSION" PROGRAM_VERSION)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION")
+  file(READ "${CMAKE_CURRENT_SOURCE_DIR}/VERSION" PROGRAM_VERSION)
   string(STRIP "${PROGRAM_VERSION}" PROGRAM_VERSION)
 else()
-  message(FATAL_ERROR "File ${PROJECT_SOURCE_DIR}/VERSION not found")
+  message(FATAL_ERROR "File ${CMAKE_CURRENT_SOURCE_DIR}/VERSION not found")
 endif()
 
-# generate file version.h based on version.h.in
+# generate file version.hpp based on version.hpp.in
 configure_file(
-  version.h.in
-  generated/version.h
+  version.hpp.in
+  generated/version.hpp
   @ONLY
   )
 
@@ -31,5 +31,5 @@ add_executable(example example.cpp)
 target_include_directories(
   example
   PRIVATE
-    ${PROJECT_BINARY_DIR}/generated
+    ${CMAKE_CURRENT_BINARY_DIR}/generated
   )

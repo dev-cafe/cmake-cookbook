@@ -1,5 +1,5 @@
 // provides PROGRAM_VERSION
-#include "version.h"
+#include "version.hpp"
 
 #include <iostream>
 
