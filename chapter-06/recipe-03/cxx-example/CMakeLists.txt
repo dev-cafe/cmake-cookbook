@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(PythonInterp QUIET REQUIRED)
 
 # generate directory where we place the generated code
-file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/generated)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated)
 
 # upper bound
 set(MAX_NUMBER "100" CACHE STRING "Upper bound for primes")
@@ -18,11 +18,11 @@ set(MAX_NUMBER "100" CACHE STRING "Upper bound for primes")
 # generate code
 add_custom_command(
   OUTPUT
-    ${PROJECT_BINARY_DIR}/generated/primes.h
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/primes.hpp
   COMMAND
-    ${PYTHON_EXECUTABLE} generate.py ${MAX_NUMBER} ${PROJECT_BINARY_DIR}/generated/primes.h
+    ${PYTHON_EXECUTABLE} generate.py ${MAX_NUMBER} ${CMAKE_CURRENT_BINARY_DIR}/generated/primes.hpp
   WORKING_DIRECTORY
-    ${PROJECT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
   DEPENDS
     generate.py
   )
@@ -31,9 +31,9 @@ add_executable(example.x "")
 target_sources(example.x
   PRIVATE
     example.cpp
-    ${PROJECT_BINARY_DIR}/generated/primes.h
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/primes.hpp
   )
 target_include_directories(example.x
   PRIVATE
-    ${PROJECT_BINARY_DIR}/generated
+    ${CMAKE_CURRENT_BINARY_DIR}/generated
   )

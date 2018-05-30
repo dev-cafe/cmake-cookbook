@@ -16,26 +16,26 @@ add_executable(example example.cpp)
 target_include_directories(
   example
   PRIVATE
-    ${PROJECT_BINARY_DIR}/generated
+    ${CMAKE_CURRENT_BINARY_DIR}/generated
   )
 
 add_custom_command(
   OUTPUT
-    ${PROJECT_BINARY_DIR}/generated/version.h
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/version.hpp
     ALL
   COMMAND
-    ${CMAKE_COMMAND} -D TARGET_DIR=${PROJECT_BINARY_DIR} -P ${PROJECT_SOURCE_DIR}/git-hash.cmake
+    ${CMAKE_COMMAND} -D TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/git-hash.cmake
   WORKING_DIRECTORY
-    ${PROJECT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
   )
 
-# rebuild version.h every time
+# rebuild version.hpp every time
 add_custom_target(
   get_git_hash
   ALL
   DEPENDS
-    ${PROJECT_BINARY_DIR}/generated/version.h
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/version.hpp
   )
 
-# version.h has to be generated before we start building example
+# version.hpp has to be generated before we start building example
 add_dependencies(example get_git_hash)

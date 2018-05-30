@@ -1,4 +1,4 @@
-#include "primes.h"
+#include "primes.hpp"
 
 #include <iostream>
 #include <vector>

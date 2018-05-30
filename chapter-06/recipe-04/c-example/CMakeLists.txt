@@ -18,5 +18,5 @@ add_executable(example example.c)
 target_include_directories(
   example
   PRIVATE
-    ${PROJECT_BINARY_DIR}/generated
+    ${CMAKE_CURRENT_BINARY_DIR}/generated
   )

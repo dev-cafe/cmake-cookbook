@@ -21,16 +21,16 @@ if(GIT_FOUND)
     OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_QUIET
     WORKING_DIRECTORY
-      ${PROJECT_SOURCE_DIR}
+      ${CMAKE_CURRENT_SOURCE_DIR}
     )
 endif()
 
 message(STATUS "Git hash is ${GIT_HASH}")
 
-# generate file version.h based on version.h.in
+# generate file version.hpp based on version.hpp.in
 configure_file(
-  version.h.in
-  generated/version.h
+  version.hpp.in
+  generated/version.hpp
   @ONLY
   )
 
@@ -41,5 +41,5 @@ add_executable(example example.cpp)
 target_include_directories(
   example
   PRIVATE
-    ${PROJECT_BINARY_DIR}/generated
+    ${CMAKE_CURRENT_BINARY_DIR}/generated
   )
