@@ -49,5 +49,3 @@ target_link_libraries(math
   PUBLIC
     ${LAPACK_LIBRARIES}  # ${BLAS_LIBRARIES} are included in ${LAPACK_LIBRARIES}
   )
-
-add_dependencies(math BLAS_LAPACK_wrappers)
