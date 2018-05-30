@@ -19,7 +19,9 @@ add_custom_target(unpack-eigen
   )
 
 add_executable(linear-algebra linear-algebra.cpp)
+
 add_dependencies(linear-algebra unpack-eigen)
+
 target_include_directories(linear-algebra
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/eigen-3.3.4
