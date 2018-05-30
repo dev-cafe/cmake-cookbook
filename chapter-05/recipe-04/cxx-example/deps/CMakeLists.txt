@@ -2,10 +2,11 @@ find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
 
 set(MATH_SRCS
-    ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.hpp
-    ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.hpp)
+  ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxBLAS.hpp
+  ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK/CxxLAPACK.hpp
+  )
 
 add_custom_target(BLAS_LAPACK_wrappers
   WORKING_DIRECTORY
@@ -46,7 +47,7 @@ target_include_directories(math
 
 target_link_libraries(math
   PUBLIC
-    ${LAPACK_LIBRARIES} # not need of ${BLAS_LIBRARIES} it is included in ${LAPACK_LIBRARIES}
+    ${LAPACK_LIBRARIES}  # ${BLAS_LIBRARIES} are included in ${LAPACK_LIBRARIES}
   )
 
 add_dependencies(math BLAS_LAPACK_wrappers)
