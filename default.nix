@@ -27,8 +27,8 @@ in
       eigen3_3
       exa
       gcc
+      gdb
       gfortran
-      gfortran.cc.lib
       graphviz
       hdf5-fortran
       lcov
