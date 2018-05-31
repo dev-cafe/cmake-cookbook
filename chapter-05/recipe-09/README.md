@@ -1,4 +1,4 @@
-# Fine-tuning with generator expressions
+# Fine-tuning configuration and compilation with generator expressions
 
 We show how to rewrite conditionals into generator expressions.
 

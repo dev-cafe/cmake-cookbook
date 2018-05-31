@@ -8,4 +8,4 @@
 - [Probing compilation and linking](recipe-06/README.md)
 - [Probing compiler flags](recipe-07/README.md)
 - [Probing execution](recipe-08/README.md)
-- [Fine-tuning with generator expressions](recipe-09/README.md)
+- [Fine-tuning configuration and compilation with generator expressions](recipe-09/README.md)
