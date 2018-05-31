@@ -1,5 +1,3 @@
-include(CMakeParseArguments)
-
 function(add_catch_test)
   set(options)
   set(oneValueArgs NAME COST)
