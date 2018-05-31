@@ -19,7 +19,6 @@ include(CheckCXXCompilerFlag)
 include(CheckFortranCompilerFlag)
 
 function(set_compiler_flag _result _lang)
-
   # build a list of flags from the arguments
   set(_list_of_flags)
   # also figure out whether the function is required to find a flag
