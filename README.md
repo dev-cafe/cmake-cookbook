@@ -81,7 +81,7 @@
 - [Probing compilation and linking](chapter-05/recipe-06/README.md)
 - [Probing compiler flags](chapter-05/recipe-07/README.md)
 - [Probing execution](chapter-05/recipe-08/README.md)
-- [Fine-tuning with generator expressions](chapter-05/recipe-09/README.md)
+- [Fine-tuning configuration and compilation with generator expressions](chapter-05/recipe-09/README.md)
 
 
 ### [Chapter 6: Generating Source Code](chapter-06/README.md)
@@ -97,7 +97,7 @@
 
 ### [Chapter 7: Structuring Projects](chapter-07/README.md)
 
-- [Defining a macro with named arguments](chapter-07/recipe-01/README.md)
+- [Code reuse with functions and macros](chapter-07/recipe-01/README.md)
 - [Splitting CMake sources into modules](chapter-07/recipe-02/README.md)
 - [Function to test and set compiler flags](chapter-07/recipe-03/README.md)
 - [Defining a function or macro with named arguments](chapter-07/recipe-04/README.md)

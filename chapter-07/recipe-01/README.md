@@ -1,4 +1,4 @@
-# Defining a macro with named arguments
+# Code reuse with functions and macros
 
 Abstract to be written ...
 
