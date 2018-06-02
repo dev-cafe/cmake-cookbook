@@ -4,8 +4,10 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 # project name and language
 project(recipe-03 LANGUAGES Fortran)
 
-set(_sources message.f90)
-add_library(message SHARED ${_sources})
+add_library(message
+  SHARED
+    message.f90
+  )
 
 add_executable(hello-world hello-world.f90)
 
