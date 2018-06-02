@@ -1,4 +1,4 @@
-# Building and Linking Static and Shared Libraries
+# Building and linking static and shared libraries
 
 Abstract to be written ...
 

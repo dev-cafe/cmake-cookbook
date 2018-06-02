@@ -1,4 +1,4 @@
-# Setting the Standard for the Language
+# Setting the standard for the language
 
 Abstract to be written ...
 

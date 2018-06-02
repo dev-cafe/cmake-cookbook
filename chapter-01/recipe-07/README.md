@@ -1,4 +1,4 @@
-# Switching the Build Type
+# Switching the build type
 
 Abstract to be written ...
 

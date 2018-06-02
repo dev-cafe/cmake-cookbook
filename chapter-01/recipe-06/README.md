@@ -1,4 +1,4 @@
-# Specifying the Compiler
+# Specifying the compiler
 
 Abstract to be written ...
 

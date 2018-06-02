@@ -1,1 +1,1 @@
-Specifying the Compiler
+Specifying the compiler
