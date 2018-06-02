@@ -1,25 +1,25 @@
 module messaging
 
-implicit none
+  implicit none
 
-public Messenger
-type Messenger
-  character(len=19) :: message_
-end type
+  public Messenger
+  type Messenger
+    character(len=19) :: message_
+  end type
 
-public print_message
+  public print_message
 
-private
+  private
 
 contains
 
-pure function print_message(postman) result(m)
+  pure function print_message(postman) result(m)
 
-  type(Messenger), intent(in) :: postman
-  character(len=19) :: m
+    type(Messenger), intent(in) :: postman
+    character(len=19) :: m
 
-  m = postman%message_
+    m = postman%message_
 
-end function
+  end function
 
 end module
