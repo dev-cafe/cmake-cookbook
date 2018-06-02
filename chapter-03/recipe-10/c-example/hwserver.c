@@ -31,7 +31,7 @@ int main(void) {
     zmq_recv(responder, buffer, 10, 0);
     printf("Received Hello\n");
 #if (_MSC_VER && !__INTEL_COMPILER)
-    Sleep(1*1000); //  Do some 'work'
+    Sleep(1 * 1000); //  Do some 'work'
 #else
     sleep(1); //  Do some 'work'
 #endif
