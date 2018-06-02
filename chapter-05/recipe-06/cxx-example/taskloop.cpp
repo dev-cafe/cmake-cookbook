@@ -1,12 +1,12 @@
 // example adapted from
 // http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf page 85
 
-void long_running_task() {
-  // do something
+void long_running_task(){
+    // do something
 };
 
-void loop_body(int i, int j) {
-  // do something
+void loop_body(int i, int j){
+    // do something
 };
 
 void parallel_work() {
