@@ -22,7 +22,11 @@ target_compile_options(geometry
     -O3
   )
 
-list(APPEND sources_with_lower_optimization geometry_circle.cpp geometry_rhombus.cpp)
+list(
+  APPEND sources_with_lower_optimization
+    geometry_circle.cpp
+    geometry_rhombus.cpp
+  )
 
 # we use the IN LISTS foreach syntax to set source properties
 message(STATUS "Setting source properties using IN LISTS syntax:")
@@ -32,7 +36,7 @@ foreach(_source IN LISTS sources_with_lower_optimization)
 endforeach()
 
 # we demonstrate the plain foreach syntax to query source properties
-# requires to expand the contents of the variable
+# which requires to expand the contents of the variable
 message(STATUS "Querying sources properties using plain syntax:")
 foreach(_source ${sources_with_lower_optimization})
   get_source_file_property(_flags ${_source} COMPILE_FLAGS)
@@ -40,4 +44,5 @@ foreach(_source ${sources_with_lower_optimization})
 endforeach()
 
 add_executable(compute-areas compute-areas.cpp)
+
 target_link_libraries(compute-areas geometry)
