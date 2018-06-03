@@ -4,6 +4,11 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 # project name and language
 project(recipe-07 LANGUAGES C CXX)
 
+# we default to Release build type
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release")
+endif()
+
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 message(STATUS "C flags, debug mode: ${CMAKE_C_FLAGS_DEBUG}")
