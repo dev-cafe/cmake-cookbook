@@ -16,6 +16,7 @@ add_library(animals
     Dog.hpp
     Factory.hpp
   )
+
 set_target_properties(animals
   PROPERTIES
     CXX_STANDARD 14
@@ -25,10 +26,12 @@ set_target_properties(animals
   )
 
 add_executable(animal-farm animal-farm.cpp)
+
 set_target_properties(animal-farm
   PROPERTIES
     CXX_STANDARD 14
     CXX_EXTENSIONS OFF
     CXX_STANDARD_REQUIRED ON
   )
+
 target_link_libraries(animal-farm animals)
