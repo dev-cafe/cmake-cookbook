@@ -1,4 +1,5 @@
 module class_Circle
+
   implicit none
   private
   real :: pi = acos(-1.0d0)
@@ -12,23 +13,23 @@ module class_Circle
 
 contains
 
-    pure function circle_area(this) result(area)
+  pure function circle_area(this) result(area)
 
-      class(Circle), intent(in) :: this
-      real :: area
+    class(Circle), intent(in) :: this
+    real :: area
 
-      area = pi * this%radius**2
+    area = pi * this%radius**2
 
-    end function
+  end function
 
-    subroutine circle_print(this)
+  subroutine circle_print(this)
 
-      class(Circle), intent(in) :: this
-      real:: area
+    class(Circle), intent(in) :: this
+    real:: area
 
-      area = this%area()
-      print *, 'Circle: r = ', this%radius, ' area = ', area
+    area = this%area()
+    print *, 'Circle: r = ', this%radius, ' area = ', area
 
-    end subroutine
+  end subroutine
 
 end module

@@ -1,4 +1,5 @@
 module class_Rhombus
+
   implicit none
   private
 
@@ -12,23 +13,23 @@ module class_Rhombus
 
 contains
 
-    pure function rhombus_area(this) result(area)
+  pure function rhombus_area(this) result(area)
 
-      class(Rhombus), intent(in) :: this
-      real :: area
+    class(Rhombus), intent(in) :: this
+    real :: area
 
-      area = (this%d1 * this%d2) / 2.0d0
+    area = (this%d1 * this%d2) / 2.0d0
 
-    end function
+  end function
 
-    subroutine rhombus_print(this)
+  subroutine rhombus_print(this)
 
-      class(Rhombus), intent(in) :: this
-      real:: area
+    class(Rhombus), intent(in) :: this
+    real:: area
 
-      area = this%area()
-      print *, 'Rhombus: d1 = ', this%d1, ' d2 = ', this%d2, ' area = ', area
+    area = this%area()
+    print *, 'Rhombus: d1 = ', this%d1, ' d2 = ', this%d2, ' area = ', area
 
-    end subroutine
+  end subroutine
 
 end module
