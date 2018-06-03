@@ -9,6 +9,7 @@ list(APPEND _sources Message.hpp Message.cpp)
 
 # introduce a toggle for using a library
 set(USE_LIBRARY OFF)
+
 # BUILD_SHARED_LIBS is a global flag offered by CMake
 # to toggle the behavior of add_library
 set(BUILD_SHARED_LIBS OFF)
