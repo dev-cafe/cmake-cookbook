@@ -24,6 +24,13 @@ else()
   message(STATUS "No suitable compiler flag found for vectorization")
 endif()
 
+add_executable(linear-algebra-unoptimized linear-algebra.cpp)
+
+target_link_libraries(linear-algebra-unoptimized
+  PRIVATE
+    Eigen3::Eigen
+  )
+
 add_executable(linear-algebra linear-algebra.cpp)
 
 target_compile_options(linear-algebra
