@@ -1,4 +1,4 @@
-# Presenting Options to the User
+# Presenting options to the user
 
 Abstract to be written ...
 

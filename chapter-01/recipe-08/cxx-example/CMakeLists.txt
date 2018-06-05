@@ -29,6 +29,7 @@ target_compile_options(geometry
   )
 
 add_executable(compute-areas compute-areas.cpp)
+
 target_compile_options(compute-areas
   PRIVATE
     "-fPIC"

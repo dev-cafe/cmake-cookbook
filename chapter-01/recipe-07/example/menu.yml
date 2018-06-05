@@ -9,6 +9,7 @@ appveyor-msys:
 
 drone:
   definitions:
+    - CMAKE_C_COMPILER: 'pgcc'
     - CMAKE_CXX_COMPILER: 'pgc++'
     - CMAKE_BUILD_TYPE: 'Release'
 

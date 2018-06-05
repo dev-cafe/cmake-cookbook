@@ -1,4 +1,4 @@
-# Controlling Compilation with Conditionals
+# Controlling compilation with conditionals
 
 Abstract to be written ...
 

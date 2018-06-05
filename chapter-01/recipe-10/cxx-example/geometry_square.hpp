@@ -1,7 +1,1 @@
-#pragma once
-
-namespace geometry {
-namespace area {
-double square(double l);
-}
-} // namespace geometry
+../../recipe-08/cxx-example/geometry_square.hpp

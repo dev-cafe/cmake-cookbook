@@ -1,4 +1,5 @@
 module class_Square
+
   implicit none
   private
 
@@ -11,23 +12,23 @@ module class_Square
 
 contains
 
-    pure function square_area(this) result(area)
+  pure function square_area(this) result(area)
 
-      class(Square), intent(in) :: this
-      real :: area
+    class(Square), intent(in) :: this
+    real :: area
 
-      area = this%side**2
+    area = this%side**2
 
-    end function
+  end function
 
-    subroutine square_print(this)
+  subroutine square_print(this)
 
-      class(Square), intent(in) :: this
-      real:: area
+    class(Square), intent(in) :: this
+    real:: area
 
-      area = this%area()
-      print *, 'Square: l = ', this%side, ' area = ', area
+    area = this%area()
+    print *, 'Square: l = ', this%side, ' area = ', area
 
-    end subroutine
+  end subroutine
 
 end module
