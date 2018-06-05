@@ -20,15 +20,17 @@ include(UseCython)
 
 # tells UseCython to compile this file as a c++ file
 set_source_files_properties(account.pyx PROPERTIES CYTHON_IS_CXX TRUE)
+if(WIN32 AND (NOT MSVC))
+  set_source_file_properties(account.pyx PROPERTIES COMPILE_DEFINITIONS "_hypot=hypot")
+endif()
 
 # create python module
 cython_add_module(account account.pyx account.cpp)
 
 # location of account.hpp
-target_include_directories(
-  account
+target_include_directories(account
   PRIVATE
-  ${PROJECT_SOURCE_DIR}
+    ${PROJECT_SOURCE_DIR}
   )
 
 # turn on testing

@@ -17,27 +17,31 @@ find_package(PythonLibs REQUIRED)
 find_package(Boost REQUIRED COMPONENTS python)
 
 # create python module
-add_library(
-  account
+add_library(account
   MODULE
-  account.cpp)
-
-target_link_libraries(
-  account
-  PUBLIC
-  Boost::python
-  ${PYTHON_LIBRARIES}
+    account.cpp
   )
 
-target_include_directories(
-  account
+if(WIN32 AND (NOT MSVC))
+  target_compile_definitions(account
+    PUBLIC
+      "_hypot=hypot"
+    )
+endif()
+
+target_link_libraries(account
+  PUBLIC
+    Boost::python
+    ${PYTHON_LIBRARIES}
+  )
+
+target_include_directories(account
   PRIVATE
-  ${PYTHON_INCLUDE_DIRS}
+    ${PYTHON_INCLUDE_DIRS}
   )
 
 # prevent cmake from creating a "lib" prefix
-set_target_properties(
-  account
+set_target_properties(account
   PROPERTIES
     PREFIX ""
   )
