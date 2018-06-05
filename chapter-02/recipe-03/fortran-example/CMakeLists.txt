@@ -8,4 +8,6 @@ project(recipe-03 LANGUAGES Fortran)
 add_executable(hello-world hello-world.F90)
 
 # compactly let the preprocessor know about the compiler vendor
-target_compile_definitions(hello-world PUBLIC "IS_${CMAKE_Fortran_COMPILER_ID}_FORTRAN_COMPILER")
+target_compile_definitions(hello-world
+  PUBLIC "IS_${CMAKE_Fortran_COMPILER_ID}_FORTRAN_COMPILER"
+)
