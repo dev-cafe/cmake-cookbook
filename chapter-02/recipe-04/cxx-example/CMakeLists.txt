@@ -26,4 +26,7 @@ elseif(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
 else()
   message(STATUS "host processor architecture is unknown")
 endif()
-target_compile_definitions(arch-dependent PUBLIC "ARCHITECTURE=${CMAKE_HOST_SYSTEM_PROCESSOR}")
+
+target_compile_definitions(arch-dependent
+  PUBLIC "ARCHITECTURE=${CMAKE_HOST_SYSTEM_PROCESSOR}"
+  )

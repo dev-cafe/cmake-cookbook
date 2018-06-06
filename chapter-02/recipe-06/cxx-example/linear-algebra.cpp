@@ -1,46 +1,32 @@
-/* Example taken from
- * https://forum.kde.org/viewtopic.php?f=74&t=138728#
- */
-
+#include <chrono>
 #include <iostream>
-#include <vector>
 
 #include <Eigen/Dense>
 
-using namespace Eigen;
-using namespace std;
-
 EIGEN_DONT_INLINE
-int foo(vector<float> &input, VectorXf &delay, VectorXf &doubleTaps) {
-  int numTaps = doubleTaps.size() / 2;
-  float tot = 0;
-  int state = 0;
-  for (const float &i : input) {
-    delay[state] = i;
-    tot += doubleTaps.segment(numTaps - state, numTaps).dot(delay);
-
-    if (--state < 0)
-      state += numTaps;
-  }
-  return tot;
+double simple_function(Eigen::VectorXd &va, Eigen::VectorXd &vb) {
+  // this simple function computes the dot product of two vectors
+  // of course it could be expressed more compactly
+  double d = va.dot(vb);
+  return d;
 }
 
 int main() {
-  int numTaps = 1024;
-  int numSamples = 10000000;
+  int len = 1000000;
+  int num_repetitions = 100;
 
-  // Create random input
-  vector<float> input(numSamples);
-  generate(input.begin(), input.end(), rand);
+  // generate two random vectors
+  Eigen::VectorXd va = Eigen::VectorXd::Random(len);
+  Eigen::VectorXd vb = Eigen::VectorXd::Random(len);
 
-  // Generate taps, then create double taps, a vector of taps twice.
-  VectorXf taps = VectorXf::Random(numTaps);
+  double result;
+  auto start = std::chrono::system_clock::now();
+  for (auto i = 0; i < num_repetitions; i++) {
+    result = simple_function(va, vb);
+  }
+  auto end = std::chrono::system_clock::now();
+  auto elapsed_seconds = end - start;
 
-  VectorXf doubleTaps;
-  doubleTaps.resize(2 * numTaps);
-  doubleTaps.head(numTaps) = taps;
-  doubleTaps.tail(numTaps) = taps;
-  VectorXf delay = VectorXf::Zero(numTaps);
-
-  int tot = foo(input, delay, doubleTaps);
+  std::cout << "result: " << result << std::endl;
+  std::cout << "elapsed seconds: " << elapsed_seconds.count() << std::endl;
 }

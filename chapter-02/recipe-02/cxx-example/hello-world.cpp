@@ -7,8 +7,8 @@ std::string say_hello() {
   return std::string("Hello from Windows!");
 #elif IS_LINUX
   return std::string("Hello from Linux!");
-#elif IS_MAC
-  return std::string("Hello from Mac!");
+#elif IS_MACOS
+  return std::string("Hello from macOS!");
 #else
   return std::string("Hello from an unknown system!");
 #endif

@@ -13,7 +13,7 @@ target_sources(processor-info
     processor-info.cpp
   )
 
-# and its source file
+# and its include directories
 target_include_directories(processor-info
   PRIVATE
     ${PROJECT_BINARY_DIR}
@@ -41,7 +41,8 @@ foreach(key
     OS_NAME
     OS_RELEASE
     OS_VERSION
-    OS_PLATFORM)
+    OS_PLATFORM
+  )
   cmake_host_system_information(RESULT _${key} QUERY ${key})
 endforeach()
 
