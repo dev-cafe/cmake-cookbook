@@ -116,8 +116,8 @@ before_script:
 script:
   - ./testing/dependencies/report_versions.sh
   - if [[ "$ANACONDA_TESTS_ONLY" == 1 ]]; then
-      pipenv run python testing/collect_tests.py 'chapter-11/recipe-04';
-      pipenv run python testing/collect_tests.py 'chapter-11/recipe-05';
+      travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-04';
+      travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-05';
     else
       pipenv run python testing/collect_tests.py 'chapter-0*/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-10/recipe-*';
