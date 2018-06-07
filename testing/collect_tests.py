@@ -77,8 +77,6 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     expect_failure_global, env_global, definitions_global, targets_global, configurations_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
-    print('env_global ', env_global)
-
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
@@ -86,14 +84,14 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     expect_failure_local, env_local, definitions_local, targets_local, configurations_local = extract_menu_file(
         menu_file, generator, ci_environment)
 
-    print('env_local ', env_local)
-
     expect_failure = expect_failure_global or expect_failure_local
 
     # local env vars override global ones
     env = env_global.copy()
     for entry in env_local:
         env[entry] = env_local[entry]
+    print('env ', env)
+    print('Is verbose? ', verbose_output())
 
     # local definitions override global ones
     definitions = definitions_global.copy()

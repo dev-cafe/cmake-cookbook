@@ -1,4 +1,4 @@
-# Detecting the Python Interpreter
+# Detecting the Python interpreter
 
 Abstract to be written ...
 

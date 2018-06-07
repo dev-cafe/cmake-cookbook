@@ -1,4 +1,4 @@
-# Detecting the BLAS and LAPACK Math Libraries
+# Detecting the BLAS and LAPACK math libraries
 
 Abstract to be written ...
 

@@ -1,4 +1,4 @@
-# Detecting the Python Library
+# Detecting the Python library
 
 Code example copy-pasted from the Python docs on embedding:
 - For Python 2.7 https://docs.python.org/2.7/extending/embedding.html
