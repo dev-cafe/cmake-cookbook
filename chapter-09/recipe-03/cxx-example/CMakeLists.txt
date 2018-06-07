@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(PythonInterp REQUIRED)
 
 # directory contains UseCython.cmake and FindCython.cmake
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake-cython)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake-cython)
 
 # this defines cython_add_module
 include(UseCython)
@@ -21,7 +21,7 @@ include(UseCython)
 # tells UseCython to compile this file as a c++ file
 set_source_files_properties(account.pyx PROPERTIES CYTHON_IS_CXX TRUE)
 if(WIN32 AND (NOT MSVC))
-  set_source_file_properties(account.pyx PROPERTIES COMPILE_DEFINITIONS "_hypot=hypot")
+  set_source_files_properties(account.pyx PROPERTIES COMPILE_DEFINITIONS "_hypot=hypot")
 endif()
 
 # create python module
@@ -30,7 +30,7 @@ cython_add_module(account account.pyx account.cpp)
 # location of account.hpp
 target_include_directories(account
   PRIVATE
-    ${PROJECT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
   )
 
 # turn on testing
@@ -41,13 +41,11 @@ add_test(
   NAME
     python_test
   COMMAND
-    ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/test.py
+    ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.py
   )
 
 # test needs to know the location of the compiled module
-set_property(
-  TEST
-    python_test
-  PROPERTY ENVIRONMENT
-    PYTHONPATH=${PROJECT_BINARY_DIR}:$ENV{PYTHONPATH}
+set_tests_properties(python_test
+  PROPERTIES
+    ENVIRONMENT PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}:$ENV{PYTHONPATH}
   )

@@ -16,6 +16,7 @@ if "%nonVSGenerator%"=="true" (
 
   rem more packages
   bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost"
+  bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost-python"
   bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-ninja"
   bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-openblas"
   bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-eigen3"
