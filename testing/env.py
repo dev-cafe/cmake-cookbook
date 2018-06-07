@@ -38,4 +38,4 @@ def get_buildflags():
 
 
 def verbose_output():
-    return os.getenv('VERBOSE_OUTPUT', False)
+    return (False if os.environ.get('VERBOSE_OUTPUT') is None else True)

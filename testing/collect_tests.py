@@ -54,7 +54,8 @@ def run_command(step, command, expect_failure):
     if child_return_code == 0:
         sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
         if verbose_output():
-            sys.stdout.write('{command}\n {stdout}{stderr}\n'.format(command=command, stdout=stdout, stderr=stderr))
+            sys.stdout.write('{cmd}\n {out}{err}\n'.format(
+                cmd=command, out=stdout, err=stderr))
     else:
         if expect_failure:
             sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
@@ -62,7 +63,8 @@ def run_command(step, command, expect_failure):
         else:
             sys.stdout.write(
                 colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED\n')
-            sys.stderr.write(stdout + stderr + '\n')
+            sys.stdout.write('{cmd}\n {out}{err}\n'.format(
+                cmd=command, out=stdout, err=stderr))
             return_code = child_return_code
     sys.stdout.flush()
     sys.stderr.flush()
@@ -90,8 +92,6 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     env = env_global.copy()
     for entry in env_local:
         env[entry] = env_local[entry]
-    print('env ', env)
-    print('Is verbose? ', verbose_output())
 
     # local definitions override global ones
     definitions = definitions_global.copy()
