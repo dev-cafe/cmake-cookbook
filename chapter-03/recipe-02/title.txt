@@ -1,1 +1,1 @@
-Detecting the Python Library
+Detecting the Python library

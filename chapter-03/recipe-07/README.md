@@ -1,4 +1,4 @@
-# Detecting the Eigen Library
+# Detecting the Eigen library
 
 Show how to use the Eigen library and link to BLAS/LAPACK.
 

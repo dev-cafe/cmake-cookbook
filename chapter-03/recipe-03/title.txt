@@ -1,1 +1,1 @@
-Detecting Python Modules
+Detecting Python modules
