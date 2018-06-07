@@ -32,7 +32,6 @@ endif()
 target_link_libraries(account
   PUBLIC
     Boost::python
-    ${PYTHON_LIBRARIES}
   )
 
 target_include_directories(account

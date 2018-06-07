@@ -54,7 +54,7 @@ def run_command(step, command, expect_failure):
     if child_return_code == 0:
         sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
         if verbose_output():
-            sys.stdout.write(stdout + stderr + '\n')
+            sys.stdout.write('{command}\n {stdout}{stderr}\n'.format(command=command, stdout=stdout, stderr=stderr))
     else:
         if expect_failure:
             sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
@@ -77,12 +77,16 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     expect_failure_global, env_global, definitions_global, targets_global, configurations_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
+    print('env_global ', env_global)
+
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
     menu_file = os.path.join(recipe, example, 'menu.yml')
     expect_failure_local, env_local, definitions_local, targets_local, configurations_local = extract_menu_file(
         menu_file, generator, ci_environment)
+
+    print('env_local ', env_local)
 
     expect_failure = expect_failure_global or expect_failure_local
 
@@ -198,8 +202,8 @@ def main(arguments):
 
         # extract title from title.txt
         with open(os.path.join(recipe, 'title.txt'), 'r') as f:
-            line = f.readline()
-            print(colorama.Back.BLUE + '\nrecipe: {0}'.format(line))
+            line = f.readline().rstrip()
+            print('\n' + colorama.Back.BLUE + 'recipe: {0}'.format(line))
 
         # Glob examples
         examples = sorted(glob.glob(os.path.join(recipe, '*example*')))
