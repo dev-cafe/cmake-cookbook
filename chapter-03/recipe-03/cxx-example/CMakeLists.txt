@@ -71,7 +71,19 @@ target_link_libraries(pure-embedding
     ${PYTHON_LIBRARIES}
   )
 
-file(
-  COPY ${PROJECT_SOURCE_DIR}/use_numpy.py
-  DESTINATION ${PROJECT_BINARY_DIR}
+add_custom_command(
+  OUTPUT
+    ${CMAKE_CURRENT_BINARY_DIR}/use_numpy.py
+  COMMAND
+    ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/use_numpy.py
+                                          ${CMAKE_CURRENT_BINARY_DIR}/use_numpy.py
+  DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/use_numpy.py
+  )
+
+# make sure building pure-embedding triggers the above
+# custom command
+target_sources(pure-embedding
+  PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}/use_numpy.py
   )
