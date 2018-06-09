@@ -27,7 +27,7 @@ endif()
 # Find NumPy version
 execute_process(
   COMMAND
-    ${PYTHON_EXECUTABLE} "-c" "import re, numpy; print(re.compile('/__init__.py.*').sub('',numpy.__version__))"
+    ${PYTHON_EXECUTABLE} "-c" "import numpy; print(numpy.__version__)"
   OUTPUT_VARIABLE _numpy_version
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
