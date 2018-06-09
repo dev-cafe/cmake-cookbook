@@ -32,7 +32,8 @@ target_link_libraries(account
 
 set_target_properties(account
   PROPERTIES
-    SUFFIX ${PYTHON_MODULE_EXTENSION}
+    PREFIX "${PYTHON_MODULE_PREFIX}"
+    SUFFIX "${PYTHON_MODULE_EXTENSION}"
   )
 
 file(

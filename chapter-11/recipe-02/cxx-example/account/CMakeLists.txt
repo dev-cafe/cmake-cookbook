@@ -2,34 +2,35 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and supported language
-project(account-project CXX)
+project(account-project LANGUAGES CXX)
 
 # require C++11
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# the pybind11 subdirectory will provide pybind11::module
-add_subdirectory(
-  ${PYBIND11_DIR}
-  ${PROJECT_BINARY_DIR}/pybind11
-)
+# the pybind11 package will provide the pybind11::module imported target
+find_package(pybind11 CONFIG REQUIRED)
 
 # create python module
-add_library(
-  account
+add_library(account
   MODULE
-  account.cpp
+    account.cpp
   )
 
-target_link_libraries(
-  account
+if(WIN32 AND (NOT MSVC))
+  target_compile_definitions(account
+    PUBLIC
+      "_hypot=hypot"
+    )
+endif()
+
+target_link_libraries(account
   PUBLIC
-  pybind11::module
+    pybind11::module
   )
 
-set_target_properties(
-  account
+set_target_properties(account
   PROPERTIES
     PREFIX "${PYTHON_MODULE_PREFIX}"
     SUFFIX "${PYTHON_MODULE_EXTENSION}"
@@ -40,7 +41,7 @@ file(
     __init__.py
     version.py
   DESTINATION
-    ${PROJECT_BINARY_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
   )
 
 install(
