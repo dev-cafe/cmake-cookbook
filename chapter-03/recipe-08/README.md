@@ -1,4 +1,4 @@
-# Detecting the Boost Libraries
+# Detecting the Boost libraries
 
 Abstract to be written ...
 

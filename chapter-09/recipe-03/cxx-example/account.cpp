@@ -1,6 +1,6 @@
 #include "account.hpp"
 
-Account::Account() { balance = 0.0; }
+Account::Account() : balance(0.0) {}
 
 Account::~Account() {}
 

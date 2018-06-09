@@ -1,4 +1,4 @@
-# Detecting the OpenMP Parallel Environment
+# Detecting the OpenMP parallel environment
 
 Abstract to be written ...
 

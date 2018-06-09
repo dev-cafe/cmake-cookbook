@@ -1,4 +1,4 @@
-# Detecting the MPI Parallel Environment
+# Detecting the MPI parallel environment
 
 Abstract to be written ...
 

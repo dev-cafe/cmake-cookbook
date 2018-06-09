@@ -35,9 +35,12 @@ environment:
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
 
+#matrix:
+#  fast_finish: true
+
 init:
   - set PATH=C:\msys64\%MSYSTEM%\bin;C:\msys64\usr\bin;%PATH%
-  - set PATH=C:\Python36;C:\Python36\Scripts;%PATH%
+  - set PATH=C:\Python36-x64;C:\Python36-x64\Scripts;%PATH%
   # Remove Python 2.7 from path
   - set PATH=%PATH:C:\Python27;=%
   - set PATH=%PATH:C:\Python27\Scripts;=%
