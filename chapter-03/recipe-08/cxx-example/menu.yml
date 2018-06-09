@@ -1,5 +1,5 @@
 appveyor-vs:
-  env:
+  definitions:
     - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
 
 travis-osx:
