@@ -21,7 +21,7 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
 if(NOT _numpy_status)
-  set(NumPy ${_numpy_location} CACHE STRING "Location of Python module NumPy")
+  set(NumPy ${_numpy_location} CACHE STRING "Location of NumPy")
 endif()
 
 # Find NumPy version
@@ -42,17 +42,10 @@ find_package_handle_standard_args(NumPy
 
 add_executable(pure-embedding "")
 
-if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
-  target_sources(pure-embedding
-    PRIVATE
-      Py2-pure-embedding.cpp
-    )
-else()
-  target_sources(pure-embedding
-    PRIVATE
-      Py3-pure-embedding.cpp
-    )
-endif()
+target_sources(pure-embedding
+  PRIVATE
+    Py${PYTHON_VERSION_MAJOR}-pure-embedding.cpp
+  )
 
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(pure-embedding
