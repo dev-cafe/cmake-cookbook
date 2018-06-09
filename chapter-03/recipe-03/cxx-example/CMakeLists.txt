@@ -23,6 +23,7 @@ execute_process(
 if(NOT _numpy_status)
   set(NumPy ${_numpy_location} CACHE STRING "Location of Python module NumPy")
 endif()
+
 # Find NumPy version
 execute_process(
   COMMAND
@@ -31,6 +32,7 @@ execute_process(
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
+
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(NumPy
   FOUND_VAR NumPy_FOUND
@@ -39,6 +41,7 @@ find_package_handle_standard_args(NumPy
   )
 
 add_executable(pure-embedding "")
+
 if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
   target_sources(pure-embedding
     PRIVATE
@@ -50,20 +53,25 @@ else()
       Py3-pure-embedding.cpp
     )
 endif()
+
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(pure-embedding
     PUBLIC
       "_hypot=hypot"
     )
 endif()
+
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
   )
+
 target_link_libraries(pure-embedding
   PRIVATE
     ${PYTHON_LIBRARIES}
   )
-file(COPY ${PROJECT_SOURCE_DIR}/use_numpy.py
-     DESTINATION ${PROJECT_BINARY_DIR}
-    )
+
+file(
+  COPY ${PROJECT_SOURCE_DIR}/use_numpy.py
+  DESTINATION ${PROJECT_BINARY_DIR}
+  )
