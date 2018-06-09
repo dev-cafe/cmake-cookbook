@@ -47,7 +47,7 @@
 
 - [Detecting the Python interpreter](chapter-03/recipe-01/README.md)
 - [Detecting the Python library](chapter-03/recipe-02/README.md)
-- [Detecting Python modules](chapter-03/recipe-03/README.md)
+- [Detecting Python modules and packages](chapter-03/recipe-03/README.md)
 - [Detecting the BLAS and LAPACK math libraries](chapter-03/recipe-04/README.md)
 - [Detecting the OpenMP parallel environment](chapter-03/recipe-05/README.md)
 - [Detecting the MPI parallel environment](chapter-03/recipe-06/README.md)
