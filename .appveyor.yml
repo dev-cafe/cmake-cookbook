@@ -35,8 +35,8 @@ environment:
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
 
-matrix:
-  fast_finish: true
+#matrix:
+#  fast_finish: true
 
 init:
   - set PATH=C:\msys64\%MSYSTEM%\bin;C:\msys64\usr\bin;%PATH%

@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(PythonInterp REQUIRED)
 
 # we require boost::python and python development headers
-find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
+find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} EXACT REQUIRED)
 find_package(Boost REQUIRED COMPONENTS python)
 
 # create python module
