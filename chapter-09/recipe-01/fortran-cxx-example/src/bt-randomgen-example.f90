@@ -14,12 +14,11 @@ program bt_randomgen_example
   type(c_ptr) :: c_buf
   integer(c_int) :: bt_size
 
-  write(output_unit, '(A)') 'Initializing randomgen C library'
-  call init_randomgen(time())
   lower = -2
   upper = 42
-  write(output_unit, '(1X,"Get a random number",1X,I5)') randomgen(lower, upper)
-  write(output_unit, '(1X,"And then another",1X,I5)') randomgen(lower, upper)
+  do i = 1, 20
+     write(output_unit, '(1X,"Get a random number",1X,I5)') randomgen(lower, upper)
+  end do
 
   write(error_unit, '(A)') 'Printing backtrace'
   c_buf = c_loc(buffer)
