@@ -13,10 +13,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(hello-conda "")
 
 # its sources
-target_sources(
-  hello-conda
+target_sources(hello-conda
   PRIVATE
-  example.cpp
+    example.cpp
   )
 
 # install the binary

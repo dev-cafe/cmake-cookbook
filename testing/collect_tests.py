@@ -134,7 +134,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     if os.path.exists(custom_sh_path):
         # if this directory contains a custom.sh script, we launch it
         step = 'custom.sh'
-        command = '{0} {1}'.format(custom_sh_path, build_directory)
+        command = 'bash -lc \"{0} {1}\"'.format(custom_sh_path, build_directory)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
     else:
