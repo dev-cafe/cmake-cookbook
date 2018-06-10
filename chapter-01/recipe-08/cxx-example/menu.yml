@@ -1,23 +1,23 @@
 appveyor-vs:
   definitions:
-    - CMAKE_CXX_FLAGS: '"/EHsc- /GR-"'
+    - CMAKE_CXX_FLAGS: '/EHsc- /GR-'
 
 appveyor-msys:
   definitions:
-    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+    - CMAKE_CXX_FLAGS: '-fno-exceptions -fno-rtti'
 
 drone:
   definitions:
-    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+    - CMAKE_CXX_FLAGS: '-fno-exceptions -fno-rtti'
 
 travis-linux:
   definitions:
-    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+    - CMAKE_CXX_FLAGS: '-fno-exceptions -fno-rtti'
 
 travis-osx:
   definitions:
-    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+    - CMAKE_CXX_FLAGS: '-fno-exceptions -fno-rtti'
 
 local:
   definitions:
-    - CMAKE_CXX_FLAGS: '"-fno-exceptions -fno-rtti"'
+    - CMAKE_CXX_FLAGS: '-fno-exceptions -fno-rtti'
