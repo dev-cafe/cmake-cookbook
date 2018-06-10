@@ -7,6 +7,7 @@ project(recipe-05 LANGUAGES Fortran)
 find_package(OpenMP REQUIRED)
 
 add_executable(example example.f90)
+
 target_link_libraries(
   example
   PUBLIC
