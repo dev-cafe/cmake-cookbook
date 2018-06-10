@@ -76,14 +76,14 @@ def run_command(step, command, expect_failure):
 def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     # extract global menu
-    menu_file = Path(topdir, 'testing', 'menu.yml')
+    menu_file = topdir / 'testing' / 'menu.yml'
     expect_failure_global, env_global, definitions_global, targets_global, configurations_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
-    menu_file = Path(recipe, example, 'menu.yml')
+    menu_file = recipe / example / 'menu.yml'
     expect_failure_local, env_local, definitions_local, targets_local, configurations_local = extract_menu_file(
         menu_file, generator, ci_environment)
 
@@ -115,11 +115,11 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     # when debugging on a laptop
     time_stamp = datetime.datetime.fromtimestamp(
         time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-    build_directory = Path(recipe, example, 'build-{0}'.format(time_stamp))
-    cmakelists_path = Path(recipe, example)
+    build_directory = recipe / example / 'build-{0}'.format(time_stamp)
+    cmakelists_path = recipe / example
 
     min_cmake_version = get_min_cmake_version(
-        Path(cmakelists_path, 'CMakeLists.txt'))
+        cmakelists_path / 'CMakeLists.txt')
     system_cmake_version = get_system_cmake_version()
 
     if version.parse(system_cmake_version) < version.parse(min_cmake_version):
@@ -130,8 +130,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     return_code = 0
 
-    custom_sh_path = Path(cmakelists_path, 'custom.sh')
-    if os.path.exists(custom_sh_path):
+    custom_sh_path = cmakelists_path / 'custom.sh'
+    if custom_sh_path.exists():
         # if this directory contains a custom.sh script, we launch it
         step = 'custom.sh'
         command = 'bash -lc \"{0} {1}\"'.format(custom_sh_path, build_directory)
@@ -186,10 +186,7 @@ def main(arguments):
     ci_environment = get_ci_environment()
 
     # glob recipes
-    recipes = [
-        Path(r)
-        for r in sorted(glob.glob(os.path.join(topdir, arguments['<regex>'])))
-    ]
+    recipes = [r for r in sorted(topdir.glob(arguments['<regex>']))]
 
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
@@ -199,15 +196,13 @@ def main(arguments):
     for recipe in recipes:
 
         # extract title from title.txt
-        with open(Path(recipe, 'title.txt'), 'r') as f:
+        title = recipe / 'title.txt'
+        with title.open() as f:
             line = f.readline().rstrip()
             print('\n' + colorama.Back.BLUE + 'recipe: {0}'.format(line))
 
         # Glob examples
-        examples = [
-            Path(e)
-            for e in sorted(glob.glob(os.path.join(recipe, '*example*')))
-        ]
+        examples = sorted(recipe.glob('*example*'))
 
         for example in examples:
             return_code += run_example(topdir, generator, ci_environment,
