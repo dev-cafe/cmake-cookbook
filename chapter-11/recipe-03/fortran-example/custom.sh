@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euxo pipefail
+
 # build directory is provided by the main script
 build_directory=$1
 mkdir -p ${build_directory}
