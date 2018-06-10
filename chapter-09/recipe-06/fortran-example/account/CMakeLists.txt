@@ -6,5 +6,5 @@ install(
   FILES
     account.h
   DESTINATION
-    include
+    ${CMAKE_INSTALL_INCLUDEDIR}
   )
