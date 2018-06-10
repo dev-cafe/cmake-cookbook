@@ -4,6 +4,7 @@ import datetime
 import glob
 import os
 import re
+import shlex
 import subprocess
 import sys
 import time
@@ -34,14 +35,15 @@ def get_system_cmake_version():
     return cmake_version
 
 
-def run_command(step, command, expect_failure):
+def run_command(*, step, command, expect_failure):
     """
     step: string (e.g. 'configuring', 'building', ...); only used in printing
     command: string; this is the command to be run
     expect_failure: bool; if True we do not panic if the command fails
     """
+    args = shlex.split(command)
     child = subprocess.Popen(
-        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     stdout_coded, stderr_coded = child.communicate()
     stdout = stdout_coded.decode('UTF-8')
