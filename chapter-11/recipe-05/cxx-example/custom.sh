@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
-
 # build directory is provided by the main script
 build_directory=$1
-mkdir -p ${build_directory}
-cd ${build_directory}
+mkdir -p "${build_directory}"
+cd "${build_directory}" || exit
 
 PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
