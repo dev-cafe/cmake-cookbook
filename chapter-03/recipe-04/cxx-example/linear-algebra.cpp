@@ -4,10 +4,8 @@
 #include "CxxBLAS.hpp"
 #include "CxxLAPACK.hpp"
 
-#include <cstdlib>
 #include <iostream>
 #include <random>
-#include <vector>
 
 int main(int argc, char **argv) {
   if (argc != 2) {
