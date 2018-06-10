@@ -19,7 +19,13 @@ FortranCInterface_HEADER(
 find_package(BLAS REQUIRED)
 find_package(LAPACK REQUIRED)
 
-add_library(math CxxBLAS.cpp CxxLAPACK.cpp)
+add_library(math "")
+
+target_sources(math
+  PRIVATE
+    CxxBLAS.cpp
+    CxxLAPACK.cpp
+  )
 
 target_include_directories(math
   PUBLIC
@@ -32,7 +38,12 @@ target_link_libraries(math
     ${LAPACK_LIBRARIES}
   )
 
-add_executable(linear-algebra linear-algebra.cpp)
+add_executable(linear-algebra "")
+
+target_sources(linear-algebra
+  PRIVATE
+    linear-algebra.cpp
+  )
 
 target_link_libraries(linear-algebra
   PRIVATE
