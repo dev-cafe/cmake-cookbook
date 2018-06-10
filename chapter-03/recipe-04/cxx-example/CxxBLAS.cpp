@@ -11,6 +11,6 @@ void C_DSCAL(size_t length, double alpha, double *vec, int inc) {
   for (int block = 0; block <= big_blocks; block++) {
     double *vec_s = &vec[block * inc * (size_t)INT_MAX];
     signed int length_s = (block == big_blocks) ? small_size : INT_MAX;
-    ::F_DSCAL(&length_s, &alpha, vec_s, &inc);
+    ::DSCAL(&length_s, &alpha, vec_s, &inc);
   }
 }

@@ -2,12 +2,13 @@
 
 #pragma once
 
+#include "fc_mangle.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define F_DGESV dgesv_
-extern int F_DGESV(int *, int *, double *, int *, int *, double *, int *, int *);
+extern int DGESV(int *, int *, double *, int *, int *, double *, int *, int *);
 
 #ifdef __cplusplus
 }
