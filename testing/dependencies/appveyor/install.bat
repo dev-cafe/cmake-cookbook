@@ -14,6 +14,9 @@ if "%nonVSGenerator%"=="true" (
   rem --ask=127 is taken from https://github.com/appveyor/ci/issues/2074#issuecomment-364842018
   bash -lc "pacman -Syuu --needed --noconfirm --ask=127"
 
+  rem search for packages with
+  rem bash -lc "pacman -Ss boost"
+
   rem more packages
   bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost"
   bash -lc "pacman -S --noconfirm mingw64/mingw-w64-x86_64-ninja"

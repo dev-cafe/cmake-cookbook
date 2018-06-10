@@ -3,7 +3,7 @@ if(Boost_FOUND)
   message(STATUS "Found Boost version ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}")
   add_library(boost_external INTERFACE)
 else()
-  message(STATUS "Suitable Boost ${BOOST_MINIMUM_REQUIRED} could not be located, Building Boost 1.65.1 instead.")
+  message(STATUS "Suitable Boost ${BOOST_MINIMUM_REQUIRED} could not be located, Building Boost 1.61.0 instead.")
 
   if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     if(APPLE)
@@ -62,9 +62,9 @@ else()
   include(ExternalProject)
   ExternalProject_Add(boost_external
     URL
-      https://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_65_1.zip
-    URL_HASH
-      SHA256=d1775aef807bd6a14077b450cce2950d8eacd86aaf51015f79e712917f8cc3c2
+      https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.zip
+    URL_MD5
+      015ae4afa6f3e597232bfe1dab949ace
     DOWNLOAD_NO_PROGRESS
       1
     UPDATE_COMMAND

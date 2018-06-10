@@ -54,7 +54,8 @@ def run_command(step, command, expect_failure):
     if child_return_code == 0:
         sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
         if verbose_output():
-            sys.stdout.write(stdout + stderr + '\n')
+            sys.stdout.write('{cmd}\n {out}{err}\n'.format(
+                cmd=command, out=stdout, err=stderr))
     else:
         if expect_failure:
             sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
@@ -62,7 +63,8 @@ def run_command(step, command, expect_failure):
         else:
             sys.stdout.write(
                 colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED\n')
-            sys.stderr.write(stdout + stderr + '\n')
+            sys.stdout.write('{cmd}\n {out}{err}\n'.format(
+                cmd=command, out=stdout, err=stderr))
             return_code = child_return_code
     sys.stdout.flush()
     sys.stderr.flush()
@@ -198,8 +200,8 @@ def main(arguments):
 
         # extract title from title.txt
         with open(os.path.join(recipe, 'title.txt'), 'r') as f:
-            line = f.readline()
-            print(colorama.Back.BLUE + '\nrecipe: {0}'.format(line))
+            line = f.readline().rstrip()
+            print('\n' + colorama.Back.BLUE + 'recipe: {0}'.format(line))
 
         # Glob examples
         examples = sorted(glob.glob(os.path.join(recipe, '*example*')))

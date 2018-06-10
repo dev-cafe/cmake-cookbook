@@ -5,6 +5,7 @@ appveyor-vs:
 
 appveyor-msys:
   failing_generators:
+    - 'MSYS Makefiles'
     - 'Ninja'
 
 travis-linux:
