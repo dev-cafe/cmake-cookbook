@@ -16,5 +16,10 @@ execute_process(
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
+
 message(STATUS "RESULT_VARIABLE is: ${_status}")
 message(STATUS "OUTPUT_VARIABLE is: ${_hello_world}")
+
+# compare the "manual" messages with the following handy helper
+include(CMakePrintHelpers)
+cmake_print_variables(_status _hello_world)

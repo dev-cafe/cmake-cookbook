@@ -9,7 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PythonInterp REQUIRED)
-find_package(PythonLibs REQUIRED)
+find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} EXACT REQUIRED)
 
 # Find NumPy location
 execute_process(
@@ -21,16 +21,18 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
 if(NOT _numpy_status)
-  set(NumPy ${_numpy_location} CACHE STRING "Location of Python module NumPy")
+  set(NumPy ${_numpy_location} CACHE STRING "Location of NumPy")
 endif()
+
 # Find NumPy version
 execute_process(
   COMMAND
-    ${PYTHON_EXECUTABLE} "-c" "import re, numpy; print(re.compile('/__init__.py.*').sub('',numpy.__version__))"
+    ${PYTHON_EXECUTABLE} "-c" "import numpy; print(numpy.__version__)"
   OUTPUT_VARIABLE _numpy_version
   ERROR_QUIET
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
+
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(NumPy
   FOUND_VAR NumPy_FOUND
@@ -39,31 +41,42 @@ find_package_handle_standard_args(NumPy
   )
 
 add_executable(pure-embedding "")
-if(PYTHON_VERSION_MAJOR VERSION_LESS 3)
-  target_sources(pure-embedding
-    PRIVATE
-      Py2-pure-embedding.cpp
-    )
-else()
-  target_sources(pure-embedding
-    PRIVATE
-      Py3-pure-embedding.cpp
-    )
-endif()
+
+target_sources(pure-embedding
+  PRIVATE
+    Py${PYTHON_VERSION_MAJOR}-pure-embedding.cpp
+  )
+
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(pure-embedding
     PUBLIC
       "_hypot=hypot"
     )
 endif()
+
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
   )
+
 target_link_libraries(pure-embedding
   PRIVATE
     ${PYTHON_LIBRARIES}
   )
-file(COPY ${PROJECT_SOURCE_DIR}/use_numpy.py
-     DESTINATION ${PROJECT_BINARY_DIR}
-    )
+
+add_custom_command(
+  OUTPUT
+    ${CMAKE_CURRENT_BINARY_DIR}/use_numpy.py
+  COMMAND
+    ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/use_numpy.py
+                                          ${CMAKE_CURRENT_BINARY_DIR}/use_numpy.py
+  DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/use_numpy.py
+  )
+
+# make sure building pure-embedding triggers the above
+# custom command
+target_sources(pure-embedding
+  PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}/use_numpy.py
+  )
