@@ -9,7 +9,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FortranCInterface)
+
 FortranCInterface_VERIFY()
+
 FortranCInterface_HEADER(
   fc_mangle.h
   MACRO_NAMESPACE "FC_"
