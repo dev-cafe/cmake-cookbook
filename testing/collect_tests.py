@@ -7,6 +7,7 @@ import re
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 import colorama
 import docopt
@@ -75,14 +76,14 @@ def run_command(step, command, expect_failure):
 def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     # extract global menu
-    menu_file = os.path.join(topdir, 'testing', 'menu.yml')
+    menu_file = Path(topdir, 'testing', 'menu.yml')
     expect_failure_global, env_global, definitions_global, targets_global, configurations_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
-    menu_file = os.path.join(recipe, example, 'menu.yml')
+    menu_file = Path(recipe, example, 'menu.yml')
     expect_failure_local, env_local, definitions_local, targets_local, configurations_local = extract_menu_file(
         menu_file, generator, ci_environment)
 
@@ -114,12 +115,11 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     # when debugging on a laptop
     time_stamp = datetime.datetime.fromtimestamp(
         time.time()).strftime('%Y-%m-%d-%H-%M-%S')
-    build_directory = os.path.join(recipe, example,
-                                   'build-{0}'.format(time_stamp))
-    cmakelists_path = os.path.join(recipe, example)
+    build_directory = Path(recipe, example, 'build-{0}'.format(time_stamp))
+    cmakelists_path = Path(recipe, example)
 
     min_cmake_version = get_min_cmake_version(
-        os.path.join(cmakelists_path, 'CMakeLists.txt'))
+        Path(cmakelists_path, 'CMakeLists.txt'))
     system_cmake_version = get_system_cmake_version()
 
     if version.parse(system_cmake_version) < version.parse(min_cmake_version):
@@ -130,7 +130,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     return_code = 0
 
-    custom_sh_path = os.path.join(cmakelists_path, 'custom.sh')
+    custom_sh_path = Path(cmakelists_path, 'custom.sh')
     if os.path.exists(custom_sh_path):
         # if this directory contains a custom.sh script, we launch it
         step = 'custom.sh'
@@ -179,7 +179,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 def main(arguments):
 
     _this_dir = os.path.dirname(os.path.realpath(__file__))
-    topdir = os.path.join(_this_dir, '..')
+    topdir = Path(_this_dir, '..')
 
     buildflags = get_buildflags()
     generator = get_generator()
@@ -187,7 +187,7 @@ def main(arguments):
 
     # glob recipes
     recipes = [
-        r
+        Path(r)
         for r in sorted(glob.glob(os.path.join(topdir, arguments['<regex>'])))
     ]
 
@@ -199,12 +199,15 @@ def main(arguments):
     for recipe in recipes:
 
         # extract title from title.txt
-        with open(os.path.join(recipe, 'title.txt'), 'r') as f:
+        with open(Path(recipe, 'title.txt'), 'r') as f:
             line = f.readline().rstrip()
             print('\n' + colorama.Back.BLUE + 'recipe: {0}'.format(line))
 
         # Glob examples
-        examples = sorted(glob.glob(os.path.join(recipe, '*example*')))
+        examples = [
+            Path(e)
+            for e in sorted(glob.glob(os.path.join(recipe, '*example*')))
+        ]
 
         for example in examples:
             return_code += run_example(topdir, generator, ci_environment,
