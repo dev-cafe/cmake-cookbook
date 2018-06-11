@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 
 def parse_yaml(file_name):
@@ -8,8 +9,8 @@ def parse_yaml(file_name):
     '''
     import yaml
     import sys
-    if os.path.isfile(file_name):
-        with open(file_name, 'r') as f:
+    if file_name.is_file():
+        with file_name.open() as f:
             try:
                 config = yaml.load(f, yaml.SafeLoader)
             except yaml.YAMLError as exc:

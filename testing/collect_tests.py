@@ -1,7 +1,6 @@
 import datetime
 import os
 import pathlib
-#import platform
 import re
 import shlex
 import subprocess
@@ -18,7 +17,7 @@ from parse import extract_menu_file
 
 
 def get_min_cmake_version(file_name):
-    with open(file_name, 'r') as f:
+    with file_name.open() as f:
         s = re.search(r'cmake_minimum_required\(VERSION (.*?) FATAL_ERROR',
                       f.read())
         assert s is not None, "get_min_cmake_version had trouble with file {0}".format(
@@ -39,8 +38,7 @@ def run_command(*, step, command, expect_failure):
     command: string; this is the command to be run
     expect_failure: bool; if True we do not panic if the command fails
     """
-    #use_posix = False if platform.system() == 'Windows' else True
-    args = shlex.split(command) #, posix=use_posix)
+    args = shlex.split(command)
     child = subprocess.Popen(
         args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
@@ -109,7 +107,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     for entry in env:
         os.environ[entry] = env[entry]
     definitions_string = ' '.join(
-        '-D{0}=\"{1}\"'.format(entry, os.path.expandvars(definitions[entry])) for entry in definitions)
+        r'-D{0}="{1}"'.format(entry, os.path.expandvars(definitions[entry]))
+        for entry in definitions)
 
     # we append a time stamp to the build directory
     # to avoid it being re-used when running tests multiple times
@@ -135,7 +134,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     if custom_sh_path.exists():
         # if this directory contains a custom.sh script, we launch it
         step = 'custom.sh'
-        command = 'bash -c \"{0}\" \"{1}\"'.format(custom_sh_path, build_directory)
+        command = r'bash -c "{0}" "{1}"'.format(custom_sh_path, build_directory)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
     else:
@@ -143,12 +142,12 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
         # configure step
         step = 'configuring'
-        command = 'cmake -H\"{0}\" -B\"{1}\" -G\"{2}\" {3}'.format(
+        command = r'cmake -H"{0}" -B"{1}" -G"{2}" {3}'.format(
             cmakelists_path, build_directory, generator, definitions_string)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
 
-        base_command = 'cmake --build \"{0}\"'.format(build_directory)
+        base_command = r'cmake --build "{0}"'.format(build_directory)
 
         # build step
         step = 'building'
