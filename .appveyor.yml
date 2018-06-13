@@ -24,6 +24,12 @@ environment:
       GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
+      GENERATOR: "MSYS Makefiles"
+      BUILDFLAGS: "VERBOSE=1"
+      CMAKEARGS: ""
+      ANACONDA_TESTS_ONLY: "1"
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 15 2017 Win64"
@@ -34,6 +40,18 @@ environment:
       GENERATOR: "Ninja"
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
+      GENERATOR: "Visual Studio 14 2015 Win64"
+      BUILDFLAGS: "/verbosity:normal"
+      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      ANACONDA_TESTS_ONLY: "1"
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      MSYSTEM: MINGW64
+      GENERATOR: "Visual Studio 15 2017 Win64"
+      BUILDFLAGS: "/verbosity:normal"
+      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      ANACONDA_TESTS_ONLY: "1"
 
 #matrix:
 #  fast_finish: true
@@ -47,10 +65,12 @@ init:
 
 cache:
   - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat
+  - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.bat
 
 install:
   - python -m pip install pipenv
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
+  - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\anaconda.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
 
 # extract step has to happen before the sh.exe workaround otherwise 7z will complain
