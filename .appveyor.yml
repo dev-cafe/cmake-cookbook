@@ -70,7 +70,7 @@ cache:
 install:
   - python -m pip install pipenv
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
-  - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\anaconda.bat'
+  - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\anaconda.ps1
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
 
 # extract step has to happen before the sh.exe workaround otherwise 7z will complain

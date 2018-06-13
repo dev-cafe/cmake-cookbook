@@ -1,6 +1,7 @@
 import datetime
 import os
 import pathlib
+import platform
 import re
 import shlex
 import subprocess
@@ -130,11 +131,16 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     return_code = 0
 
-    custom_sh_path = cmakelists_path / 'custom.sh'
-    if custom_sh_path.exists():
-        # if this directory contains a custom.sh script, we launch it
-        step = 'custom.sh'
-        command = r'"{0}" "{1}"'.format(custom_sh_path, build_directory)
+    custom_script = ''
+    if platform.system() == 'Windows':
+        custom_script = 'custom.bat'
+    else:
+        custom_script = 'custom.sh'
+    custom_script_path = cmakelists_path / custom_script
+    if custom_script_path.exists():
+        # if this directory contains a custom.sh or custom.bat script, we launch it
+        step = custom_script
+        command = r'{0} {1}'.format(custom_script_path, build_directory)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
     else:
