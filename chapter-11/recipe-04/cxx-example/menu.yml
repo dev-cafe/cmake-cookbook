@@ -5,3 +5,7 @@ appveyor-vs:
 appveyor-msys:
   env:
     - VERBOSE_OUTPUT: 'True'
+
+local:
+  env:
+    - VERBOSE_OUTPUT: 'True'

@@ -33,19 +33,34 @@ def get_system_cmake_version():
     return cmake_version
 
 
+def streamer(line, verbose=True):
+    if verbose:
+        print(line, end='')
+    return line
+
+
 def run_command(*, step, command, expect_failure):
     """
     step: string (e.g. 'configuring', 'building', ...); only used in printing
     command: string; this is the command to be run
     expect_failure: bool; if True we do not panic if the command fails
     """
-    args = shlex.split(command)
-    child = subprocess.Popen(
-        args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-    stdout_coded, stderr_coded = child.communicate()
-    stdout = stdout_coded.decode('UTF-8')
-    stderr = stderr_coded.decode('UTF-8')
+    cmd = shlex.split(command)
+    stdout = ''
+    stderr = ''
+    with subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True) as child:
+        # Only stream stdout in verbose mode
+        stdout = ''.join(
+            list(
+                map(lambda line: streamer(line, verbose=verbose_output()),
+                    child.stdout)))
+        # Always stream stderr
+        stderr = ''.join(list(map(streamer, child.stderr)))
 
     child_return_code = child.returncode
 
@@ -54,9 +69,6 @@ def run_command(*, step, command, expect_failure):
         colorama.Fore.BLUE + colorama.Style.BRIGHT + '  {0} ... '.format(step))
     if child_return_code == 0:
         sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
-        if verbose_output():
-            sys.stdout.write('{cmd}\n {out}{err}\n'.format(
-                cmd=command, out=stdout, err=stderr))
     else:
         if expect_failure:
             sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
@@ -131,16 +143,12 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     return_code = 0
 
-    custom_script = ''
-    if platform.system() == 'Windows':
-        custom_script = 'custom.bat'
-    else:
-        custom_script = 'custom.sh'
+    custom_script = 'custom.sh'
     custom_script_path = cmakelists_path / custom_script
     if custom_script_path.exists():
         # if this directory contains a custom.sh or custom.bat script, we launch it
         step = custom_script
-        command = r'{0} {1}'.format(custom_script_path, build_directory)
+        command = 'bash "{0}" "{1}"'.format(custom_script_path, build_directory)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
     else:
@@ -158,7 +166,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
         for configuration in configurations:
             # build step
             step = '{0} configuration {1}'.format('building', configuration)
-            command = base_command + ' --config {0} -- {1}'.format(configuration, buildflags)
+            command = base_command + ' --config {0} -- {1}'.format(
+                configuration, buildflags)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
 
@@ -171,7 +180,8 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
                     if target == 'test':
                         target = 'RUN_TESTS'
 
-                command = base_command + ' --config {0} --target {1}'.format(configuration, target)
+                command = base_command + ' --config {0} --target {1}'.format(
+                    configuration, target)
                 return_code += run_command(
                     step=step, command=command, expect_failure=expect_failure)
 

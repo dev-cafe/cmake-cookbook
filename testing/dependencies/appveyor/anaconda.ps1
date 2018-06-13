@@ -43,11 +43,11 @@ function InstallAnaconda ($Anaconda_VERSION, $Anaconda_cache) {
         return $false
     }
 
-    Write-Host "-- Anaconda " $Anaconda_VERSION "NOT FOUND in cache"
+    Write-Host "-- Anaconda" $Anaconda_VERSION "NOT FOUND in cache"
     $filepath = DownloadAnaconda $Anaconda_VERSION
     Write-Host "Installing" $filepath "to" $Anaconda_cache
     $install_log = $Anaconda_cache + ".log"
-    $args = "/InstallationType=JustMe /RegisterPython=0 /S /D=$Anaconda_cache"
+    $args = "/InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=$Anaconda_cache"
     Write-Host $filepath $args
     Start-Process -FilePath $filepath -ArgumentList $args -Wait -Passthru
     if (Test-Path $Anaconda_cache) {
@@ -78,10 +78,15 @@ function SetUpConda ($Anaconda_cache) {
 
 
 function main () {
-    $Anaconda_VERSION = "5.1.0"
+    $Anaconda_VERSION = "5.2.0"
     $Anaconda_cache = "C:\Deps\conda"
-    InstallAnaconda $Anaconda_VERSION $Anaconda_cache
-    SetUpConda $Anaconda_cache
+    If ($env:ANACONDA_TESTS_ONLY -eq 1) {
+        Write-Host "-- ANACONDA_TESTS_ONLY is set, hence installing version" $Anaconda_VERSION
+        InstallAnaconda $Anaconda_VERSION $Anaconda_cache
+        SetUpConda $Anaconda_cache
+    } Else {
+        Write-Host "-- ANACONDA_TESTS_ONLY is not set, hence not installing it!"
+    }
 }
 
 main

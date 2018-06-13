@@ -8,12 +8,18 @@ version: 'build-{build}-{branch}'
 platform: x64
 
 build:
-  parallel: true
+  parallel: false
 
 environment:
   # Create expected SHELL variable for pipenv.
   SHELL: "windows"
   matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      MSYSTEM: MINGW64
+      GENERATOR: "MSYS Makefiles"
+      BUILDFLAGS: "VERBOSE=1"
+      CMAKEARGS: ""
+      ANACONDA_TESTS_ONLY: "1"
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 14 2015 Win64"
@@ -24,12 +30,6 @@ environment:
       GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      MSYSTEM: MINGW64
-      GENERATOR: "MSYS Makefiles"
-      BUILDFLAGS: "VERBOSE=1"
-      CMAKEARGS: ""
-      ANACONDA_TESTS_ONLY: "1"
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       MSYSTEM: MINGW64
       GENERATOR: "Visual Studio 15 2017 Win64"
@@ -64,6 +64,7 @@ init:
   - set PATH=%PATH:C:\Python27\Scripts;=%
 
 cache:
+  - c:\msys64\var\cache\pacman\pkg -> testing\dependencies\appveyor\install.bat
   - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat
   - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.bat
 
