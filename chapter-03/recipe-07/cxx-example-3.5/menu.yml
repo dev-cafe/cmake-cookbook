@@ -1,10 +1,10 @@
 drone:
   definitions:
-    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
+    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake'
 
 travis-linux:
   definitions:
-    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
+    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake'
 
 # OpenMP does not work with clang
 travis-osx:
@@ -14,4 +14,4 @@ travis-osx:
 
 local:
   definitions:
-    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake/'
+    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake'

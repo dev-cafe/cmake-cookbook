@@ -1,3 +1,4 @@
+# CMake 3.6 needed for IMPORTED_TARGET option to pkg_search_module
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
 project(recipe-01 LANGUAGES CXX)

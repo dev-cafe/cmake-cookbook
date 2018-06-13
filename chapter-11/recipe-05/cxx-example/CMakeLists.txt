@@ -13,17 +13,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(dgemm-example "")
 
 # its sources
-target_sources(
-  dgemm-example
+target_sources(dgemm-example
   PRIVATE
-  example.cpp
+    example.cpp
   )
 
 # targets needs to find mkl.h
-target_include_directories(
-  dgemm-example
+target_include_directories(dgemm-example
   PRIVATE
-  ${CMAKE_INSTALL_PREFIX}/include
+    ${CMAKE_INSTALL_PREFIX}/include
   )
 
 # locate MKL libraries
@@ -39,11 +37,10 @@ foreach(_name IN ITEMS mkl_intel_lp64 mkl_gnu_thread mkl_core gomp)
 endforeach()
 
 # link to MKL libraries
-target_link_libraries(
-  dgemm-example
+target_link_libraries(dgemm-example
   PRIVATE
-  ${_mkl_libs}
-  m
+    ${_mkl_libs}
+    m
   )
 
 # install the binary

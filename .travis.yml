@@ -21,10 +21,12 @@ matrix:
             - liblapack-dev
             - liblapacke-dev
             - libopenmpi-dev
+            - libpython3-all-dev
             - libzmq3-dev
             - openmpi-bin
             - pkg-config
-            - python-dev
+            - python3
+            - python3-dev
             - uuid-dev
       env:
         - CMAKE_VERSION="3.11.2"
@@ -105,7 +107,11 @@ install:
   - ./testing/dependencies/travis/anaconda.sh
   - ./testing/dependencies/travis/eigen.sh
   - export PATH=$HOME/Deps/cmake/$CMAKE_VERSION/bin${PATH:+:$PATH}
-  - pipenv install
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      pipenv install --python `type -P python3.4`;
+    else
+      pipenv install --three;
+    fi
   - pipenv run python --version
 
 before_script:

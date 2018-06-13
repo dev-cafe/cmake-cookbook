@@ -11,8 +11,8 @@ def generate_chapter_readmes(directory_of_this_script, chapters, chapter_titles,
                              recipes, recipe_titles):
 
     for chapter in chapters:
-        readme = directory_of_this_script / '..' / chapter / 'README.md'
-        with open(readme, 'w') as f:
+        readme = directory_of_this_script.parent / chapter / 'README.md'
+        with readme.open(mode='w') as f:
             number = int(chapter.split('-')[-1])
             f.write('# Chapter {0}: {1}\n\n'.format(number,
                                                     chapter_titles[chapter]))
@@ -28,23 +28,23 @@ def generate_recipe_readmes(directory_of_this_script, chapters, recipes,
 
     for chapter in chapters:
         for recipe in recipes[chapter]:
-            readme = directory_of_this_script / '..' / chapter / recipe / 'README.md'
+            readme = directory_of_this_script.parent / chapter / recipe / 'README.md'
 
-            abstract_file = directory_of_this_script / '..' / chapter / recipe / 'abstract.md'
-            if os.path.isfile(abstract_file):
-                with open(abstract_file, 'r') as f:
+            abstract_file = directory_of_this_script.parent / chapter / recipe / 'abstract.md'
+            if abstract_file.is_file():
+                with abstract_file.open() as f:
                     abstract = f.read()
             else:
                 abstract = default_abstract
 
-            with open(readme, 'w') as f:
+            with readme.open(mode='w') as f:
 
                 f.write('# {0}\n\n'.format(recipe_titles[(chapter, recipe)]))
                 f.write(abstract)
                 f.write('\n\n')
 
-                paths = pathlib.Path(directory_of_this_script / '..' / chapter /
-                                     recipe).glob('*example*')
+                paths = (directory_of_this_script.parent / chapter /
+                         recipe).glob('*example*')
                 examples = sorted((path.parts[-1] for path in paths))
                 for example in examples:
                     f.write('- [{0}]({1}/)\n'.format(example, example))
@@ -53,8 +53,8 @@ def generate_recipe_readmes(directory_of_this_script, chapters, recipes,
 def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
                          recipes, recipe_titles):
 
-    readme = directory_of_this_script / '..' / 'README.md'
-    with open(readme, 'w') as f:
+    readme = directory_of_this_script.parent / 'README.md'
+    with readme.open(mode='w') as f:
         f.write("""
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/dev-cafe/cmake-cookbook/master/LICENSE)
 
@@ -95,13 +95,12 @@ def locate_chapters_and_recipes(directory_of_this_script):
     """
     Returns a list of chapters and a dictionary of chapter -> list of recipes.
     """
-    paths = pathlib.Path(directory_of_this_script / '..').glob('chapter-*')
+    paths = (directory_of_this_script.parent).glob('chapter-*')
     chapters = sorted((path.parts[-1] for path in paths))
 
     recipes = {}
     for chapter in chapters:
-        paths = pathlib.Path(
-            directory_of_this_script / '..' / chapter).glob('recipe-*')
+        paths = (directory_of_this_script.parent / chapter).glob('recipe-*')
         _recipes = sorted((path.parts[-1] for path in paths))
         recipes[chapter] = _recipes
 
@@ -112,23 +111,22 @@ def get_titles(directory_of_this_script, chapters, recipes):
 
     chapter_titles = {}
     for chapter in chapters:
-        with open(directory_of_this_script / '..' / chapter / 'title.txt',
-                  'r') as f:
+        with (directory_of_this_script.parent / chapter /
+              'title.txt').open() as f:
             chapter_titles[chapter] = f.readline().strip()
 
     recipe_titles = {}
     for chapter in chapters:
         for recipe in recipes[chapter]:
-            with open(directory_of_this_script / '..' / chapter / recipe /
-                      'title.txt', 'r') as f:
+            with (directory_of_this_script.parent / chapter / recipe /
+                  'title.txt').open() as f:
                 recipe_titles[(chapter, recipe)] = f.readline().strip()
 
     return chapter_titles, recipe_titles
 
 
 if __name__ == '__main__':
-    directory_of_this_script = pathlib.Path(
-        os.path.dirname(os.path.realpath(__file__)))
+    directory_of_this_script = pathlib.Path(__file__).resolve().parent
 
     chapters, recipes = locate_chapters_and_recipes(directory_of_this_script)
 

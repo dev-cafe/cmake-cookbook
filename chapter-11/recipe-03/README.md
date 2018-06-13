@@ -1,4 +1,4 @@
-# Distributing a C/Fortran/Python project build with CMake/CFFI via PyPI
+# Distributing a C/Fortran/Python project built with CMake/CFFI via PyPI
 
 Abstract to be written ...
 

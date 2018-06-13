@@ -1,26 +1,24 @@
-add_library(
-  account
+add_library(account
   SHARED
-  fortran_implementation.f90
+    fortran_implementation.f90
   )
 
 # generate account_export.h
 include(GenerateExportHeader)
-generate_export_header(
-  account
+generate_export_header(account
   BASE_NAME account
   )
 
 install(
   FILES
-    ${PROJECT_BINARY_DIR}/account/implementation/account_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/account_export.h
   DESTINATION
-    include
+    ${CMAKE_INSTALL_INCLUDEDIR}
   )
 
 install(
   TARGETS
     account
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
