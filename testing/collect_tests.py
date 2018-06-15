@@ -159,6 +159,12 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
             # extra targets
             for target in targets:
                 step = '{0} configuration {1}'.format(target, configuration)
+
+                # on VS '--target test' fails but '--target RUN_TESTS' seems to work
+                if generator.startswith('Visual Studio'):
+                    if target == 'test':
+                        target = 'RUN_TESTS'
+
                 command = base_command + ' --config {0} --target {1}'.format(configuration, target)
                 return_code += run_command(
                     step=step, command=command, expect_failure=expect_failure)
