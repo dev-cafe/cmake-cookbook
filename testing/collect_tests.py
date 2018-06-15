@@ -149,24 +149,17 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
         base_command = r'cmake --build "{0}"'.format(build_directory)
 
-        # build step
-        step = 'building'
-        for c in configurations:
-            confstr = ' configuration {}'.format(c)
-            step += confstr
-            config = '--config {}'.format(c)
-            # append configuration to base command
-            base_command += ' {0}'.format(config)
-            # form build command by appending tool-native buildflags
-            command = base_command + ' -- {0}'.format(buildflags)
-            # ready to roll
+        for configuration in configurations:
+            # build step
+            step = '{0} configuration {1}'.format('building', configuration)
+            command = base_command + ' --config {0} -- {1}'.format(configuration, buildflags)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
 
             # extra targets
             for target in targets:
-                step = target + confstr
-                command = base_command + ' --target {0}'.format(target)
+                step = '{0} configuration {1}'.format(target, configuration)
+                command = base_command + ' --config {0} --target {1}'.format(configuration, target)
                 return_code += run_command(
                     step=step, command=command, expect_failure=expect_failure)
 
