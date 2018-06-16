@@ -9,15 +9,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(OpenMP REQUIRED)
 
 find_package(Eigen3 3.3 REQUIRED CONFIG)
+
 if(TARGET Eigen3::Eigen)
-  message(STATUS "Eigen3 version ${EIGEN3_VERSION_STRING} found in ${EIGEN3_INCLUDE_DIR}")
+  message(STATUS "Eigen3 v${EIGEN3_VERSION_STRING} found in ${EIGEN3_INCLUDE_DIR}")
 endif()
+
+add_executable(linear-algebra linear-algebra.cpp)
 
 find_package(BLAS)
 
-add_executable(linear-algebra linear-algebra.cpp)
 if(BLAS_FOUND)
-  message(STATUS "Eigen will use some subroutines from BLAS. See here: http://eigen.tuxfamily.org/dox-devel/TopicUsingBlasLapack.html")
+  message(STATUS "Eigen will use some subroutines from BLAS.")
+  message(STATUS "See: http://eigen.tuxfamily.org/dox-devel/TopicUsingBlasLapack.html")
   target_compile_definitions(linear-algebra
     PRIVATE
       EIGEN_USE_BLAS

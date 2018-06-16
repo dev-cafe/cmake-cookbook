@@ -47,6 +47,7 @@ int main(int argc, char **argv) {
   start = std::chrono::system_clock::now();
   Eigen::VectorXd x = A.lu().solve(b);
   end = std::chrono::system_clock::now();
+
   // Report times
   elapsed_seconds = end - start;
   end_time = std::chrono::system_clock::to_time_t(end);
