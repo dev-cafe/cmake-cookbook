@@ -3,8 +3,10 @@
 import subprocess
 import argparse
 
-# this test script expects an argument
+# test script expects the executable as argument
 parser = argparse.ArgumentParser()
+parser.add_argument('--executable',
+                    help='full path to executable')
 parser.add_argument('--short',
                     default=False,
                     action='store_true',
@@ -13,7 +15,7 @@ args = parser.parse_args()
 
 
 def execute_cpp_code(integers):
-    result = subprocess.check_output(['./sum_up'] + integers)
+    result = subprocess.check_output([args.executable] + integers)
     return int(result)
 
 

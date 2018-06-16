@@ -27,7 +27,22 @@ target_link_libraries(cpp_test sum_integers)
 enable_testing()
 
 # define tests
-add_test(bash_test ${BASH_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.sh)
-add_test(cpp_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test)
-add_test(python_test_long ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.py)
-add_test(python_test_short ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.py --short)
+add_test(
+  NAME bash_test
+  COMMAND ${BASH_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.sh $<TARGET_FILE:sum_up>
+  )
+
+add_test(
+  NAME cpp_test
+  COMMAND $<TARGET_FILE:cpp_test>
+  )
+
+add_test(
+  NAME python_test_long
+  COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.py --executable $<TARGET_FILE:sum_up>
+  )
+
+add_test(
+  NAME python_test_short
+  COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.py --short --executable $<TARGET_FILE:sum_up>
+  )
