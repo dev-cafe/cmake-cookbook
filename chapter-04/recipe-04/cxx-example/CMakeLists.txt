@@ -34,4 +34,8 @@ target_compile_definitions(cpp_test
   )
 
 enable_testing()
-add_test(boost_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test)
+
+add_test(
+  NAME boost_test
+  COMMAND $<TARGET_FILE:cpp_test>
+  )
