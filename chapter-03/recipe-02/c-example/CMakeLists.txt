@@ -11,19 +11,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} EXACT REQUIRED)
 
-add_executable(hello-embedded-python "")
-
-if(PYTHON_VERSION_MAJOR VERSION_EQUAL 2)
-  target_sources(hello-embedded-python
-    PRIVATE
-      hello-embedded-python2.c
-    )
-else()
-  target_sources(hello-embedded-python
-    PRIVATE
-      hello-embedded-python3.c
-    )
-endif()
+add_executable(hello-embedded-python hello-embedded-python${PYTHON_VERSION_MAJOR}.c)
 
 target_include_directories(hello-embedded-python
   PRIVATE

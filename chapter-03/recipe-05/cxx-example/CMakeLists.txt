@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(OpenMP REQUIRED)
 
 add_executable(example example.cpp)
+
 target_link_libraries(
   example
   PUBLIC

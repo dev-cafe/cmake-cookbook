@@ -5,7 +5,12 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#if (_MSC_VER && !__INTEL_COMPILER)
+#include <WinSock2.h>
+#include <Windows.h>
+#else
 #include <unistd.h>
+#endif
 
 #include <zmq.h>
 
@@ -25,7 +30,11 @@ int main(void) {
     char buffer[10];
     zmq_recv(responder, buffer, 10, 0);
     printf("Received Hello\n");
+#if (_MSC_VER && !__INTEL_COMPILER)
+    Sleep(1 * 1000); //  Do some 'work'
+#else
     sleep(1); //  Do some 'work'
+#endif
     zmq_send(responder, "World", 5, 0);
   }
   return 0;

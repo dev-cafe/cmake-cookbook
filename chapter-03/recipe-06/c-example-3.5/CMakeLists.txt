@@ -16,10 +16,12 @@ target_compile_options(hello-mpi
   PUBLIC
     ${MPI_C_COMPILE_FLAGS}
   )
+
 target_include_directories(hello-mpi
   PUBLIC
     ${MPI_C_INCLUDE_PATH}
   )
+
 target_link_libraries(hello-mpi
   PUBLIC
     ${MPI_C_LIBRARIES}
