@@ -18,37 +18,56 @@ target_sources(dgemm-example
     example.cpp
   )
 
-target_compile_options(dgemm-example
-  PRIVATE
+# we mimick the include directories, compiler options, and link line suggested by the advisor:
+# https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/
+add_library(IntelMKL INTERFACE)
+# its compile options
+target_compile_options(IntelMKL
+  INTERFACE
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:-m64>
   )
-include(CMakePrintHelpers)
-cmake_print_properties(TARGETS dgemm-example PROPERTIES COMPILE_OPTIONS)
-
-# targets needs to find mkl.h
-target_include_directories(dgemm-example
-  PRIVATE
+# locate mkl.h
+find_path(_mkl_h
+  NAMES 
+    mkl.h
+  HINTS
     ${CMAKE_INSTALL_PREFIX}/include
   )
-
+target_include_directories(IntelMKL 
+  INTERFACE 
+    ${_mkl_h}
+  )
+message(STATUS "MKL header file FOUND: ${_mkl_h}")
 # locate MKL single dynamic library (mkl_rt)
 find_library(_mkl_libs
-  mkl_rt
+  NAMES 
+    mkl_rt
   HINTS
     ${CMAKE_INSTALL_PREFIX}/lib
   )
 message(STATUS "MKL single dynamic library FOUND: ${_mkl_libs}")
-
-find_package(Threads)
-
-# link to MKL libraries
-# we mimick the link line suggested by the advisor:
-# https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/
-target_link_libraries(dgemm-example
-  PRIVATE
+find_package(Threads QUIET)
+target_link_libraries(IntelMKL 
+  INTERFACE 
     ${_mkl_libs}
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:Threads::Threads>
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:m>
+  )
+include(CMakePrintHelpers)
+cmake_print_properties(
+  TARGETS 
+    IntelMKL
+  PROPERTIES
+    INTERFACE_COMPILE_OPTIONS
+    INTERFACE_INCLUDE_DIRECTORIES
+    INTERFACE_LINK_LIBRARIES
+  )
+
+
+# link to MKL libraries
+target_link_libraries(dgemm-example
+  PRIVATE
+    IntelMKL
   )
 
 # install the binary

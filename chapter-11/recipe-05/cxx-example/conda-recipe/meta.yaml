@@ -17,6 +17,8 @@ requirements:
     - cmake >=3.5
     - {{ compiler('cxx') }}
     - mkl-devel
+  run:
+    - mkl-devel
 
 about:
   home: http://www.example.com
