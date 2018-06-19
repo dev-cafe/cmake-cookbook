@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -eu -o pipefail
 
 Eigen_VERSION="3.3.4"
 echo "-- Installing Eigen $Eigen_VERSION"

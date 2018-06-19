@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -eu -o pipefail
 
 echo "-- Installing Ninja"
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then

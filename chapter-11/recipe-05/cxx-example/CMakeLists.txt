@@ -28,34 +28,34 @@ target_compile_options(IntelMKL
   )
 # locate mkl.h
 find_path(_mkl_h
-  NAMES 
+  NAMES
     mkl.h
   HINTS
     ${CMAKE_INSTALL_PREFIX}/include
   )
-target_include_directories(IntelMKL 
-  INTERFACE 
+target_include_directories(IntelMKL
+  INTERFACE
     ${_mkl_h}
   )
 message(STATUS "MKL header file FOUND: ${_mkl_h}")
 # locate MKL single dynamic library (mkl_rt)
 find_library(_mkl_libs
-  NAMES 
+  NAMES
     mkl_rt
   HINTS
     ${CMAKE_INSTALL_PREFIX}/lib
   )
 message(STATUS "MKL single dynamic library FOUND: ${_mkl_libs}")
 find_package(Threads QUIET)
-target_link_libraries(IntelMKL 
-  INTERFACE 
+target_link_libraries(IntelMKL
+  INTERFACE
     ${_mkl_libs}
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:Threads::Threads>
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:m>
   )
 include(CMakePrintHelpers)
 cmake_print_properties(
-  TARGETS 
+  TARGETS
     IntelMKL
   PROPERTIES
     INTERFACE_COMPILE_OPTIONS

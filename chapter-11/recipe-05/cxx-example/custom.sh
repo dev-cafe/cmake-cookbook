@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -eu -o pipefail
 
 if [ $# -eq 0 ] ; then
     echo 'No arguments passed!'
@@ -17,6 +17,8 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
+    /c/deps/conda/scripts/conda.exe config --show
+
     /c/deps/conda/scripts/conda.exe build conda-recipe
 
     /c/deps/conda/scripts/conda.exe install -y --use-local conda-example-dgemm
@@ -25,9 +27,13 @@ if [[ "$OSTYPE" == "msys" ]]; then
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
+    ls "$HOME"/Deps/conda/bin
+
+    conda config --show
+
     conda build conda-recipe
 
-    conda install -y --use-local conda-example-dgemm
+    conda install --use-local conda-example-dgemm
 
     dgemm-example
 fi

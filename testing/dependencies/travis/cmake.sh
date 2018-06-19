@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -eu -o pipefail
 
 echo "-- Installing CMake"
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
