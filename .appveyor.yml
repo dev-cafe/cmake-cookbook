@@ -8,7 +8,7 @@ version: 'build-{build}-{branch}'
 platform: x64
 
 build:
-  parallel: false
+  parallel: true
 
 environment:
   # Create expected SHELL variable for pipenv.

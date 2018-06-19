@@ -5,8 +5,3 @@ appveyor-vs:
 appveyor-msys:
   env:
     - VERBOSE_OUTPUT: 'True'
-
-travis-osx:
-  failing_generators:
-    - 'Ninja'
-    - 'Unix Makefiles'
