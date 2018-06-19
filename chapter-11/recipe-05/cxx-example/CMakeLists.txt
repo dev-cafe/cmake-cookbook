@@ -18,29 +18,37 @@ target_sources(dgemm-example
     example.cpp
   )
 
+target_compile_options(dgemm-example
+  PRIVATE
+    $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:-m64>
+  )
+include(CMakePrintHelpers)
+cmake_print_properties(TARGETS dgemm-example PROPERTIES COMPILE_OPTIONS)
+
 # targets needs to find mkl.h
 target_include_directories(dgemm-example
   PRIVATE
     ${CMAKE_INSTALL_PREFIX}/include
   )
 
-# locate MKL libraries
-set(_mkl_libs)
-foreach(_name IN ITEMS mkl_intel_lp64 mkl_gnu_thread mkl_core gomp)
-  find_library(
-    _lib_${_name}
-    ${_name}
-    HINTS
-      ${CMAKE_INSTALL_PREFIX}/lib
-    )
-    list(APPEND _mkl_libs ${_lib_${_name}})
-endforeach()
+# locate MKL single dynamic library (mkl_rt)
+find_library(_mkl_libs
+  mkl_rt
+  HINTS
+    ${CMAKE_INSTALL_PREFIX}/lib
+  )
+message(STATUS "MKL single dynamic library FOUND: ${_mkl_libs}")
+
+find_package(Threads)
 
 # link to MKL libraries
+# we mimick the link line suggested by the advisor:
+# https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/
 target_link_libraries(dgemm-example
   PRIVATE
     ${_mkl_libs}
-    m
+    $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:Threads::Threads>
+    $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:m>
   )
 
 # install the binary

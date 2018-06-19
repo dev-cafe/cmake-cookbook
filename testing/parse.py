@@ -55,16 +55,14 @@ def extract_menu_file(file_name, generator, ci_environment):
     env = {}
     if 'env' in config[ci_environment]:
         for entry in config[ci_environment]['env']:
-            for k in entry.keys():
-                v = entry[k]
+            for k, v in entry.items():
                 env[k] = v
 
     # assemble definitions
     definitions = {}
     if 'definitions' in config[ci_environment]:
         for entry in config[ci_environment]['definitions']:
-            for k in entry.keys():
-                v = entry[k]
+            for k, v in entry.items():
                 definitions[k] = v
 
     return expect_failure, env, definitions, targets, configurations

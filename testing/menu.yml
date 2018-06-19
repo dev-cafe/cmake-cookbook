@@ -3,6 +3,8 @@ appveyor-vs:
     - CMAKE_BUILD_TYPE: 'Debug'
     - CMAKE_CONFIGURATION_TYPES: 'Debug'
     - CMAKE_TOOLCHAIN_FILE: 'C:\tools\vcpkg\scripts\buildsystems\vcpkg.cmake'
+  env:
+    - 'DIE_HARD': 'True'
 
 appveyor-msys:
   definitions:
@@ -10,6 +12,8 @@ appveyor-msys:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'Debug'
+  env:
+    - 'DIE_HARD': 'True'
 
 drone:
   definitions:
@@ -17,6 +21,8 @@ drone:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'pgfortran'
     - CMAKE_BUILD_TYPE: 'Debug'
+  env:
+    - 'DIE_HARD': 'True'
 
 travis-linux:
   definitions:
@@ -24,6 +30,8 @@ travis-linux:
     - CMAKE_CXX_COMPILER: 'g++-7'
     - CMAKE_Fortran_COMPILER: 'gfortran-7'
     - CMAKE_BUILD_TYPE: 'Debug'
+  env:
+    - 'DIE_HARD': 'True'
 
 travis-osx:
   definitions:
@@ -31,6 +39,8 @@ travis-osx:
     - CMAKE_CXX_COMPILER: 'clang++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'Debug'
+  env:
+    - 'DIE_HARD': 'True'
 
 local:
   definitions:

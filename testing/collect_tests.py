@@ -1,4 +1,5 @@
 import datetime
+import functools
 import os
 import pathlib
 import platform
@@ -12,7 +13,7 @@ import colorama
 import docopt
 from packaging import version
 
-from env import (get_buildflags, get_ci_environment, get_generator,
+from env import (die_hard, get_buildflags, get_ci_environment, get_generator,
                  verbose_output)
 from parse import extract_menu_file
 
@@ -33,9 +34,12 @@ def get_system_cmake_version():
     return cmake_version
 
 
-def streamer(line, verbose=True):
+def streamer(line, *, file_handle=sys.stdout, end='', verbose=True):
+    """
+    Stream a line to file_handle and return the line.
+    """
     if verbose:
-        print(line, end='')
+        print(line + colorama.Style.RESET_ALL, file=file_handle, end=end)
     return line
 
 
@@ -46,41 +50,47 @@ def run_command(*, step, command, expect_failure):
     expect_failure: bool; if True we do not panic if the command fails
     """
     cmd = shlex.split(command)
-    stdout = ''
+    # Stream stdout in verbose mode only
+    stdout_streamer = functools.partial(streamer, verbose=verbose_output())
+    # stdout starts with the command we want to execute
+    stdout = stdout_streamer(command)
+    # Stream stderr always
+    stderr_streamer = functools.partial(streamer, file_handle=sys.stderr)
     stderr = ''
     with subprocess.Popen(
             cmd,
+            bufsize=1,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            bufsize=1,
             universal_newlines=True) as child:
-        # Only stream stdout in verbose mode
-        stdout = ''.join(
-            list(
-                map(lambda line: streamer(line, verbose=verbose_output()),
-                    child.stdout)))
+        stdout += ''.join(list(map(stdout_streamer, child.stdout)))
         # Always stream stderr
-        stderr = ''.join(list(map(streamer, child.stderr)))
-
-    child_return_code = child.returncode
+        stderr = ''.join(list(map(stderr_streamer, child.stderr)))
 
     return_code = 0
-    sys.stdout.write(
+    streamer(
         colorama.Fore.BLUE + colorama.Style.BRIGHT + '  {0} ... '.format(step))
-    if child_return_code == 0:
-        sys.stdout.write(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK\n')
+    if child.returncode == 0:
+        streamer(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK', end='\n')
     else:
         if expect_failure:
-            sys.stdout.write(colorama.Fore.YELLOW + colorama.Style.BRIGHT +
-                             'EXPECTED TO FAIL\n')
+            streamer(
+                colorama.Fore.YELLOW + colorama.Style.BRIGHT +
+                'EXPECTED TO FAIL',
+                end='\n')
         else:
-            sys.stdout.write(
-                colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED\n')
-            sys.stdout.write('{cmd}\n {out}{err}\n'.format(
-                cmd=command, out=stdout, err=stderr))
-            return_code = child_return_code
-    sys.stdout.flush()
-    sys.stderr.flush()
+            if die_hard():
+                raise subprocess.CalledProcessError(child.returncode,
+                                                    child.args)
+            else:
+                streamer(
+                    colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED',
+                    end='\n')
+                streamer(
+                    '{cmd}\n {out}{err}'.format(
+                        cmd=command, out=stdout, err=stderr),
+                    end='\n')
+                return_code = child.returncode
 
     return return_code
 
@@ -206,7 +216,7 @@ def main(arguments):
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'
 
-    colorama.init(autoreset=True)
+    colorama.init()
     return_code = 0
     for recipe in recipes:
 
@@ -214,7 +224,9 @@ def main(arguments):
         title = recipe / 'title.txt'
         with title.open() as f:
             line = f.readline().rstrip()
-            print('\n' + colorama.Back.BLUE + 'recipe: {0}'.format(line))
+            streamer(
+                '\n' + colorama.Back.BLUE + 'recipe: {0}'.format(line),
+                end='\n')
 
         # Glob examples
         examples = sorted(recipe.glob('*example*'))
