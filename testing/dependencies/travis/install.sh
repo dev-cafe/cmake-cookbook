@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -eu -o pipefail
 
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   pip install --user pipenv --upgrade

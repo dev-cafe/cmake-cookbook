@@ -125,7 +125,9 @@ script:
       travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-04';
       travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-05';
     else
-      pipenv run python testing/collect_tests.py 'chapter-0*/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-0[1-7]/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-08/recipe-0(1|3|4|6)';
+      travis_wait 30 pipenv run python testing/collect_tests.py 'chapter-08/recipe-0(2|5)';
       pipenv run python testing/collect_tests.py 'chapter-10/recipe-*';
       pipenv run python testing/collect_tests.py 'chapter-11/recipe-01*';
       pipenv run python testing/collect_tests.py 'chapter-11/recipe-02';

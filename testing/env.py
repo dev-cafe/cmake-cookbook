@@ -37,5 +37,26 @@ def get_buildflags():
     return buildflags
 
 
+def is_defined(env_var):
+    truthy = ['1', 'TRUE', 'ON', 'YES', 'Y']
+    falsey = ['0', 'FALSE', 'OFF', 'NO', 'N']
+
+    defined = False
+    if os.environ.get(env_var) is None:
+        defined = False
+    elif os.environ.get(env_var).upper() in falsey:
+        defined = False
+    elif os.environ.get(env_var).upper() in truthy:
+        defined = True
+    else:
+        defined = False
+
+    return defined
+
+
 def verbose_output():
-    return (False if os.environ.get('VERBOSE_OUTPUT') is None else True)
+    return is_defined('VERBOSE_OUTPUT')
+
+
+def die_hard():
+    return is_defined('DIE_HARD')
