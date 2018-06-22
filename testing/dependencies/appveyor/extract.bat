@@ -2,7 +2,7 @@ rem we download and extract and use the zip instead of the git clone
 rem to avoid issues with symlinks
 
 rem the 7z that is default on appveyor cannot handle symlinks but p7zip can
-bash -lc "pacman -S --noconfirm p7zip"
+bash "pacman -S --noconfirm p7zip"
 
-bash -lc "cd /c/projects/ && 7z x ${APPVEYOR_REPO_COMMIT}.zip"
-bash -lc "mv /c/projects/cmake-cookbook-${APPVEYOR_REPO_COMMIT} /c/projects/cmake-cookbook-no-symlinks"
+bash "cd /c/projects/ && 7z x ${APPVEYOR_REPO_COMMIT}.zip"
+bash "mv /c/projects/cmake-cookbook-${APPVEYOR_REPO_COMMIT} /c/projects/cmake-cookbook-no-symlinks"
