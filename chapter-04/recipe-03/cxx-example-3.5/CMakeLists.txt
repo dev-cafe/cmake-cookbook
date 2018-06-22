@@ -45,5 +45,9 @@ if(ENABLE_UNIT_TESTS)
     )
 
   enable_testing()
-  add_test(google_test ${CMAKE_CURRENT_BINARY_DIR}/cpp_test)
+
+  add_test(
+    NAME google_test
+    COMMAND $<TARGET_FILE:cpp_test>
+    )
 endif()

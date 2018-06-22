@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-BINARY=$1
+EXECUTABLE=$1
 
-OUTPUT=$($BINARY 1 2 3 4)
+OUTPUT=$($EXECUTABLE 1 2 3 4)
 
 if [ "$OUTPUT" = "10" ]
 then
