@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-03 LANGUAGES CXX Fortran)
+project(recipe-03 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -44,8 +44,6 @@ target_sources(math
   )
 
 target_include_directories(math
-  PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}
   INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
