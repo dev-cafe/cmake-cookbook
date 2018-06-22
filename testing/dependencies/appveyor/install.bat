@@ -9,21 +9,21 @@ if "%nonVSGenerator%"=="true" (
   echo "Let's get MSYS64 working"
 
   rem upgrade the msys2 platform
-  bash "pacman -S --needed --noconfirm pacman-mirrors"
+  bash -c "pacman -S --needed --noconfirm pacman-mirrors"
 
   rem --ask=127 is taken from https://github.com/appveyor/ci/issues/2074#issuecomment-364842018
-  bash "pacman -Syuu --needed --noconfirm --ask=127"
+  bash -c "pacman -Syuu --needed --noconfirm --ask=127"
 
   rem search for packages with
   rem bash "pacman -Ss boost"
 
   rem more packages
-  bash "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost"
-  bash "pacman -S --noconfirm mingw64/mingw-w64-x86_64-ninja"
-  bash "pacman -S --noconfirm mingw64/mingw-w64-x86_64-openblas"
-  bash "pacman -S --noconfirm mingw64/mingw-w64-x86_64-eigen3"
-  bash "pacman -S --noconfirm mingw64/mingw-w64-x86_64-pkg-config"
-  bash "pacman -S --noconfirm mingw64/mingw-w64-x86_64-zeromq"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-ninja"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-openblas"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-eigen3"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-pkg-config"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-zeromq"
 ) else (
   echo "Using VS generator %GENERATOR%"
   echo "Let's get VcPkg working"
