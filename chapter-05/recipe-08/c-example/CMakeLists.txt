@@ -13,6 +13,7 @@ if(UUID_FOUND)
 endif()
 
 include(CheckCSourceRuns)
+
 set(_test_uuid
   "
 #include <uuid/uuid.h>
@@ -25,9 +26,11 @@ int main(int argc, char * argv[]) {
   return 0;
 }
   ")
+
 set(CMAKE_REQUIRED_LIBRARIES PkgConfig::UUID)
 check_c_source_runs("${_test_uuid}" _runs)
 unset(CMAKE_REQUIRED_LIBRARIES)
+
 if(NOT _runs)
   message(FATAL_ERROR "Cannot run a simple C executable using libuuid!")
 endif()
