@@ -62,6 +62,8 @@ init:
   # Remove Python 2.7 from path
   - set PATH=%PATH:C:\Python27;=%
   - set PATH=%PATH:C:\Python27\Scripts;=%
+  # Add Anaconda to PATH
+  - set PATH=C:\Deps\conda\Scripts;C:\Deps\conda\library\bin;%PATH%
 
 cache:
   - c:\msys64\var\cache\pacman\pkg -> testing\dependencies\appveyor\install.bat
