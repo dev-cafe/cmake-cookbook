@@ -5,7 +5,6 @@
 #endif
 
 int main() {
-
 #ifdef HAVE_MPI
   // initialize MPI
   MPI_Init(NULL, NULL);
@@ -20,5 +19,4 @@ int main() {
 #else
   std::cout << "hello from a sequential binary" << std::endl;
 #endif /* HAVE_MPI */
-
 }
