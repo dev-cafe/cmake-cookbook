@@ -1,0 +1,7 @@
+appveyor-vs:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
+
+configurations:
+  - 'Release'

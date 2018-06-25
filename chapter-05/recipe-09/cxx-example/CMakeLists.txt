@@ -1,28 +1,35 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+# set minimum cmake version
+cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 
+# project name and language
 project(recipe-09 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-list(APPEND CXX_BASIC_FLAGS "-g3" "-O1")
+option(USE_MPI "Use MPI parallelization" ON)
 
-include(CheckCXXCompilerFlag)
+if(USE_MPI)
+  find_package(MPI REQUIRED)
+endif()
 
-set(ASAN_FLAGS "-fsanitize=address -fno-omit-frame-pointer")
-set(CMAKE_REQUIRED_FLAGS ${ASAN_FLAGS})
-check_cxx_compiler_flag(${ASAN_FLAGS} asan_works)
-unset(CMAKE_REQUIRED_FLAGS)
-string(REPLACE " " ";" _asan_flags ${ASAN_FLAGS})
+add_executable(example example.cpp)
 
-add_executable(asan-example asan-example.cpp)
-target_compile_options(asan-example
+target_link_libraries(example
   PUBLIC
-    ${CXX_BASIC_FLAGS}
-    $<$<BOOL:${asan_works}>:${_asan_flags}>
+    $<$<BOOL:${MPI_FOUND}>:MPI::MPI_CXX>
   )
-target_link_libraries(asan-example
-  PUBLIC
-    $<$<BOOL:${asan_works}>:${ASAN_FLAGS}>
+
+target_compile_definitions(example
+  PRIVATE
+    $<$<BOOL:${MPI_FOUND}>:HAVE_MPI>
   )
+
+if(MPI_FOUND)
+  include(CMakePrintHelpers)
+  cmake_print_properties(
+    TARGETS MPI::MPI_CXX
+    PROPERTIES INTERFACE_LINK_LIBRARIES
+    )
+endif()

@@ -1,4 +1,0 @@
-#cmakedefine NumPy_VERSION @NumPy_VERSION@
-
-#define STRINGIFY(x) #x
-#define TOSTRING(x) STRINGIFY(x)

@@ -39,13 +39,12 @@ target_sources(math
   )
 
 target_include_directories(math
-  PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}
   INTERFACE
     ${CMAKE_CURRENT_BINARY_DIR}/wrap_BLAS_LAPACK
   )
 
+# BLAS_LIBRARIES are included in LAPACK_LIBRARIES
 target_link_libraries(math
   PUBLIC
-    ${LAPACK_LIBRARIES}  # ${BLAS_LIBRARIES} are included in ${LAPACK_LIBRARIES}
+    ${LAPACK_LIBRARIES}
   )
