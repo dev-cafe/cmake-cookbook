@@ -4,9 +4,9 @@
 #include <stdio.h>
 
 int main() {
-  printf("This is output from example code %s\n", PROJECT_VERSION);
-  printf("The major version number is %i\n", PROJECT_VERSION_MAJOR);
-  printf("The minor version number is %i\n", PROJECT_VERSION_MINOR);
+  printf("This is output from code %s\n", PROJECT_VERSION);
+  printf("Major version number: %i\n", PROJECT_VERSION_MAJOR);
+  printf("Minor version number: %i\n", PROJECT_VERSION_MINOR);
 
   printf("Hello CMake world!\n");
 }
