@@ -2,6 +2,7 @@
 #include <unistd.h>
 
 void print_info(void) {
+  printf("\n");
   printf("Configuration and build information\n");
   printf("-----------------------------------\n");
   printf("\n");
