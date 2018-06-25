@@ -29,25 +29,31 @@ cmake_host_system_information(RESULT _os_platform QUERY OS_PLATFORM)
 
 string(TIMESTAMP _configuration_time "%Y-%m-%d %H:%M:%S [UTC]" UTC)
 
+# we loop through all variables known at this stage
+# and build a dictionary which we will pass on to python
+get_cmake_property(_vars VARIABLES)
+foreach(_var IN ITEMS ${_vars})
+  string(REPLACE ";" "\;" _var_escaped "${${_var}}")
+  list(APPEND _vars_dict "'${_var}': '''${_var_escaped}'''")
+endforeach()
+string(REPLACE ";" "," _vars_dict "${_vars_dict}")
+
 set(_config_script
 "
-import os, sys
-sys.path.append('${CMAKE_CURRENT_SOURCE_DIR}')
-import configurator as cf
-conf_dict = cf.prepare_configuration_dictionary(processor_name='${_processor_name}',
-            processor_description='${_processor_description}',
-            os_name='${_os_name}',
-            os_release='${_os_release}',
-            os_version='${_os_version}',
-            os_platform='${_os_platform}',
-            cmake_version='${CMAKE_VERSION}',
-            cmake_generator='${CMAKE_GENERATOR}',
-            fc='${CMAKE_Fortran_COMPILER}',
-            cc='${CMAKE_C_COMPILER}')
-cf.configure_file(conf_dict, 'print_info.c', in_path='${CMAKE_CURRENT_SOURCE_DIR}', out_path='${CMAKE_CURRENT_BINARY_DIR}', suffix='.in')
+import sys
+sys.path.insert(0, '${CMAKE_CURRENT_SOURCE_DIR}')
+
+import os
+input_file = os.path.join('${CMAKE_CURRENT_SOURCE_DIR}', 'print_info.c.in')
+output_file = os.path.join('${CMAKE_CURRENT_BINARY_DIR}', 'print_info.c')
+
+from configurator import configure_file
+vars_dict = {${_vars_dict}}
+configure_file(input_file, output_file, vars_dict)
 ")
 
 find_package(PythonInterp QUIET REQUIRED)
+
 execute_process(
   COMMAND
     ${PYTHON_EXECUTABLE} "-c" ${_config_script}
