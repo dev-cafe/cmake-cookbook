@@ -4,7 +4,7 @@ program hello_world
 
   interface
     subroutine print_info() bind(c, name="print_info")
-    end subroutine print_info
+    end subroutine
   end interface
 
   call print_info()
