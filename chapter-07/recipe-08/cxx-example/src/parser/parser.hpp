@@ -1,5 +1,1 @@
-#pragma once
-
-#include <tuple>
-
-std::tuple<int, int, int> parse_arguments(int argc, char *argv[]);
+../../../../recipe-07/cxx-example/src/parser/parser.hpp

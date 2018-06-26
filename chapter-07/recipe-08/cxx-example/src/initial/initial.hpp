@@ -1,5 +1,1 @@
-#pragma once
-
-#include <vector>
-
-std::vector<int> initial_distribution(const int length);
+../../../../recipe-07/cxx-example/src/initial/initial.hpp
