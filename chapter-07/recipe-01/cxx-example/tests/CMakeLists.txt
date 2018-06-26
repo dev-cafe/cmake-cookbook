@@ -4,8 +4,6 @@ target_link_libraries(cpp_test sum_integers)
 macro(add_catch_test _name _cost)
   math(EXPR num_macro_calls "${num_macro_calls} + 1")
   message(STATUS "add_catch_test called with ${ARGC} arguments: ${ARGV}")
-# message(STATUS "${_name} equals ${ARGV0}")
-# message(STATUS "${_cost} equals ${ARGV1}")
 
   set(_argn "${ARGN}")
   if(_argn)
@@ -16,7 +14,7 @@ macro(add_catch_test _name _cost)
     NAME
       ${_name}
     COMMAND
-      ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/cpp_test
+      $<TARGET_FILE:cpp_test>
       [${_name}] --success --out
       ${PROJECT_BINARY_DIR}/tests/${_name}.log --durations yes
     WORKING_DIRECTORY
