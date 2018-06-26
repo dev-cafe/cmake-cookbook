@@ -19,7 +19,7 @@ function(add_catch_test)
     NAME
       ${add_catch_test_NAME}
     COMMAND
-      ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/cpp_test
+      $<TARGET_FILE:cpp_test>
       [${add_catch_test_NAME}] --success --out
       ${PROJECT_BINARY_DIR}/tests/${add_catch_test_NAME}.log --durations yes
     WORKING_DIRECTORY
