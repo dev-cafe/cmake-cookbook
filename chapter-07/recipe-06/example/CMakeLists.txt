@@ -4,7 +4,7 @@ project(recipe-06 LANGUAGES NONE)
 
 macro(custom_include_guard)
   if(NOT DEFINED included_modules)
-      set(included_modules)
+    set(included_modules)
   endif()
 
   if ("${CMAKE_CURRENT_LIST_FILE}" IN_LIST included_modules)

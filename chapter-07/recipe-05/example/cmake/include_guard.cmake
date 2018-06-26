@@ -1,6 +1,7 @@
 macro(include_guard)
   if (CMAKE_VERSION VERSION_LESS "3.10")
-    # for CMake below 3.10 we define our own include_guard(GLOBAL)
+    # for CMake below 3.10 we define our
+    # own include_guard(GLOBAL)
     message(STATUS "calling our custom include_guard")
 
     # if this macro is called the first time
@@ -15,7 +16,8 @@ macro(include_guard)
 
     list(APPEND included_modules ${CMAKE_CURRENT_LIST_FILE})
   else()
-    # for CMake 3.10 or higher we augment the built-in include_guard
+    # for CMake 3.10 or higher we augment
+    # the built-in include_guard
     message(STATUS "calling the built-in include_guard")
 
     _include_guard(${ARGV})
