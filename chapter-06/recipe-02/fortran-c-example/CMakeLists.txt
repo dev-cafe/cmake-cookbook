@@ -40,12 +40,14 @@ string(REPLACE ";" "," _vars_dict "${_vars_dict}")
 
 set(_config_script
 "
-import sys
-sys.path.insert(0, '${CMAKE_CURRENT_SOURCE_DIR}')
+from pathlib import Path
+source_dir = Path('${CMAKE_CURRENT_SOURCE_DIR}')
+binary_dir = Path('${CMAKE_CURRENT_BINARY_DIR}')
+input_file = source_dir / 'print_info.c.in'
+output_file = binary_dir / 'print_info.c'
 
-import os
-input_file = os.path.join('${CMAKE_CURRENT_SOURCE_DIR}', 'print_info.c.in')
-output_file = os.path.join('${CMAKE_CURRENT_BINARY_DIR}', 'print_info.c')
+import sys
+sys.path.insert(0, str(source_dir))
 
 from configurator import configure_file
 vars_dict = {${_vars_dict}}
