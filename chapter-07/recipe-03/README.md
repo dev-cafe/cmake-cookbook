@@ -1,5 +1,5 @@
-# Function to test and set compiler flags
+# Writing a function to test and set compiler flags
 
 Abstract to be written ...
 
-- [example](example/)
+- [c-cxx-example](c-cxx-example/)

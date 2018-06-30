@@ -21,7 +21,8 @@ include(CheckFortranCompilerFlag)
 function(set_compiler_flag _result _lang)
   # build a list of flags from the arguments
   set(_list_of_flags)
-  # also figure out whether the function is required to find a flag
+  # also figure out whether the function
+  # is required to find a flag
   set(_flag_is_required FALSE)
   foreach(_arg IN ITEMS ${ARGN})
     string(TOUPPER "${_arg}" _arg_uppercase)

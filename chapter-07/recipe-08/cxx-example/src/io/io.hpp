@@ -1,5 +1,1 @@
-#pragma once
-
-#include <vector>
-
-void print_row(const std::vector<int> row);
+../../../../recipe-07/cxx-example/src/io/io.hpp

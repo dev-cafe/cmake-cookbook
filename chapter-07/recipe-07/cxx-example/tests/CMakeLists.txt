@@ -5,7 +5,5 @@ add_test(
   NAME
     test_evolution
   COMMAND
-    ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/cpp_test
-  WORKING_DIRECTORY
-    ${CMAKE_CURRENT_BINARY_DIR}
+    $<TARGET_FILE:cpp_test>
   )

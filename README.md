@@ -99,7 +99,7 @@
 
 - [Code reuse with functions and macros](chapter-07/recipe-01/README.md)
 - [Splitting CMake sources into modules](chapter-07/recipe-02/README.md)
-- [Function to test and set compiler flags](chapter-07/recipe-03/README.md)
+- [Writing a function to test and set compiler flags](chapter-07/recipe-03/README.md)
 - [Defining a function or macro with named arguments](chapter-07/recipe-04/README.md)
 - [Redefining functions and macros](chapter-07/recipe-05/README.md)
 - [Deprecating functions, macros, and variables](chapter-07/recipe-06/README.md)

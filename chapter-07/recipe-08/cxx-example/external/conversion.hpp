@@ -1,5 +1,1 @@
-#pragma once
-
-#include <string>
-
-std::string binary_representation(const int decimal);
+../../../recipe-07/cxx-example/external/conversion.hpp

@@ -1,8 +1,1 @@
-# adds current directory to INTERFACE_INCLUDE_DIRECTORIES
-# for targets defined below
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
-
-add_library(sum_integers sum_integers.cpp)
-
-add_executable(sum_up main.cpp)
-target_link_libraries(sum_up sum_integers)
+../../../recipe-01/cxx-example/src/CMakeLists.txt
