@@ -29,15 +29,6 @@ cmake_host_system_information(RESULT _os_platform QUERY OS_PLATFORM)
 
 string(TIMESTAMP _configuration_time "%Y-%m-%d %H:%M:%S [UTC]" UTC)
 
-# we loop through all variables known at this stage
-# and build a dictionary which we will pass on to python
-get_cmake_property(_vars VARIABLES)
-foreach(_var IN ITEMS ${_vars})
-  string(REPLACE ";" "\;" _var_escaped "${${_var}}")
-  list(APPEND _vars_dict "'${_var}': '''${_var_escaped}'''")
-endforeach()
-string(REPLACE ";" "," _vars_dict "${_vars_dict}")
-
 set(_config_script
 "
 from pathlib import Path
@@ -50,7 +41,22 @@ import sys
 sys.path.insert(0, str(source_dir))
 
 from configurator import configure_file
-vars_dict = {${_vars_dict}}
+vars_dict = {
+    '_user_name':             '${_user_name}',
+    '_host_name':             '${_host_name}',
+    '_fdqn':                  '${_fdqn}',
+    '_processor_name':        '${_processor_name}',
+    '_processor_description': '${_processor_description}',
+    '_os_name':               '${_os_name}',
+    '_os_release':            '${_os_release}',
+    '_os_version':            '${_os_version}',
+    '_os_platform':           '${_os_platform}',
+    '_configuration_time':    '${_configuration_time}',
+    'CMAKE_VERSION':          '${CMAKE_VERSION}',
+    'CMAKE_GENERATOR':        '${CMAKE_GENERATOR}',
+    'CMAKE_Fortran_COMPILER': '${CMAKE_Fortran_COMPILER}',
+    'CMAKE_C_COMPILER':       '${CMAKE_C_COMPILER}',
+}
 configure_file(input_file, output_file, vars_dict)
 ")
 
