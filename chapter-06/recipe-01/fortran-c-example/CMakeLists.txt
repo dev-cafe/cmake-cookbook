@@ -15,7 +15,7 @@ execute_process(
 
 # host name information
 cmake_host_system_information(RESULT _host_name QUERY HOSTNAME)
-cmake_host_system_information(RESULT _fdqn QUERY FQDN)
+cmake_host_system_information(RESULT _fqdn QUERY FQDN)
 
 # processor information
 cmake_host_system_information(RESULT _processor_name QUERY PROCESSOR_NAME)

@@ -15,7 +15,7 @@ execute_process(
 
 # host name information
 cmake_host_system_information(RESULT _host_name QUERY HOSTNAME)
-cmake_host_system_information(RESULT _fdqn QUERY FQDN)
+cmake_host_system_information(RESULT _fqdn QUERY FQDN)
 
 # processor information
 cmake_host_system_information(RESULT _processor_name QUERY PROCESSOR_NAME)
@@ -44,7 +44,7 @@ from configurator import configure_file
 vars_dict = {
     '_user_name':             '${_user_name}',
     '_host_name':             '${_host_name}',
-    '_fdqn':                  '${_fdqn}',
+    '_fqdn':                  '${_fqdn}',
     '_processor_name':        '${_processor_name}',
     '_processor_description': '${_processor_description}',
     '_os_name':               '${_os_name}',
