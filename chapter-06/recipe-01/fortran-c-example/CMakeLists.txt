@@ -12,23 +12,29 @@ execute_process(
     _user_name
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
-# Get hostname
+
+# host name information
 cmake_host_system_information(RESULT _host_name QUERY HOSTNAME)
-# Get Fully Qualified Domain Name
-cmake_host_system_information(RESULT _fdqn QUERY FQDN)
-# Get processor name
+cmake_host_system_information(RESULT _fqdn QUERY FQDN)
+
+# processor information
 cmake_host_system_information(RESULT _processor_name QUERY PROCESSOR_NAME)
 cmake_host_system_information(RESULT _processor_description QUERY PROCESSOR_DESCRIPTION)
+
+# os information
 cmake_host_system_information(RESULT _os_name QUERY OS_NAME)
 cmake_host_system_information(RESULT _os_release QUERY OS_RELEASE)
 cmake_host_system_information(RESULT _os_version QUERY OS_VERSION)
 cmake_host_system_information(RESULT _os_platform QUERY OS_PLATFORM)
+
 string(TIMESTAMP _configuration_time "%Y-%m-%d %H:%M:%S [UTC]" UTC)
 
 configure_file(print_info.c.in print_info.c @ONLY)
 
-add_executable(hello-world hello-world.f90)
-target_sources(hello-world
+add_executable(example "")
+
+target_sources(example
   PRIVATE
+    example.f90
     ${CMAKE_CURRENT_BINARY_DIR}/print_info.c
   )

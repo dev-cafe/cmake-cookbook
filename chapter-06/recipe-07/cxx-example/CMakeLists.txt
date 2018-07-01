@@ -37,5 +37,6 @@ add_custom_target(
     ${CMAKE_CURRENT_BINARY_DIR}/generated/version.hpp
   )
 
-# version.hpp has to be generated before we start building example
+# version.hpp has to be generated
+# before we start building example
 add_dependencies(example get_git_hash)

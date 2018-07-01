@@ -27,13 +27,15 @@ add_custom_command(
     generate.py
   )
 
-add_executable(example.x "")
-target_sources(example.x
+add_executable(example "")
+
+target_sources(example
   PRIVATE
     example.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/generated/primes.hpp
   )
-target_include_directories(example.x
+
+target_include_directories(example
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/generated
   )
