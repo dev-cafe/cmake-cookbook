@@ -71,6 +71,7 @@ cache:
   - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.bat
 
 install:
+  - bash -c "pacman -Ss doxygen"
   - python -m pip install pipenv
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\anaconda.ps1
@@ -90,6 +91,7 @@ build_script:
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-04'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'"
     ) else (
+      bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-12/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-01/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-02/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-03/recipe-*'" &&
