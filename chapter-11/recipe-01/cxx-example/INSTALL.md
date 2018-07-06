@@ -1,7 +1,7 @@
 # Installing `message`
 
 The library uses CMake as its build system. The minimum required version is
-CMake 3.5
+CMake 3.6
 You can configure with:
 ```
 cmake -H. -Bbuild -DCMAKE_INSTALL_PREFIX=/path/to/install/message
