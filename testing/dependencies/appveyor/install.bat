@@ -29,8 +29,9 @@ if "%nonVSGenerator%"=="true" (
   echo "Using VS generator %GENERATOR%"
   echo "Let's get VcPkg working"
 
-  vcpkg install boost-filesystem boost-system boost-test boost-python zeromq eigen3 doxygen --triplet x64-windows
+  vcpkg install boost-filesystem boost-system boost-test boost-python zeromq eigen3 --triplet x64-windows
   cd c:\tools\vcpkg
   vcpkg integrate install
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-doxygen"
   cd %APPVEYOR_BUILD_FOLDER%
 )
