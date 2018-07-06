@@ -71,7 +71,6 @@ cache:
   - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.bat
 
 install:
-  - bash -c "pacman -Ss doxygen"
   - python -m pip install pipenv
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\anaconda.ps1
