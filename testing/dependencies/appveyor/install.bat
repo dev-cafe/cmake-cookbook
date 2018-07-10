@@ -15,7 +15,7 @@ if "%nonVSGenerator%"=="true" (
   bash -c "pacman -Syuu --needed --noconfirm --ask=127"
 
   rem search for packages with
-  rem bash "pacman -Ss boost"
+  rem bash -c "pacman -Ss boost"
 
   rem more packages
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost"
@@ -24,6 +24,7 @@ if "%nonVSGenerator%"=="true" (
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-eigen3"
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-pkg-config"
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-zeromq"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-doxygen"
 ) else (
   echo "Using VS generator %GENERATOR%"
   echo "Let's get VcPkg working"
@@ -31,5 +32,6 @@ if "%nonVSGenerator%"=="true" (
   vcpkg install boost-filesystem boost-system boost-test boost-python zeromq eigen3 --triplet x64-windows
   cd c:\tools\vcpkg
   vcpkg integrate install
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-doxygen"
   cd %APPVEYOR_BUILD_FOLDER%
 )
