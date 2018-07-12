@@ -86,6 +86,7 @@ before_build:
 
 build_script:
   - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv install"
+  - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-08/recipe-*'" 
   - if "%ANACONDA_TESTS_ONLY%"=="1" (
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-04'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'"
