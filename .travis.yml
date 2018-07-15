@@ -27,6 +27,7 @@ matrix:
             - pkg-config
             - python3
             - python3-dev
+            - rpmbuild
             - uuid-dev
       env:
         - CMAKE_VERSION="3.11.2"
