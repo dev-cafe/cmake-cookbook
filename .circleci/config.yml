@@ -1,0 +1,39 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: devcafe/cmake-cookbook_circleci_ubuntu16.04-intel2018.1
+        user: root
+        environment:
+          CIRCLECI_COMPILER: intel
+    steps:
+      - checkout
+      - run:
+          name: Python dependencies
+          command: |
+            pip install --user pipenv --upgrade pip
+            pipenv install --three
+      - run:
+          name: Report
+          command: |
+            pipenv run python --version
+      - run:
+          shell: /bin/bash
+          name: Testing
+          command: |
+            source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
+            pipenv run python testing/collect_tests.py 'chapter-01/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-02/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-03/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-04/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-05/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-06/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-07/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-08/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-09/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-10/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-11/recipe-0[1-3]' &&
+            pipenv run python testing/collect_tests.py 'chapter-12/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-13/recipe-*' &&
+            pipenv run python testing/collect_tests.py 'chapter-14/recipe-*'
