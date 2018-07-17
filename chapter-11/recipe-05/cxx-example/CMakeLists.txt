@@ -63,7 +63,6 @@ cmake_print_properties(
     INTERFACE_LINK_LIBRARIES
   )
 
-
 # link to MKL libraries
 target_link_libraries(dgemm-example
   PRIVATE

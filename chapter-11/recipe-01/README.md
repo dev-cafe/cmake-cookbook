@@ -1,4 +1,4 @@
-# Generating source archives
+# Generating source and binary packages
 
 Abstract to be written ...
 

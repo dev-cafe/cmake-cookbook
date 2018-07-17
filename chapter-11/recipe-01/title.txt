@@ -1,1 +1,1 @@
-Generating source archives
+Generating source and binary packages

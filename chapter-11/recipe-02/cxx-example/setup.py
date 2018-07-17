@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
+import distutils.command.build as _build
 import os
 import sys
+from distutils import spawn
+from distutils.sysconfig import get_python_lib
 
 from setuptools import setup
-from distutils import spawn
-import distutils.command.build as _build
-from distutils.sysconfig import get_python_lib
 
 
 def extend_build(package_name):
@@ -20,19 +20,20 @@ def extend_build(package_name):
             _build_dir = os.path.join(_source_dir, 'build_setup_py')
             _prefix = os.path.join(get_python_lib(), package_name)
             try:
-                spawn.spawn(['cmake',
-                             '-H{0}'.format(_source_dir),
-                             '-B{0}'.format(_build_dir),
-                             '-DCMAKE_INSTALL_PREFIX={0}'.format(_prefix),
-                             ])
-                spawn.spawn(['cmake',
-                             '--build', _build_dir,
-                             '--target', 'install'])
+                spawn.spawn([
+                    'cmake',
+                    '-H{0}'.format(_source_dir),
+                    '-B{0}'.format(_build_dir),
+                    '-DCMAKE_INSTALL_PREFIX={0}'.format(_prefix),
+                ])
+                spawn.spawn(
+                    ['cmake', '--build', _build_dir, '--target', 'install'])
                 os.chdir(cwd)
             except spawn.DistutilsExecError:
                 sys.stderr.write("Error while building with CMake\n")
                 sys.exit(-1)
             _build.build.run(self)
+
     return build
 
 
@@ -51,19 +52,21 @@ version = {}
 with open(os.path.join(_here, _this_package, 'version.py')) as f:
     exec(f.read(), version)
 
-setup(name=_this_package,
-      version=version['__version__'],
-      description='Description in here.',
-      long_description=long_description,
-      author='Bruce Wayne',
-      author_email='bruce.wayne@example.com',
-      url='http://example.com',
-      license='MIT',
-      packages=[_this_package],
-      include_package_data=True,
-      classifiers=[
-          'Development Status :: 3 - Alpha',
-          'Intended Audience :: Science/Research',
-          'Programming Language :: Python :: 2.7',
-          'Programming Language :: Python :: 3.6'],
-      cmdclass={'build': extend_build(_this_package)})
+setup(
+    name=_this_package,
+    version=version['__version__'],
+    description='Description in here.',
+    long_description=long_description,
+    author='Bruce Wayne',
+    author_email='bruce.wayne@example.com',
+    url='http://example.com',
+    license='MIT',
+    packages=[_this_package],
+    include_package_data=True,
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Science/Research',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6'
+    ],
+    cmdclass={'build': extend_build(_this_package)})
