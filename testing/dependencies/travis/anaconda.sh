@@ -27,6 +27,7 @@ else
     # Install conda build and deployment tools.
     conda install --yes --quiet conda-build anaconda-client jinja2 setuptools &> /dev/null
     conda clean -tipsy &> /dev/null
+    conda info -a
     cd "$TRAVIS_BUILD_DIR"
     rm -f "$HOME"/Downloads/miniconda.sh
 fi
