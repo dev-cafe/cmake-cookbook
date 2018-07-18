@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import distutils.command.build as _build
 import os
 import sys
