@@ -16,11 +16,6 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       MSYSTEM: MINGW64
-      GENERATOR: "Visual Studio 14 2015 Win64"
-      BUILDFLAGS: "/verbosity:normal"
-      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      MSYSTEM: MINGW64
       GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
@@ -39,12 +34,6 @@ environment:
       GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
-      ANACONDA_TESTS_ONLY: "1"
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      MSYSTEM: MINGW64
-      GENERATOR: "Visual Studio 14 2015 Win64"
-      BUILDFLAGS: "/verbosity:normal"
-      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
       ANACONDA_TESTS_ONLY: "1"
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       MSYSTEM: MINGW64
