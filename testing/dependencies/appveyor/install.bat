@@ -33,3 +33,6 @@ if "%nonVSGenerator%"=="true" (
   vcpkg integrate install
   cd %APPVEYOR_BUILD_FOLDER%
 )
+
+bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-doxygen"
+bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-graphviz"
