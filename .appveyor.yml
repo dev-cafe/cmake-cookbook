@@ -10,29 +10,27 @@ platform: x64
 build:
   parallel: true
 
+image:
+- Visual Studio 2017
+
 environment:
   # Create expected SHELL variable for pipenv.
   SHELL: "windows"
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      GENERATOR: "MSYS Makefiles"
+    - GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      GENERATOR: "Visual Studio 15 2017 Win64"
+    - GENERATOR: "Visual Studio 15 2017 Win64"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      GENERATOR: "Ninja"
+    - GENERATOR: "Ninja"
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      GENERATOR: "MSYS Makefiles"
+    - GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
       ANACONDA_TESTS_ONLY: "1"
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      GENERATOR: "Visual Studio 15 2017 Win64"
+    - GENERATOR: "Visual Studio 15 2017 Win64"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
       ANACONDA_TESTS_ONLY: "1"
