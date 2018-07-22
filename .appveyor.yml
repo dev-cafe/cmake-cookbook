@@ -27,13 +27,13 @@ environment:
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
     - GENERATOR: "MSYS Makefiles"
+      ANACONDA_TESTS_ONLY: "1"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
-      ANACONDA_TESTS_ONLY: "1"
     - GENERATOR: "Visual Studio 15 2017 Win64"
+      ANACONDA_TESTS_ONLY: "1"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
-      ANACONDA_TESTS_ONLY: "1"
 
 #matrix:
 #  fast_finish: true
