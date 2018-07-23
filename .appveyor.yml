@@ -80,8 +80,9 @@ build_script:
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-05/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-06/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-07/recipe-*'" &&
+      bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-01'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-12/recipe-*'"
     )
-#     bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-0[1-3]'" &&
+#     bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-0[2-3]'" &&
 
 deploy: off
