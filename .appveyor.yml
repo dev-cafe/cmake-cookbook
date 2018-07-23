@@ -16,6 +16,7 @@ image:
 environment:
   # Create expected SHELL variable for pipenv.
   SHELL: "windows"
+  CTEST_OUTPUT_ON_FAILURE: "1"
   matrix:
     - GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
