@@ -37,6 +37,14 @@ def get_buildflags():
     return buildflags
 
 
+def get_platform():
+    return os.environ.get('PLATFORM')
+
+
+def get_configuration():
+    return os.environ.get('CONFIGURATION')
+
+
 def is_defined(env_var):
     truthy = ['1', 'TRUE', 'ON', 'YES', 'Y']
     falsey = ['0', 'FALSE', 'OFF', 'NO', 'N']

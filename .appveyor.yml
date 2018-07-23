@@ -7,6 +7,9 @@ version: 'build-{build}-{branch}'
 
 platform: x64
 
+configuration: 
+  - Release
+
 build:
   parallel: true
 
@@ -21,7 +24,7 @@ environment:
     - GENERATOR: "MSYS Makefiles"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
-    - GENERATOR: "Visual Studio 15 2017 Win64"
+    - GENERATOR: "Visual Studio 15 2017"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
     - GENERATOR: "Ninja"
@@ -31,7 +34,7 @@ environment:
       ANACONDA_TESTS_ONLY: "1"
       BUILDFLAGS: "VERBOSE=1"
       CMAKEARGS: ""
-    - GENERATOR: "Visual Studio 15 2017 Win64"
+    - GENERATOR: "Visual Studio 15 2017"
       ANACONDA_TESTS_ONLY: "1"
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
@@ -51,7 +54,7 @@ init:
 cache:
   - c:\msys64\var\cache\pacman\pkg -> testing\dependencies\appveyor\install.bat
   - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat
-  - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.bat
+  - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.ps1
 
 install:
   - python -m pip install pipenv
