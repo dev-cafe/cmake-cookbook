@@ -47,5 +47,5 @@ file(
 install(
   TARGETS
     account
-  LIBRARY DESTINATION .
+  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}
   )

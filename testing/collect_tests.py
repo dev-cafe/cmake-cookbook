@@ -78,18 +78,17 @@ def run_command(*, step, command, expect_failure):
                 'EXPECTED TO FAIL',
                 end='\n')
         else:
+            streamer(
+                colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED',
+                end='\n')
+            streamer(
+                '{cmd}\n {out}{err}'.format(
+                    cmd=command, out=stdout, err=stderr),
+                end='\n')
+            return_code = child.returncode
             if die_hard():
                 raise subprocess.CalledProcessError(child.returncode,
                                                     child.args)
-            else:
-                streamer(
-                    colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED',
-                    end='\n')
-                streamer(
-                    '{cmd}\n {out}{err}'.format(
-                        cmd=command, out=stdout, err=stderr),
-                    end='\n')
-                return_code = child.returncode
 
     return return_code
 

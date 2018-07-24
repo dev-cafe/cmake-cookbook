@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import distutils.command.build as _build
 import os
 import sys
@@ -20,12 +18,16 @@ def extend_build(package_name):
             _build_dir = os.path.join(_source_dir, 'build_setup_py')
             _prefix = os.path.join(get_python_lib(), package_name)
             try:
-                spawn.spawn([
+                cmake_configure_command = [
                     'cmake',
                     '-H{0}'.format(_source_dir),
                     '-B{0}'.format(_build_dir),
                     '-DCMAKE_INSTALL_PREFIX={0}'.format(_prefix),
-                ])
+                ]
+                _generator = os.getenv('GENERATOR')
+                if _generator is not None:
+                    cmake_configure_command.append('-G"{0}"'.format(_generator))
+                spawn.spawn(cmake_configure_command)
                 spawn.spawn(
                     ['cmake', '--build', _build_dir, '--target', 'install'])
                 os.chdir(cwd)

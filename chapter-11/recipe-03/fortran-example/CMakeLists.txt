@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # specify where to place libraries
 include(GNUInstallDirs)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 
 # interface and sources
 add_subdirectory(account)
@@ -26,10 +26,10 @@ find_package(PythonInterp REQUIRED)
 add_test(python_test ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/account/test.py)
 
 # export environment variables needed by the test
-set_tests_properties(python_test
-  PROPERTIES
-    ENVIRONMENT
-      PYTHONPATH=${CMAKE_CURRENT_SOURCE_DIR}:$ENV{PYTHONPATH}
-      ACCOUNT_LIBRARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/lib
-      ACCOUNT_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/account
+set_property(
+  TEST python_test
+  PROPERTY ENVIRONMENT
+    PYTHONPATH=${CMAKE_CURRENT_SOURCE_DIR}:$ENV{PYTHONPATH}
+    ACCOUNT_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/account
+    ACCOUNT_LIBRARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}
   )

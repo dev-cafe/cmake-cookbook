@@ -21,11 +21,13 @@ target_sources(dgemm-example
 # we mimick the include directories, compiler options, and link line suggested by the advisor:
 # https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/
 add_library(IntelMKL INTERFACE)
+
 # its compile options
 target_compile_options(IntelMKL
   INTERFACE
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:-m64>
   )
+
 # locate mkl.h
 find_path(_mkl_h
   NAMES
@@ -38,6 +40,7 @@ target_include_directories(IntelMKL
     ${_mkl_h}
   )
 message(STATUS "MKL header file FOUND: ${_mkl_h}")
+
 # locate MKL single dynamic library (mkl_rt)
 find_library(_mkl_libs
   NAMES
@@ -46,6 +49,7 @@ find_library(_mkl_libs
     ${CMAKE_INSTALL_PREFIX}/lib
   )
 message(STATUS "MKL single dynamic library FOUND: ${_mkl_libs}")
+
 find_package(Threads QUIET)
 target_link_libraries(IntelMKL
   INTERFACE
@@ -53,6 +57,7 @@ target_link_libraries(IntelMKL
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:Threads::Threads>
     $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:AppleClang>>:m>
   )
+
 include(CMakePrintHelpers)
 cmake_print_properties(
   TARGETS
