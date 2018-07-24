@@ -7,9 +7,6 @@ version: 'build-{build}-{branch}'
 
 platform: x64
 
-configuration: 
-  - Release
-
 build:
   parallel: true
 
@@ -26,7 +23,7 @@ environment:
       CMAKEARGS: ""
     - GENERATOR: "Visual Studio 15 2017"
       BUILDFLAGS: "/verbosity:normal"
-      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      CMAKEARGS: ""
     - GENERATOR: "Ninja"
       BUILDFLAGS: "-v"
       CMAKEARGS: ""
@@ -37,7 +34,7 @@ environment:
     - GENERATOR: "Visual Studio 15 2017"
       ANACONDA_TESTS_ONLY: "1"
       BUILDFLAGS: "/verbosity:normal"
-      CMAKEARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      CMAKEARGS: ""
 
 #matrix:
 #  fast_finish: true
