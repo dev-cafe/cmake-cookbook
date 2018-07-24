@@ -80,8 +80,7 @@ def run_command(*, step, command, expect_failure):
                 end='\n')
         else:
             streamer(
-                colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED',
-                end='\n')
+                colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED', end='\n')
             streamer(
                 '{cmd}\n {out}{err}'.format(
                     cmd=command, out=stdout, err=stderr),
@@ -95,18 +94,18 @@ def run_command(*, step, command, expect_failure):
 
 
 def cmake_configuration_command(cmakelists_path, build_directory, generator,
-                                platform_string, definitions_string):
+                                definitions_string):
     # Location of CMakeLists.txt, build directory, and generator
     base_options = r'-H"{0}" -B"{1}" -G"{2}"'.format(cmakelists_path,
                                                      build_directory, generator)
-    # Only the Visual Studio generator on Appveyor needs the platform option
+    # Only the Visual Studio generator on Appveyor needs this option
+    # The platform is always defined as the PLATFORM env-var
     if 'Visual Studio' in generator:
-        base_options += r' -A"{}"'.format(platform_string)
+        base_options += r' -A"{}"'.format(get_platform())
     return (r'cmake {0} {1}'.format(base_options, definitions_string))
 
 
-def run_example(topdir, generator, ci_environment, platform, buildflags, recipe,
-                example):
+def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     # extract global menu
     menu_file = topdir / 'testing' / 'menu.yml'
@@ -134,9 +133,6 @@ def run_example(topdir, generator, ci_environment, platform, buildflags, recipe,
 
     # local targets extend global targets
     targets = targets_global + targets_local
-
-    # if platform is present, tuck it into the -A option to CMake
-    platform_string = '' if platform is None else r' -A"{0}"'.format(platform)
 
     # local configurations override global ones
     configurations = configurations_local[:] if configurations_local else configurations_global[:]
@@ -181,7 +177,7 @@ def run_example(topdir, generator, ci_environment, platform, buildflags, recipe,
         # configure step
         step = 'configuring'
         command = cmake_configuration_command(cmakelists_path, build_directory,
-                                              generator, platform_string, definitions_string)
+                                              generator, definitions_string)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
 
@@ -223,7 +219,6 @@ def main(arguments):
     buildflags = get_buildflags()
     generator = get_generator()
     ci_environment = get_ci_environment()
-    platform = get_platform()
 
     # glob recipes
     recipes = [r for r in sorted(topdir.glob(arguments['<regex>']))]
@@ -248,7 +243,7 @@ def main(arguments):
 
         for example in examples:
             return_code += run_example(topdir, generator, ci_environment,
-                                       platform, buildflags, recipe, example)
+                                       buildflags, recipe, example)
 
     colorama.deinit()
     sys.exit(return_code)
