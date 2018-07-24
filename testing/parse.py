@@ -27,7 +27,6 @@ def extract_menu_file(file_name, generator, ci_environment):
     env: dictionary of environment variables passed to CMake
     definitions: dictionary of CMake configure-step definitions
     targets: list of targets to build
-    configurations: list of CMake configurations to build (Debug, Release, ...)
     '''
     config = parse_yaml(file_name)
 
@@ -37,14 +36,8 @@ def extract_menu_file(file_name, generator, ci_environment):
         for entry in config['targets']:
             targets.append(entry)
 
-    # assemble configurations
-    configurations = []
-    if 'configurations' in config:
-        for entry in config['configurations']:
-            configurations.append(entry)
-
     if ci_environment not in config:
-        return False, {}, {}, targets, configurations
+        return False, {}, {}, targets
 
     failing_generators = []
     if 'failing_generators' in config[ci_environment]:
@@ -65,4 +58,4 @@ def extract_menu_file(file_name, generator, ci_environment):
             for k, v in entry.items():
                 definitions[k] = v
 
-    return expect_failure, env, definitions, targets, configurations
+    return expect_failure, env, definitions, targets

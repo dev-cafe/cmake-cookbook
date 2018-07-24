@@ -24,6 +24,3 @@ travis-osx:
 local:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
-
-configurations:
-  - 'Release'

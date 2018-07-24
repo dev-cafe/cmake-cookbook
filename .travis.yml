@@ -16,6 +16,7 @@ matrix:
             - gfortran
             - gfortran-7
             - gfortran-mingw-w64
+            - graphviz
             - libatlas-dev
             - libboost1.55-all-dev
             - liblapack-dev

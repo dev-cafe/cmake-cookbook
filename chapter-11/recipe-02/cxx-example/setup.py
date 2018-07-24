@@ -26,7 +26,7 @@ def extend_build(package_name):
                 ]
                 _generator = os.getenv('GENERATOR')
                 if _generator is not None:
-                    cmake_configure_command.append('-G"{0}"'.format(_generator))
+                    cmake_configure_command.append('-G{0}'.format(_generator))
                 spawn.spawn(cmake_configure_command)
                 spawn.spawn(
                     ['cmake', '--build', _build_dir, '--target', 'install'])

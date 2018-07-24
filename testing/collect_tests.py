@@ -13,7 +13,7 @@ import docopt
 from packaging import version
 
 from env import (die_hard, get_buildflags, get_ci_environment, get_generator,
-                 verbose_output)
+                 get_platform, verbose_output)
 from parse import extract_menu_file
 
 
@@ -79,8 +79,7 @@ def run_command(*, step, command, expect_failure):
                 end='\n')
         else:
             streamer(
-                colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED',
-                end='\n')
+                colorama.Fore.RED + colorama.Style.BRIGHT + 'FAILED', end='\n')
             streamer(
                 '{cmd}\n {out}{err}'.format(
                     cmd=command, out=stdout, err=stderr),
@@ -93,18 +92,30 @@ def run_command(*, step, command, expect_failure):
     return return_code
 
 
+def cmake_configuration_command(cmakelists_path, build_directory, generator,
+                                definitions_string):
+    # Location of CMakeLists.txt, build directory, and generator
+    base_options = r'-H"{0}" -B"{1}" -G"{2}"'.format(cmakelists_path,
+                                                     build_directory, generator)
+    # Only the Visual Studio generator on Appveyor needs this option
+    # The platform is always defined as the PLATFORM env-var
+    if 'Visual Studio' in generator:
+        base_options += r' -A"{}"'.format(get_platform())
+    return (r'cmake {0} {1}'.format(base_options, definitions_string))
+
+
 def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     # extract global menu
     menu_file = topdir / 'testing' / 'menu.yml'
-    expect_failure_global, env_global, definitions_global, targets_global, configurations_global = extract_menu_file(
+    expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
     menu_file = recipe / example / 'menu.yml'
-    expect_failure_local, env_local, definitions_local, targets_local, configurations_local = extract_menu_file(
+    expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
         menu_file, generator, ci_environment)
 
     expect_failure = expect_failure_global or expect_failure_local
@@ -119,11 +130,12 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     for entry in definitions_local:
         definitions[entry] = definitions_local[entry]
 
+    # Decide configuration from CMAKE_BUILD_TYPE, by default it's Debug
+    configuration = definitions[
+        'CMAKE_BUILD_TYPE'] if 'CMAKE_BUILD_TYPE' in definitions else 'Debug'
+
     # local targets extend global targets
     targets = targets_global + targets_local
-
-    # local configurations override global ones
-    configurations = configurations_local[:] if configurations_local else configurations_global[:]
 
     for entry in env:
         os.environ[entry] = env[entry]
@@ -164,34 +176,33 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
         # configure step
         step = 'configuring'
-        command = r'cmake -H"{0}" -B"{1}" -G"{2}" {3}'.format(
-            cmakelists_path, build_directory, generator, definitions_string)
+        command = cmake_configuration_command(cmakelists_path, build_directory,
+                                              generator, definitions_string)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
 
         base_command = r'cmake --build "{0}"'.format(build_directory)
 
-        for configuration in configurations:
-            # build step
-            step = '{0} configuration {1}'.format('building', configuration)
-            command = base_command + ' --config {0} -- {1}'.format(
-                configuration, buildflags)
+        # build step
+        step = '{0} configuration {1}'.format('building', configuration)
+        command = base_command + ' --config {0} -- {1}'.format(
+            configuration, buildflags)
+        return_code += run_command(
+            step=step, command=command, expect_failure=expect_failure)
+
+        # extra targets
+        for target in targets:
+            step = '{0} configuration {1}'.format(target, configuration)
+
+            # on VS '--target test' fails but '--target RUN_TESTS' seems to work
+            if generator.startswith('Visual Studio'):
+                if target == 'test':
+                    target = 'RUN_TESTS'
+
+            command = base_command + ' --config {0} --target {1}'.format(
+                configuration, target)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
-
-            # extra targets
-            for target in targets:
-                step = '{0} configuration {1}'.format(target, configuration)
-
-                # on VS '--target test' fails but '--target RUN_TESTS' seems to work
-                if generator.startswith('Visual Studio'):
-                    if target == 'test':
-                        target = 'RUN_TESTS'
-
-                command = base_command + ' --config {0} --target {1}'.format(
-                    configuration, target)
-                return_code += run_command(
-                    step=step, command=command, expect_failure=expect_failure)
 
     for entry in env:
         os.environ.pop(entry)
