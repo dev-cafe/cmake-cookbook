@@ -1,5 +1,5 @@
-import sys
 import subprocess
+import sys
 
 # for simplicity we do not check number of
 # arguments and whether the file really exists
@@ -11,6 +11,7 @@ except FileNotFoundError:
   print('command "size" is not available on this platform')
   sys.exit(0)
 
+size = 0.0
 for line in output.split('\n'):
     if file_path in line:
         # we are interested in the 4th number on this line
