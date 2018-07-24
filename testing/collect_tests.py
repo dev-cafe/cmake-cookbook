@@ -12,9 +12,8 @@ import colorama
 import docopt
 from packaging import version
 
-from env import (die_hard, get_buildflags, get_ci_environment,
-                 get_configuration, get_generator, get_platform,
-                 verbose_output)
+from env import (die_hard, get_buildflags, get_ci_environment, get_generator,
+                 get_platform, verbose_output)
 from parse import extract_menu_file
 
 
