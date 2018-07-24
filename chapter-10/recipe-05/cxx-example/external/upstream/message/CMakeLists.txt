@@ -1,6 +1,6 @@
 find_package(message 1 CONFIG QUIET)
 if(message_FOUND)
-  get_property(_loc TARGET message::message-shared PROPERTY LOCATION)
+  get_property(_loc TARGET message::message PROPERTY LOCATION)
   message(STATUS "Found message: ${_loc} (found version ${message_VERSION})")
   add_library(message_external INTERFACE)  # dummy
 else()
