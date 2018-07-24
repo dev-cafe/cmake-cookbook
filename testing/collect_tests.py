@@ -94,6 +94,17 @@ def run_command(*, step, command, expect_failure):
     return return_code
 
 
+def cmake_configuration_command(cmakelists_path, build_directory, generator,
+                                platform_string, definitions_string):
+    # Location of CMakeLists.txt, build directory, and generator
+    base_options = r'-H"{0}" -B"{1}" -G"{2}"'.format(cmakelists_path,
+                                                     build_directory, generator)
+    # Only the Visual Studio generator on Appveyor needs the platform option
+    if 'Visual Studio' in generator:
+        base_options += r' -A"{}"'.format(platform_string)
+    return (r'cmake {0} {1}'.format(base_options, definitions_string))
+
+
 def run_example(topdir, generator, ci_environment, platform, buildflags, recipe,
                 example):
 
@@ -169,8 +180,8 @@ def run_example(topdir, generator, ci_environment, platform, buildflags, recipe,
 
         # configure step
         step = 'configuring'
-        command = r'cmake -H"{0}" -B"{1}" -G"{2}" {3} {4}'.format(
-            cmakelists_path, build_directory, generator, platform_string, definitions_string)
+        command = cmake_configuration_command(cmakelists_path, build_directory,
+                                              generator, platform_string, definitions_string)
         return_code += run_command(
             step=step, command=command, expect_failure=expect_failure)
 
