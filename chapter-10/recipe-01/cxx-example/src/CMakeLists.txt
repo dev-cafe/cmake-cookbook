@@ -20,14 +20,11 @@ target_sources(message-shared
 target_compile_definitions(message-shared
   PUBLIC
     $<$<BOOL:${UUID_FOUND}>:HAVE_UUID>
-  INTERFACE
-    $<INSTALL_INTERFACE:USING_message>
   )
 
 target_include_directories(message-shared
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}>
-    $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
+    ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}
   )
 
 target_link_libraries(message-shared
@@ -38,10 +35,10 @@ target_link_libraries(message-shared
 set_target_properties(message-shared
   PROPERTIES
     POSITION_INDEPENDENT_CODE 1
-    MACOSX_RPATH ON
     SOVERSION ${PROJECT_VERSION_MAJOR}
     OUTPUT_NAME "message"
     PUBLIC_HEADER "Message.hpp"
+    MACOSX_RPATH ON
   )
 
 # EXECUTABLES
@@ -86,6 +83,6 @@ install(
     DESTINATION ${INSTALL_LIBDIR}
     COMPONENT lib
   PUBLIC_HEADER
-    DESTINATION ${INSTALL_INCLUDEDIR}/message
+    DESTINATION ${INSTALL_INCLUDEDIR}/recipe-01
     COMPONENT dev
   )
