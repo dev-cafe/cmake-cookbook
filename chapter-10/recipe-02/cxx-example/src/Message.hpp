@@ -1,9 +1,11 @@
 #pragma once
 
+#include "messageExport.h"
+
 #include <iosfwd>
 #include <string>
 
-class Message {
+class message_EXPORT Message {
 public:
   Message(const std::string &m) : message_(m) {}
 

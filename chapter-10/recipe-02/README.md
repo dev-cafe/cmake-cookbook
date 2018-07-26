@@ -1,4 +1,4 @@
-# Installing following GNU standards
+# Generating export headers
 
 Abstract to be written ...
 

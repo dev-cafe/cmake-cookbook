@@ -1,1 +1,1 @@
-Installing following GNU standards
+Generating export headers
