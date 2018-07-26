@@ -8,7 +8,6 @@ if(PKG_CONFIG_FOUND)
 endif()
 
 # <<< Build targets >>>
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # SHARED library
 add_library(message-shared SHARED "")
@@ -40,6 +39,7 @@ set_target_properties(message-shared
     OUTPUT_NAME "message"
     PUBLIC_HEADER "Message.hpp"
     MACOSX_RPATH ON
+    WINDOWS_EXPORT_ALL_SYMBOLS ON
   )
 
 # EXECUTABLES
