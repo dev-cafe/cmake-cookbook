@@ -1,22 +1,22 @@
 appveyor-vs:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-01
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/ch10r01
 
 appveyor-msys:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-01
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/ch10r01
 
 travis-linux:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-01
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/ch10r01
 
 travis-osx:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-01
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/ch10r01
 
 local:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-01
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/ch10r01
 
 targets:
   - test

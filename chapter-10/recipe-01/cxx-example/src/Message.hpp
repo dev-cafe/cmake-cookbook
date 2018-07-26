@@ -15,3 +15,5 @@ private:
   std::string message_;
   std::ostream &printObject(std::ostream &os);
 };
+
+std::string getUUID();
