@@ -2,7 +2,10 @@
 
 #include <iostream>
 #include <string>
+
+#ifdef HAVE_UUID
 #include <uuid/uuid.h>
+#endif
 
 std::ostream &Message::printObject(std::ostream &os) {
   os << "This is my very nice message: " << std::endl;
@@ -12,6 +15,7 @@ std::ostream &Message::printObject(std::ostream &os) {
   return os;
 }
 
+#ifdef HAVE_UUID
 std::string getUUID() {
   uuid_t uuid;
   uuid_generate(uuid);
@@ -21,3 +25,6 @@ std::string getUUID() {
   std::string uuid_cxx(uuid_str);
   return uuid_cxx;
 }
+#else
+std::string getUUID() { return "Ooooops, no UUID for you!"; }
+#endif

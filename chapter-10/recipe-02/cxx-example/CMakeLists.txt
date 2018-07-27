@@ -13,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "/usr/local/message" CACHE PATH "Install path" FORCE)
+  set(CMAKE_INSTALL_PREFIX "/usr/local/recipe-02" CACHE PATH "Install path" FORCE)
 endif()
 message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
 
