@@ -26,6 +26,12 @@ else()
     INSTALL_COMMAND
       DESTDIR=${CMAKE_BINARY_DIR}/stage ${CMAKE_MAKE_PROGRAM} install
     )
-  set(message_DIR ${STAGED_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/cmake/message
-    CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
+  if(WIN32 AND NOT CYGWIN)
+    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/CMake)
+  else()
+    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/share/cmake/message)
+  endif()
+  file(TO_NATIVE_PATH "${DEF_message_DIR}" DEF_message_DIR)
+  set(message_DIR ${DEF_message_DIR}
+      CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
 endif()
