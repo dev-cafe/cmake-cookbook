@@ -32,14 +32,11 @@ target_sources(message-shared
 target_compile_definitions(message-shared
   PUBLIC
     $<$<BOOL:${UUID_FOUND}>:HAVE_UUID>
-  INTERFACE
-    $<INSTALL_INTERFACE:USING_message>
   )
 
 target_include_directories(message-shared
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}>
-    $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
+    ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}
   )
 
 target_link_libraries(message-shared
@@ -52,11 +49,11 @@ set_target_properties(message-shared
     POSITION_INDEPENDENT_CODE 1
     CXX_VISIBILITY_PRESET hidden
     VISIBILITY_INLINES_HIDDEN 1
-    MACOSX_RPATH ON
     SOVERSION ${PROJECT_VERSION_MAJOR}
     OUTPUT_NAME "message"
     DEBUG_POSTFIX "_d"
     PUBLIC_HEADER "Message.hpp;${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/messageExport.h"
+    MACOSX_RPATH ON
   )
 
 # STATIC library
@@ -71,14 +68,11 @@ target_compile_definitions(message-static
   PUBLIC
     message_STATIC_DEFINE
     $<$<BOOL:${UUID_FOUND}>:HAVE_UUID>
-  INTERFACE
-    $<INSTALL_INTERFACE:USING_message>
   )
 
 target_include_directories(message-static
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}>
-    $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
+    ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}
   )
 
 target_link_libraries(message-static
