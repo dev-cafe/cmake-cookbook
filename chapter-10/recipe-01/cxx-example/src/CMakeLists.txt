@@ -37,6 +37,7 @@ set_target_properties(message-shared
     POSITION_INDEPENDENT_CODE 1
     SOVERSION ${PROJECT_VERSION_MAJOR}
     OUTPUT_NAME "message"
+    DEBUG_POSTFIX "_d"
     PUBLIC_HEADER "Message.hpp"
     MACOSX_RPATH ON
     WINDOWS_EXPORT_ALL_SYMBOLS ON
