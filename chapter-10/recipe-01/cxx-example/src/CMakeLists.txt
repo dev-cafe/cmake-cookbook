@@ -22,11 +22,6 @@ target_compile_definitions(message-shared
     $<$<BOOL:${UUID_FOUND}>:HAVE_UUID>
   )
 
-target_include_directories(message-shared
-  PUBLIC
-    ${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}
-  )
-
 target_link_libraries(message-shared
   PUBLIC
     $<$<BOOL:${UUID_FOUND}>:PkgConfig::UUID>
