@@ -10,10 +10,9 @@ import time
 
 import colorama
 import docopt
-from packaging import version
-
 from env import (die_hard, get_buildflags, get_ci_environment, get_generator,
-                 get_platform, verbose_output)
+                 verbose_output)
+from packaging import version
 from parse import extract_menu_file
 
 
@@ -97,10 +96,6 @@ def cmake_configuration_command(cmakelists_path, build_directory, generator,
     # Location of CMakeLists.txt, build directory, and generator
     base_options = r'-H"{0}" -B"{1}" -G"{2}"'.format(cmakelists_path,
                                                      build_directory, generator)
-    # Only the Visual Studio generator on Appveyor needs this option
-    # The platform is always defined as the PLATFORM env-var
-    if 'Visual Studio' in generator:
-        base_options += r' -A"{}"'.format(get_platform())
     return (r'cmake {0} {1}'.format(base_options, definitions_string))
 
 

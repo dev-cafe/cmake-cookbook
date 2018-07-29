@@ -1,9 +1,9 @@
 #pragma once
 
-#include "messageExport.h"
-
 #include <iosfwd>
 #include <string>
+
+#include "messageExport.h"
 
 class message_EXPORT Message {
 public:
@@ -17,3 +17,5 @@ private:
   std::string message_;
   std::ostream &printObject(std::ostream &os);
 };
+
+std::string getUUID();

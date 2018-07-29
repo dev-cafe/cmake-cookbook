@@ -131,10 +131,9 @@
 ### [Chapter 10: Writing an Installer](chapter-10/README.md)
 
 - [Installing your project](chapter-10/recipe-01/README.md)
-- [Installing following GNU standards](chapter-10/recipe-02/README.md)
-- [Generating export headers](chapter-10/recipe-03/README.md)
-- [Exporting your targets](chapter-10/recipe-04/README.md)
-- [Installing a superbuild](chapter-10/recipe-05/README.md)
+- [Generating export headers](chapter-10/recipe-02/README.md)
+- [Exporting your targets](chapter-10/recipe-03/README.md)
+- [Installing a superbuild](chapter-10/recipe-04/README.md)
 
 
 ### [Chapter 11: Packaging Projects](chapter-11/README.md)
