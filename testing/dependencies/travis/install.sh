@@ -19,6 +19,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew install pipenv
   brew install pkg-config
   brew install zeromq
+  brew install patchelf
   # Symlink the installed Boost.Python to where all the rest of Boost resides
   ln -sf /usr/local/opt/boost-python@1.59/lib/* /usr/local/opt/boost@1.59/lib
 fi

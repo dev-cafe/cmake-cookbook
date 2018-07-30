@@ -8,6 +8,7 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
+            - cjwatson/backports
           packages:
             - doxygen
             - g++-7
@@ -25,6 +26,7 @@ matrix:
             - libpython3-all-dev
             - libzmq3-dev
             - openmpi-bin
+            - patchelf
             - pkg-config
             - python3
             - python3-dev
