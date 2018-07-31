@@ -103,16 +103,17 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
     # extract global menu
     menu_file = topdir / 'testing' / 'menu.yml'
-    expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
+    skip_global, expect_failure_global, env_global, definitions_global, targets_global = extract_menu_file(
         menu_file, generator, ci_environment)
 
     sys.stdout.write('\n  {}\n'.format(example))
 
     # extract local menu
     menu_file = recipe / example / 'menu.yml'
-    expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
+    skip_local, expect_failure_local, env_local, definitions_local, targets_local = extract_menu_file(
         menu_file, generator, ci_environment)
 
+    skip = skip_global or skip_local
     expect_failure = expect_failure_global or expect_failure_local
 
     # local env vars override global ones
@@ -153,6 +154,12 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     if version.parse(system_cmake_version) < version.parse(min_cmake_version):
         sys.stdout.write(
             '\nSKIPPING (system cmake version < min. cmake version for this recipe)\n'
+        )
+        return 0
+
+    if skip:
+        sys.stdout.write(
+            '\nSKIPPING recipe (based on menu.yml)\n'
         )
         return 0
 
