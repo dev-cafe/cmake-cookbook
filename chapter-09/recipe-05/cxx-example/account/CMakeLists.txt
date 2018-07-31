@@ -1,16 +1,21 @@
-# define minimum cmake version
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+include(FetchContent)
 
-# project name and supported language
-project(account-project LANGUAGES CXX)
+FetchContent_Declare(
+  pybind11_sources
+  GIT_REPOSITORY https://github.com/pybind/pybind11.git
+  GIT_TAG        v2.2
+)
 
-# require C++11
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+FetchContent_GetProperties(pybind11_sources)
 
-# the pybind11 package will provide the pybind11::module imported target
-find_package(pybind11 CONFIG REQUIRED)
+if(NOT pybind11_sources_POPULATED)
+  FetchContent_Populate(pybind11_sources)
+
+  add_subdirectory(
+    ${pybind11_sources_SOURCE_DIR}
+    ${pybind11_sources_BINARY_DIR}
+    )
+endif()
 
 # create python module
 add_library(account
