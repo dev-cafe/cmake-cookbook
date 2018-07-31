@@ -11,15 +11,21 @@ FortranCInterface_HEADER(
   SYMBOLS DSCAL DGESV
   )
 
-add_library(linalg_wrap CxxBLAS.cpp CxxLAPACK.cpp)
+add_library(math "")
 
-target_include_directories(linalg_wrap
+target_sources(math
+  PRIVATE
+    CxxBLAS.cpp
+    CxxLAPACK.cpp
+  )
+
+target_include_directories(math
   PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
   )
 
-target_link_libraries(linalg_wrap
+target_link_libraries(math
   PUBLIC
     ${LAPACK_LIBRARIES}
   )
