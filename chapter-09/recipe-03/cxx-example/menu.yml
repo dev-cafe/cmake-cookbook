@@ -1,2 +1,12 @@
 targets:
   - test
+
+appveyor-vs:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
+
+appveyor-msys:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'

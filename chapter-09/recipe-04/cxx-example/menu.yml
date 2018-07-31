@@ -3,6 +3,13 @@ appveyor-vs:
     - VERBOSE_OUTPUT: 'True'
   definitions:
     - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
+
+appveyor-msys:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
 
 travis-osx:
   definitions:
