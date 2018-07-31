@@ -18,6 +18,8 @@ add_library(account
     account.cpp
   )
 
+# workaround for problem with different names of some math
+# functions on Windows MSYS
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(account
     PUBLIC
