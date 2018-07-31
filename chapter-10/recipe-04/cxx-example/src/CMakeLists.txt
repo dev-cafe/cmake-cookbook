@@ -42,8 +42,9 @@ add_test(
   )
 
 install(
-  PROGRAMS
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/use_message
-  DESTINATION
-    ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}
+  TARGETS
+    use_message
+  RUNTIME
+    DESTINATION ${CMAKE_INSTALL_BINDIR}
+    COMPONENT bin
   )
