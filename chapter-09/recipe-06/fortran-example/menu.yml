@@ -1,3 +1,6 @@
+targets:
+  - test
+
 appveyor-vs:
   failing_generators:
     - 'Visual Studio 15 2017 Win64'
@@ -5,9 +8,6 @@ appveyor-vs:
 appveyor-msys:
   failing_generators:
     - 'Ninja'
-
-targets:
-  - test
 
 travis-linux:
   failing_generators:
