@@ -1,2 +1,1 @@
-# implementation sources
-add_subdirectory(implementation)
+../../cxx-example/account/CMakeLists.txt

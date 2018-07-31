@@ -1,1 +1,1 @@
-__version__ = '0.0.0'
+../../cxx-example/account/version.py
