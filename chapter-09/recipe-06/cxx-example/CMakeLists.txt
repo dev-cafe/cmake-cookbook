@@ -23,13 +23,12 @@ enable_testing()
 find_package(PythonInterp REQUIRED)
 
 # define test
-add_test(python_test ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/account/test.py)
-
-# export environment variables needed by the test
-set_tests_properties(python_test
-  PROPERTIES
-    ENVIRONMENT
-      PYTHONPATH=${CMAKE_CURRENT_SOURCE_DIR}:$ENV{PYTHONPATH}
-      ACCOUNT_LIBRARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}
-      ACCOUNT_INCLUDE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/account
+add_test(
+  NAME
+    python_test
+  COMMAND
+    ${CMAKE_COMMAND} -E env ACCOUNT_MODULE_PATH=${CMAKE_CURRENT_SOURCE_DIR}
+                            ACCOUNT_HEADER_FILE=${CMAKE_CURRENT_SOURCE_DIR}/account/account.h
+                            ACCOUNT_LIBRARY_FILE=$<TARGET_FILE:account>
+    ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/account/test.py
   )
