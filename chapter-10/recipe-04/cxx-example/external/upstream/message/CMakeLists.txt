@@ -6,6 +6,7 @@ if(message_FOUND)
 else()
   include(ExternalProject)
   message(STATUS "Suitable message could not be located, Building message instead.")
+  set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/external/upstream/message)
   ExternalProject_Add(message_external
     GIT_REPOSITORY
       https://github.com/dev-cafe/message.git
