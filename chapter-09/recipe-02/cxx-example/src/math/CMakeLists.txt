@@ -3,7 +3,7 @@ find_package(LAPACK REQUIRED)
 
 include(FortranCInterface)
 
-FortranCInterface_VERIFY()
+FortranCInterface_VERIFY(CXX)
 
 FortranCInterface_HEADER(
   fc_mangle.h
