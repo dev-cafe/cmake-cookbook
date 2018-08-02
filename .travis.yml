@@ -67,15 +67,18 @@ matrix:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
     - os: osx
+      osx_image: xcode9.2
       env:
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: osx
+      osx_image: xcode9.2
       env:
         - GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
         - ANACONDA_TESTS_ONLY=1
     - os: osx
+      osx_image: xcode9.2
       env:
         - GENERATOR="Ninja"
         - BUILDFLAGS="-v"
