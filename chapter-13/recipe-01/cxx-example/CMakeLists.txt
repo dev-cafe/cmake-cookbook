@@ -20,7 +20,7 @@ add_executable(hello-world hello-world.cpp)
 target_compile_definitions(
   hello-world
   PUBLIC
-    "-DCMAKE_SYSTEM_NAME=\"${CMAKE_SYSTEM_NAME}\""
+    "-DSYSTEM_NAME=\"${CMAKE_SYSTEM_NAME}\""
   )
 
 install(
