@@ -13,6 +13,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew install boost@1.59
   brew install doxygen
   brew install gcc
+  brew install mingw-w64
   brew install mpich
   brew install ossp-uuid
   brew install pipenv
