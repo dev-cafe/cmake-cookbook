@@ -154,7 +154,7 @@
 
 ### [Chapter 13: Alternative Generators and Cross-compilation](chapter-13/README.md)
 
-- [Hello world example](chapter-13/recipe-01/README.md)
+- [Cross-compiling a hello world example](chapter-13/recipe-01/README.md)
 - [Cross-compiling a Windows binary with OpenMP parallelization](chapter-13/recipe-02/README.md)
 
 

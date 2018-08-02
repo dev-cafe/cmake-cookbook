@@ -1,4 +1,4 @@
-# Hello world example
+# Cross-compiling a hello world example
 
 Abstract to be written ...
 
