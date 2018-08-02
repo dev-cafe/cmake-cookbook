@@ -1,0 +1,26 @@
+appveyor-vs:
+  definitions:
+    - Boost_NO_BOOST_CMAKE: 'ON'
+    - Boost_NO_SYSTEM_PATHS: 'ON'
+
+appveyor-msys:
+  definitions:
+    - Boost_NO_BOOST_CMAKE: 'ON'
+    - Boost_NO_SYSTEM_PATHS: 'ON'
+
+travis-linux:
+  definitions:
+    - Boost_NO_BOOST_CMAKE: 'ON'
+    - Boost_NO_SYSTEM_PATHS: 'ON'
+
+travis-osx:
+  definitions:
+    - Boost_NO_BOOST_CMAKE: 'ON'
+    - Boost_NO_SYSTEM_PATHS: 'ON'
+
+local:
+  definitions:
+    - Boost_NO_BOOST_CMAKE: 'ON'
+    - Boost_NO_SYSTEM_PATHS: 'ON'
+  env:
+    - VERBOSE_OUTPUT: 'ON'

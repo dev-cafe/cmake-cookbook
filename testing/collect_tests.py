@@ -10,9 +10,10 @@ import time
 
 import colorama
 import docopt
+from packaging import version
+
 from env import (die_hard, get_buildflags, get_ci_environment, get_generator,
                  verbose_output)
-from packaging import version
 from parse import extract_menu_file
 
 
@@ -67,7 +68,8 @@ def run_command(*, step, command, expect_failure):
 
     return_code = 0
     streamer(
-        colorama.Fore.BLUE + colorama.Style.BRIGHT + '  {0} ... '.format(step))
+        colorama.Fore.BLUE + colorama.Style.BRIGHT + '  {0} ... '.format(step),
+        end='\n')
     if child.returncode == 0:
         streamer(colorama.Fore.GREEN + colorama.Style.BRIGHT + 'OK', end='\n')
     else:

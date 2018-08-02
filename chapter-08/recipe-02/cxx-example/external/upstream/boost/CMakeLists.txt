@@ -96,10 +96,10 @@ else()
            toolset=${_toolset}
            ${_b2_select_libraries}
            ${_build_user_config_args}
-    LOG_BUILD
-      1
-    LOG_INSTALL
-      1
+    #LOG_BUILD
+    #  1
+    #LOG_INSTALL
+    #  1
     BUILD_BYPRODUCTS
       "${_build_byproducts}"
     )
