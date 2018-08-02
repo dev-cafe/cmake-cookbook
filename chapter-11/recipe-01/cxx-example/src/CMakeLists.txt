@@ -9,20 +9,14 @@ endif()
 
 # <<< Build targets >>>
 
-add_library(message "")
-target_sources(message
-  PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/Message.cpp
-  PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/Message.hpp>
-    $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}/message/Message.hpp>
-  )
+# SHARED library
+add_library(message-shared SHARED "")
 
 include(GenerateExportHeader)
-generate_export_header(message
+generate_export_header(message-shared
   BASE_NAME "message"
   EXPORT_MACRO_NAME "message_EXPORT"
-  EXPORT_FILE_NAME "messageExport.h"
+  EXPORT_FILE_NAME "${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/messageExport.h"
   DEPRECATED_MACRO_NAME "message_DEPRECATED"
   NO_EXPORT_MACRO_NAME "message_NO_EXPORT"
   STATIC_DEFINE "message_STATIC_DEFINE"
@@ -30,7 +24,30 @@ generate_export_header(message
   DEFINE_NO_DEPRECATED
   )
 
-set_target_properties(message
+target_sources(message-shared
+  PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/Message.cpp
+  )
+
+target_compile_definitions(message-shared
+  PUBLIC
+    $<$<BOOL:${UUID_FOUND}>:HAVE_UUID>
+  INTERFACE
+    $<INSTALL_INTERFACE:USING_message>
+  )
+
+target_include_directories(message-shared
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}>
+    $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
+  )
+
+target_link_libraries(message-shared
+  PUBLIC
+    $<$<BOOL:${UUID_FOUND}>:PkgConfig::UUID>
+  )
+
+set_target_properties(message-shared
   PROPERTIES
     POSITION_INDEPENDENT_CODE 1
     CXX_VISIBILITY_PRESET hidden
@@ -38,37 +55,65 @@ set_target_properties(message
     MACOSX_RPATH ON
     SOVERSION ${PROJECT_VERSION_MAJOR}
     OUTPUT_NAME "message"
-    PUBLIC_HEADER "Message.hpp;${CMAKE_CURRENT_BINARY_DIR}/messageExport.h"
+    DEBUG_POSTFIX "_d"
+    PUBLIC_HEADER "Message.hpp;${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/messageExport.h"
   )
 
-target_compile_definitions(message
+# STATIC library
+add_library(message-static STATIC "")
+
+target_sources(message-static
+  PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/Message.cpp
+  )
+
+target_compile_definitions(message-static
   PUBLIC
-    message_EXPORTS
+    message_STATIC_DEFINE
     $<$<BOOL:${UUID_FOUND}>:HAVE_UUID>
-    $<$<NOT:$<BOOL:${BUILD_SHARED_LIBS}>>:message_STATIC_DEFINE>
   INTERFACE
     $<INSTALL_INTERFACE:USING_message>
   )
 
-target_include_directories(message
+target_include_directories(message-static
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}>
     $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
   )
 
-target_link_libraries(message
+target_link_libraries(message-static
   PUBLIC
     $<$<BOOL:${UUID_FOUND}>:PkgConfig::UUID>
   )
 
-add_executable(hello-world hello-world.cpp)
-target_link_libraries(hello-world
-  PUBLIC
-    message
+set_target_properties(message-static
+  PROPERTIES
+    POSITION_INDEPENDENT_CODE 1
+    ARCHIVE_OUTPUT_NAME "message"
+    DEBUG_POSTFIX "_sd"
+    RELEASE_POSTFIX "_s"
+    PUBLIC_HEADER "Message.hpp;${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/messageExport.h"
   )
 
-# RPATH fixing
-set_target_properties(hello-world
+# EXECUTABLES
+add_executable(hello-world_wDSO hello-world.cpp)
+
+target_link_libraries(hello-world_wDSO
+  PUBLIC
+    message-shared
+  )
+
+# Prepare RPATH
+
+file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
+if(APPLE)
+  set(_rpath "@loader_path/${_rel}")
+else()
+  set(_rpath "\$ORIGIN/${_rel}")
+endif()
+file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" message_RPATH)
+
+set_target_properties(hello-world_wDSO
   PROPERTIES
     MACOSX_RPATH ON
     SKIP_BUILD_RPATH OFF
@@ -77,11 +122,21 @@ set_target_properties(hello-world
     INSTALL_RPATH_USE_LINK_PATH ON
   )
 
+add_executable(hello-world_wAR hello-world.cpp)
+
+target_link_libraries(hello-world_wAR
+  PUBLIC
+    message-static
+  )
+
 # <<< Install and export targets >>>
 
 install(
   TARGETS
-    message
+    message-shared
+    message-static
+    hello-world_wDSO
+    hello-world_wAR
   EXPORT
     messageTargets
   ARCHIVE
@@ -107,27 +162,6 @@ install(
     ${INSTALL_CMAKEDIR}
   COMPONENT
     dev
-  )
-
-install(
-  TARGETS
-    hello-world
-  EXPORT
-    messageTargets-hello-world
-  RUNTIME
-    DESTINATION ${INSTALL_BINDIR}
-    COMPONENT bin
-  )
-
-install(
-  EXPORT
-    messageTargets-hello-world
-  NAMESPACE
-    "message::"
-  DESTINATION
-    ${INSTALL_CMAKEDIR}
-  COMPONENT
-    bin
   )
 
 include(CMakePackageConfigHelpers)
