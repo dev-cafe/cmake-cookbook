@@ -24,7 +24,7 @@ set(_elfobj ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR}/use_message)
 find_package(PythonInterp REQUIRED)
 execute_process(
   COMMAND
-    python3 ${PATCHING_SCRIPT} "${_patcher}" "${_path_to_remove}" "${_path_to_add}" "${_elfobj}"
+    ${PYTHON_EXECUTABLE} ${PATCHING_SCRIPT} "${_patcher}" "${_path_to_remove}" "${_path_to_add}" "${_elfobj}"
   RESULT_VARIABLE _res
   OUTPUT_VARIABLE _out
   ERROR_VARIABLE _err

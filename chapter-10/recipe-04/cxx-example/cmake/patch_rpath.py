@@ -1,5 +1,4 @@
 import functools
-import pathlib
 import shlex
 import subprocess
 import sys
@@ -15,9 +14,6 @@ def streamer(line, *, file_handle=sys.stdout, end='', verbose=True):
 
 
 def run_command(*, command):
-    """
-    patcher: string; ELF patching utility to use (valid options: patchelf, chrpath, install_name_tool)
-    """
     cmd = shlex.split(command)
     stdout_streamer = streamer
     stderr_streamer = functools.partial(streamer, file_handle=sys.stderr)

@@ -21,9 +21,6 @@ if(NOT DEFINED CMAKE_BUILD_TYPE OR "${CMAKE_BUILD_TYPE}" STREQUAL "")
 endif()
 message(STATUS "Build type set to ${CMAKE_BUILD_TYPE}")
 
-set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage)
-message(STATUS "${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}")
-
 include(GNUInstallDirs)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
@@ -49,6 +46,9 @@ foreach(p LIB BIN INCLUDE CMAKE)
 endforeach()
 
 set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
+
+set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage)
+message(STATUS "${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}")
 
 add_subdirectory(external/upstream)
 
