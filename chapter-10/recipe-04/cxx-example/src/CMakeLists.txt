@@ -25,20 +25,31 @@ target_link_libraries(use_message
     message::message-shared
   )
 
+# Prepare RPATH
+file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
+if(APPLE)
+  set(_rpath "@loader_path/${_rel}")
+else()
+  set(_rpath "\$ORIGIN/${_rel}")
+endif()
+file(TO_NATIVE_PATH "${_rpath}/${CMAKE_INSTALL_LIBDIR}" use_message_RPATH)
+
 set_target_properties(use_message
   PROPERTIES
     MACOSX_RPATH ON
     SKIP_BUILD_RPATH OFF
     BUILD_WITH_INSTALL_RPATH OFF
-    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
+    INSTALL_RPATH "${use_message_RPATH}"
     INSTALL_RPATH_USE_LINK_PATH ON
   )
 
 enable_testing()
 
 add_test(
-  NAME check_use_message
-  COMMAND $<TARGET_FILE:use_message>
+  NAME
+    check_use_message
+  COMMAND
+    $<TARGET_FILE:use_message>
   )
 
 install(

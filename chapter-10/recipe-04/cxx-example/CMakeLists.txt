@@ -48,10 +48,11 @@ foreach(p LIB BIN INCLUDE CMAKE)
   unset(_path)
 endforeach()
 
+set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
+
 add_subdirectory(external/upstream)
 
 include(ExternalProject)
-
 ExternalProject_Add(${PROJECT_NAME}_core
   DEPENDS
     message_external
