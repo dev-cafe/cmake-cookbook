@@ -8,7 +8,6 @@ appveyor-vs:
 
 appveyor-msys:
   failing_generators:
-    - 'MSYS Makefiles'
     - 'Ninja'
 
 travis-osx:
@@ -20,7 +19,7 @@ travis-linux:
   failing_generators:
     - 'Ninja'
   definitions:
-    - CMAKE_TOOLCHAIN_FILE: $TRAVIS_BUILD_DIR/chapter-13/toolchain-travis-linux.cmake
+    - CMAKE_TOOLCHAIN_FILE: $TRAVIS_BUILD_DIR/chapter-13/toolchain-travis.cmake
     - CMAKE_INSTALL_PREFIX: $TRAVIS_BUILD_DIR/../install
 
 local:
