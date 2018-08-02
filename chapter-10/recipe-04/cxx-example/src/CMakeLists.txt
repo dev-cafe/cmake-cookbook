@@ -43,15 +43,6 @@ set_target_properties(use_message
     INSTALL_RPATH_USE_LINK_PATH ON
   )
 
-enable_testing()
-
-add_test(
-  NAME
-    check_use_message
-  COMMAND
-    $<TARGET_FILE:use_message>
-  )
-
 install(
   TARGETS
     use_message

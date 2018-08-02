@@ -71,8 +71,15 @@ ExternalProject_Add(${PROJECT_NAME}_core
     -DCMAKE_PREFIX_PATH:PATH=${CMAKE_PREFIX_PATH}
   BUILD_ALWAYS
     1
-  TEST_BEFORE_INSTALL
-    1
+  )
+
+enable_testing()
+
+add_test(
+  NAME
+    check_use_message
+  COMMAND
+    ${STAGED_INSTALL_PREFIX}/${INSTALL_BINDIR}/use_message
   )
 
 # this one mimicks using DESTDIR
