@@ -67,6 +67,8 @@ before_build:
   - appveyor DownloadFile https://github.com/dev-cafe/cmake-cookbook/archive/%APPVEYOR_REPO_COMMIT%.zip
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\extract.bat'
 
+# the pipenv lock was added as workaround for pipenv complaining about wrong checksum
+# after upgrade to Python 3.7 on Appveyor
 build_script:
   - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv lock"
   - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv install"
