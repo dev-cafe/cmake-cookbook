@@ -63,8 +63,8 @@ else()
   ExternalProject_Add(boost_external
     URL
       https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.zip
-    URL_MD5
-      015ae4afa6f3e597232bfe1dab949ace
+    URL_HASH
+      SHA256=02d420e6908016d4ac74dfc712eec7d9616a7fc0da78b0a1b5b937536b2e01e8
     DOWNLOAD_NO_PROGRESS
       1
     UPDATE_COMMAND
