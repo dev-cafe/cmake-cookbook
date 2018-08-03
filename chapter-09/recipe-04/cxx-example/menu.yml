@@ -12,7 +12,6 @@ appveyor-vs:
 appveyor-msys:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
-    - CMAKE_CONFIGURATION_TYPES: 'Release'
 
 travis-osx:
   definitions:
