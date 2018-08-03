@@ -5,7 +5,7 @@ set(PATCHING_SCRIPT @PATCHING_SCRIPT@)
 
 # Look for patchelf, chrpath, install_tool_name
 set(_patcher "")
-list(APPEND _patchers patchelf chrpath install_tool_name)
+list(APPEND _patchers patchelf chrpath install_name_tool)
 foreach(p IN LISTS _patchers)
   find_program(${p}_FOUND
     NAMES
