@@ -23,7 +23,7 @@ else()
     set(_cxx_std_flag "/EHc /std:c++14")
   endif()
 
-  if(WIN32)
+  if(MSVC)
     set(_bootstrap "bootstrap.bat")
     set(_b2 "b2.exe")
   else()
@@ -77,7 +77,7 @@ else()
     BUILD_COMMAND
       <SOURCE_DIR>/${_b2} -q
            address-model=${_address_model}
-           link=static
+           link=shared
            runtime-link=shared
            threading=multi
            variant=release
@@ -89,7 +89,7 @@ else()
     INSTALL_COMMAND
       <SOURCE_DIR>/${_b2} -q install
            address-model=${_address_model}
-           link=static
+           link=shared
            runtime-link=shared
            threading=multi
            variant=release
