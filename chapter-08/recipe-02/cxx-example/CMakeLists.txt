@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
+
 list(APPEND BOOST_COMPONENTS_REQUIRED filesystem system)
 set(BOOST_MINIMUM_REQUIRED 1.61)
 add_subdirectory(external/upstream)
