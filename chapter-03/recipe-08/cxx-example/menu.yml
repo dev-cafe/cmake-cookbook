@@ -1,6 +1,6 @@
 appveyor-vs:
   definitions:
-    - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
+    - BOOST_ROOT: 'C:\Libraries\boost_1_67_0'
 
 travis-osx:
   definitions:
