@@ -20,10 +20,11 @@ in
       atlas
       boost155
       ccache
+      chrpath
       clang-tools
       cmake
-      dpkg
       doxygen_gui
+      dpkg
       eigen3_3
       exa
       gcc
