@@ -6,6 +6,10 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
+
+option(FFTW3_FORCE_SUPERBUILD "Always build FFTW3 on our own" OFF)
+
 add_subdirectory(external/upstream)
 
 include(ExternalProject)

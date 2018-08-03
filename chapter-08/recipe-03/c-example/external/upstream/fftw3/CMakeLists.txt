@@ -1,10 +1,14 @@
 find_package(FFTW3 CONFIG QUIET)
-if(FFTW3_FOUND)
+if(FFTW3_FOUND AND (NOT FFTW3_FORCE_SUPERBUILD))
   get_property(_loc TARGET FFTW3::fftw3 PROPERTY LOCATION)
   message(STATUS "Found FFTW3: ${_loc} (found version ${FFTW3_VERSION})")
   add_library(fftw3_external INTERFACE)  # dummy
 else()
-  message(STATUS "Suitable FFTW3 could not be located. Downloading and building!")
+  if(FFTW3_FORCE_SUPERBUILD)
+    message(STATUS "Forcing superbuild of FFTW3.")
+  else()
+    message(STATUS "Suitable FFTW3 could not be located. Downloading and building!")
+  endif()
   include(ExternalProject)
   ExternalProject_Add(fftw3_external
     URL
@@ -17,6 +21,8 @@ else()
       ""
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX=${DEPS_INSTALL_PREFIX}
+    CMAKE_CACHE_ARGS
+      -DCMAKE_C_FLAGS:STRING=-DWITH_OUR_MALLOC
     )
   include(GNUInstallDirs)
   set(FFTW3_DIR ${DEPS_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/cmake/fftw3
