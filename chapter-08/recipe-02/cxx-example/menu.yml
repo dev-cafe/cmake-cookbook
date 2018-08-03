@@ -1,6 +1,6 @@
 appveyor-vs:
-  definitions:
-    - Boost_FORCE_SUPERBUILD: 'ON'
+  skip_generators:
+    - 'Visual Studio 15 2017 Win64'
 
 appveyor-msys:
   definitions:

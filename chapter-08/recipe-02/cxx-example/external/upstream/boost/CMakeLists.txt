@@ -22,24 +22,10 @@ else()
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
     set(_toolset "intel")
     set(_cxx_std_flag "-std=c++11")
-  elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    set(_toolset "msvc")
-    set(_cxx_std_flag "/EHc /std:c++14")
   endif()
 
-  if(MSVC)
-    set(_bootstrap "bootstrap.bat")
-    set(_b2 "b2.exe")
-  else()
-    set(_bootstrap "bootstrap.sh")
-    set(_b2 "b2")
-  endif()
-
-  if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-    set(_address_model 64)
-  else()
-    set(_address_model 32)
-  endif()
+  set(_bootstrap "bootstrap.sh")
+  set(_b2 "b2")
 
   # Non-empty list. Compiled libraries needed
   if(NOT "${BOOST_COMPONENTS_REQUIRED}" STREQUAL "")
@@ -80,9 +66,7 @@ else()
       ${_bootstrap_select_libraries}
     BUILD_COMMAND
       <SOURCE_DIR>/${_b2} -q
-           address-model=${_address_model}
            link=shared
-           runtime-link=shared
            threading=multi
            variant=release
            toolset=${_toolset}
@@ -92,18 +76,16 @@ else()
       1
     INSTALL_COMMAND
       <SOURCE_DIR>/${_b2} -q install
-           address-model=${_address_model}
            link=shared
-           runtime-link=shared
            threading=multi
            variant=release
            toolset=${_toolset}
            ${_b2_select_libraries}
            ${_build_user_config_args}
-    #LOG_BUILD
-    #  1
-    #LOG_INSTALL
-    #  1
+    LOG_BUILD
+      1
+    LOG_INSTALL
+      1
     BUILD_BYPRODUCTS
       "${_build_byproducts}"
     )
