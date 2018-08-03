@@ -6,8 +6,6 @@ project(recipe-01
   VERSION 1.0.0
   )
 
-option(BUILD_SHARED_LIBS "Whether to build shared libraries" ON)
-
 # <<< General set up >>>
 
 set(CMAKE_CXX_STANDARD 11)
@@ -47,15 +45,6 @@ foreach(p LIB BIN INCLUDE CMAKE)
   message(STATUS "Installing ${p} to ${_path}")
   unset(_path)
 endforeach()
-
-# Prepare RPATH
-file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
-if(APPLE)
-  set(_rpath "@loader_path/${_rel}")
-else()
-  set(_rpath "\$ORIGIN/${_rel}")
-endif()
-file(TO_NATIVE_PATH "${_rpath}/${INSTALL_LIBDIR}" message_RPATH)
 
 add_subdirectory(src)
 
