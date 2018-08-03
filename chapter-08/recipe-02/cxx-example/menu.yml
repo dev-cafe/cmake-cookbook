@@ -1,26 +1,21 @@
 appveyor-vs:
   definitions:
-    - Boost_NO_BOOST_CMAKE: 'ON'
-    - Boost_NO_SYSTEM_PATHS: 'ON'
+    - Boost_FORCE_SUPERBUILD: 'ON'
 
 appveyor-msys:
   definitions:
-    - Boost_NO_BOOST_CMAKE: 'ON'
-    - Boost_NO_SYSTEM_PATHS: 'ON'
+    - Boost_FORCE_SUPERBUILD: 'ON'
 
 travis-linux:
   definitions:
-    - Boost_NO_BOOST_CMAKE: 'ON'
-    - Boost_NO_SYSTEM_PATHS: 'ON'
+    - Boost_FORCE_SUPERBUILD: 'ON'
 
 travis-osx:
   definitions:
-    - Boost_NO_BOOST_CMAKE: 'ON'
-    - Boost_NO_SYSTEM_PATHS: 'ON'
+    - Boost_FORCE_SUPERBUILD: 'ON'
 
 local:
   definitions:
-    - Boost_NO_BOOST_CMAKE: 'ON'
-    - Boost_NO_SYSTEM_PATHS: 'ON'
+    - Boost_FORCE_SUPERBUILD: 'ON'
   env:
     - VERBOSE_OUTPUT: 'ON'

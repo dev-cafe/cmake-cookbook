@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
 
+option(Boost_FORCE_SUPERBUILD "Always build Boost on our own" OFF)
+
 list(APPEND BOOST_COMPONENTS_REQUIRED filesystem system)
 set(BOOST_MINIMUM_REQUIRED 1.61)
 add_subdirectory(external/upstream)
