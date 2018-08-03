@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append(os.getenv('ACCOUNT_MODULE_PATH'))
 
-from account import Account
+from account import Account  # isort: skip
 
 account1 = Account()
 
