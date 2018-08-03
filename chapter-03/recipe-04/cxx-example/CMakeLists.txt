@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FortranCInterface)
 
-FortranCInterface_VERIFY()
+FortranCInterface_VERIFY(CXX)
 
 FortranCInterface_HEADER(
   fc_mangle.h

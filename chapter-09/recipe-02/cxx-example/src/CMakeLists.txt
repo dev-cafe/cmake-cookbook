@@ -1,7 +1,13 @@
-add_subdirectory(linalg_wrap)
+add_subdirectory(math)
 
-add_executable(linear-algebra linear-algebra.cpp)
+add_executable(linear-algebra "")
+
+target_sources(linear-algebra
+  PRIVATE
+    linear-algebra.cpp
+  )
+
 target_link_libraries(linear-algebra
   PRIVATE
-    linalg_wrap
+    math
   )

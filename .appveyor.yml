@@ -41,7 +41,7 @@ environment:
 
 init:
   - set PATH=C:\msys64\MINGW64\bin;C:\msys64\usr\bin;%PATH%
-  - set PATH=C:\Python36-x64;C:\Python36-x64\Scripts;%PATH%
+  - set PATH=C:\Python37-x64;C:\Python37-x64\Scripts;%PATH%
   # Remove Python 2.7 from path
   - set PATH=%PATH:C:\Python27;=%
   - set PATH=%PATH:C:\Python27\Scripts;=%
@@ -67,12 +67,16 @@ before_build:
   - appveyor DownloadFile https://github.com/dev-cafe/cmake-cookbook/archive/%APPVEYOR_REPO_COMMIT%.zip
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\extract.bat'
 
+# the pipenv lock was added as workaround for pipenv complaining about wrong checksum
+# after upgrade to Python 3.7 on Appveyor
 build_script:
+  - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv lock"
   - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv install"
   - if "%ANACONDA_TESTS_ONLY%"=="1" (
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-04'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'"
     ) else (
+      bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-09/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-01/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-02/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-03/recipe-*'" &&

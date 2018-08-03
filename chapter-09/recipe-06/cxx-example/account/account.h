@@ -1,4 +1,4 @@
-/* we do not use pragma once because CFFI then issues a warning */
+/* CFFI would issue warning with pragma once */
 #ifndef ACCOUNT_H_INCLUDED
 #define ACCOUNT_H_INCLUDED
 

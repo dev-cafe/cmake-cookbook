@@ -50,11 +50,20 @@ Sometimes we expect a failure. For instance let us imagine we expect
 a test to fail on AppVeyor when using the Ninja generator. We can express this using:
 
 ```
-appveyor:
+appveyor-msys:
   definitions:
     - CMAKE_Fortran_COMPILER: 'gfortran'
   failing_generators:
     - 'Ninja'
+```
+
+
+## How to skip a recipe completely
+
+```
+appveyor-msys:
+  skip_generators:
+    - 'MSYS Makefiles'
 ```
 
 

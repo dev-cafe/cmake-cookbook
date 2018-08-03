@@ -1,32 +1,32 @@
-from .cffi_helpers import get_lib_handle
-from .version import __version__
+from subprocess import check_output
+from cffi import FFI
 import os
 import sys
 
 
-def get_env(v):
-    _v = os.getenv(v)
-    if _v is None:
-        sys.stderr.write('ERROR: variable {0} is undefined\n'.format(v))
-        sys.exit(1)
-    return _v
+def get_lib_handle(definitions, header_file, library_file):
+    ffi = FFI()
+    command = ['cc', '-E'] + definitions + [header_file]
+    interface = check_output(command).decode('utf-8')
+
+    # remove possible \r characters on windows which
+    # would confuse cdef
+    _interface = [l.strip('\r') for l in interface.split('\n')]
+
+    ffi.cdef('\n'.join(_interface))
+    lib = ffi.dlopen(library_file)
+    return lib
 
 
-_this_path = os.path.dirname(os.path.realpath(__file__))
+_header_file = os.getenv('ACCOUNT_HEADER_FILE')
+assert _header_file is not None
 
-_library_dir = os.getenv('ACCOUNT_LIBRARY_DIR')
-if _library_dir is None:
-    _library_dir = os.path.join(_this_path, 'lib')
+_library_file = os.getenv('ACCOUNT_LIBRARY_FILE')
+assert _library_file is not None
 
-_include_dir = os.getenv('ACCOUNT_INCLUDE_DIR')
-if _include_dir is None:
-    _include_dir = os.path.join(_this_path, 'include')
-
-_lib = get_lib_handle(['-DACCOUNT_API=', '-DACCOUNT_NOINCLUDE'],
-                      'account.h',
-                      'account',
-                      _library_dir,
-                      _include_dir)
+_lib = get_lib_handle(definitions=['-DACCOUNT_API=', '-DACCOUNT_NOINCLUDE'],
+                      header_file=_header_file,
+                      library_file=_library_file)
 
 
 # we change names to obtain a more pythonic API

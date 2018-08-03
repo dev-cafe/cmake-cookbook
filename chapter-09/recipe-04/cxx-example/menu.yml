@@ -3,6 +3,15 @@ appveyor-vs:
     - VERBOSE_OUTPUT: 'True'
   definitions:
     - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
+    - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CONFIGURATION_TYPES: 'Release'
+  # fails because packaged boost only provides python27
+  failing_generators:
+    - 'Visual Studio 15 2017 Win64'
+
+appveyor-msys:
+  definitions:
+    - CMAKE_BUILD_TYPE: 'Release'
 
 travis-osx:
   definitions:

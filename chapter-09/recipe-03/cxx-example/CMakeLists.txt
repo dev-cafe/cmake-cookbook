@@ -9,6 +9,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# we default to Release build type
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release")
+endif()
+
 # for testing we will need the python interpreter
 find_package(PythonInterp REQUIRED)
 
@@ -24,6 +29,8 @@ set_source_files_properties(account.pyx PROPERTIES CYTHON_IS_CXX TRUE)
 # create python module
 cython_add_module(account account.pyx account.cpp)
 
+# workaround for problem with different names of some math
+# functions on Windows MSYS
 if(WIN32 AND (NOT MSVC))
   target_compile_definitions(account
     PRIVATE
@@ -45,11 +52,6 @@ add_test(
   NAME
     python_test
   COMMAND
+    ${CMAKE_COMMAND} -E env ACCOUNT_MODULE_PATH=$<TARGET_FILE_DIR:account>
     ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test.py
-  )
-
-# test needs to know the location of the compiled module
-set_tests_properties(python_test
-  PROPERTIES
-    ENVIRONMENT PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}:$ENV{PYTHONPATH}
   )

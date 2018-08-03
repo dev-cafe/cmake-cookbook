@@ -23,6 +23,7 @@ def parse_yaml(file_name):
 def extract_menu_file(file_name, generator, ci_environment):
     '''
     Reads file_name in yml format and returns:
+    skip (bool): if True, then skip the current generator
     expected_failure (bool): if True, then the current generator is not supported
     env: dictionary of environment variables passed to CMake
     definitions: dictionary of CMake configure-step definitions
@@ -37,7 +38,12 @@ def extract_menu_file(file_name, generator, ci_environment):
             targets.append(entry)
 
     if ci_environment not in config:
-        return False, {}, {}, targets
+        return False, False, {}, {}, targets
+
+    skip_generators = []
+    if 'skip_generators' in config[ci_environment]:
+        skip_generators = config[ci_environment]['skip_generators']
+    skip = generator in skip_generators
 
     failing_generators = []
     if 'failing_generators' in config[ci_environment]:
@@ -58,4 +64,4 @@ def extract_menu_file(file_name, generator, ci_environment):
             for k, v in entry.items():
                 definitions[k] = v
 
-    return expect_failure, env, definitions, targets
+    return skip, expect_failure, env, definitions, targets

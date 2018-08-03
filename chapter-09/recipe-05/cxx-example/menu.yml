@@ -1,2 +1,8 @@
 targets:
   - test
+
+# fetchcontent on msys never completes
+# not sure why
+appveyor-msys:
+  skip_generators:
+    - 'MSYS Makefiles'
