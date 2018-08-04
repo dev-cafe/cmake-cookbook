@@ -9,3 +9,4 @@ appveyor-vs:
 appveyor-msys:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
+    - CMAKE_CXX_FLAGS: '-D_hypot=hypot'

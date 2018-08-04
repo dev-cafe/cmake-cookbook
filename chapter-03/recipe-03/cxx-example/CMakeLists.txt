@@ -47,15 +47,6 @@ target_sources(pure-embedding
     Py${PYTHON_VERSION_MAJOR}-pure-embedding.cpp
   )
 
-# workaround for problem with different names of some math
-# functions on Windows MSYS
-if(WIN32 AND (NOT MSVC))
-  target_compile_definitions(pure-embedding
-    PUBLIC
-      "_hypot=hypot"
-    )
-endif()
-
 target_include_directories(pure-embedding
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}

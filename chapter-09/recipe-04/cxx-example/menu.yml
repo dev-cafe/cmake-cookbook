@@ -13,7 +13,10 @@ appveyor-vs:
 appveyor-msys:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
+    - Boost_USE_STATIC_LIBS: 'ON'
+    - Boost_USE_MULTITHREADED: 'ON'
     - Boost_USE_STATIC_RUNTIME: 'ON'
+    - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
 
 travis-osx:
   definitions:

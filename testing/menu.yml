@@ -43,6 +43,8 @@ travis-osx:
     - 'DIE_HARD': 'True'
 
 local:
+  env:
+    - 'VERBOSE_OUTPUT': 'True'
   definitions:
     - CMAKE_C_COMPILER: 'gcc'
     - CMAKE_CXX_COMPILER: 'g++'

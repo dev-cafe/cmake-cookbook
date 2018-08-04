@@ -4,5 +4,7 @@ targets:
 # fetchcontent on msys never completes
 # not sure why
 appveyor-msys:
+  definitions:
+    - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
   skip_generators:
     - 'MSYS Makefiles'
