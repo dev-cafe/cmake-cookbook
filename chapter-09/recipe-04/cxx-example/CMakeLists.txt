@@ -34,9 +34,6 @@ list(
 set(_boost_component_found "")
 
 foreach(_component IN ITEMS ${_components})
-  set(Boost_USE_STATIC_LIBS ON)
-  set(Boost_USE_MULTITHREADED ON)
-  set(Boost_USE_STATIC_RUNTIME ON)
   find_package(Boost COMPONENTS ${_component})
   if(Boost_FOUND)
     set(_boost_component_found ${_component})
