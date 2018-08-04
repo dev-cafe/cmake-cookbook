@@ -1,4 +1,4 @@
-find_package(Eigen3 3.3.4 QUIET CONFIG)
+find_package(Eigen3 3.3.5 QUIET CONFIG)
 if(TARGET Eigen3::Eigen AND (NOT Eigen3_FORCE_SUPERBUILD))
   message(STATUS "Found Eigen3: ${EIGEN3_INCLUDE_DIR} (found version ${EIGEN3_VERSION_STRING})")
   add_library(eigen3_external INTERFACE)  # dummy
@@ -13,11 +13,12 @@ else()
     GIT_REPOSITORY
       https://github.com/eigenteam/eigen-git-mirror.git
     GIT_TAG
-      3.3.4
+      3.3.5
     UPDATE_COMMAND
       ""
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX=${DEPS_INSTALL_PREFIX}
+      -DBUILD_TESTING=OFF
     )
   set(Eigen3_DIR ${DEPS_INSTALL_PREFIX}/share/eigen3/cmake
     CACHE PATH
