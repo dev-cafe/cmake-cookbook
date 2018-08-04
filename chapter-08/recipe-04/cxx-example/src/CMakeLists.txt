@@ -11,5 +11,12 @@ add_executable(linear-algebra linear-algebra.cpp)
 target_link_libraries(linear-algebra
   PUBLIC
     Eigen3::Eigen
-    OpenMP::OpenMP_CXX
+  )
+set_target_properties(
+  linear-algebra
+  PROPERTIES
+    COMPILE_FLAGS
+      ${OpenMP_CXX_FLAGS}
+    LINK_FLAGS
+      ${OpenMP_CXX_FLAGS}
   )

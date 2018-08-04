@@ -1,6 +1,6 @@
 find_package(message 1 CONFIG QUIET)
 if(message_FOUND)
-  get_property(_loc TARGET message::message PROPERTY LOCATION)
+  get_property(_loc TARGET message::message-shared PROPERTY LOCATION)
   message(STATUS "Found message: ${_loc} (found version ${message_VERSION})")
   add_library(message_external INTERFACE)  # dummy
 else()
@@ -15,10 +15,19 @@ else()
       ""
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX=${DEPS_INSTALL_PREFIX}
+      -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
       -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
     CMAKE_CACHE_ARGS
       -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}
+    TEST_AFTER_INSTALL
+      1
     )
-  set(message_DIR ${DEPS_INSTALL_PREFIX}/share/cmake/message
-    CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
+  if(WIN32 AND NOT CYGWIN)
+    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/CMake)
+  else()
+    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/share/cmake)
+  endif()
+  file(TO_NATIVE_PATH "${DEF_message_DIR}/message" DEF_message_DIR)
+  set(message_DIR ${DEF_message_DIR}
+      CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
 endif()

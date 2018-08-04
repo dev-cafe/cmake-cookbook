@@ -52,6 +52,7 @@ cache:
 
 install:
   - python -m pip install pipenv
+  - bash -c "pacman -Ss mercurial"
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\anaconda.ps1
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1

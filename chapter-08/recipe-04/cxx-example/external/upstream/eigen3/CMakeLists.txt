@@ -1,14 +1,18 @@
 find_package(Eigen3 3.3.4 QUIET CONFIG)
-if(TARGET Eigen3::Eigen)
+if(TARGET Eigen3::Eigen AND (NOT Eigen3_FORCE_SUPERBUILD))
   message(STATUS "Found Eigen3: ${EIGEN3_INCLUDE_DIR} (found version ${EIGEN3_VERSION_STRING})")
   add_library(eigen3_external INTERFACE)  # dummy
 else()
-  message(STATUS "Suitable Eigen3 could not be located. Downloading and building!")
+  if(Eigen3_FORCE_SUPERBUILD)
+    message(STATUS "Forcing superbuild of Eigen3.")
+  else()
+    message(STATUS "Suitable Eigen3 could not be located. Downloading and building!")
+  endif()
   include(ExternalProject)
   ExternalProject_Add(eigen3_external
-    HG_REPOSITORY
-      https://bitbucket.org/eigen/eigen
-    HG_TAG
+    GIT_REPOSITORY
+      https://github.com/eigenteam/eigen-git-mirror.git
+    GIT_TAG
       3.3.4
     UPDATE_COMMAND
       ""

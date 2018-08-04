@@ -1,0 +1,21 @@
+appveyor-vs:
+  definitions:
+    - FFTW3_FORCE_SUPERBUILD: 'ON'
+
+appveyor-msys:
+  definitions:
+    - FFTW3_FORCE_SUPERBUILD: 'ON'
+
+travis-linux:
+  definitions:
+    - FFTW3_FORCE_SUPERBUILD: 'ON'
+
+travis-osx:
+  definitions:
+    - FFTW3_FORCE_SUPERBUILD: 'ON'
+
+local:
+  definitions:
+    - FFTW3_FORCE_SUPERBUILD: 'ON'
+  env:
+    - VERBOSE_OUTPUT: 'ON'

@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
+
+option(Eigen3_FORCE_SUPERBUILD "Always build Eigen3 on our own" OFF)
+
 add_subdirectory(external/upstream)
 
 include(ExternalProject)

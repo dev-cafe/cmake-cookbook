@@ -1,5 +1,5 @@
-# Managing dependencies with a superbuild IV. The HDF5 library
+# Managing your project as a superbuild
 
 Abstract to be written ...
 
-- [fortran-example](fortran-example/)
+- [cxx-example](cxx-example/)
