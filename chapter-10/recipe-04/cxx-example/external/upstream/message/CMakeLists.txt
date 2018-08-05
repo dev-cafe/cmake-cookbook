@@ -21,13 +21,21 @@ else()
       -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}
     TEST_AFTER_INSTALL
       1
+    DOWNLOAD_NO_PROGRESS
+      1
+    LOG_CONFIGURE
+      1
+    LOG_BUILD
+      1
+    LOG_INSTALL
+      1
     )
   if(WIN32 AND NOT CYGWIN)
     set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/CMake)
   else()
-    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/share/cmake)
+    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/share/cmake/message)
   endif()
-  file(TO_NATIVE_PATH "${DEF_message_DIR}/message" DEF_message_DIR)
+  file(TO_NATIVE_PATH "${DEF_message_DIR}" DEF_message_DIR)
   set(message_DIR ${DEF_message_DIR}
       CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
 endif()
