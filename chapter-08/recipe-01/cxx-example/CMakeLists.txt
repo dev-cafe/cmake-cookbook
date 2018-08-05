@@ -7,6 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(ExternalProject)
+
 ExternalProject_Add(${PROJECT_NAME}_core
   SOURCE_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/src
