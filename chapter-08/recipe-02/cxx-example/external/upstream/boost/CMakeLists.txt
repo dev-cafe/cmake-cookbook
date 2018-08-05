@@ -1,4 +1,4 @@
-find_package(Boost ${BOOST_MINIMUM_REQUIRED} QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
+find_package(Boost ${Boost_MINIMUM_REQUIRED} QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
 if(Boost_FOUND AND (NOT Boost_FORCE_SUPERBUILD))
   message(STATUS "Found Boost version ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}")
   add_library(boost_external INTERFACE)
@@ -6,7 +6,7 @@ else()
   if(Boost_FORCE_SUPERBUILD)
     message(STATUS "Forcing superbuild of Boost 1.61.0.")
   else()
-    message(STATUS "Suitable Boost ${BOOST_MINIMUM_REQUIRED} could not be located, Building Boost 1.61.0 instead.")
+    message(STATUS "Suitable Boost ${Boost_MINIMUM_REQUIRED} could not be located, Building Boost 1.61.0 instead.")
   endif()
 
   if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
@@ -23,9 +23,6 @@ else()
     set(_toolset "intel")
     set(_cxx_std_flag "-std=c++11")
   endif()
-
-  set(_bootstrap "bootstrap.sh")
-  set(_b2 "b2")
 
   # Non-empty list. Compiled libraries needed
   if(NOT "${BOOST_COMPONENTS_REQUIRED}" STREQUAL "")
@@ -60,12 +57,12 @@ else()
     UPDATE_COMMAND
       ""
     CONFIGURE_COMMAND
-      <SOURCE_DIR>/${_bootstrap}
+      <SOURCE_DIR>/bootstrap.sh
       --with-toolset=${_toolset}
       --prefix=${STAGED_INSTALL_PREFIX}/boost
       ${_bootstrap_select_libraries}
     BUILD_COMMAND
-      <SOURCE_DIR>/${_b2} -q
+      <SOURCE_DIR>/b2 -q
            link=shared
            threading=multi
            variant=release
@@ -77,7 +74,7 @@ else()
     BUILD_IN_SOURCE
       1
     INSTALL_COMMAND
-      <SOURCE_DIR>/${_b2} -q install
+      <SOURCE_DIR>/b2 -q install
            link=shared
            threading=multi
            variant=release
@@ -99,9 +96,6 @@ else()
 
   # Unset internal variables
   unset(_toolset)
-  unset(_bootstrap)
-  unset(_b2)
-  unset(_address_model)
   unset(_b2_needed_components)
   unset(_build_byproducts)
   unset(_boostrap_select_libraries)

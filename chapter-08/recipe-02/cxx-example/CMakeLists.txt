@@ -14,7 +14,7 @@ message(STATUS "${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}")
 option(Boost_FORCE_SUPERBUILD "Always build Boost on our own" OFF)
 
 list(APPEND BOOST_COMPONENTS_REQUIRED filesystem system)
-set(BOOST_MINIMUM_REQUIRED 1.61)
+set(Boost_MINIMUM_REQUIRED 1.61)
 add_subdirectory(external/upstream)
 
 include(ExternalProject)
@@ -22,7 +22,7 @@ ExternalProject_Add(${PROJECT_NAME}_core
   DEPENDS
     boost_external
   SOURCE_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_LIST_DIR}/src
   CMAKE_ARGS
     -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
     -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
