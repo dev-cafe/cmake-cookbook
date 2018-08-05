@@ -42,10 +42,8 @@ init:
   - set PATH=%PATH:C:\Python27\Scripts;=%
   # Add Anaconda to PATH
   - set PATH=C:\Deps\conda\Scripts;C:\Deps\conda\library\bin;%PATH%
-  # Add system Boost to PATH, but only for VS generator
-  - if "%GENERATOR%"=="Visual Studio 15 2017 Win64" (
-      set PATH=C:\Libraries\boost_1_67_0\lib64-msvc-14.1;%PATH%
-    )
+  # Add system Boost to PATH
+  - set PATH=C:\Libraries\boost_1_67_0\lib64-msvc-14.1;%PATH%
 
 cache:
   - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat
@@ -71,8 +69,6 @@ before_build:
 build_script:
   - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv lock"
   - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv install"
-  - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-09/recipe-04'"
-  - bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-04/recipe-04'"
   - if "%ANACONDA_TESTS_ONLY%"=="1" (
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-04'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'"
