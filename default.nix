@@ -34,7 +34,6 @@ in
       hdf5-fortran
       lcov
       libuuid
-      mercurial
       ninja-kitware
       openblas
       openmpi
