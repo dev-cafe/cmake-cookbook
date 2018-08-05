@@ -1,4 +1,4 @@
-# Managing dependencies with a superbuild III. The Eigen library
+# Managing dependencies with a superbuild III. The Google test framework
 
 Abstract to be written ...
 

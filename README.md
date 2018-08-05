@@ -113,7 +113,7 @@
 - [Using the superbuild pattern](chapter-08/recipe-01/README.md)
 - [Managing dependencies with a superbuild I. The Boost libraries](chapter-08/recipe-02/README.md)
 - [Managing dependencies with a superbuild II. The FFTW library](chapter-08/recipe-03/README.md)
-- [Managing dependencies with a superbuild III. The Eigen library](chapter-08/recipe-04/README.md)
+- [Managing dependencies with a superbuild III. The Google test framework](chapter-08/recipe-04/README.md)
 - [Managing your project as a superbuild](chapter-08/recipe-05/README.md)
 
 

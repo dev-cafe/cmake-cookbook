@@ -1,25 +1,2 @@
-appveyor-vs:
-  definitions:
-    - Eigen3_FORCE_SUPERBUILD: 'ON'
-
-appveyor-msys:
-  definitions:
-    - Eigen3_FORCE_SUPERBUILD: 'ON'
-
-travis-linux:
-  definitions:
-    - Eigen3_FORCE_SUPERBUILD: 'ON'
-
-# OpenMP does not work with clang
-travis-osx:
-  definitions:
-    - Eigen3_FORCE_SUPERBUILD: 'ON'
-  failing_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'
-
-local:
-  definitions:
-    - Eigen3_FORCE_SUPERBUILD: 'ON'
-  env:
-    - VERBOSE_OUTPUT: 'ON'
+targets:
+  - test
