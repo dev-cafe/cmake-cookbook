@@ -64,8 +64,6 @@ else()
       --with-toolset=${_toolset}
       --prefix=${STAGED_INSTALL_PREFIX}/boost
       ${_bootstrap_select_libraries}
-    #LOG_CONFIGURE
-    #  1
     BUILD_COMMAND
       <SOURCE_DIR>/${_b2} -q
            link=shared
