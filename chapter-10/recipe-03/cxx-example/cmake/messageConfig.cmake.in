@@ -1,5 +1,5 @@
 # messageConfig.cmake
-# ---------------------
+# -------------------
 #
 # message cmake module.
 # This module sets the following variables in your project:
