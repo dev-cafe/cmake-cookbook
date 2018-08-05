@@ -27,8 +27,8 @@ else()
       1
     LOG_BUILD
       1
-    LOG_INSTALL
-      1
+    #LOG_INSTALL
+    #  1
     )
   if(WIN32 AND NOT CYGWIN)
     set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/CMake)
@@ -36,6 +36,7 @@ else()
     set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/share/cmake)
   endif()
   file(TO_NATIVE_PATH "${DEF_message_DIR}/message" DEF_message_DIR)
+  message(STATUS "message_DIR : ${message_DIR}")
   set(message_DIR ${DEF_message_DIR}
       CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
 endif()
