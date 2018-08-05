@@ -2,7 +2,8 @@ appveyor-vs:
   env:
     - VERBOSE_OUTPUT: 'True'
   definitions:
-    - BOOST_ROOT: 'C:\tools\vcpkg\installed\x64-windows'
+    - BOOST_ROOT: 'C:\Libraries\boost_1_67_0'
+    - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB'  
     - CMAKE_BUILD_TYPE: 'Release'
     - CMAKE_CONFIGURATION_TYPES: 'Release'
   # fails because packaged boost only provides python27
@@ -12,6 +13,10 @@ appveyor-vs:
 appveyor-msys:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
+    - Boost_USE_STATIC_LIBS: 'ON'
+    - Boost_USE_MULTITHREADED: 'ON'
+    - Boost_USE_STATIC_RUNTIME: 'ON'
+    - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
 
 travis-osx:
   definitions:

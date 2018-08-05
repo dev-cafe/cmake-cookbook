@@ -29,15 +29,6 @@ set_source_files_properties(account.pyx PROPERTIES CYTHON_IS_CXX TRUE)
 # create python module
 cython_add_module(account account.pyx account.cpp)
 
-# workaround for problem with different names of some math
-# functions on Windows MSYS
-if(WIN32 AND (NOT MSVC))
-  target_compile_definitions(account
-    PRIVATE
-      "_hypot=hypot"
-    )
-endif()
-
 # location of account.hpp
 target_include_directories(account
   PRIVATE

@@ -34,9 +34,6 @@ list(
 set(_boost_component_found "")
 
 foreach(_component IN ITEMS ${_components})
-  set(Boost_USE_STATIC_LIBS ON)
-  set(Boost_USE_MULTITHREADED ON)
-  set(Boost_USE_STATIC_RUNTIME ON)
   find_package(Boost COMPONENTS ${_component})
   if(Boost_FOUND)
     set(_boost_component_found ${_component})
@@ -53,15 +50,6 @@ add_library(account
   MODULE
     account.cpp
   )
-
-# workaround for problem with different names of some math
-# functions on Windows MSYS
-if(WIN32 AND (NOT MSVC))
-  target_compile_definitions(account
-    PUBLIC
-      "_hypot=hypot"
-    )
-endif()
 
 target_link_libraries(account
   PUBLIC
