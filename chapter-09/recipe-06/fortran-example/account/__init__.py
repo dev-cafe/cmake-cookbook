@@ -26,7 +26,7 @@ def get_lib_handle(definitions, header_file, library_file):
 # or if this is not found then using environment variables
 _this_path = Path(os.path.dirname(os.path.realpath(__file__)))
 _cfg_file = _this_path / 'interface_file_names.cfg'
-if os.path.isfile(_cfg_file):
+if _cfg_file.exists():
     config = ConfigParser()
     config.read(_cfg_file)
     header_file_name = config.get('configuration', 'header_file_name')
@@ -40,7 +40,6 @@ else:
     assert _header_file is not None
     _library_file = os.getenv('ACCOUNT_LIBRARY_FILE')
     assert _library_file is not None
-
 
 _lib = get_lib_handle(definitions=['-DACCOUNT_API=', '-DACCOUNT_NOINCLUDE'],
                       header_file=_header_file,
