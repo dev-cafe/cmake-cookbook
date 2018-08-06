@@ -21,8 +21,8 @@ find_package(PythonInterp REQUIRED)
 find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} EXACT REQUIRED)
 
 # now search for the boost component
-# depending on the boost version it is called either python, python2,
-# python27, python3, python36, python37, ...
+# depending on the boost version it is called either python,
+# python2, python27, python3, python36, python37, ...
 
 list(
   APPEND _components
