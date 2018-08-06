@@ -1,3 +1,0 @@
-appveyor-msys:
-  definitions:
-    - CMAKE_CXX_FLAGS: '-D_hypot=hypot'

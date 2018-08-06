@@ -15,7 +15,7 @@ cd "${build_directory}"
 ls -l ..
 cp ../account/test.py .
 
-PIPENV_MAX_DEPTH=1 pipenv install ..
+env PIPENV_MAX_DEPTH=1 pipenv install ..
 pipenv run python test.py
 
 exit $?
