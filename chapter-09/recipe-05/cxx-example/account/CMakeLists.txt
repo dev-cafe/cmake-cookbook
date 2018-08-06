@@ -33,17 +33,3 @@ set_target_properties(account
     PREFIX "${PYTHON_MODULE_PREFIX}"
     SUFFIX "${PYTHON_MODULE_EXTENSION}"
   )
-
-file(
-  COPY
-    __init__.py
-    version.py
-  DESTINATION
-    ${CMAKE_CURRENT_BINARY_DIR}
-  )
-
-install(
-  TARGETS
-    account
-  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}
-  )
