@@ -3,7 +3,6 @@ import os
 import sys
 from distutils import spawn
 from distutils.sysconfig import get_python_lib
-import pathlib
 
 from setuptools import setup
 
@@ -31,14 +30,10 @@ def extend_build():
                 spawn.spawn(cmake_configure_command)
                 spawn.spawn(
                     ['cmake', '--build', _build_dir, '--target', 'install'])
-                sys.stderr.write("DEBUG FIND\n")
-                for path, subdirs, files in os.walk(get_python_lib()):
-                    for name in files:
-                        if 'account' in path:
-                            sys.stderr.write('{0}\n'.format(pathlib.PurePath(path, name)))
                 os.chdir(cwd)
             except spawn.DistutilsExecError:
                 sys.stderr.write("Error while building with CMake\n")
+                sys.exit(-1)
             _build.build.run(self)
 
     return build
