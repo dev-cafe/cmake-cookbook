@@ -32,55 +32,55 @@ matrix:
             - uuid-dev
       env:
         - CMAKE_VERSION="3.11.2"
-        - GENERATOR="Unix Makefiles"
+        - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: linux
       addons: *1
       env:
         - CMAKE_VERSION="3.11.2"
-        - GENERATOR="Unix Makefiles"
+        - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
         - ANACONDA_TESTS_ONLY=1
     - os: linux
       addons: *1
       env:
         - CMAKE_VERSION="3.11.2"
-        - GENERATOR="Ninja"
+        - CMAKE_GENERATOR="Ninja"
         - BUILDFLAGS="-v"
     - os: linux
       addons: *1
       env:
         - CMAKE_VERSION="3.5.2"
-        - GENERATOR="Unix Makefiles"
+        - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: linux
       addons: *1
       env:
         - CMAKE_VERSION="3.5.2"
-        - GENERATOR="Unix Makefiles"
+        - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
         - ANACONDA_TESTS_ONLY=1
     - os: linux
       addons: *1
       env:
         - CMAKE_VERSION="3.5.2"
-        - GENERATOR="Ninja"
+        - CMAKE_GENERATOR="Ninja"
         - BUILDFLAGS="-v"
     - os: osx
       osx_image: xcode9.2
       env:
-        - GENERATOR="Unix Makefiles"
+        - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: osx
       osx_image: xcode9.2
       env:
-        - GENERATOR="Unix Makefiles"
+        - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
         - ANACONDA_TESTS_ONLY=1
     - os: osx
       osx_image: xcode9.2
       env:
-        - GENERATOR="Ninja"
+        - CMAKE_GENERATOR="Ninja"
         - BUILDFLAGS="-v"
 
 cache:

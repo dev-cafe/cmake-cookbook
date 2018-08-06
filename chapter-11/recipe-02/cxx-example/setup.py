@@ -24,7 +24,7 @@ def extend_build():
                     '-B{0}'.format(_build_dir),
                     '-DCMAKE_INSTALL_PREFIX={0}'.format(_prefix),
                 ]
-                _generator = os.getenv('GENERATOR')
+                _generator = os.getenv('CMAKE_GENERATOR')
                 if _generator is not None:
                     cmake_configure_command.append('-G{0}'.format(_generator))
                 spawn.spawn(cmake_configure_command)

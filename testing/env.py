@@ -9,7 +9,7 @@ def get_ci_environment():
         else:
             ci_environment = 'travis-linux'
     elif os.environ.get('APPVEYOR'):
-        generator = os.environ.get('GENERATOR')
+        generator = os.environ.get('CMAKE_GENERATOR')
         if 'Visual Studio' in generator:
             ci_environment = 'appveyor-vs'
         else:
@@ -22,7 +22,7 @@ def get_ci_environment():
 
 
 def get_generator():
-    generator = os.environ.get('GENERATOR')
+    generator = os.environ.get('CMAKE_GENERATOR')
     if generator is None:
         generator = 'Unix Makefiles'
     return generator
