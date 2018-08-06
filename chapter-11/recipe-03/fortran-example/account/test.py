@@ -1,4 +1,8 @@
-import account
+import os
+import sys
+sys.path.append(os.getenv('ACCOUNT_MODULE_PATH'))
+
+import account  # isort: skip
 
 account1 = account.new()
 
