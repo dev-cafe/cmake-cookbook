@@ -16,11 +16,12 @@ option(FFTW3_FORCE_SUPERBUILD "Always build FFTW3 on our own" OFF)
 add_subdirectory(external/upstream)
 
 include(ExternalProject)
+
 ExternalProject_Add(${PROJECT_NAME}_core
   DEPENDS
     fftw3_external
   SOURCE_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_LIST_DIR}/src
   CMAKE_ARGS
     -DFFTW3_DIR=${FFTW3_DIR}
     -DCMAKE_C_STANDARD=${CMAKE_C_STANDARD}

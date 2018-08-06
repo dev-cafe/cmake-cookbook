@@ -12,19 +12,19 @@ else()
   include(ExternalProject)
   ExternalProject_Add(fftw3_external
     URL
-      http://www.fftw.org/fftw-3.3.7.tar.gz
+      http://www.fftw.org/fftw-3.3.8.tar.gz
     URL_HASH
-      MD5=0d5915d7d39b3253c1cc05030d79ac47
+      MD5=8aac833c943d8e90d51b697b27d4384d
     DOWNLOAD_NO_PROGRESS
       1
+    UPDATE_COMMAND
+      ""
     LOG_CONFIGURE
       1
     LOG_BUILD
       1
     LOG_INSTALL
       1
-    UPDATE_COMMAND
-      ""
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX=${STAGED_INSTALL_PREFIX}
       -DBUILD_TESTS=OFF

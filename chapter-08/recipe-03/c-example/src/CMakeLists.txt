@@ -7,12 +7,7 @@ get_property(_loc TARGET FFTW3::fftw3 PROPERTY LOCATION)
 message(STATUS "Found FFTW3: ${_loc} (found version ${FFTW3_VERSION})")
 
 add_executable(fftw_example fftw_example.c)
-# target_include_directories is needed because FFTW does not export headers
-target_include_directories(fftw_example
-  SYSTEM
-  PRIVATE
-    ${FFTW3_INCLUDE_DIRS}
-  )
+
 target_link_libraries(fftw_example
   PRIVATE
     FFTW3::fftw3
