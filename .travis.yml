@@ -2,6 +2,7 @@ language: cpp
 sudo: false
 dist: trusty
 matrix:
+  fast_finish: true
   include:
     - os: linux
       addons: &1
