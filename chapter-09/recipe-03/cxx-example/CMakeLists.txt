@@ -17,7 +17,7 @@ endif()
 # for testing we will need the python interpreter
 find_package(PythonInterp REQUIRED)
 
-# directory contains UseCython.cmake and FindCython.cmake
+# directory containing UseCython.cmake and FindCython.cmake
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake-cython)
 
 # this defines cython_add_module

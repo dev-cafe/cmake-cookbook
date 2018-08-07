@@ -9,7 +9,7 @@ pipeline:
 
 matrix:
   include:
-    - GENERATOR: 'Unix Makefiles'
+    - CMAKE_GENERATOR: 'Unix Makefiles'
       BUILDFLAGS: 'VERBOSE=1'
-    - GENERATOR: 'Ninja'
+    - CMAKE_GENERATOR: 'Ninja'
       BUILDFLAGS: '-v'

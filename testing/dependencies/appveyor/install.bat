@@ -2,10 +2,10 @@ rem Finally found a use for De Morgan's laws of boolean algebra!
 rem We can't use logical OR in IF statements, so we check for the negation of
 rem the AND (implicit when chaining IF-s) of the negation of each separate statement
 set nonVSGenerator=true
-if not "%GENERATOR%"=="Ninja" if not "%GENERATOR%"=="MSYS Makefiles" set nonVSGenerator=false
+if not "%CMAKE_GENERATOR%"=="Ninja" if not "%CMAKE_GENERATOR%"=="MSYS Makefiles" set nonVSGenerator=false
 
 if "%nonVSGenerator%"=="true" (
-  echo "Using non-VS generator %GENERATOR%"
+  echo "Using non-VS generator %CMAKE_GENERATOR%"
   echo "Let's get MSYS64 working"
 
   rem upgrade the msys2 platform
@@ -25,7 +25,7 @@ if "%nonVSGenerator%"=="true" (
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-pkg-config"
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-zeromq"
 ) else (
-  echo "Using VS generator %GENERATOR%"
+  echo "Using VS generator %CMAKE_GENERATOR%"
   echo "Let's get VcPkg working"
 
   vcpkg install zeromq eigen3 --triplet x64-windows

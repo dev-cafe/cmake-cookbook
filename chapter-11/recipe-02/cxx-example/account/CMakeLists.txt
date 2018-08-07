@@ -1,22 +1,38 @@
-# define minimum cmake version
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+include(FetchContent)
 
-# project name and supported language
-project(account-project LANGUAGES CXX)
+FetchContent_Declare(
+  pybind11_sources
+  GIT_REPOSITORY https://github.com/pybind/pybind11.git
+  GIT_TAG        v2.2
+)
 
-# require C++11
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+FetchContent_GetProperties(pybind11_sources)
 
-# the pybind11 package will provide the pybind11::module imported target
-find_package(pybind11 CONFIG REQUIRED)
+if(NOT pybind11_sources_POPULATED)
+  FetchContent_Populate(pybind11_sources)
+
+  add_subdirectory(
+    ${pybind11_sources_SOURCE_DIR}
+    ${pybind11_sources_BINARY_DIR}
+    )
+endif()
 
 # create python module
 add_library(account
   MODULE
     account.cpp
   )
+
+# workaround for problem with different names of some math
+# functions on Windows MSYS
+# this probably only concerns our CI setup on Appveyor
+# and may not be needed generally
+if(WIN32 AND (NOT MSVC))
+  target_compile_definitions(account
+    PUBLIC
+      "_hypot=hypot"
+    )
+endif()
 
 target_link_libraries(account
   PUBLIC
@@ -29,16 +45,9 @@ set_target_properties(account
     SUFFIX "${PYTHON_MODULE_EXTENSION}"
   )
 
-file(
-  COPY
-    __init__.py
-    version.py
-  DESTINATION
-    ${CMAKE_CURRENT_BINARY_DIR}
-  )
-
 install(
   TARGETS
     account
-  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}
+  LIBRARY
+    DESTINATION account
   )

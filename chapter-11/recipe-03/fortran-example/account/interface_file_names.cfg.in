@@ -1,0 +1,3 @@
+[configuration]
+header_file_name = account.h
+library_file_name = $<TARGET_FILE_NAME:account>
