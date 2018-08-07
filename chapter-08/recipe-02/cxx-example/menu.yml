@@ -1,0 +1,21 @@
+appveyor-vs:
+  skip_generators:
+    - 'Visual Studio 15 2017 Win64'
+
+appveyor-msys:
+  definitions:
+    - Boost_FORCE_SUPERBUILD: 'ON'
+
+travis-linux:
+  definitions:
+    - Boost_FORCE_SUPERBUILD: 'ON'
+
+travis-osx:
+  definitions:
+    - Boost_FORCE_SUPERBUILD: 'ON'
+
+local:
+  definitions:
+    - Boost_FORCE_SUPERBUILD: 'ON'
+  env:
+    - VERBOSE_OUTPUT: 'ON'

@@ -1,5 +1,2 @@
-# OpenMP does not work with clang
-travis-osx:
-  failing_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'
+targets:
+  - test

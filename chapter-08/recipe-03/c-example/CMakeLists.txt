@@ -6,14 +6,22 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
+
+set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage)
+message(STATUS "${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}")
+
+option(FFTW3_FORCE_SUPERBUILD "Always build FFTW3 on our own" OFF)
+
 add_subdirectory(external/upstream)
 
 include(ExternalProject)
+
 ExternalProject_Add(${PROJECT_NAME}_core
   DEPENDS
     fftw3_external
   SOURCE_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_LIST_DIR}/src
   CMAKE_ARGS
     -DFFTW3_DIR=${FFTW3_DIR}
     -DCMAKE_C_STANDARD=${CMAKE_C_STANDARD}
