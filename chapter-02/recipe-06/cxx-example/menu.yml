@@ -1,7 +1,11 @@
-drone:
+circle-intel:
   definitions:
-    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake'
+    - Eigen3_DIR: '/opt/eigen/share/eigen3/cmake'
 
+circle-pgi:
+  definitions:
+    - Eigen3_DIR: '/opt/eigen/share/eigen3/cmake'
+      
 travis-linux:
   definitions:
     - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake'

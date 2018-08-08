@@ -3,6 +3,7 @@
 
 [![Travis branch](https://img.shields.io/travis/dev-cafe/cmake-cookbook/master.svg?style=flat-square)](https://travis-ci.org/dev-cafe/cmake-cookbook)
 [![AppVeyor branch](https://img.shields.io/appveyor/ci/bast/cmake-cookbook/master.svg?style=flat-square)](https://ci.appveyor.com/project/bast/cmake-cookbook/branch/master)
+[![CircleCI](https://circleci.com/gh/robertodr/cmake-cookbook.svg?style=svg)](https://circleci.com/gh/robertodr/cmake-cookbook)
 
 [![GitHub issues](https://img.shields.io/github/issues/dev-cafe/cmake-cookbook.svg?style=flat-square)](https://github.com/dev-cafe/cmake-cookbook/issues)
 [![GitHub forks](https://img.shields.io/github/forks/dev-cafe/cmake-cookbook.svg?style=flat-square)](https://github.com/dev-cafe/cmake-cookbook/network)
