@@ -8,12 +8,12 @@ add_test(
   NAME
     test_short
   COMMAND
-    ${PROJECT_BINARY_DIR}/tests/test_short
+    $<TARGET_FILE:test_short>
   )
 
 add_test(
   NAME
     test_long
   COMMAND
-    ${PROJECT_BINARY_DIR}/tests/test_long
+    $<TARGET_FILE:test_long>
   )

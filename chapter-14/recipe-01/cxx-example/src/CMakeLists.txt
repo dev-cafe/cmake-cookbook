@@ -1,16 +1,14 @@
 # example library
 add_library(sum_integers "")
 
-target_sources(
-  sum_integers
+target_sources(sum_integers
   PRIVATE
     sum_integers.cpp
   PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/sum_integers.hpp
   )
 
-target_include_directories(
-  sum_integers
+target_include_directories(sum_integers
   PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
   )
