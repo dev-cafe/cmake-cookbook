@@ -210,7 +210,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
         if dashboard_script_path.exists():
             # if this directory contains a dashboard.cmake script, we launch it
             step = dashboard_script
-            command = 'ctest -C {0} -S {1} -DCTEST_CMAKE_GENERATOR="{2}"'.format(
+            command = 'ctest -C {0} -S "{1}" -DCTEST_CMAKE_GENERATOR="{2}"'.format(
                 configuration, dashboard_script_path, generator)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
