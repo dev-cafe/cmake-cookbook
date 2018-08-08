@@ -3,6 +3,7 @@ appveyor-vs:
     - CMAKE_BUILD_TYPE: 'Debug'
     - CMAKE_CONFIGURATION_TYPES: 'Debug'
     - CMAKE_TOOLCHAIN_FILE: 'C:\tools\vcpkg\scripts\buildsystems\vcpkg.cmake'
+    - SITE: "Appveyor Win64"
   env:
     - 'DIE_HARD': 'True'
 
@@ -12,6 +13,7 @@ appveyor-msys:
     - CMAKE_CXX_COMPILER: 'g++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'Debug'
+    - SITE: "Appveyor Win64"
   env:
     - 'DIE_HARD': 'True'
 
@@ -30,6 +32,7 @@ travis-linux:
     - CMAKE_CXX_COMPILER: 'g++-7'
     - CMAKE_Fortran_COMPILER: 'gfortran-7'
     - CMAKE_BUILD_TYPE: 'Debug'
+    - SITE: "Travis Ubuntu 14.04"
   env:
     - 'DIE_HARD': 'True'
 
@@ -39,6 +42,7 @@ travis-osx:
     - CMAKE_CXX_COMPILER: 'clang++'
     - CMAKE_Fortran_COMPILER: 'gfortran'
     - CMAKE_BUILD_TYPE: 'Debug'
+    - SITE: "Travis macOS 10.12"
   env:
     - 'DIE_HARD': 'True'
 
