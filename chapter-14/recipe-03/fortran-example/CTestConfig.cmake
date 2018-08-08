@@ -1,1 +1,1 @@
-../cxx-example/CTestConfig.cmake
+../../recipe-01/cxx-example/CTestConfig.cmake

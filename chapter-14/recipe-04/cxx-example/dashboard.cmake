@@ -1,5 +1,6 @@
 set(CTEST_PROJECT_NAME "example")
-set(CTEST_SITE "localhost")
+cmake_host_system_information(RESULT _site QUERY HOSTNAME)
+set(CTEST_SITE ${_site})
 set(CTEST_BUILD_NAME "${CMAKE_SYSTEM_NAME}-${CMAKE_HOST_SYSTEM_PROCESSOR}")
 
 set(CTEST_SOURCE_DIRECTORY "${CTEST_SCRIPT_DIRECTORY}")
