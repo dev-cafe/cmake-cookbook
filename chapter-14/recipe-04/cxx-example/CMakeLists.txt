@@ -12,8 +12,7 @@ find_package(Threads REQUIRED)
 
 add_executable(example example.cpp)
 
-target_link_libraries(
-  example
+target_link_libraries(example
   PUBLIC
     Threads::Threads
   )
@@ -22,13 +21,12 @@ option(ENABLE_TSAN "Enable ThreadSanitizer" OFF)
 
 if(ENABLE_TSAN)
   if(CMAKE_CXX_COMPILER_ID MATCHES GNU)
-    target_compile_options(
-      example
+    message(STATUS "ThreadSanitizer enabled")
+    target_compile_options(example
       PUBLIC
         -g -O1 -fsanitize=thread -fno-omit-frame-pointer -fPIC
       )
-    target_link_libraries(
-      example
+    target_link_libraries(example
       PUBLIC
         tsan
       )
@@ -46,5 +44,5 @@ add_test(
   NAME
     example
   COMMAND
-    ${PROJECT_BINARY_DIR}/example
+    $<TARGET_FILE:example>
   )

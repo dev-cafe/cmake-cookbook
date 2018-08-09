@@ -31,8 +31,8 @@ environment:
       BUILDFLAGS: "/verbosity:normal"
       CMAKEARGS: ""
 
-#matrix:
-#  fast_finish: true
+matrix:
+  fast_finish: true
 
 init:
   - set PATH=C:\msys64\MINGW64\bin;C:\msys64\usr\bin;%PATH%
@@ -73,6 +73,7 @@ build_script:
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-04'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'"
     ) else (
+      bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-14/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-01/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-02/recipe-*'" &&
       bash -c "cd /c/projects/cmake-cookbook-no-symlinks && pipenv run python testing/collect_tests.py 'chapter-03/recipe-*'" &&

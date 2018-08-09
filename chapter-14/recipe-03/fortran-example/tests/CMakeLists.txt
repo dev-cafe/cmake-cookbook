@@ -5,5 +5,5 @@ add_test(
   NAME
     leaky
   COMMAND
-    ${PROJECT_BINARY_DIR}/tests/leaky
+    $<TARGET_FILE:leaky>
   )

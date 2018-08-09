@@ -1,7 +1,6 @@
 add_library(buggy "")
 
-target_sources(
-  buggy
+target_sources(buggy
   PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/buggy.f90
   )
@@ -10,13 +9,12 @@ option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
 
 if(ENABLE_ASAN)
   if(CMAKE_Fortran_COMPILER_ID MATCHES GNU)
-    target_compile_options(
-      buggy
+    message(STATUS "AddressSanitizer enabled")
+    target_compile_options(buggy
       PUBLIC
         -g -fsanitize=address
       )
-    target_link_libraries(
-      buggy
+    target_link_libraries(buggy
       PUBLIC
         asan
       )

@@ -6,6 +6,6 @@ foreach(_test IN ITEMS leaky use_after_free)
     NAME
       ${_test}
     COMMAND
-      ${PROJECT_BINARY_DIR}/tests/${_test}
+      $<TARGET_FILE:${_test}>
     )
 endforeach()

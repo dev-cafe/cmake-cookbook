@@ -158,9 +158,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
         return 0
 
     if skip:
-        sys.stdout.write(
-            '\nSKIPPING recipe (based on menu.yml)\n'
-        )
+        sys.stdout.write('\nSKIPPING recipe (based on menu.yml)\n')
         return 0
 
     return_code = 0
@@ -203,6 +201,17 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
 
             command = base_command + ' --config {0} --target {1}'.format(
                 configuration, target)
+            return_code += run_command(
+                step=step, command=command, expect_failure=expect_failure)
+
+        # execute dashboard script, if it exists
+        dashboard_script = 'dashboard.cmake'
+        dashboard_script_path = cmakelists_path / dashboard_script
+        if dashboard_script_path.exists():
+            # if this directory contains a dashboard.cmake script, we launch it
+            step = dashboard_script
+            command = 'ctest -C {0} -S "{1}" -DCTEST_CMAKE_GENERATOR="{2}"'.format(
+                configuration, dashboard_script_path, generator)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
 
