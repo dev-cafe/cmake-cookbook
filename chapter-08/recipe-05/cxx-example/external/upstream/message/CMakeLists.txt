@@ -1,11 +1,13 @@
 find_package(message 1 CONFIG QUIET)
+
 if(message_FOUND)
   get_property(_loc TARGET message::message-shared PROPERTY LOCATION)
   message(STATUS "Found message: ${_loc} (found version ${message_VERSION})")
   add_library(message_external INTERFACE)  # dummy
 else()
-  include(ExternalProject)
   message(STATUS "Suitable message could not be located, Building message instead.")
+
+  include(ExternalProject)
   ExternalProject_Add(message_external
     GIT_REPOSITORY
       https://github.com/dev-cafe/message.git
@@ -33,11 +35,13 @@ else()
     LOG_INSTALL
       1
     )
+
   if(WIN32 AND NOT CYGWIN)
     set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/CMake)
   else()
     set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/share/cmake/message)
   endif()
+
   file(TO_NATIVE_PATH "${DEF_message_DIR}" DEF_message_DIR)
   set(message_DIR ${DEF_message_DIR}
       CACHE PATH "Path to internally built messageConfig.cmake" FORCE)
