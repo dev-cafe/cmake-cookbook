@@ -15,7 +15,7 @@ macro(fetch_git_repo _project_name _download_root _git_url _git_tag)
   set(FETCH_GIT_TAG ${_git_tag})
 
   configure_file(
-    ${CMAKE_CURRENT_LIST_DIR}/fetch_git_repo_sub.cmake
+    ${CMAKE_CURRENT_LIST_DIR}/fetch_at_configure_step.in
     ${_download_root}/CMakeLists.txt
     @ONLY
     )
