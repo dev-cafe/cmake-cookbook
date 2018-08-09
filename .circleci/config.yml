@@ -24,8 +24,7 @@ variables:
             source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
         fi
         EOF
-        pip install --user pipenv --upgrade pip
-        pipenv install --three
+        pipenv install --python /usr/bin/python3
   report: &report
     run:
       name: Report

@@ -21,7 +21,11 @@ else()
     set(_toolset "clang")
     set(_cxx_std_flag "-std=c++11")
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
-    set(_toolset "intel")
+    if(APPLE)
+      set(_toolset "intel-darwin")
+    else()
+      set(_toolset "intel-linux")
+    endif()
     set(_cxx_std_flag "-std=c++11")
   endif()
 
@@ -42,10 +46,6 @@ else()
     string(REPLACE ";" ", " printout "${BOOST_COMPONENTS_REQUIRED}")
     message(STATUS "  Libraries to be built: ${printout}")
   endif()
-
-  set(_user_config_jamfile "${PROJECT_BINARY_DIR}/user-config.jam")
-  file(WRITE "${_user_config_jamfile}" "using ${_toolset} : : ${CMAKE_CXX_COMPILER} : <cxxflags>\"${_cxx_std_flag}\" <linkflags>\"${_cxx_std_flag}\" ;")
-  set(_build_user_config_args "--user-config=${PROJECT_BINARY_DIR}/user-config.jam")
 
   include(ExternalProject)
   ExternalProject_Add(boost_external
