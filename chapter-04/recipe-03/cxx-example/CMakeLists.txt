@@ -26,7 +26,7 @@ message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
 if(ENABLE_UNIT_TESTS)
   # the following code to fetch googletest
   # is inspired by and adapted after:
-  #   - https://cmake.org/cmake/help/git-stage/module/FetchContent.html
+  #   - https://cmake.org/cmake/help/v3.11/module/FetchContent.html
   include(FetchContent)
 
   FetchContent_Declare(
