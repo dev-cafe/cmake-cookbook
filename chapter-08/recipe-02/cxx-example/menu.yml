@@ -1,3 +1,5 @@
+# we think that CMake+MSYS+VS confuse
+# Boost's own build system
 appveyor-vs:
   skip_generators:
     - 'Visual Studio 15 2017 Win64'
