@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+
+project(fetch_git_repo_sub LANGUAGES NONE)
+
+include(ExternalProject)
+
+ExternalProject_Add(
+  @FETCH_PROJECT_NAME@
+  SOURCE_DIR "@FETCH_SOURCE_DIR@"
+  BINARY_DIR "@FETCH_BINARY_DIR@"
+  GIT_REPOSITORY
+    @FETCH_GIT_REPOSITORY@
+  GIT_TAG
+    @FETCH_GIT_TAG@
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND ""
+  INSTALL_COMMAND ""
+  TEST_COMMAND ""
+  )
