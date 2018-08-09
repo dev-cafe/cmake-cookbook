@@ -3,7 +3,8 @@ appveyor-vs:
     - 'Visual Studio 15 2017 Win64'
 
 appveyor-msys:
-  failing_generators:
+  skip_generators:
+    - 'MSYS Makefiles'
     - 'Ninja'
 
 targets:
