@@ -38,8 +38,12 @@ appveyor-vs:
 appveyor-msys:
   ...
 
-# Drone CI
-drone:
+# Circle CI on Linux with Intel 2018
+circle-intel:
+  ...
+
+# Circle CI on Linux with PGI 18.4
+circle-pgi:
   ...
 ```
 
