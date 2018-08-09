@@ -1,4 +1,5 @@
 find_package(Boost ${Boost_MINIMUM_REQUIRED} QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
+
 if(Boost_FOUND AND (NOT Boost_FORCE_SUPERBUILD))
   message(STATUS "Found Boost version ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}")
   add_library(boost_external INTERFACE)
@@ -6,7 +7,7 @@ else()
   if(Boost_FORCE_SUPERBUILD)
     message(STATUS "Forcing superbuild of Boost 1.61.0.")
   else()
-    message(STATUS "Suitable Boost ${Boost_MINIMUM_REQUIRED} could not be located, Building Boost 1.61.0 instead.")
+    message(STATUS "Boost ${Boost_MINIMUM_REQUIRED} could not be located, Building Boost 1.61.0 instead.")
   endif()
 
   if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
@@ -87,12 +88,21 @@ else()
       "${_build_byproducts}"
     )
 
-  set(BOOST_ROOT ${STAGED_INSTALL_PREFIX}/boost
-    CACHE PATH "Path to internally built Boost installation root" FORCE)
-  set(BOOST_INCLUDEDIR ${BOOST_ROOT}/include
-    CACHE PATH "Path to internally built Boost include directories" FORCE)
-  set(BOOST_LIBRARYDIR ${BOOST_ROOT}/lib
-    CACHE PATH "Path to internally built Boost library directories" FORCE)
+  set(
+    BOOST_ROOT ${STAGED_INSTALL_PREFIX}/boost
+    CACHE PATH "Path to internally built Boost installation root"
+    FORCE
+    )
+  set(
+    BOOST_INCLUDEDIR ${BOOST_ROOT}/include
+    CACHE PATH "Path to internally built Boost include directories"
+    FORCE
+    )
+  set(
+    BOOST_LIBRARYDIR ${BOOST_ROOT}/lib
+    CACHE PATH "Path to internally built Boost library directories"
+    FORCE
+    )
 
   # Unset internal variables
   unset(_toolset)
