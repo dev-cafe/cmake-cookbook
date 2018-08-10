@@ -6,9 +6,15 @@ appveyor-msys:
   definitions:
     - CMAKE_CXX_FLAGS: '-fno-exceptions -fno-rtti'
 
-drone:
+circle-intel:
   definitions:
     - CMAKE_CXX_FLAGS: '-fno-exceptions -fno-rtti'
+
+# PGI does not understand -Wall -Wextra -Wpedantic
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
 
 travis-linux:
   definitions:
