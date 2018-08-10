@@ -15,6 +15,7 @@ option(Boost_FORCE_SUPERBUILD "Always build Boost on our own" OFF)
 
 list(APPEND BOOST_COMPONENTS_REQUIRED filesystem system)
 set(Boost_MINIMUM_REQUIRED 1.61)
+
 add_subdirectory(external/upstream)
 
 include(ExternalProject)
