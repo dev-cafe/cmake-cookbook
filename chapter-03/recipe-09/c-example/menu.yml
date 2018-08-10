@@ -1,3 +1,9 @@
 appveyor-vs:
   failing_generators:
     - 'Visual Studio 15 2017 Win64'
+
+# Fails to generate imported target for ZeroMQ
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

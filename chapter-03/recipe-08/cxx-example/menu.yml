@@ -3,6 +3,12 @@ appveyor-vs:
     - BOOST_ROOT: 'C:\Libraries\boost_1_67_0'
     - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB'  
 
+# PGI and Boost do not get along
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
 travis-osx:
   definitions:
     - BOOST_ROOT: '/usr/local/opt/boost@1.59'

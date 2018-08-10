@@ -46,7 +46,13 @@ if(ZeroMQ_INCLUDE_DIRS)
   endif()
 
   if(NOT ${CMAKE_C_PLATFORM_ID} STREQUAL "Windows")
-    find_library(ZeroMQ_LIBRARIES NAMES zmq HINTS ${_ZeroMQ_ROOT}/lib)
+    find_library(ZeroMQ_LIBRARIES 
+        NAMES 
+          zmq 
+        HINTS 
+          ${_ZeroMQ_ROOT}/lib
+          ${_ZeroMQ_ROOT}/lib/x86_64-linux-gnu
+        )
   else()
     find_library(ZeroMQ_LIBRARIES
         NAMES

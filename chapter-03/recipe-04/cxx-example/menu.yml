@@ -6,6 +6,12 @@ appveyor-msys:
   failing_generators:
     - 'Ninja'
 
+# Need to link against libpgftnrtl and librt
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
 travis-linux:
   failing_generators:
     - 'Ninja'
