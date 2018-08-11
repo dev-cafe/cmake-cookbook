@@ -13,7 +13,7 @@ variables:
       - image: devcafe/cmake-cookbook_circleci_ubuntu16.04-pgi18.4
         user: root
         environment:
-          CIRCLECI_COMPILER: pgi 
+          CIRCLECI_COMPILER: pgi
     working_directory: ~/cmake-cookbook
   setup: &setup
     run:
@@ -24,17 +24,17 @@ variables:
             source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
         fi
         EOF
-        pipenv install --python /usr/bin/python3
+        pipenv install --three
   report: &report
     run:
       name: Report
       command: |
         pipenv run python --version
-  tests: &tests        
+  tests: &tests
     run:
       name: Testing
       shell: /bin/bash
-      command: |                                                                 
+      command: |
         pipenv run python testing/collect_tests.py 'chapter-01/recipe-*' &&
         pipenv run python testing/collect_tests.py 'chapter-02/recipe-*' &&
         pipenv run python testing/collect_tests.py 'chapter-03/recipe-*' &&
@@ -52,7 +52,7 @@ variables:
   tests-conda: &tests-conda
     run:
       name: Testing Conda recipes
-      shell: /bin/bash                                                       
+      shell: /bin/bash
       command: |
         pipenv run python testing/collect_tests.py 'chapter-11/recipe-04' &&
         pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'

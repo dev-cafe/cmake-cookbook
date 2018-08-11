@@ -10,3 +10,9 @@ appveyor-msys:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
     - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
+
+# CMake cannot find the Python library
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

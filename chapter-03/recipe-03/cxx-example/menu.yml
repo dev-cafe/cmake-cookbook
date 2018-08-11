@@ -6,3 +6,9 @@ appveyor-vs:
 appveyor-msys:
   definitions:
     - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
+
+# CMake cannot find the Python library
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

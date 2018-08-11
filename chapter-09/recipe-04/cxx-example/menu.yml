@@ -18,6 +18,12 @@ appveyor-msys:
     - Boost_USE_STATIC_RUNTIME: 'ON'
     - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
 
+# CMake cannot find the Python library
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
 travis-osx:
   definitions:
     - BOOST_ROOT: '/usr/local/opt/boost@1.59'
