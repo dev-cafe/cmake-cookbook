@@ -57,7 +57,7 @@ vars_dict = {
     'CMAKE_Fortran_COMPILER': '${CMAKE_Fortran_COMPILER}',
     'CMAKE_C_COMPILER':       '${CMAKE_C_COMPILER}',
 }
-configure_file(input_file.resolve(), output_file.resolve(), vars_dict)
+configure_file(input_file, output_file, vars_dict)
 ")
 
 find_package(PythonInterp QUIET REQUIRED)
