@@ -1,0 +1,5 @@
+# Fails to generate imported target for UUID
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

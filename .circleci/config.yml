@@ -4,6 +4,7 @@ variables:
   intel-linux: &intel-linux
     docker:
       - image: devcafe/cmake-cookbook_circleci_ubuntu16.04-intel2018.1
+        name: tsubame
         user: root
         environment:
           CIRCLECI_COMPILER: intel
@@ -11,6 +12,7 @@ variables:
   pgi-linux: &pgi-linux
     docker:
       - image: devcafe/cmake-cookbook_circleci_ubuntu16.04-pgi18.4
+        name: chabo
         user: root
         environment:
           CIRCLECI_COMPILER: pgi
