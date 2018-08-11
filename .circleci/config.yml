@@ -54,6 +54,7 @@ variables:
       name: Testing Conda recipes
       shell: /bin/bash
       command: |
+        export PATH=/opt/conda/bin:$PATH
         pipenv run python testing/collect_tests.py 'chapter-11/recipe-04' &&
         pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'
 

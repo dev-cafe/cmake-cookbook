@@ -7,6 +7,12 @@ if [ $# -eq 0 ] ; then
     exit 1
 fi
 
+# Remove symlinks
+find "$PWD" -type l -exec sh -c '
+    file=$(basename "$1")
+    directory=${1%/*}
+    (cd "$directory" && cp --remove-destination "$(readlink "$file")" "$file")' sh {} ';'
+
 # build directory is provided by the main script
 build_directory="$1"
 mkdir -p "${build_directory}"
