@@ -18,6 +18,12 @@ travis-osx:
   failing_generators:
     - 'Ninja'
 
+# ASan not supported by ifort
+circle-intel:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
 # error stop is Fortran2008 and PGI is not compliant
 circle-pgi:
   skip_generators:
