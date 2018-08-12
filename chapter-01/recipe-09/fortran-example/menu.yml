@@ -6,12 +6,6 @@ appveyor-msys:
   failing_generators:
     - 'Ninja'
 
-# Intel use -std08 instead of -std=f2008
-circle-intel:
-  skip_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'
-
 # PGI seems not to support Fortran2008 yet
 circle-pgi:
   skip_generators:
