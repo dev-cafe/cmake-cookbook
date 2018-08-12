@@ -14,8 +14,12 @@ def get_ci_environment():
             ci_environment = 'appveyor-vs'
         else:
             ci_environment = 'appveyor-msys'
-    elif os.environ.get('DRONE'):
-        ci_environment = 'drone'
+    elif os.environ.get('CIRCLECI'):
+        circle_compiler = os.environ.get('CIRCLECI_COMPILER')
+        if circle_compiler == 'intel':
+            ci_environment = 'circle-intel'
+        else:
+            ci_environment = 'circle-pgi'
     else:
         ci_environment = 'local'
     return ci_environment

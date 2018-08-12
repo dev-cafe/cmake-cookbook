@@ -7,6 +7,12 @@ appveyor-msys:
     - 'MSYS Makefiles'
     - 'Ninja'
 
+# Fails to generate imported target for UUID
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
 travis-linux:
   failing_generators:
     - 'Ninja'

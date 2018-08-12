@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(recipe-03 LANGUAGES CXX)
+# Fortran needed to discover LAPACK with some compilers
+project(recipe-03 LANGUAGES CXX Fortran)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)

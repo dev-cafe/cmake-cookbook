@@ -2,3 +2,9 @@ appveyor-vs:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
     - CMAKE_CONFIGURATION_TYPES: 'Release'
+
+# PGI does not understand all compiler options needed
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

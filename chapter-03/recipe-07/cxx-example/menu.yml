@@ -1,6 +1,14 @@
-drone:
+circle-intel:
   definitions:
-    - Eigen3_DIR: '$HOME/Deps/eigen/share/eigen3/cmake'
+    - Eigen3_DIR: '/opt/eigen/share/eigen3/cmake'
+
+# Compiler errors due to some undefined alignment primitive
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+  definitions:
+    - Eigen3_DIR: '/opt/eigen/share/eigen3/cmake'
 
 travis-linux:
   definitions:

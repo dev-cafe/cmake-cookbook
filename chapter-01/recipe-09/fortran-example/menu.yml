@@ -6,10 +6,10 @@ appveyor-msys:
   failing_generators:
     - 'Ninja'
 
-drone:
-  definitions:
-    - CMAKE_Fortran_COMPILER: 'gfortran'
-  failing_generators:
+# PGI seems not to support Fortran2008 yet
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
     - 'Ninja'
 
 travis-linux:

@@ -1,0 +1,5 @@
+# Compiler errors due to some undefined alignment primitive
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

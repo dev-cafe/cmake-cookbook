@@ -2,3 +2,9 @@ appveyor-vs:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
     - CMAKE_CONFIGURATION_TYPES: 'Release'
+
+# CMake cannot find the Python library
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

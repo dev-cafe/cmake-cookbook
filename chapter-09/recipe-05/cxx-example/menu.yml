@@ -8,3 +8,10 @@ appveyor-msys:
     - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
   skip_generators:
     - 'MSYS Makefiles'
+
+# PGI does not understand -fvisibility flags
+# that we get from pybind11
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'

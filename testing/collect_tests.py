@@ -10,9 +10,10 @@ import time
 
 import colorama
 import docopt
+from packaging import version
+
 from env import (die_hard, get_buildflags, get_ci_environment, get_generator,
                  verbose_output)
-from packaging import version
 from parse import extract_menu_file
 
 
@@ -210,8 +211,9 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
         if dashboard_script_path.exists():
             # if this directory contains a dashboard.cmake script, we launch it
             step = dashboard_script
-            command = 'ctest -C {0} -S "{1}" -DCTEST_CMAKE_GENERATOR="{2}"'.format(
-                configuration, dashboard_script_path, generator)
+            command = 'ctest -C {0} -S "{1}" -DCTEST_CMAKE_GENERATOR="{2}" {3}'.format(
+                configuration, dashboard_script_path, generator,
+                definitions_string)
             return_code += run_command(
                 step=step, command=command, expect_failure=expect_failure)
 

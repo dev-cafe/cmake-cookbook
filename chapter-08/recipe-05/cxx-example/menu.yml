@@ -1,12 +1,5 @@
-targets:
-  - install
-  - test
-  - package
-
 # Fails to generate imported target for UUID
 circle-pgi:
-  definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-01
   skip_generators:
     - 'Unix Makefiles'
     - 'Ninja'

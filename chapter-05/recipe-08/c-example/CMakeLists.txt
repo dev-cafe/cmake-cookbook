@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(PkgConfig REQUIRED QUIET)
 pkg_search_module(UUID REQUIRED uuid IMPORTED_TARGET)
-if(UUID_FOUND)
+if(TARGET PkgConfig::UUID)
   message(STATUS "Found libuuid")
 endif()
 

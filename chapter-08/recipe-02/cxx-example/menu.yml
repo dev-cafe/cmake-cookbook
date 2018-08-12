@@ -8,6 +8,12 @@ appveyor-msys:
   definitions:
     - Boost_FORCE_SUPERBUILD: 'ON'
 
+# Boost build system does not support PGI
+circle-pgi:
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
 travis-linux:
   definitions:
     - Boost_FORCE_SUPERBUILD: 'ON'

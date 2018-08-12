@@ -17,15 +17,26 @@ appveyor-msys:
   env:
     - 'DIE_HARD': 'True'
 
-drone:
+circle-intel:
   definitions:
-    - CMAKE_C_COMPILER: 'gcc'
-    - CMAKE_CXX_COMPILER: 'g++'
-    - CMAKE_Fortran_COMPILER: 'pgfortran'
+    - CMAKE_C_COMPILER: 'icc'
+    - CMAKE_CXX_COMPILER: 'icpc'
+    - CMAKE_Fortran_COMPILER: 'ifort'
     - CMAKE_BUILD_TYPE: 'Debug'
+    - SITE: 'Circle CI Ubuntu 16.04'
   env:
     - 'DIE_HARD': 'True'
 
+circle-pgi:
+  definitions:
+    - CMAKE_C_COMPILER: 'pgcc'
+    - CMAKE_CXX_COMPILER: 'pgc++'
+    - CMAKE_Fortran_COMPILER: 'pgfortran'
+    - CMAKE_BUILD_TYPE: 'Debug'
+    - SITE: 'Circle CI Ubuntu 16.04'
+  env:
+    - 'DIE_HARD': 'True'
+      
 travis-linux:
   definitions:
     - CMAKE_C_COMPILER: 'gcc-7'

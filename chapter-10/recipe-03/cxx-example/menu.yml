@@ -14,6 +14,18 @@ travis-osx:
   definitions:
     - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-03
 
+circle-intel:
+  definitions:
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-03
+
+# Fails to generate imported target for UUID
+circle-pgi:
+  definitions:
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-03
+  skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
 local:
   definitions:
     - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-03

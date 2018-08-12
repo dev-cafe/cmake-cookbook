@@ -16,6 +16,7 @@ add_library(
 add_executable(compute-areas compute-areas.f90)
 
 # These compiler flags will not work on Windows
+# Intel or PGI
 target_compile_options(geometry
   PRIVATE
     "-std=f2008"

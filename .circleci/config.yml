@@ -1,0 +1,99 @@
+version: 2
+
+variables:
+  intel-linux: &intel-linux
+    docker:
+      - image: devcafe/cmake-cookbook_circleci_ubuntu16.04-intel2018.1
+        name: tsubame
+        user: root
+        environment:
+          CIRCLECI_COMPILER: intel
+    working_directory: ~/cmake-cookbook
+  pgi-linux: &pgi-linux
+    docker:
+      - image: devcafe/cmake-cookbook_circleci_ubuntu16.04-pgi18.4
+        name: chabo
+        user: root
+        environment:
+          CIRCLECI_COMPILER: pgi
+    working_directory: ~/cmake-cookbook
+  setup: &setup
+    run:
+      name: Set up base system and Python dependencies
+      command: |
+        cat >> $BASH_ENV <<EOF
+        if [[ "$CIRCLECI_COMPILER" == "intel" ]] ; then
+            source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux
+        fi
+        EOF
+        pipenv install --three
+  report: &report
+    run:
+      name: Report
+      command: |
+        pipenv run python --version
+  tests: &tests
+    run:
+      name: Testing
+      shell: /bin/bash
+      command: |
+        pipenv run python testing/collect_tests.py 'chapter-01/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-02/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-03/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-04/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-05/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-06/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-07/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-08/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-09/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-10/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-11/recipe-0[1,3]' &&
+        pipenv run python testing/collect_tests.py 'chapter-12/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-13/recipe-*' &&
+        pipenv run python testing/collect_tests.py 'chapter-14/recipe-*'
+  tests-conda: &tests-conda
+    run:
+      name: Testing Conda recipes
+      shell: /bin/bash
+      command: |
+        pipenv run python testing/collect_tests.py 'chapter-11/recipe-04' &&
+        pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'
+
+jobs:
+  intel:
+    <<: *intel-linux
+    steps:
+      - checkout
+      - *setup
+      - *report
+      - *tests
+  intel-conda:
+    <<: *intel-linux
+    steps:
+      - checkout
+      - *setup
+      - *report
+      - *tests-conda
+  pgi:
+    <<: *pgi-linux
+    steps:
+      - checkout
+      - *setup
+      - *report
+      - *tests
+  pgi-conda:
+    <<: *pgi-linux
+    steps:
+      - checkout
+      - *setup
+      - *report
+      - *tests-conda
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - intel
+      - intel-conda
+      - pgi
+      - pgi-conda

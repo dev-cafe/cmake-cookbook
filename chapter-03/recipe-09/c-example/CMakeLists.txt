@@ -15,7 +15,7 @@ pkg_search_module(
   IMPORTED_TARGET
   )
 
-if(ZeroMQ_FOUND)
+if(TARGET PkgConfig::ZeroMQ)
   message(STATUS "Found ZeroMQ")
 endif()
 

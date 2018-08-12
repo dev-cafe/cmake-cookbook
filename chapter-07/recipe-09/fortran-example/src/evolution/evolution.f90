@@ -18,7 +18,7 @@ contains
     integer, intent(in) :: rule_binary(8)
     integer :: i
     integer :: left, center, right
-    integer :: ancestors
+    integer :: ancestry
     integer, allocatable :: new_row(:)
 
     allocate(new_row(size(row)))
@@ -31,8 +31,8 @@ contains
       if (left < 1) left = left + size(row)
       if (right > size(row)) right = right - size(row)
 
-      ancestors = compute_ancestors(row, left, center, right)
-      new_row(i) = rule_binary(ancestors)
+      ancestry = compute_ancestors(row, left, center, right)
+      new_row(i) = rule_binary(ancestry)
     end do
 
     row = new_row

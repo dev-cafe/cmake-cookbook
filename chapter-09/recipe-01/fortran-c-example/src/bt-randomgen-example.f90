@@ -15,7 +15,7 @@ program bt_randomgen_example
   integer(c_int) :: bt_size
 
   write(output_unit, '(A)') 'Initializing randomgen C library'
-  call init_randomgen(time())
+  call init_randomgen(int(time()))
   lower = -2
   upper = 42
   do i = 1, 20
