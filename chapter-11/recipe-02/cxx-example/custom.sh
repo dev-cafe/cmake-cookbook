@@ -8,7 +8,8 @@ if [ $# -eq 0 ] ; then
 fi
 
 # Remove symlinks
-find "$PWD" -type l -exec sh -c '
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+find "$script_dir" -type l -exec sh -c '
     file=$(basename "$1")
     directory=${1%/*}
     (cd "$directory" && cp --remove-destination "$(readlink "$file")" "$file")' sh {} ';'
