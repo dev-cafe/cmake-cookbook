@@ -1,14 +1,15 @@
+targets:
+  - test
+
 appveyor-vs:
   failing_generators:
     - 'Visual Studio 15 2017 Win64'
 
+# No ASan on Windows
 appveyor-msys:
   skip_generators:
     - 'MSYS Makefiles'
     - 'Ninja'
-
-targets:
-  - test
 
 travis-linux:
   failing_generators:

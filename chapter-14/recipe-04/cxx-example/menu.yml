@@ -1,3 +1,6 @@
+targets:
+  - test
+
 # No TSan on Windows
 appveyor-vs:
   skip_generators:
@@ -7,9 +10,6 @@ appveyor-msys:
   skip_generators:
     - 'MSYS Makefiles'
     - 'Ninja'
-
-targets:
-  - test
 
 # OpenMP does not work with clang
 travis-osx:
