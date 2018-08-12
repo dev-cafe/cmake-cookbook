@@ -1,3 +1,0 @@
-drone:
-  definitions:
-    - CMAKE_CXX_COMPILER: 'pgc++'

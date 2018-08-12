@@ -6,11 +6,16 @@ appveyor-msys:
   definitions:
     - USE_LIBRARY: 'ON'
 
-drone:
+circle-intel:
+  definitions:
+    - CMAKE_CXX_COMPILER: 'icpc'
+    - USE_LIBRARY: 'ON'
+
+circle-pgi:
   definitions:
     - CMAKE_CXX_COMPILER: 'pgc++'
     - USE_LIBRARY: 'ON'
-
+      
 travis-linux:
   definitions:
     - USE_LIBRARY: 'ON'

@@ -1,3 +1,0 @@
-drone:
-  definitions:
-    - CMAKE_C_COMPILER: 'pgcc'
