@@ -1,3 +1,6 @@
+targets:
+  - test
+
 # No ASan on Windows
 appveyor-vs:
   skip_generators:
@@ -7,6 +10,3 @@ appveyor-msys:
   skip_generators:
     - 'MSYS Makefiles'
     - 'Ninja'
-
-targets:
-  - test
