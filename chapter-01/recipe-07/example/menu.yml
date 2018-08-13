@@ -7,10 +7,12 @@ appveyor-msys:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
 
-drone:
+circle-intel:
   definitions:
-    - CMAKE_C_COMPILER: 'pgcc'
-    - CMAKE_CXX_COMPILER: 'pgc++'
+    - CMAKE_BUILD_TYPE: 'Release'
+
+circle-pgi:
+  definitions:
     - CMAKE_BUILD_TYPE: 'Release'
 
 travis-linux:
