@@ -1,7 +1,7 @@
 find_package(PythonInterp REQUIRED)
 find_package(Sphinx REQUIRED)
 
-macro(add_sphinx_doc)
+function(add_sphinx_doc)
   set(options)
   set(oneValueArgs
     SOURCE_DIR
@@ -13,6 +13,7 @@ macro(add_sphinx_doc)
     COMMENT
     )
   set(multiValueArgs)
+
   cmake_parse_arguments(SPHINX_DOC
     "${options}"
     "${oneValueArgs}"
@@ -25,6 +26,7 @@ macro(add_sphinx_doc)
     ${SPHINX_DOC_BUILD_DIR}/conf.py
     @ONLY
     )
+
   add_custom_target(${SPHINX_DOC_TARGET_NAME}
     COMMAND
       ${SPHINX_EXECUTABLE}
@@ -38,5 +40,6 @@ macro(add_sphinx_doc)
       "Building ${SPHINX_DOC_COMMENT} with Sphinx"
     VERBATIM
     )
+
   message(STATUS "Added ${SPHINX_DOC_TARGET_NAME} [Sphinx] target to build documentation")
-endmacro()
+endfunction()
