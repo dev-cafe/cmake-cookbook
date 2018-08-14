@@ -26,13 +26,13 @@ macro(add_breathe_doc)
     )
 
   configure_file(
-    ${BREATHE_DOC_DOXY_FILE}
-    ${BREATHE_DOC_BUILD_DIR}/Doxyfile
+    ${BREATHE_DOC_CONF_FILE}
+    ${BREATHE_DOC_BUILD_DIR}/conf.py
     @ONLY
     )
   configure_file(
-    ${BREATHE_DOC_CONF_FILE}
-    ${BREATHE_DOC_BUILD_DIR}/conf.py
+    ${BREATHE_DOC_DOXY_FILE}
+    ${BREATHE_DOC_BUILD_DIR}/Doxyfile
     @ONLY
     )
   add_custom_target(${BREATHE_DOC_TARGET_NAME}
