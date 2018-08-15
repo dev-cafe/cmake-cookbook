@@ -5,7 +5,7 @@ find_package(Sphinx REQUIRED)
 include(FindPythonModule)
 find_python_module(breathe REQUIRED)
 
-macro(add_breathe_doc)
+function(add_breathe_doc)
   set(options)
   set(oneValueArgs
     SOURCE_DIR
@@ -18,6 +18,7 @@ macro(add_breathe_doc)
     COMMENT
     )
   set(multiValueArgs)
+
   cmake_parse_arguments(BREATHE_DOC
     "${options}"
     "${oneValueArgs}"
@@ -30,11 +31,13 @@ macro(add_breathe_doc)
     ${BREATHE_DOC_BUILD_DIR}/conf.py
     @ONLY
     )
+
   configure_file(
     ${BREATHE_DOC_DOXY_FILE}
     ${BREATHE_DOC_BUILD_DIR}/Doxyfile
     @ONLY
     )
+
   add_custom_target(${BREATHE_DOC_TARGET_NAME}
     COMMAND
       ${SPHINX_EXECUTABLE}
@@ -48,5 +51,6 @@ macro(add_breathe_doc)
       "Building ${BREATHE_DOC_TARGET_NAME} documentation with Breathe, Sphinx and Doxygen"
     VERBATIM
     )
+
   message(STATUS "Added ${BREATHE_DOC_TARGET_NAME} [Breathe+Sphinx+Doxygen] target to build documentation")
-endmacro()
+endfunction()
