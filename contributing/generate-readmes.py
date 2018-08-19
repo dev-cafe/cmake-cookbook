@@ -16,9 +16,9 @@ def generate_chapter_readmes(directory_of_this_script, chapters, chapter_titles,
             number = int(chapter.split('-')[-1])
             f.write('# Chapter {0}: {1}\n\n'.format(number,
                                                     chapter_titles[chapter]))
-            for recipe in recipes[chapter]:
-                f.write('- [{0}]({1}/README.md)\n'.format(
-                    recipe_titles[(chapter, recipe)], recipe))
+            for i, recipe in enumerate(recipes[chapter]):
+                f.write('- [{0}. {1}]({2}/README.md)\n'.format(
+                    i+1, recipe_titles[(chapter, recipe)], recipe))
 
 
 def generate_recipe_readmes(directory_of_this_script, chapters, recipes,
@@ -81,9 +81,9 @@ def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
             number = int(chapter.split('-')[-1])
             f.write('\n\n### [Chapter {0}: {1}]({2}/README.md)\n\n'.format(
                 number, chapter_titles[chapter], chapter))
-            for recipe in recipes[chapter]:
-                f.write('- [{0}]({1}/{2}/README.md)\n'.format(
-                    recipe_titles[(chapter, recipe)], chapter, recipe))
+            for i, recipe in enumerate(recipes[chapter]):
+                f.write('- [{0}. {1}]({2}/{3}/README.md)\n'.format(
+                    i+1, recipe_titles[(chapter, recipe)], chapter, recipe))
 
         # chapter 15 is hard-coded
         # since it points to an outside diff
