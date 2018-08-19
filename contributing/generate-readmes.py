@@ -88,7 +88,7 @@ def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
         # chapter 15 is hard-coded
         # since it points to an outside diff
         f.write(
-            '\n\n### [Chapter 15: Porting a Project to CMake](https://github.com/dev-cafe/vim/compare/master...cmake-support)\n'
+            '\n\n### [Chapter 15: Porting a Project to CMake](chapter-15/README.md)\n'
         )
 
 
@@ -98,6 +98,10 @@ def locate_chapters_and_recipes(directory_of_this_script):
     """
     paths = (directory_of_this_script.parent).glob('chapter-*')
     chapters = sorted((path.parts[-1] for path in paths))
+
+    # chapter 15 is different and "hardcoded"
+    # so we remove it from the list of chapters to process
+    chapters.remove('chapter-15')
 
     recipes = {}
     for chapter in chapters:
