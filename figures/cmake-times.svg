@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
    sodipodi:docname="cmake-times.svg"
-   inkscape:export-filename="/home/roberto/Workspace/robertodr/cmake-cookbook/figures/cmake-times.png"
+   inkscape:export-filename="/home/roberto/Workspace/robertodr/cmake-cookbook/figures/cmake-times2.png"
    inkscape:export-xdpi="600"
    inkscape:export-ydpi="600">
   <defs
@@ -89,7 +89,7 @@
       <path
          id="path6900"
          d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-         style="fill-rule:evenodd;stroke:#00ffe9;stroke-width:1pt;stroke-opacity:0.49019608;fill:#00ffe9;fill-opacity:0.49019608"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
          transform="scale(0.4) rotate(180) translate(10,0)" />
     </marker>
     <marker
@@ -488,10 +488,10 @@
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:window-width="2048"
-     inkscape:window-height="1088"
+     inkscape:window-width="2560"
+     inkscape:window-height="1384"
      inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-y="20"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -501,7 +501,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -655,7 +655,7 @@
          id="tspan20495"
          x="368.64542"
          y="-36.353928"
-         style="stroke-width:0.26458332"></tspan></text>
+         style="stroke-width:0.26458332" /></text>
   </g>
   <g
      inkscape:label="Boxes"
@@ -934,7 +934,7 @@
            height="64.044998"
            x="1407.683"
            y="-184.52115" /></flowRegion><flowPara
-         id="flowPara20505"></flowPara></flowRoot>    <text
+         id="flowPara20505" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="475.61417"
