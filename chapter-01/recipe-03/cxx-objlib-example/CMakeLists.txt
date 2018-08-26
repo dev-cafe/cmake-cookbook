@@ -11,7 +11,8 @@ add_library(message-objs
     Message.cpp
   )
 
-# this is only needed for older compilers, but doesn't hurt either to have it
+# this is only needed for older compilers
+# but doesn't hurt either to have it
 set_target_properties(message-objs
   PROPERTIES
     POSITION_INDEPENDENT_CODE 1
