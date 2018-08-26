@@ -1,4 +1,4 @@
-# Creating a simple unit test example
+# Creating a simple unit test
 
 Abstract to be written ...
 

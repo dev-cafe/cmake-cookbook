@@ -1,4 +1,4 @@
-# Define a unit test and link against Boost test
+# Defining a unit test and linking against Boost test
 
 Abstract to be written ...
 

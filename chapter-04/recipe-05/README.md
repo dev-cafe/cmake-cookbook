@@ -1,4 +1,4 @@
-# Dynamic analysis to detect memory defects
+# Using dynamic analysis to detect memory defects
 
 Abstract to be written ...
 

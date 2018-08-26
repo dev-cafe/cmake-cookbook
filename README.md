@@ -60,11 +60,11 @@
 
 ### [Chapter 4: Creating and Running Tests](chapter-04/README.md)
 
-- [1. Creating a simple unit test example](chapter-04/recipe-01/README.md)
-- [2. Define a unit test using the Catch2 library](chapter-04/recipe-02/README.md)
-- [3. Define a unit test and link against Google test](chapter-04/recipe-03/README.md)
-- [4. Define a unit test and link against Boost test](chapter-04/recipe-04/README.md)
-- [5. Dynamic analysis to detect memory defects](chapter-04/recipe-05/README.md)
+- [1. Creating a simple unit test](chapter-04/recipe-01/README.md)
+- [2. Defining a unit test using the Catch2 library](chapter-04/recipe-02/README.md)
+- [3. Defining a unit test and linking against Google test](chapter-04/recipe-03/README.md)
+- [4. Defining a unit test and linking against Boost test](chapter-04/recipe-04/README.md)
+- [5. Using dynamic analysis to detect memory defects](chapter-04/recipe-05/README.md)
 - [6. Testing expected failures](chapter-04/recipe-06/README.md)
 - [7. Using timeouts for long tests](chapter-04/recipe-07/README.md)
 - [8. Running tests in parallel](chapter-04/recipe-08/README.md)
