@@ -1,1 +1,1 @@
-Running a custom command at build-time I
+Running a custom command at build-time: I. Using add_custom_command

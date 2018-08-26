@@ -76,8 +76,8 @@
 
 - [1. Using platform-independent file operations](chapter-05/recipe-01/README.md)
 - [2. Running a custom command at configure-time](chapter-05/recipe-02/README.md)
-- [3. Running a custom command at build-time I](chapter-05/recipe-03/README.md)
-- [4. Running a custom command at build-time II](chapter-05/recipe-04/README.md)
+- [3. Running a custom command at build-time: I. Using add_custom_command](chapter-05/recipe-03/README.md)
+- [4. Running a custom command at build-time: II. Using add_custom_target](chapter-05/recipe-04/README.md)
 - [5. Running custom commands for specific targets at build-time](chapter-05/recipe-05/README.md)
 - [6. Probing compilation and linking](chapter-05/recipe-06/README.md)
 - [7. Probing compiler flags](chapter-05/recipe-07/README.md)
