@@ -62,10 +62,17 @@ configure_file(input_file, output_file, vars_dict)
 
 find_package(PythonInterp QUIET REQUIRED)
 
-execute_process(
-  COMMAND
-    ${PYTHON_EXECUTABLE} "-c" ${_config_script}
-  )
+file(GENERATE
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/gen.py
+    CONTENT "${_config_script}")
+
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/print_info.c
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/gen.py
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/print_info.c.in
+    COMMENT "Generate C info file."
+    VERBATIM
+)
 
 add_custom_target(build_info
   ALL DEPENDS
