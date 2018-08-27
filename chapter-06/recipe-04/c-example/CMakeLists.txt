@@ -15,8 +15,7 @@ configure_file(
 add_executable(example example.c)
 
 # needs to find the generated header file
-target_include_directories(
-  example
+target_include_directories(example
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/generated
   )

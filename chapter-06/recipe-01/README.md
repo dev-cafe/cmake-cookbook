@@ -1,4 +1,4 @@
-# Generating sources at configure-time
+# Generating sources at configure time
 
 Abstract to be written ...
 

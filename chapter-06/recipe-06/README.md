@@ -1,4 +1,4 @@
-# Recording the Git hash at configure-time
+# Recording the Git hash at configure time
 
 Abstract to be written ...
 

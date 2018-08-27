@@ -67,11 +67,6 @@ execute_process(
     ${PYTHON_EXECUTABLE} "-c" ${_config_script}
   )
 
-add_custom_target(build_info
-  ALL DEPENDS
-    ${CMAKE_CURRENT_BINARY_DIR}/print_info.c
-  )
-
 add_executable(example "")
 
 target_sources(example

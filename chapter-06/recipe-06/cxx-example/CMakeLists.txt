@@ -16,7 +16,7 @@ set(GIT_HASH "unknown")
 find_package(Git QUIET)
 if(GIT_FOUND)
   execute_process(
-    COMMAND ${GIT_EXECUTABLE} --no-pager show -s --pretty=format:%h -n 1
+    COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%h
     OUTPUT_VARIABLE GIT_HASH
     OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_QUIET
@@ -38,8 +38,7 @@ configure_file(
 add_executable(example example.cpp)
 
 # needs to find the generated header file
-target_include_directories(
-  example
+target_include_directories(example
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/generated
   )

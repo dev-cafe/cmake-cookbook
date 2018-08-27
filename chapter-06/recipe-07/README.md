@@ -1,4 +1,4 @@
-# Recording the Git hash at build-time
+# Recording the Git hash at build time
 
 Abstract to be written ...
 

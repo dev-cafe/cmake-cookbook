@@ -13,8 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(example example.cpp)
 
 # needs to find the generated header file
-target_include_directories(
-  example
+target_include_directories(example
   PRIVATE
     ${CMAKE_CURRENT_BINARY_DIR}/generated
   )

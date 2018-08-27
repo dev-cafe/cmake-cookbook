@@ -87,13 +87,13 @@
 
 ### [Chapter 6: Generating Source Code](chapter-06/README.md)
 
-- [1. Generating sources at configure-time](chapter-06/recipe-01/README.md)
-- [2. Generating source code at configure-time using Python](chapter-06/recipe-02/README.md)
-- [3. Generating source code at build-time using Python](chapter-06/recipe-03/README.md)
+- [1. Generating sources at configure time](chapter-06/recipe-01/README.md)
+- [2. Generating source code at configure time using Python](chapter-06/recipe-02/README.md)
+- [3. Generating source code at build time using Python](chapter-06/recipe-03/README.md)
 - [4. Recording the project version information for reproducibility](chapter-06/recipe-04/README.md)
 - [5. Recording the project version from a file](chapter-06/recipe-05/README.md)
-- [6. Recording the Git hash at configure-time](chapter-06/recipe-06/README.md)
-- [7. Recording the Git hash at build-time](chapter-06/recipe-07/README.md)
+- [6. Recording the Git hash at configure time](chapter-06/recipe-06/README.md)
+- [7. Recording the Git hash at build time](chapter-06/recipe-07/README.md)
 
 
 ### [Chapter 7: Structuring Projects](chapter-07/README.md)
