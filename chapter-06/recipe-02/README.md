@@ -1,4 +1,4 @@
-# Generating source code at configure-time using Python
+# Generating source code at configure time using Python
 
 Abstract to be written ...
 
