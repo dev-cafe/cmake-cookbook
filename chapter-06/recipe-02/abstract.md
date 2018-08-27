@@ -1,5 +1,3 @@
-# Generating source code at configure time using Python
-
 In this recipe, we generate `print_info.c` from the template `print_info.c.in`
 by emulating the CMake function `configure_file` with a custom Python script.
 
@@ -15,6 +13,3 @@ To proper mimic the behavior of `configure_file` we would
 require `add_custom_command` and `add_custom_target`, which we will use in the
 subsequent recipe 3, Generating source code at build-time using Python, where
 we will overcome this limitation.
-
-
-- [fortran-c-example](fortran-c-example/)
