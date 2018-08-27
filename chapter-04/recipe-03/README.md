@@ -1,4 +1,4 @@
-# Define a unit test and link against Google test
+# Defining a unit test and linking against Google test
 
 Abstract to be written ...
 
