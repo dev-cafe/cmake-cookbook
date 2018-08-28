@@ -13,12 +13,11 @@ build:
     - cmake --build build_conda --target install
 
 requirements:
+  host:
+    - mkl-devel
   build:
     - cmake >=3.5
     - {{ compiler('cxx') }}
-    - mkl-devel
-  run:
-    - mkl-devel
 
 about:
   home: http://www.example.com
