@@ -590,9 +590,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.45063734"
-     inkscape:cx="-732.68881"
-     inkscape:cy="681.23391"
+     inkscape:zoom="0.2967182"
+     inkscape:cx="-1738.0671"
+     inkscape:cy="394.56998"
      inkscape:document-units="mm"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -610,7 +610,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -654,18 +654,19 @@
        inkscape:export-ydpi="300.0101" />
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.99999982;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker24303)"
-       d="M -440.9298,57.669282 V 201.90108"
+       d="m -452.57154,58.29413 v 72.33265 72.33264"
        id="path24299"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/home/bast/tmp/times.png"
        inkscape:export-xdpi="300.0101"
-       inkscape:export-ydpi="300.0101" />
+       inkscape:export-ydpi="300.0101"
+       sodipodi:nodetypes="ccc" />
     <rect
        style="display:inline;opacity:1;fill:#ffb4b4;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4504-3-7"
        width="84"
        height="28.999998"
-       x="-466.28079"
+       x="-445.64297"
        y="114.65116"
        ry="8.2112064"
        rx="8.2112064"
@@ -675,7 +676,7 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="-424.33453"
+       x="-403.69672"
        y="127.01585"
        id="text16381-3"
        inkscape:export-filename="/home/bast/tmp/times.png"
@@ -683,12 +684,12 @@
        inkscape:export-ydpi="300.0101"><tspan
          sodipodi:role="line"
          id="tspan16379-6"
-         x="-424.33453"
+         x="-403.69672"
          y="127.01585"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:Hack;-inkscape-font-specification:Hack;text-align:center;text-anchor:middle;stroke-width:0.26458332">Scripts for native</tspan><tspan
          sodipodi:role="line"
-         x="-424.33453"
-         y="137.59917"
+         x="-403.69672"
+         y="137.59918"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;font-family:Hack;-inkscape-font-specification:Hack;text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan1362">build tools</tspan></text>
     <rect
@@ -985,8 +986,8 @@
        inkscape:export-xdpi="300.0101"
        inkscape:export-ydpi="300.0101" />
     <path
-       style="display:inline;fill:none;stroke:#000000;stroke-width:0.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6645)"
-       d="m -274.28791,111.36472 v 29.61144"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.99999982;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6645)"
+       d="m -274.28791,118.25204 v 22.72412"
        id="path9021"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/home/bast/tmp/times.png"
@@ -994,7 +995,7 @@
        inkscape:export-ydpi="300.0101" />
     <text
        id="text9025"
-       y="130.32127"
+       y="132.43791"
        x="-267.70447"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"
@@ -1003,7 +1004,7 @@
        inkscape:export-ydpi="300.0101"><tspan
          id="tspan9023"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46666622px;font-family:Hack;-inkscape-font-specification:'Hack Bold';text-align:center;text-anchor:middle;stroke-width:0.26458332"
-         y="130.32127"
+         y="132.43791"
          x="-267.70447"
          sodipodi:role="line">B</tspan></text>
     <text
@@ -1140,16 +1141,17 @@
        inkscape:export-ydpi="300.0101" />
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.99999976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker16873)"
-       d="m -382.28925,137.67046 63.73271,12.41331"
+       d="m -363.38968,140.73793 44.83314,9.34584"
        id="path16869"
        inkscape:connector-curvature="0"
        inkscape:export-filename="/home/bast/tmp/times.png"
        inkscape:export-xdpi="300.0101"
-       inkscape:export-ydpi="300.0101" />
+       inkscape:export-ydpi="300.0101"
+       sodipodi:nodetypes="cc" />
     <path
        inkscape:connector-curvature="0"
        id="path17991"
-       d="m -382.973,119.02997 64.48951,-13.2834"
+       d="m -364.37028,116.5562 45.88679,-10.80963"
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.99999982;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker17995)"
        sodipodi:nodetypes="cc"
        inkscape:export-filename="/home/bast/tmp/times.png"
@@ -1343,14 +1345,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="-433.50797"
+       x="-445.14981"
        y="191.35774"
        id="text32362"
        inkscape:export-filename="/home/bast/tmp/times.png"
        inkscape:export-xdpi="300.0101"
        inkscape:export-ydpi="300.0101"><tspan
          sodipodi:role="line"
-         x="-433.50797"
+         x="-445.14981"
          y="191.35774"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46666622px;font-family:Hack;-inkscape-font-specification:'Hack Bold';text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan32360">P</tspan></text>
@@ -1368,6 +1370,29 @@
          y="92.395164"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46666622px;font-family:Hack;-inkscape-font-specification:'Hack Bold';text-align:center;text-anchor:middle;stroke-width:0.26458332"
          id="tspan32367">I</tspan></text>
+    <path
+       inkscape:export-ydpi="300.0101"
+       inkscape:export-xdpi="300.0101"
+       inkscape:export-filename="/home/bast/tmp/times.png"
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.99999988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker14147)"
+       d="m -424.59847,143.66784 c -0.41889,27.94153 32.18894,28.03069 32.45518,2.71253"
+       id="path194"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       inkscape:export-ydpi="300.0101"
+       inkscape:export-xdpi="300.0101"
+       inkscape:export-filename="/home/bast/tmp/times.png"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46666622px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-408.05511"
+       y="175.12692"
+       id="text198"><tspan
+         sodipodi:role="line"
+         x="-408.05511"
+         y="175.12692"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46666622px;font-family:Hack;-inkscape-font-specification:'Hack Bold';text-align:center;text-anchor:middle;stroke-width:0.26458332"
+         id="tspan196">C</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
