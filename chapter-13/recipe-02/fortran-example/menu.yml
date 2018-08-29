@@ -25,3 +25,6 @@ travis-linux:
 local:
   failing_generators:
     - 'Ninja'
+  definitions:
+    - CMAKE_TOOLCHAIN_FILE: $PWD/chapter-13/toolchain-travis.cmake
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-13/recipe-02-fortran
