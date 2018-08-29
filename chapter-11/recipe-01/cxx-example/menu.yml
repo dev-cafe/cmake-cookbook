@@ -10,3 +10,7 @@ circle-pgi:
   skip_generators:
     - 'Unix Makefiles'
     - 'Ninja'
+
+local:
+  definitions:
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-11/recipe-01

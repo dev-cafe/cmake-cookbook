@@ -1,34 +1,34 @@
 appveyor-vs:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-02
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-10/recipe-02
 
 appveyor-msys:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-02
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-10/recipe-02
 
 travis-linux:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-02
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-10/recipe-02
 
 travis-osx:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-02
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-10/recipe-02
 
 circle-intel:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-03
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-10/recipe-02
 
 # Fails to generate imported target for UUID
 circle-pgi:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-03
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-10/recipe-02
   skip_generators:
     - 'Unix Makefiles'
     - 'Ninja'
 
 local:
   definitions:
-    - CMAKE_INSTALL_PREFIX: $HOME/Software/recipe-02
+    - CMAKE_INSTALL_PREFIX: $HOME/Software/chapter-10/recipe-02
 
 targets:
   - test
