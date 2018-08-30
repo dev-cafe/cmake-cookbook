@@ -12,7 +12,7 @@ if(ENABLE_ASAN)
     message(STATUS "AddressSanitizer enabled")
     target_compile_options(buggy
       PUBLIC
-        -g -fsanitize=address
+        -g -O1 -fsanitize=address -fno-omit-frame-pointer
       )
     target_link_libraries(buggy
       PUBLIC
