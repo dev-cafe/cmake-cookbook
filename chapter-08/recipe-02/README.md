@@ -1,4 +1,4 @@
-# Managing dependencies with a superbuild I. The Boost libraries
+# Managing dependencies with a superbuild: I. The Boost libraries
 
 Abstract to be written ...
 

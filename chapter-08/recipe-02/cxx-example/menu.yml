@@ -6,7 +6,7 @@ appveyor-vs:
 
 appveyor-msys:
   definitions:
-    - Boost_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_Boost: 'ON'
 
 # Boost build system does not support PGI
 circle-pgi:
@@ -16,14 +16,14 @@ circle-pgi:
 
 travis-linux:
   definitions:
-    - Boost_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_Boost: 'ON'
 
 travis-osx:
   definitions:
-    - Boost_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_Boost: 'ON'
 
 local:
   definitions:
-    - Boost_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_Boost: 'ON'
   env:
     - VERBOSE_OUTPUT: 'ON'

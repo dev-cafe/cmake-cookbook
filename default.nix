@@ -18,7 +18,7 @@ in
     name = "CMake-Cookbook";
     buildInputs = [
       atlas
-      boost155
+      boost162
       ccache
       chrpath
       clang-tools

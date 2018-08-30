@@ -11,8 +11,6 @@ set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
 set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage)
 message(STATUS "${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}")
 
-option(FFTW3_FORCE_SUPERBUILD "Always build FFTW3 on our own" OFF)
-
 add_subdirectory(external/upstream)
 
 include(ExternalProject)

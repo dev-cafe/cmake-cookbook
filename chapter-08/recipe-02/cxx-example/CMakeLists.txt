@@ -11,8 +11,6 @@ set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
 set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage)
 message(STATUS "${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}")
 
-option(Boost_FORCE_SUPERBUILD "Always build Boost on our own" OFF)
-
 list(APPEND BOOST_COMPONENTS_REQUIRED filesystem system)
 set(Boost_MINIMUM_REQUIRED 1.61)
 
