@@ -1,15 +1,11 @@
 find_package(FFTW3 CONFIG QUIET)
 
-if(FFTW3_FOUND AND (NOT FFTW3_FORCE_SUPERBUILD))
+if(FFTW3_FOUND)
   get_property(_loc TARGET FFTW3::fftw3 PROPERTY LOCATION)
   message(STATUS "Found FFTW3: ${_loc} (found version ${FFTW3_VERSION})")
   add_library(fftw3_external INTERFACE)  # dummy
 else()
-  if(FFTW3_FORCE_SUPERBUILD)
-    message(STATUS "Forcing superbuild of FFTW3.")
-  else()
-    message(STATUS "Suitable FFTW3 could not be located. Downloading and building!")
-  endif()
+  message(STATUS "Suitable FFTW3 could not be located. Downloading and building!")
 
   include(ExternalProject)
   ExternalProject_Add(fftw3_external

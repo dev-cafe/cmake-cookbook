@@ -1,21 +1,21 @@
 appveyor-vs:
   definitions:
-    - FFTW3_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_FFTW3: 'ON'
 
 appveyor-msys:
   definitions:
-    - FFTW3_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_FFTW3: 'ON'
 
 travis-linux:
   definitions:
-    - FFTW3_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_FFTW3: 'ON'
 
 travis-osx:
   definitions:
-    - FFTW3_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_FFTW3: 'ON'
 
 local:
   definitions:
-    - FFTW3_FORCE_SUPERBUILD: 'ON'
+    - CMAKE_DISABLE_FIND_PACKAGE_FFTW3: 'ON'
   env:
     - VERBOSE_OUTPUT: 'ON'
