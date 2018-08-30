@@ -12,8 +12,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 find_package(OpenMP REQUIRED)
 
 add_executable(example example.f90)
-target_link_libraries(
-  example
+
+target_link_libraries(example
   PUBLIC
     OpenMP::OpenMP_Fortran
   )
