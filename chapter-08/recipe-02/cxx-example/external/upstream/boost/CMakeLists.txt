@@ -1,14 +1,10 @@
 find_package(Boost ${Boost_MINIMUM_REQUIRED} QUIET COMPONENTS "${BOOST_COMPONENTS_REQUIRED}")
 
-if(Boost_FOUND AND (NOT Boost_FORCE_SUPERBUILD))
+if(Boost_FOUND)
   message(STATUS "Found Boost version ${Boost_MAJOR_VERSION}.${Boost_MINOR_VERSION}.${Boost_SUBMINOR_VERSION}")
   add_library(boost_external INTERFACE)
 else()
-  if(Boost_FORCE_SUPERBUILD)
-    message(STATUS "Forcing superbuild of Boost 1.61.0.")
-  else()
-    message(STATUS "Boost ${Boost_MINIMUM_REQUIRED} could not be located, Building Boost 1.61.0 instead.")
-  endif()
+  message(STATUS "Boost ${Boost_MINIMUM_REQUIRED} could not be located, Building Boost 1.61.0 instead.")
 
   if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     if(APPLE)
@@ -16,17 +12,14 @@ else()
     else()
       set(_toolset "gcc")
     endif()
-    set(_cxx_std_flag "-std=c++11")
   elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     set(_toolset "clang")
-    set(_cxx_std_flag "-std=c++11")
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
     if(APPLE)
       set(_toolset "intel-darwin")
     else()
       set(_toolset "intel-linux")
     endif()
-    set(_cxx_std_flag "-std=c++11")
   endif()
 
   # Non-empty list. Compiled libraries needed
@@ -69,7 +62,6 @@ else()
            variant=release
            toolset=${_toolset}
            ${_b2_select_libraries}
-           ${_build_user_config_args}
     LOG_BUILD
       1
     BUILD_IN_SOURCE
@@ -81,7 +73,6 @@ else()
            variant=release
            toolset=${_toolset}
            ${_b2_select_libraries}
-           ${_build_user_config_args}
     LOG_INSTALL
       1
     BUILD_BYPRODUCTS
@@ -108,8 +99,6 @@ else()
   unset(_toolset)
   unset(_b2_needed_components)
   unset(_build_byproducts)
-  unset(_boostrap_select_libraries)
   unset(_b2_select_libraries)
-  unset(_user_config_jamfile)
-  unset(_build_user_config_args)
+  unset(_boostrap_select_libraries)
 endif()
