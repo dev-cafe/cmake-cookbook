@@ -16,6 +16,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew install mingw-w64
   brew install mpich
   brew install ossp-uuid
+  brew install patchelf
   brew install pipenv
   brew install pkg-config
   brew install zeromq
