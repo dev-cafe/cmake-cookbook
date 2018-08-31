@@ -10,6 +10,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            #- chrpath
             - doxygen
             - g++-7
             - g++-mingw-w64
@@ -19,14 +20,17 @@ matrix:
             - gfortran-mingw-w64
             - graphviz
             - libatlas-dev
-            - libboost1.55-all-dev
+            - libboost-filesystem-dev
+            - libboost-python-dev
+            - libboost-test-dev
             - liblapack-dev
             - liblapacke-dev
             - libopenmpi-dev
+            - libpython3.5-dev
             - libzmq3-dev
             - openmpi-bin
             - pkg-config
-            - python3-dev
+            - python3.5-dev
             - rpm
             - uuid-dev
       env:
@@ -112,9 +116,10 @@ install:
   - ./testing/dependencies/travis/eigen.sh
   - export PATH=$HOME/Deps/cmake/$CMAKE_VERSION/bin${PATH:+:$PATH}
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      pipenv install --python $(type -P python3.4);
+      pipenv install --three
+      #pipenv install --python $(type -P python3.5)
     else
-      pipenv install --three;
+      pipenv install --three
     fi
   - pipenv run python --version
 
@@ -126,18 +131,18 @@ before_script:
 script:
   - ./testing/dependencies/report_versions.sh
   - if [[ "$ANACONDA_TESTS_ONLY" == 1 ]]; then
-      travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-04';
-      travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-05';
+      travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-04' &&
+      travis_wait 20 pipenv run python testing/collect_tests.py 'chapter-11/recipe-05'
     else
-      pipenv run python testing/collect_tests.py 'chapter-0[1-7]/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-08/recipe-0(1|3|4|6)';
-      travis_wait 30 pipenv run python testing/collect_tests.py 'chapter-08/recipe-0(2|5)';
-      pipenv run python testing/collect_tests.py 'chapter-10/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-11/recipe-01*';
-      pipenv run python testing/collect_tests.py 'chapter-11/recipe-02';
-      pipenv run python testing/collect_tests.py 'chapter-11/recipe-03';
-      pipenv run python testing/collect_tests.py 'chapter-12/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-13/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-14/recipe-*';
-      pipenv run python testing/collect_tests.py 'chapter-15/recipe-*';
+      pipenv run python testing/collect_tests.py 'chapter-0[1-7]/recipe-*' &&
+      pipenv run python testing/collect_tests.py 'chapter-08/recipe-0(1|3|4|6)' &&
+      travis_wait 30 pipenv run python testing/collect_tests.py 'chapter-08/recipe-0(2|5)' &&
+      pipenv run python testing/collect_tests.py 'chapter-10/recipe-*' &&
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-01*' &&
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-02' &&
+      pipenv run python testing/collect_tests.py 'chapter-11/recipe-03' &&
+      pipenv run python testing/collect_tests.py 'chapter-12/recipe-*' &&
+      pipenv run python testing/collect_tests.py 'chapter-13/recipe-*' &&
+      pipenv run python testing/collect_tests.py 'chapter-14/recipe-*' &&
+      pipenv run python testing/collect_tests.py 'chapter-15/recipe-*'
     fi
