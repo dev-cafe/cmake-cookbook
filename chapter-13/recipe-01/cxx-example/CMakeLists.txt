@@ -17,8 +17,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 add_executable(hello-world hello-world.cpp)
 
 # we will print the system name in the code
-target_compile_definitions(
-  hello-world
+target_compile_definitions(hello-world
   PUBLIC
     "SYSTEM_NAME=\"${CMAKE_SYSTEM_NAME}\""
   )
