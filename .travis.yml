@@ -10,7 +10,6 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - chrpath
             - doxygen
             - g++-7
             - g++-mingw-w64

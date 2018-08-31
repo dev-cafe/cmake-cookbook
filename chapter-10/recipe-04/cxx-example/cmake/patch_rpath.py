@@ -54,8 +54,11 @@ def main():
     elif patcher == 'chrpath':
         streamer('Using chrpath', end='\n')
         old_rpath = run_command(command='{} --list {}'.format(patcher, elfobj))
+        streamer('FIRST {}'.format(old_rpath), end='\n')
         old_rpath = old_rpath.replace('{}: RUNPATH='.format(elfobj), '')
+        streamer('SECOND {}'.format(old_rpath), end='\n')
         new_rpath = old_rpath.replace(to_remove, to_add)
+        streamer('THIRD {}'.format(new_rpath), end='\n')
         _ = run_command(command='{} --replace {} {}'.format(patcher, new_rpath, elfobj))
         _ = run_command(command='{} --list {}'.format(patcher, elfobj))
     elif patcher == 'install_tool_name':

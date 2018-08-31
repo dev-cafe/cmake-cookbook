@@ -1,0 +1,9 @@
+breathe
+cffi
+colorama
+cython
+docopt
+numpy
+pathlib
+pyyaml
+sphinx

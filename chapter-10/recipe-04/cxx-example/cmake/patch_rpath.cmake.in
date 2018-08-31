@@ -35,6 +35,9 @@ else()
     OUTPUT_STRIP_TRAILING_WHITESPACE
     )
 
+  message(STATUS "Standard output from patch_rpath.py: ${_out}")
+  message(STATUS "Standard error from patch_rpath.py: ${_err}")
+
   if(_res EQUAL 0)
     message(STATUS "RPATH for ${_elfobj} patched using ${_patcher}")
   else()

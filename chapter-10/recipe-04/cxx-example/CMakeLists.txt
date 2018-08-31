@@ -90,11 +90,11 @@ install(
   )
 
 # patch RPATH of executable
-if(UNIX)
-  set(PATCHING_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/cmake/patch_rpath.py")
-  configure_file(cmake/patch_rpath.cmake.in patch_rpath.cmake @ONLY)
-  install(
-    SCRIPT
-      ${CMAKE_CURRENT_BINARY_DIR}/patch_rpath.cmake
-    )
-endif()
+#if(UNIX)
+#  set(PATCHING_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/cmake/patch_rpath.py")
+#  configure_file(cmake/patch_rpath.cmake.in patch_rpath.cmake @ONLY)
+#  install(
+#    SCRIPT
+#      ${CMAKE_CURRENT_BINARY_DIR}/patch_rpath.cmake
+#    )
+#endif()

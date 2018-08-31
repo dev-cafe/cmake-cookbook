@@ -37,10 +37,10 @@ file(TO_NATIVE_PATH "${_rpath}/${CMAKE_INSTALL_LIBDIR}" use_message_RPATH)
 set_target_properties(use_message
   PROPERTIES
     MACOSX_RPATH ON
-    SKIP_BUILD_RPATH OFF
+    SKIP_BUILD_RPATH ON
     BUILD_WITH_INSTALL_RPATH OFF
     INSTALL_RPATH "${use_message_RPATH}"
-    INSTALL_RPATH_USE_LINK_PATH ON
+    INSTALL_RPATH_USE_LINK_PATH OFF
   )
 
 install(
