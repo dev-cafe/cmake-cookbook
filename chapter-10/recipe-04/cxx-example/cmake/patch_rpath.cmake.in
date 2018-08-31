@@ -3,8 +3,8 @@ set(INSTALL_LIBDIR @INSTALL_LIBDIR@)
 set(INSTALL_BINDIR @INSTALL_BINDIR@)
 set(PATCHING_SCRIPT @PATCHING_SCRIPT@)
 
-# Look for patchelf, chrpath, install_tool_name
-set(_patcher "")
+# Look for patchelf, chrpath, install_name_tool
+set(_patcher)
 list(APPEND _patchers patchelf chrpath install_name_tool)
 foreach(p IN LISTS _patchers)
   find_program(${p}_FOUND
@@ -13,29 +13,34 @@ foreach(p IN LISTS _patchers)
     )
   if(${p}_FOUND)
     set(_patcher ${p})
+    message(STATUS "ELF patching tool ${_patcher} FOUND")
     break()
   endif()
 endforeach()
 
-set(_path_to_remove ${STAGED_INSTALL_PREFIX}/${INSTALL_LIBDIR})
-set(_path_to_add "\$ORIGIN/../${INSTALL_LIBDIR}")
-set(_elfobj ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR}/use_message)
-
-find_package(PythonInterp REQUIRED)
-execute_process(
-  COMMAND
-    ${PYTHON_EXECUTABLE} ${PATCHING_SCRIPT} "${_patcher}" "${_path_to_remove}" "${_path_to_add}" "${_elfobj}"
-  RESULT_VARIABLE _res
-  OUTPUT_VARIABLE _out
-  ERROR_VARIABLE _err
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-  )
-
-if(_res EQUAL 0)
-  message(STATUS "RPATH for ${_elfobj} patched using ${_patcher}")
+if(NOT _patcher)
+  message(FATAL_ERROR "ELF patching tool NOT FOUND!\nPlease install one of patchelf, chrpath or install_name_tool")
 else()
-  message(STATUS "Something went wrong!")
-  message(STATUS "Standard output from patch_rpath.py: ${_out}")
-  message(STATUS "Standard error from patch_rpath.py: ${_err}")
-  message(FATAL_ERROR "RPATH for ${_elfobj} could NOT be patched using ${_patcher}")
+  set(_path_to_remove ${STAGED_INSTALL_PREFIX}/${INSTALL_LIBDIR})
+  set(_path_to_add "\$ORIGIN/../${INSTALL_LIBDIR}")
+  set(_elfobj ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR}/use_message)
+
+  find_package(PythonInterp REQUIRED QUIET)
+  execute_process(
+    COMMAND
+      ${PYTHON_EXECUTABLE} ${PATCHING_SCRIPT} "${_patcher}" "${_path_to_remove}" "${_path_to_add}" "${_elfobj}"
+    RESULT_VARIABLE _res
+    OUTPUT_VARIABLE _out
+    ERROR_VARIABLE _err
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+  if(_res EQUAL 0)
+    message(STATUS "RPATH for ${_elfobj} patched using ${_patcher}")
+  else()
+    message(STATUS "Something went wrong!")
+    message(STATUS "Standard output from patch_rpath.py: ${_out}")
+    message(STATUS "Standard error from patch_rpath.py: ${_err}")
+    message(FATAL_ERROR "RPATH for ${_elfobj} could NOT be patched using ${_patcher}")
+  endif()
 endif()
