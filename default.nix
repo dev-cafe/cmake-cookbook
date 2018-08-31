@@ -19,26 +19,22 @@ in
     buildInputs = [
       atlas
       boost162
-      ccache
       chrpath
       clang-tools
       cmake
       doxygen_gui
       dpkg
       eigen3_3
-      exa
       gcc
       gdb
       gfortran
       graphviz
-      hdf5-fortran
       lcov
       libuuid
       ninja-kitware
       openblas
       openmpi
       pkgconfig
-      python3Full
       python3Packages.breathe
       python3Packages.cffi
       python3Packages.colorama
