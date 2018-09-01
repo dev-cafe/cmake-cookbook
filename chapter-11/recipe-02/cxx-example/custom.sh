@@ -13,25 +13,13 @@ fi
 build_directory="$1"
 mkdir -p "${build_directory}"
 
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-testing_dir="$script_dir/../../../testing"
+script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-# shellcheck source=/dev/null
-. "${testing_dir}/canonicalize_filename.sh"
+cd $build_directory
 
-# Copy stuff to build_directory, removing symlinks in the process
-for f in $script_dir/CMakeLists.txt $script_dir/MANIFEST.in $script_dir/setup.py $script_dir/README.rst; do
-    canonical="$(canonicalize_filename "$f")"
-    cp -f "$canonical" "$build_directory"
-done
-# Copying for account is done separately
-mkdir -p "${build_directory}"/account
-for f in $script_dir/account/*; do
-    canonical="$(canonicalize_filename "$f")"
-    cp -f "$canonical" "$build_directory"/account
-done
+# we tar with --dereference and then untar to get rid of symlinks
+tar --dereference --directory "${script_directory}" -c -f - . | tar -x
 
-cd "${build_directory}"
 # Now make a directory where we test the
 # install in a virtual environment
 mkdir -p venv
