@@ -13,6 +13,7 @@ matrix:
             - doxygen
             - g++-7
             - g++-mingw-w64
+            - gcc-7
             - gcc-mingw-w64
             - gfortran-7
             - gfortran-mingw-w64
@@ -124,9 +125,15 @@ install:
   - pipenv run python --version
 
 before_script:
-  - test -n $CC && unset CC
-  - test -n $CXX && unset CXX
-  - test -n $FC && unset FC
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      test -n $CC && unset CC && export CC=gcc-7;
+      test -n $CXX && unset CXX && export CXX=g++-7;
+      test -n $FC && unset FC && export FC=gfortran-7;
+    else
+      test -n $CC && unset CC && export CC=gcc;
+      test -n $CXX && unset CXX && export CXX=g++;
+      test -n $FC && unset FC && export FC=gfortran;
+    fi
 
 script:
   - ./testing/dependencies/report_versions.sh
