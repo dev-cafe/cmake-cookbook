@@ -18,7 +18,7 @@ script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 cd $build_directory
 
 # we tar with --dereference and then untar to get rid of symlinks
-tar --dereference --directory "${script_directory}" -c -f - . | tar -x
+tar --exclude "build-*" --dereference --directory "${script_directory}" -c -f - . | tar -x
 
 # Now make a directory where we test the
 # install in a virtual environment
