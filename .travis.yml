@@ -33,20 +33,20 @@ matrix:
             - rpm
             - uuid-dev
       env:
-        - CMAKE_VERSION="3.11.2"
+        - CMAKE_VERSION="3.12.1"
         - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
     - os: linux
       addons: *1
       env:
-        - CMAKE_VERSION="3.11.2"
+        - CMAKE_VERSION="3.12.1"
         - CMAKE_GENERATOR="Unix Makefiles"
         - BUILDFLAGS="VERBOSE=1"
         - ANACONDA_TESTS_ONLY=1
     - os: linux
       addons: *1
       env:
-        - CMAKE_VERSION="3.11.2"
+        - CMAKE_VERSION="3.12.1"
         - CMAKE_GENERATOR="Ninja"
         - BUILDFLAGS="-v"
     - os: linux
@@ -90,7 +90,7 @@ cache:
   pip: true
   directories:
     - $HOME/Deps/cmake/3.5.2
-    - $HOME/Deps/cmake/3.11.2
+    - $HOME/Deps/cmake/3.12.1
     - $HOME/Deps/eigen
     - $HOME/Deps/ninja
     - $HOME/Deps/conda
