@@ -14,7 +14,6 @@ matrix:
             - g++-7
             - g++-mingw-w64
             - gcc-mingw-w64
-            - gfortran
             - gfortran-7
             - gfortran-mingw-w64
             - graphviz
