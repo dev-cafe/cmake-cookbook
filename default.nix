@@ -29,7 +29,6 @@ in
       gdb
       gfortran
       graphviz
-      lcov
       libuuid
       ninja-kitware
       openblas
@@ -41,7 +40,6 @@ in
       python3Packages.cython
       python3Packages.docopt
       python3Packages.numpy
-      python3Packages.pycodestyle
       python3Packages.pyyaml
       python3Packages.sphinx
       rpm

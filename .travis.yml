@@ -109,9 +109,9 @@ before_install:
   # Dependencies are downloaded in $HOME/Downloads and installed in $HOME/Deps
   - mkdir -p $HOME/Downloads $HOME/Deps
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      export PYTHON3="$(type -P python3.5)";
+      export PYTHON3="/usr/bin/python3.5";
     else
-      export PYTHON3="$(type -P python3)";
+      export PYTHON3="/usr/local/bin/python3";
     fi
 
 install:

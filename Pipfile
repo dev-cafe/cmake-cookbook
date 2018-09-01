@@ -13,7 +13,6 @@ colorama = "*"
 cython = "*"
 docopt = "*"
 numpy = "*"
-pathlib = "*"
 pyyaml = "*"
 sphinx = "*"
 
