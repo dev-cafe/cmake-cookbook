@@ -3,7 +3,7 @@ appveyor-vs:
     - VERBOSE_OUTPUT: 'True'
   definitions:
     - BOOST_ROOT: 'C:\Libraries\boost_1_67_0'
-    - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB'  
+    - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB'
     - CMAKE_BUILD_TYPE: 'Release'
     - CMAKE_CONFIGURATION_TYPES: 'Release'
   # fails because packaged boost only provides python27
@@ -21,6 +21,13 @@ appveyor-msys:
 # CMake cannot find the Python library
 circle-pgi:
   skip_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
+
+# Boost.Python version on Travis
+# links against Python 2.7
+travis-linux:
+  failing_generators:
     - 'Unix Makefiles'
     - 'Ninja'
 
