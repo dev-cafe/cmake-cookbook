@@ -18,8 +18,11 @@ travis-linux:
     - 'Unix Makefiles'
     - 'Ninja'
 
+# for 'Unix Makefiles' see:
+# see https://github.com/dev-cafe/cmake-cookbook/issues/481
 travis-osx:
   failing_generators:
+    - 'Unix Makefiles'
     - 'Ninja'
 
 # ASan not supported by ifort
