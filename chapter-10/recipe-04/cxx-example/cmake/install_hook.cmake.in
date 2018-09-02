@@ -1,10 +1,6 @@
-set(STAGED_INSTALL_PREFIX @STAGED_INSTALL_PREFIX@)
-set(INSTALL_BINDIR @INSTALL_BINDIR@)
-set(PRINT_SCRIPT @PRINT_SCRIPT@)
+set(_executable ${CMAKE_INSTALL_PREFIX}/@INSTALL_BINDIR@/use_message)
 
-set(_executable ${CMAKE_INSTALL_PREFIX}/${INSTALL_BINDIR}/use_message)
-
-# Look for patchelf, chrpath, otool
+# Look for chrpath, patchelf, otool
 set(_patcher)
 list(APPEND _patchers chrpath patchelf otool)
 foreach(p IN LISTS _patchers)
@@ -20,12 +16,12 @@ foreach(p IN LISTS _patchers)
 endforeach()
 
 if(NOT _patcher)
-  message(FATAL_ERROR "ELF patching tool NOT FOUND!\nPlease install one of patchelf, chrpath or otool")
+  message(FATAL_ERROR "ELF patching tool NOT FOUND!\nPlease install one of chrpath, patchelf or otool")
 else()
   find_package(PythonInterp REQUIRED QUIET)
   execute_process(
     COMMAND
-      ${PYTHON_EXECUTABLE} ${PRINT_SCRIPT} "${_patcher}" "${_executable}"
+      ${PYTHON_EXECUTABLE} @PRINT_SCRIPT@ "${_patcher}" "${_executable}"
     RESULT_VARIABLE _res
     OUTPUT_VARIABLE _out
     ERROR_VARIABLE _err
