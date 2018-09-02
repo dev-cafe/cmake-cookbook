@@ -12,14 +12,14 @@ appveyor-msys:
     - 'Ninja'
 
 # for 'Unix Makefiles' see:
-# see https://github.com/dev-cafe/cmake-cookbook/issues/481
+# https://github.com/dev-cafe/cmake-cookbook/issues/481
 travis-linux:
   failing_generators:
     - 'Unix Makefiles'
     - 'Ninja'
 
 # for 'Unix Makefiles' see:
-# see https://github.com/dev-cafe/cmake-cookbook/issues/481
+# https://github.com/dev-cafe/cmake-cookbook/issues/481
 travis-osx:
   failing_generators:
     - 'Unix Makefiles'

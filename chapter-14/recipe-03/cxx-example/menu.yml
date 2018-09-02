@@ -10,3 +10,9 @@ appveyor-msys:
   skip_generators:
     - 'MSYS Makefiles'
     - 'Ninja'
+
+# see: https://github.com/dev-cafe/cmake-cookbook/issues/481
+travis-osx:
+  failing_generators:
+    - 'Unix Makefiles'
+    - 'Ninja'
