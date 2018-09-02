@@ -89,12 +89,12 @@ install(
   USE_SOURCE_PERMISSIONS
   )
 
-# patch RPATH of executable
+# Print RPATH of installed executable and run it
 if(UNIX)
-  set(PATCHING_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/cmake/patch_rpath.py")
-  configure_file(cmake/patch_rpath.cmake.in patch_rpath.cmake @ONLY)
+  set(PRINT_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/cmake/print_rpath.py")
+  configure_file(cmake/install_hook.cmake.in install_hook.cmake @ONLY)
   install(
     SCRIPT
-      ${CMAKE_CURRENT_BINARY_DIR}/patch_rpath.cmake
+      ${CMAKE_CURRENT_BINARY_DIR}/install_hook.cmake
     )
 endif()

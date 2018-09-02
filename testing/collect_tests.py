@@ -10,10 +10,9 @@ import time
 
 import colorama
 import docopt
-from packaging import version
-
 from env import (die_hard, get_buildflags, get_ci_environment, get_generator,
                  verbose_output)
+from packaging import version
 from parse import extract_menu_file
 
 
@@ -234,6 +233,8 @@ def main(arguments):
 
     # glob recipes
     recipes = [r for r in sorted(topdir.glob(arguments['<regex>']))]
+    if not recipes:
+        raise RuntimeError('Empty list of recipes to test: provide a valid regex')
 
     # Set NINJA_STATUS environment variable
     os.environ['NINJA_STATUS'] = '[Built edge %f of %t in %e sec]'

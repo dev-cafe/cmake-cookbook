@@ -1,0 +1,57 @@
+set(_executable ${CMAKE_INSTALL_PREFIX}/@INSTALL_BINDIR@/use_message)
+
+# Look for chrpath, patchelf, otool
+set(_patcher)
+list(APPEND _patchers chrpath patchelf otool)
+foreach(p IN LISTS _patchers)
+  find_program(${p}_FOUND
+    NAMES
+      ${p}
+    )
+  if(${p}_FOUND)
+    set(_patcher ${p})
+    message(STATUS "ELF patching tool ${_patcher} FOUND")
+    break()
+  endif()
+endforeach()
+
+if(NOT _patcher)
+  message(FATAL_ERROR "ELF patching tool NOT FOUND!\nPlease install one of chrpath, patchelf or otool")
+else()
+  find_package(PythonInterp REQUIRED QUIET)
+  execute_process(
+    COMMAND
+      ${PYTHON_EXECUTABLE} @PRINT_SCRIPT@ "${_patcher}" "${_executable}"
+    RESULT_VARIABLE _res
+    OUTPUT_VARIABLE _out
+    ERROR_VARIABLE _err
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+  if(_res EQUAL 0)
+    message(STATUS "RPATH for ${_executable} is ${_out}")
+  else()
+    message(STATUS "Something went wrong!")
+    message(STATUS "Standard output from print_rpath.py: ${_out}")
+    message(STATUS "Standard error from print_rpath.py: ${_err}")
+    message(FATAL_ERROR "${_patcher} could NOT obtain RPATH for ${_executable}")
+  endif()
+endif()
+
+# Run use_message from the install directory
+execute_process(
+  COMMAND ${_executable}
+  RESULT_VARIABLE _res
+  OUTPUT_VARIABLE _out
+  ERROR_VARIABLE _err
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+
+if(_res EQUAL 0)
+  message(STATUS "Running ${_executable}:\n ${_out}")
+else()
+  message(STATUS "Something went wrong!")
+  message(STATUS "Standard output from running ${_executable}:\n ${_out}")
+  message(STATUS "Standard error from running ${_executable}:\n ${_err}")
+  message(FATAL_ERROR "Something went wrong with ${_executable}")
+endif()

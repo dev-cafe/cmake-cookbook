@@ -83,7 +83,7 @@ targets:
 ## Running tests on your computer
 
 ```shell
-$ pipenv install
+$ pipenv install --three
 $ pipenv run python testing/collect_tests.py 'chapter-*/recipe-*'
 ```
 

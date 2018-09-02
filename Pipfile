@@ -13,14 +13,8 @@ colorama = "*"
 cython = "*"
 docopt = "*"
 numpy = "*"
-pathlib = "*"
-pycodestyle = "*"
 pyyaml = "*"
 sphinx = "*"
-sphinx-rtd-theme = "*"
-sphinxcontrib-bibtex = "*"
-typing = "*"
-
 
 [dev-packages]
 

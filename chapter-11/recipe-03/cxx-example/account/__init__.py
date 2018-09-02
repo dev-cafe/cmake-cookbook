@@ -1,9 +1,10 @@
-from subprocess import check_output
-from cffi import FFI
 import os
 import sys
 from configparser import ConfigParser
 from pathlib import Path
+from subprocess import check_output
+
+from cffi import FFI
 
 
 def get_lib_handle(definitions, header_file, library_file):
@@ -28,9 +29,9 @@ _this_path = Path(os.path.dirname(os.path.realpath(__file__)))
 _cfg_file = _this_path / 'interface_file_names.cfg'
 if _cfg_file.exists():
     config = ConfigParser()
-    config.read(_cfg_file)
+    config.read(str(_cfg_file))
     header_file_name = config.get('configuration', 'header_file_name')
-    _header_file = _this_path / 'include' /  header_file_name
+    _header_file = _this_path / 'include' / header_file_name
     _header_file = str(_header_file)
     library_file_name = config.get('configuration', 'library_file_name')
     _library_file = _this_path / 'lib' / library_file_name
@@ -41,10 +42,10 @@ else:
     _library_file = os.getenv('ACCOUNT_LIBRARY_FILE')
     assert _library_file is not None
 
-_lib = get_lib_handle(definitions=['-DACCOUNT_API=', '-DACCOUNT_NOINCLUDE'],
-                      header_file=_header_file,
-                      library_file=_library_file)
-
+_lib = get_lib_handle(
+    definitions=['-DACCOUNT_API=', '-DACCOUNT_NOINCLUDE'],
+    header_file=_header_file,
+    library_file=_library_file)
 
 # we change names to obtain a more pythonic API
 new = _lib.account_new

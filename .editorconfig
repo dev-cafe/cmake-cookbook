@@ -1,0 +1,23 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+
+[*.py]
+indent_size = 4
+
+[*.{c,h,cpp,hpp,f90,F90}]
+indent_size = 2
+
+[*.rst]
+indent_size = 3
+tab_size = 3
+
+[*.yml]
+indent_size = 2
