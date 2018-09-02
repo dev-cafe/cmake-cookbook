@@ -83,6 +83,12 @@ targets:
 ## Running tests on your computer
 
 ```shell
-pipenv install
-pipenv run python testing/collect_tests.py 'chapter-*/recipe-*'
+$ pipenv install
+$ pipenv run python testing/collect_tests.py 'chapter-*/recipe-*'
+```
+
+To get more verbose output, use:
+
+```shell
+$ env VERBOSE_OUTPUT=ON pipenv run python testing/collect_tests.py 'chapter-*/recipe-*'
 ```
