@@ -24,19 +24,13 @@ circle-pgi:
     - 'Unix Makefiles'
     - 'Ninja'
 
-# Boost.Python version on Travis
-# links against Python 2.7
 travis-linux:
-  failing_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'
+  definitions:
+    - BOOST_ROOT: '$HOME/Deps/boost_1.59.0'
 
 travis-osx:
   definitions:
-    - BOOST_ROOT: '/usr/local/opt/boost@1.59'
-  failing_generators:
-    - 'Unix Makefiles'
-    - 'Ninja'
+    - BOOST_ROOT: '/usr/local/Cellar/boost/1.67.0_1'
 
 targets:
   - test
