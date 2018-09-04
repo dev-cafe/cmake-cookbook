@@ -16,7 +16,7 @@ if "%CMAKE_GENERATOR%"=="Visual Studio 15 2017 Win64" (
     cd boost_1_67_0
     bootstrap.bat > NUL
     rem Build and install
-    b2 -q install link=static,shared threading=multi variant=release toolset=msvc address-model=64 --with-filesystem --with-test --with-system --with-python --prefix="C:\Deps\boost_1_67_0" > NUL
+    b2 -q install address-model=64 architecture=x86 threading=multi toolset=msvc --build-type=complete --with-filesystem --with-test --with-system --with-python --prefix="C:\Deps\boost_1_67_0" > NUL
     rem Clean up
     cd %APPVEYOR_BUILD_FOLDER%
     del /s /q boost_1_67_0 boost_1_67_0.zip > NUL

@@ -1,7 +1,6 @@
 appveyor-vs:
   definitions:
     - BOOST_ROOT: 'C:\Deps\boost_1_67_0'
-    - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB'
 
 circle-pgi:
   definitions:

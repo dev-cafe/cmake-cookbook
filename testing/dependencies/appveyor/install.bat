@@ -4,6 +4,9 @@ rem the AND (implicit when chaining IF-s) of the negation of each separate state
 set nonVSGenerator=true
 if not "%CMAKE_GENERATOR%"=="Ninja" if not "%CMAKE_GENERATOR%"=="MSYS Makefiles" set nonVSGenerator=false
 
+bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-doxygen"
+bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-graphviz"
+
 if "%nonVSGenerator%"=="true" (
   echo "Using non-VS generator %CMAKE_GENERATOR%"
   echo "Let's get MSYS64 working"
@@ -19,20 +22,17 @@ if "%nonVSGenerator%"=="true" (
 
   rem more packages
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-boost"
+  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-eigen3"
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-ninja"
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-openblas"
-  bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-eigen3"
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-pkg-config"
   bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-zeromq"
 ) else (
   echo "Using VS generator %CMAKE_GENERATOR%"
   echo "Let's get VcPkg working"
 
-  vcpkg install zeromq eigen3 --triplet x64-windows
+  vcpkg install eigen3 zeromq --triplet x64-windows
   cd c:\tools\vcpkg
   vcpkg integrate install
   cd %APPVEYOR_BUILD_FOLDER%
 )
-
-bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-doxygen"
-bash -c "pacman -S --noconfirm mingw64/mingw-w64-x86_64-graphviz"

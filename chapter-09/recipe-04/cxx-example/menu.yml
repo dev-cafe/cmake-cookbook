@@ -1,10 +1,9 @@
 appveyor-vs:
-  env:
-    - VERBOSE_OUTPUT: 'True'
   definitions:
     - BOOST_ROOT: 'C:\Deps\boost_1_67_0'
     - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB /EHsc'
     - Boost_USE_STATIC_LIBS: 'ON'
+    - CMAKE_BUILD_TYPE: 'Release'
     - CMAKE_CONFIGURATION_TYPES: 'Release'
 
 appveyor-msys:
