@@ -42,17 +42,17 @@ init:
   - set PATH=%PATH:C:\Python27\Scripts;=%
   # Add Anaconda to PATH
   - set PATH=C:\Deps\conda\Scripts;C:\Deps\conda\library\bin;%PATH%
-  # Add system Boost to PATH
-  - set PATH=C:\Libraries\boost_1_67_0\lib64-msvc-14.1;%PATH%
 
 cache:
   - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat
   - c:\msys64\var\cache\pacman\pkg -> testing\dependencies\appveyor\install.bat
+  - c:\Deps\boost_1_67_0 -> testing\dependencies\appveyor\boost.bat
   - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.ps1
 
 install:
   - python -m pip install pipenv
   - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\install.bat'
+  - '%APPVEYOR_BUILD_FOLDER%\testing\dependencies\appveyor\boost.bat'
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\anaconda.ps1
   - ps: .$env:APPVEYOR_BUILD_FOLDER\testing\dependencies\appveyor\install-msmpi.ps1
 

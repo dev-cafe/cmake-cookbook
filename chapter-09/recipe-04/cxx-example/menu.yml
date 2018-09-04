@@ -2,20 +2,15 @@ appveyor-vs:
   env:
     - VERBOSE_OUTPUT: 'True'
   definitions:
-    - BOOST_ROOT: 'C:\Libraries\boost_1_67_0'
-    - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB'
-    - CMAKE_BUILD_TYPE: 'Release'
+    - BOOST_ROOT: 'C:\Deps\boost_1_67_0'
+    - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB /EHsc'
+    - Boost_USE_STATIC_LIBS: 'ON'
     - CMAKE_CONFIGURATION_TYPES: 'Release'
-  # fails because packaged boost only provides python27
-  failing_generators:
-    - 'Visual Studio 15 2017 Win64'
 
 appveyor-msys:
   definitions:
     - CMAKE_BUILD_TYPE: 'Release'
     - Boost_USE_STATIC_LIBS: 'ON'
-    - Boost_USE_MULTITHREADED: 'ON'
-    - Boost_USE_STATIC_RUNTIME: 'ON'
     - CMAKE_CXX_FLAGS: '-D_hypot=hypot'
 
 # CMake cannot find the Python library
