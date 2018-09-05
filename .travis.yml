@@ -20,9 +20,6 @@ matrix:
             - gfortran-mingw-w64
             - graphviz
             - libatlas-dev
-            - libboost-filesystem-dev
-            - libboost-python-dev
-            - libboost-test-dev
             - liblapack-dev
             - liblapacke-dev
             - libopenmpi-dev
@@ -95,6 +92,8 @@ cache:
     - $HOME/Deps/eigen
     - $HOME/Deps/ninja
     - $HOME/Deps/conda
+    - $HOME/Deps/boost_1.59.0
+    - $HOME/Library/Caches/Homebrew
 
 env:
   global:
@@ -121,6 +120,7 @@ install:
   - ./testing/dependencies/travis/ninja.sh
   - ./testing/dependencies/travis/anaconda.sh
   - ./testing/dependencies/travis/eigen.sh
+  - ./testing/dependencies/travis/boost.sh
   - export PATH=$HOME/Deps/cmake/$CMAKE_VERSION/bin${PATH:+:$PATH}
   - pipenv install --python $PYTHON3
   - pipenv run python --version

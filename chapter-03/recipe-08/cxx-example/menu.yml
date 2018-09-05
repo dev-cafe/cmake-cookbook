@@ -1,13 +1,21 @@
 appveyor-vs:
   definitions:
-    - BOOST_ROOT: 'C:\Libraries\boost_1_67_0'
-    - CMAKE_CXX_FLAGS: '-DBOOST_ALL_NO_LIB'  
+    - BOOST_ROOT: 'C:\Deps\boost_1_67_0'
+    - Boost_USE_STATIC_LIBS: 'ON'
+
+appveyor-msys:
+  definitions:
+    - Boost_USE_STATIC_LIBS: 'ON'
 
 circle-pgi:
   definitions:
    - BOOST_INCLUDEDIR: '/usr/include/boost'
    - BOOST_LIBRARYDIR: '/usr/lib/x86_64-linux-gnu'
 
+travis-linux:
+  definitions:
+    - BOOST_ROOT: '$HOME/Deps/boost_1.59.0'
+
 travis-osx:
   definitions:
-    - BOOST_ROOT: '/usr/local/opt/boost@1.59'
+    - BOOST_ROOT: '/usr/local/Cellar/boost/1.67.0_1'
