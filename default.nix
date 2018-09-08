@@ -11,6 +11,9 @@ in
     overlays = [(self: super:
     {
       ninja-kitware = super.callPackage ./.pkgs/ninja-kitware.nix {};
+      boost162 = super.boost162.override {
+        python = self.python3;
+      };
     }
     )];
   };
