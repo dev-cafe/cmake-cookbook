@@ -2,7 +2,7 @@
 
 - [1. Creating a simple unit test](recipe-01/README.md)
 - [2. Defining a unit test using the Catch2 library](recipe-02/README.md)
-- [3. Defining a unit test and linking against Google test](recipe-03/README.md)
+- [3. Defining a unit test and linking against Google Test](recipe-03/README.md)
 - [4. Defining a unit test and linking against Boost test](recipe-04/README.md)
 - [5. Using dynamic analysis to detect memory defects](recipe-05/README.md)
 - [6. Testing expected failures](recipe-06/README.md)
