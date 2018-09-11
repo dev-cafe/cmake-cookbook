@@ -1,4 +1,4 @@
-# Installing a superbuild
+# Installing a superbuild project
 
 Abstract to be written ...
 
