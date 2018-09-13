@@ -62,7 +62,7 @@
 
 - [1. Creating a simple unit test](chapter-04/recipe-01/README.md)
 - [2. Defining a unit test using the Catch2 library](chapter-04/recipe-02/README.md)
-- [3. Defining a unit test and linking against Google test](chapter-04/recipe-03/README.md)
+- [3. Defining a unit test and linking against Google Test](chapter-04/recipe-03/README.md)
 - [4. Defining a unit test and linking against Boost test](chapter-04/recipe-04/README.md)
 - [5. Using dynamic analysis to detect memory defects](chapter-04/recipe-05/README.md)
 - [6. Testing expected failures](chapter-04/recipe-06/README.md)
@@ -114,7 +114,7 @@
 - [1. Using the superbuild pattern](chapter-08/recipe-01/README.md)
 - [2. Managing dependencies with a superbuild: I. The Boost libraries](chapter-08/recipe-02/README.md)
 - [3. Managing dependencies with a superbuild: II. The FFTW library](chapter-08/recipe-03/README.md)
-- [4. Managing dependencies with a superbuild: III. The Google test framework](chapter-08/recipe-04/README.md)
+- [4. Managing dependencies with a superbuild: III. The Google Test framework](chapter-08/recipe-04/README.md)
 - [5. Managing your project as a superbuild](chapter-08/recipe-05/README.md)
 
 
@@ -133,7 +133,7 @@
 - [1. Installing your project](chapter-10/recipe-01/README.md)
 - [2. Generating export headers](chapter-10/recipe-02/README.md)
 - [3. Exporting your targets](chapter-10/recipe-03/README.md)
-- [4. Installing a superbuild](chapter-10/recipe-04/README.md)
+- [4. Installing a superbuild project](chapter-10/recipe-04/README.md)
 
 
 ### [Chapter 11: Packaging Projects](chapter-11/README.md)

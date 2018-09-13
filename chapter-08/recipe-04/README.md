@@ -1,4 +1,4 @@
-# Managing dependencies with a superbuild: III. The Google test framework
+# Managing dependencies with a superbuild: III. The Google Test framework
 
 Abstract to be written ...
 

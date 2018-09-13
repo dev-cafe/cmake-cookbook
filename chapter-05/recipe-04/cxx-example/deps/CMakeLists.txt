@@ -29,7 +29,7 @@ add_custom_command(
     ${CMAKE_CURRENT_SOURCE_DIR}/wrap_BLAS_LAPACK.tar.gz
   COMMENT
     "Unpacking C++ wrappers for BLAS/LAPACK"
-)
+  )
 
 add_library(math "")
 
