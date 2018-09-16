@@ -12,7 +12,7 @@ cache:
   - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.ps1
 
 image:
-  - Previous Visual Studio 2017
+  - Visual Studio 2017
 
 environment:
   # Create expected SHELL variable for pipenv.
