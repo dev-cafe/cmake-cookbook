@@ -1,4 +1,4 @@
-# Running custom commands for specific targets at build-time
+# Running custom commands for specific targets at build time
 
 Abstract to be written ...
 

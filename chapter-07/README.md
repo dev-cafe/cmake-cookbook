@@ -6,6 +6,6 @@
 - [4. Defining a function or macro with named arguments](recipe-04/README.md)
 - [5. Redefining functions and macros](recipe-05/README.md)
 - [6. Deprecating functions, macros, and variables](recipe-06/README.md)
-- [7. Limiting scope with add_subdirectory](recipe-07/README.md)
-- [8. Avoiding global variables using target_sources](recipe-08/README.md)
+- [7. Limiting scope with `add_subdirectory`](recipe-07/README.md)
+- [8. Avoiding global variables using `target_sources`](recipe-08/README.md)
 - [9. Organizing Fortran projects](recipe-09/README.md)

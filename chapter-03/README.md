@@ -8,5 +8,5 @@
 - [6. Detecting the MPI parallel environment](recipe-06/README.md)
 - [7. Detecting the Eigen library](recipe-07/README.md)
 - [8. Detecting the Boost libraries](recipe-08/README.md)
-- [9. Detecting external libraries: I. Using pkg-config](recipe-09/README.md)
+- [9. Detecting external libraries: I. Using `pkg-config`](recipe-09/README.md)
 - [10. Detecting external libraries: II. Writing a find-module](recipe-10/README.md)

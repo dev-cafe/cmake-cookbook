@@ -1,4 +1,4 @@
-# Avoiding global variables using target_sources
+# Avoiding global variables using `target_sources`
 
 Abstract to be written ...
 

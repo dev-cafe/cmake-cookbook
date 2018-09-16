@@ -1,4 +1,4 @@
-# Detecting external libraries: I. Using pkg-config
+# Detecting external libraries: I. Using `pkg-config`
 
 Abstract to be written ...
 
