@@ -1,4 +1,4 @@
-# Limiting scope with add_subdirectory
+# Limiting scope with `add_subdirectory`
 
 Abstract to be written ...
 
