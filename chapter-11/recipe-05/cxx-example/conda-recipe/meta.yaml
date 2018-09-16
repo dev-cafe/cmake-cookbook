@@ -14,7 +14,7 @@ build:
 
 requirements:
   host:
-    - mkl-devel
+    - mkl-devel 2018
   build:
     - cmake >=3.5
     - {{ compiler('cxx') }}
