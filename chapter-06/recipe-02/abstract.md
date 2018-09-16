@@ -11,5 +11,5 @@ time. In other words, if you remove the generated `print_info.c` after the
 configure step, this file will not be regenerated and the build step will fail.
 To proper mimic the behavior of `configure_file` we would
 require `add_custom_command` and `add_custom_target`, which we will use in the
-subsequent recipe 3, *Generating source code at build-time using Python*, where
+subsequent recipe 3, *Generating source code at build time using Python*, where
 we will overcome this limitation.

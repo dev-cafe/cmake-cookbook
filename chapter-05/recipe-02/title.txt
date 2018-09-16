@@ -1,1 +1,1 @@
-Running a custom command at configure-time
+Running a custom command at configure time
