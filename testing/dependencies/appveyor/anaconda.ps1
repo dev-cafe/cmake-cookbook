@@ -83,7 +83,7 @@ function SetUpConda ($Anaconda_cache) {
     Write-Host $conda_path $args
     Start-Process -FilePath "$conda_path" -ArgumentList $args -Wait -Passthru
 
-    $args = "install --yes --quiet conda-build anaconda-client jinja2 setuptools"
+    $args = "install --yes --quiet conda-build anaconda-client conda-verify jinja2 setuptools"
     Write-Host $conda_path $args
     Start-Process -FilePath "$conda_path" -ArgumentList $args -Wait -Passthru
 
