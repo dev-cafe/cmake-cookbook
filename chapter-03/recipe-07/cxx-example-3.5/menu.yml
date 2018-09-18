@@ -16,7 +16,7 @@ travis-linux:
 
 # OpenMP does not work with clang
 travis-osx:
-  failing_generators:
+  skip_generators:
     - 'Unix Makefiles'
     - 'Ninja'
 

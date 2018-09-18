@@ -1,3 +1,4 @@
+# No suitable native BLAS/LAPACK with MSVC
 appveyor-vs:
   failing_generators:
     - 'Visual Studio 15 2017 Win64'

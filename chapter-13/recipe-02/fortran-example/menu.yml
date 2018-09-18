@@ -3,7 +3,7 @@ targets:
   - install
 
 appveyor-vs:
-  failing_generators:
+  skip_generators:
     - 'Visual Studio 15 2017 Win64'
 
 appveyor-msys:
@@ -11,7 +11,7 @@ appveyor-msys:
     - 'Ninja'
 
 travis-osx:
-  failing_generators:
+  skip_generators:
     - 'Unix Makefiles'
     - 'Ninja'
 
