@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-echo "first option is $1"
-echo "OSTYPE is ${OSTYPE}"
-
 set -eu -o pipefail
 
 if [ $# -eq 0 ] ; then
@@ -15,16 +12,11 @@ build_directory="$1"
 mkdir -p "${build_directory}"
 cd "${build_directory}" || exit
 
-echo "build_directory is ${build_directory}"
-echo "OSTYPE is ${OSTYPE}"
-
 cp -r ../conda-recipe .
 cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    conda.exe config --set always_yes yes --set changeps1 no
-
     conda.exe build conda-recipe
 
     conda.exe install --use-local conda-example-dgemm

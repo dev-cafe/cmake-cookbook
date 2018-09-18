@@ -8,9 +8,9 @@ source:
 build:
   number: 0
   script:
-    - cmake -H. -Bbuild_conda -G "${CMAKE_GENERATOR}" -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_BUILD_TYPE="Relase"                   # [not win]
-    - cmake -H. -Bbuild_conda -G "%CMAKE_GENERATOR%" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" -DCMAKE_CONFIGURATION_TYPES="Release" # [win]
-    - cmake --build build_conda --target install --config Release
+    - cmake -H. -Bbuild_conda -G "${CMAKE_GENERATOR}" -DCMAKE_INSTALL_PREFIX=${PREFIX}         # [not win]
+    - cmake -H. -Bbuild_conda -G "%CMAKE_GENERATOR%" -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" # [win]
+    - cmake --build build_conda --target install
 
 requirements:
   build:
