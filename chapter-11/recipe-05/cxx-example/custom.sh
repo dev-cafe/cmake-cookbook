@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eux -o pipefail
+set -eu -o pipefail
 
 if [ $# -eq 0 ] ; then
     echo 'No arguments passed!'
@@ -11,6 +11,9 @@ fi
 build_directory="$1"
 mkdir -p "${build_directory}"
 cd "${build_directory}" || exit
+
+echo "build_directory is ${build_directory}"
+echo "OSTYPE is ${OSTYPE}"
 
 cp -r ../conda-recipe .
 cp ../CMakeLists.txt .

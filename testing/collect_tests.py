@@ -63,6 +63,7 @@ def run_command(*, step, command, expect_failure):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             universal_newlines=True) as child:
+        sys.stdout.write('\nIn context manager\n')
         stdout += ''.join(list(map(stdout_streamer, child.stdout)))
         # Always stream stderr
         stderr = ''.join(list(map(stderr_streamer, child.stderr)))
