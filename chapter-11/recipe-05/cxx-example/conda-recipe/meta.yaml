@@ -17,6 +17,7 @@ requirements:
     - cmake >=3.5
     - {{ compiler('cxx') }}
   host:
+    - intel-openmp 2018
     - mkl-devel 2018
 
 about:
