@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu -o pipefail
+set -eux -o pipefail
 
 if [ $# -eq 0 ] ; then
     echo 'No arguments passed!'
