@@ -20,9 +20,6 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    echo "conda.exe clean --all"
-    conda.exe clean --all
-
     echo "conda.exe build conda-recipe"
     conda.exe build conda-recipe
 
