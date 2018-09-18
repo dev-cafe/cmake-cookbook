@@ -58,14 +58,14 @@ def run_command(*, step, command, expect_failure):
 
     stderr = ''
     sys.stdout.write('\nStarting subprocess with {}\n'.format(cmd))
-    child = subprocess.run(cmd,
+    with subprocess.run(cmd,
                            stdout=subprocess.PIPE,
                            stderr=subprocess.PIPE,
-                           universal_newlines=True)
-
-    stdout += ''.join(list(map(stdout_streamer, child.stdout)))
-    # Always stream stderr
-    stderr = ''.join(list(map(stderr_streamer, child.stderr)))
+                        universal_newlines=True) as child:
+        sys.stdout.write('\nIn context manager\n')
+        stdout += ''.join(list(map(stdout_streamer, child.stdout)))
+        # Always stream stderr
+        stderr = ''.join(list(map(stderr_streamer, child.stderr)))
 
     return_code = 0
     streamer(
