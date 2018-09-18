@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "first option is $1"
+echo "OSTYPE is ${OSTYPE}"
+
 set -eu -o pipefail
 
 if [ $# -eq 0 ] ; then
