@@ -17,7 +17,7 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    conda.exe config --set always_yes yes --set changeps1 no
+    conda.exe clean --all
 
     conda.exe build conda-recipe
 
@@ -26,6 +26,8 @@ if [[ "$OSTYPE" == "msys" ]]; then
     hello-conda.exe
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
+
+    conda clean --all
 
     conda build conda-recipe
 

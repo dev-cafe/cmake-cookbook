@@ -17,6 +17,8 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
+    conda.exe clean --all
+
     conda.exe build conda-recipe
 
     conda.exe install --use-local conda-example-dgemm
@@ -24,6 +26,8 @@ if [[ "$OSTYPE" == "msys" ]]; then
     dgemm-example.exe
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
+
+    conda clean --all
 
     conda build conda-recipe
 

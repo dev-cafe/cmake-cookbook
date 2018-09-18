@@ -6,10 +6,10 @@ build:
   parallel: true
 
 cache:
-  - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat
+  - c:\tools\vcpkg\installed -> testing\dependencies\appveyor\install.bat
   - c:\msys64\var\cache\pacman\pkg -> testing\dependencies\appveyor\install.bat
   - c:\Deps\boost_1_67_0 -> testing\dependencies\appveyor\boost.bat
-  - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.ps1
+  - c:\Deps\conda -> testing\dependencies\appveyor\anaconda.ps1
 
 image:
   - Visual Studio 2017
