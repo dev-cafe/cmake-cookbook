@@ -55,18 +55,17 @@ def run_command(*, step, command, expect_failure):
     stdout = stdout_streamer(command, end='\n')
     # Stream stderr always
     stderr_streamer = functools.partial(streamer, file_handle=sys.stderr)
+
     stderr = ''
     sys.stdout.write('\nStarting subprocess with {}\n'.format(cmd))
-    with subprocess.Popen(
-            cmd,
-            bufsize=1,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            universal_newlines=True) as child:
-        sys.stdout.write('\nIn context manager\n')
-        stdout += ''.join(list(map(stdout_streamer, child.stdout)))
-        # Always stream stderr
-        stderr = ''.join(list(map(stderr_streamer, child.stderr)))
+    child = subprocess.run(cmd,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE,
+                           universal_newlines=True)
+
+    stdout += ''.join(list(map(stdout_streamer, child.stdout)))
+    # Always stream stderr
+    stderr = ''.join(list(map(stderr_streamer, child.stderr)))
 
     return_code = 0
     streamer(
