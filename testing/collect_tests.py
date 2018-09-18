@@ -48,7 +48,7 @@ def run_command(*, step, command, expect_failure):
     expect_failure: bool; if True we do not panic if the command fails
     """
     cmd = shlex.split(command)
-    sys.stdout.write('\nWe are in run_command\n')
+    sys.stdout.write('\nWe are in run_command verbose={}\n'.format(verbose_output()))
     # Stream stdout in verbose mode only
     stdout_streamer = functools.partial(streamer, verbose=verbose_output())
     # stdout starts with the command we want to execute
