@@ -52,6 +52,7 @@ def run_command(*, step, command, expect_failure):
     stdout_streamer = functools.partial(streamer, verbose=verbose_output())
     # stdout starts with the command we want to execute
     stdout = stdout_streamer(command, end='\n')
+    stdout += stdout_streamer('We are in run_command', end='\n')
     # Stream stderr always
     stderr_streamer = functools.partial(streamer, file_handle=sys.stderr)
     stderr = ''
@@ -166,6 +167,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     custom_script = 'custom.sh'
     custom_script_path = cmakelists_path / custom_script
     if custom_script_path.exists():
+        sys.stdout.write('\nRunning a custom.sh script\n')
         # if this directory contains a custom.sh script, we launch it
         step = custom_script
         command = 'bash "{0}" "{1}"'.format(custom_script_path, build_directory)
