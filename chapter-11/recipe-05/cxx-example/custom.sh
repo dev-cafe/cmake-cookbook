@@ -17,12 +17,16 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
+    echo "conda.exe clean --all"
     conda.exe clean --all
 
+    echo "conda.exe build conda-recipe"
     conda.exe build conda-recipe
 
+    echo "conda.exe install --use-local conda-example-dgemm"
     conda.exe install --use-local conda-example-dgemm
 
+    echo "dgemm-example.exe"
     dgemm-example.exe
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
