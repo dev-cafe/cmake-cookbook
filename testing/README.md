@@ -70,6 +70,22 @@ appveyor-msys:
     - 'MSYS Makefiles'
 ```
 
+## When to use `failing_generators` and `skip_generators`
+
+Marking generators as expected failures or skipping them achieves more or less
+the same goal: not failing CI for recipes that are known not to work under
+certain conditions. Using `failing_generators` means that the recipe is actually
+tested, but the possible failure is not elevated to an error; whereas using
+`skip_generators` will skip the testing altogether.
+The semantic to differentiate the use of the two is thus:
+1. Use `failing_generators` if the recipe does not work under the current CI set
+   up, but _it could be made_ to work. As an example, the Ninja is always marked as
+   an expected failure for Fortran recipes, since its set up is rather contrived,
+   requiring specific versions specific versions of CMake _and_ Ninja.
+   The hurdle could however be overcome in the future.
+2. Use `skip_generators` when _you cannot foresee any way_ to make the recipe work.
+   This is the case for the Fortran recipes with the Visual Studio generators.
+
 
 ## Bulding targets
 
