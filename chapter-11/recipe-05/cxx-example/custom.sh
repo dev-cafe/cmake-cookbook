@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-echo "first parameter is $1"
-echo "OSTYPE is $OSTYPE"
-
 set -eu -o pipefail
 
 if [ $# -eq 0 ] ; then
@@ -20,26 +17,32 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    conda.exe config --set always_yes yes --set changeps1 no
+    echo "conda.exe config --get"
+    conda.exe config --get
 
     echo "conda.exe build conda-recipe"
-    conda.exe build conda-recipe
+    conda.exe build --build-only conda-recipe
 
     echo "conda.exe install --yes --use-local conda-example-dgemm"
-    conda.exe install --yes --use-local conda-example-dgemm
+    conda.exe install --no-update-deps --use-local --yes conda-example-dgemm
 
     echo "dgemm-example.exe"
     dgemm-example.exe
+
+    echo "conda.exe clean --all --yes"
+    conda.exe clean --all --yes
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
-    conda clean --all
+    conda clean --all --yes
 
-    conda build conda-recipe
+    conda build --build-only conda-recipe
 
-    conda install --yes --use-local conda-example-dgemm
+    conda install --no-update-deps --use-local --yes conda-example-dgemm
 
     dgemm-example
+
+    conda clean --all --yes
 fi
 
 exit $?

@@ -17,23 +17,23 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    conda.exe clean --all
-
-    conda.exe build conda-recipe
+    conda.exe build --build-only conda-recipe
 
     conda.exe install --yes --use-local conda-example-simple
 
     hello-conda.exe
+
+    conda.exe clean --all --yes
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
-    conda clean --all
-
-    conda build conda-recipe
+    conda build --build-only conda-recipe
 
     conda install --yes --use-local conda-example-simple
 
     hello-conda
+
+    conda clean --all --yes
 fi
 
 exit $?
