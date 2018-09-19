@@ -31,7 +31,7 @@ else
 
     conda build conda-recipe
 
-    conda install --use-local conda-example-simple --yes
+    conda install --yes --use-local conda-example-simple
 
     hello-conda
 fi
