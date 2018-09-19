@@ -23,8 +23,8 @@ if [[ "$OSTYPE" == "msys" ]]; then
     echo "conda.exe build conda-recipe"
     conda.exe build conda-recipe
 
-    echo "conda.exe install --use-local conda-example-dgemm"
-    conda.exe install --use-local conda-example-dgemm
+    echo "conda.exe install --yes --use-local conda-example-dgemm"
+    conda.exe install --yes --use-local conda-example-dgemm
 
     echo "dgemm-example.exe"
     dgemm-example.exe

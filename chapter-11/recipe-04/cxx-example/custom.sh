@@ -21,7 +21,7 @@ if [[ "$OSTYPE" == "msys" ]]; then
 
     conda.exe build conda-recipe
 
-    conda.exe install --use-local conda-example-simple
+    conda.exe install --yes --use-local conda-example-simple
 
     hello-conda.exe
 else
