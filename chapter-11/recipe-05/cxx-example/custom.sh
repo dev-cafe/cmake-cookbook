@@ -20,6 +20,8 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
+    conda.exe config --set always_yes yes --set changeps1
+
     echo "conda.exe build conda-recipe"
     conda.exe build conda-recipe
 
