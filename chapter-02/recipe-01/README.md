@@ -5,5 +5,4 @@ with an example that does not require compilation of any source code. For
 simplicity, we only consider the configuration step.
 
 
-- [cxx-example](cxx-example/)
 - [example](example/)
