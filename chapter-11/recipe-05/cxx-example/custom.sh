@@ -17,13 +17,10 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    echo "conda.exe config --get"
-    conda.exe config --get
-
-    echo "conda.exe build conda-recipe"
+    echo "conda.exe build --build-only conda-recipe"
     conda.exe build --build-only conda-recipe
 
-    echo "conda.exe install --yes --use-local conda-example-dgemm"
+    echo "conda.exe install --no-update-deps --use-local --yes conda-example-dgemm"
     conda.exe install --no-update-deps --use-local --yes conda-example-dgemm
 
     echo "dgemm-example.exe"
