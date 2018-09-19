@@ -41,6 +41,7 @@ matrix:
   fast_finish: true
 
 init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - set PATH=C:\msys64\MINGW64\bin;C:\msys64\usr\bin;%PATH%
   - set PATH=C:\Python37-x64;C:\Python37-x64\Scripts;%PATH%
   # Remove Python 2.7 from path
