@@ -35,7 +35,7 @@ else
 
     conda build conda-recipe
 
-    conda install --use-local conda-example-dgemm
+    conda install --use-local conda-example-dgemm --yes
 
     dgemm-example
 fi
