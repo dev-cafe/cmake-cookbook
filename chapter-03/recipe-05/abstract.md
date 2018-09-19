@@ -1,13 +1,5 @@
-# Detecting the OpenMP parallel environment
-
 We will show how to detect support for the OpenMP shared-memory parallelism
 standard. Usage of CMake `IMPORTED` libraries is shown. Examples are given for
 both C++ and Fortran using CMake 3.9 or higher. The `cxx-example-3.5` and
 `fortran-example-3.5` show how to attain the same goal with a lower version of
 CMake.
-
-
-- [cxx-example](cxx-example/)
-- [cxx-example-3.5](cxx-example-3.5/)
-- [fortran-example](fortran-example/)
-- [fortran-example-3.5](fortran-example-3.5/)
