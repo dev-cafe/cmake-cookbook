@@ -1,6 +1,1 @@
-# Distributing a project with dependencies as Conda package
-
 We show how to package a C++ executable depending on the MKL linear algebra libraries using Conda.
-
-
-- [cxx-example](cxx-example/)

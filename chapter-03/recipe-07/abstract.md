@@ -1,1 +1,5 @@
-Show how to use the Eigen library and link to BLAS/LAPACK.
+Show how to use the Eigen library with OpenMP threading and optionally linking
+to BLAS/LAPACK.
+Usage of CMake `IMPORTED` libraries is shown for CMake 3.9 or higher.
+The `cxx-example-3.5` folder shows how to attain the same goal with older
+versions of CMake.

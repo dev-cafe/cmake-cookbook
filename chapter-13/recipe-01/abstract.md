@@ -1,7 +1,2 @@
-# Cross-compiling a hello world example
-
 This recipes shows how to cross-compile a simple C++ "hello world" executable from
 GNU/Linux or macOS to Windows.
-
-
-- [cxx-example](cxx-example/)
