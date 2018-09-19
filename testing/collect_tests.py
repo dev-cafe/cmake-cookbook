@@ -57,6 +57,8 @@ def run_command(*, step, command, expect_failure):
     stderr_streamer = functools.partial(streamer, file_handle=sys.stderr)
     stderr = ''
     sys.stdout.write('\nStarting subprocess with {}\n'.format(cmd))
+    # subprocess.Popen can be managed as a context and allows us to stream
+    # stdout and stderr in real-time
     with subprocess.Popen(
             cmd,
             bufsize=1,
