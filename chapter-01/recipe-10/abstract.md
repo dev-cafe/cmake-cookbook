@@ -1,6 +1,1 @@
-# Using control flow constructs
-
 This recipe shows how to use loop construct `foreach-endforeach` in CMake.
-
-
-- [cxx-example](cxx-example/)

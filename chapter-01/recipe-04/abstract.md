@@ -1,6 +1,1 @@
-# Controlling compilation with conditionals
-
 This recipe demonstrates how to use the `if-else-endif` conditional construct in `CMakeLists.txt`.
-
-
-- [cxx-example](cxx-example/)
