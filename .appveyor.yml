@@ -22,7 +22,7 @@ environment:
     - CMAKE_GENERATOR: 'MSYS Makefiles'
       ANACONDA_TESTS_ONLY: '1'
       BUILDFLAGS: 'VERBOSE=1'
-      TESTTARGET: 'test'
+      TESTTARGET: 'RUN_TESTS'
     - CMAKE_GENERATOR: 'Visual Studio 15 2017 Win64'
       ANACONDA_TESTS_ONLY: '1'
       BUILDFLAGS: '/verbosity:normal'
