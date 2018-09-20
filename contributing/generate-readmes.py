@@ -67,7 +67,11 @@ def generate_main_readme(directory_of_this_script, chapters, chapter_titles,
 [![GitHub stars](https://img.shields.io/github/stars/dev-cafe/cmake-cookbook.svg?style=flat-square)](https://github.com/dev-cafe/cmake-cookbook/stargazers)
 
 
-# CMake cookbook recipes
+# CMake Cookbook
+
+This repository collects sources for the recipes contained in the
+[CMake Cookbook](https://www.packtpub.com/application-development/cmake-cookbook)
+published by Packt and authored by [Radovan Bast](@bast) and [Roberto Di Remigio](@robertodr)
 
 - [Testing](testing/README.md)
 - [Contributing](contributing/README.md)
