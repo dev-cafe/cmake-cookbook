@@ -14,7 +14,8 @@
 
 This repository collects sources for the recipes contained in the
 [CMake Cookbook](https://www.packtpub.com/application-development/cmake-cookbook)
-published by Packt and authored by [Radovan Bast](@bast) and [Roberto Di Remigio](@robertodr)
+published by Packt and authored by [Radovan Bast](https://github.com/bast) and
+[Roberto Di Remigio](https://github.com/robertodr)
 
 - [Testing](testing/README.md)
 - [Contributing](contributing/README.md)
