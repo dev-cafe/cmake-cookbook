@@ -17,8 +17,13 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
+    echo "conda.exe clean --all --yes"
+    conda.exe clean --all --yes
+
     echo "conda.exe build --no-anaconda-upload conda-recipe"
     conda.exe build --no-anaconda-upload conda-recipe
+
+    echo "In culo alla balena! Maremma gatta!"
 
     echo "conda.exe install --no-update-dependencies --use-local --yes conda-example-dgemm"
     conda.exe install --no-update-dependencies --use-local --yes conda-example-dgemm
