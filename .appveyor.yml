@@ -6,17 +6,15 @@ build:
   parallel: true
 
 cache:
-  - c:\tools\vcpkg\installed -> testing\dependencies\appveyor\install.bat
+  - c:\tools\vcpkg\installed\ -> testing\dependencies\appveyor\install.bat
   - c:\msys64\var\cache\pacman\pkg -> testing\dependencies\appveyor\install.bat
+  - c:\Deps\conda\ -> testing\dependencies\appveyor\anaconda.ps1
   - c:\Deps\boost_1_67_0 -> testing\dependencies\appveyor\boost.bat
-  - c:\Deps\conda -> testing\dependencies\appveyor\anaconda.ps1
 
 image:
   - Visual Studio 2017
 
 environment:
-  APPVEYOR_RDP_PASSWORD:
-    secure: wzSM7fnszHGe9WBKmKy4Te3J3RU5/1EnPAI3pgc6ow4=
   # Create expected SHELL variable for pipenv.
   SHELL: 'windows'
   CTEST_OUTPUT_ON_FAILURE: '1'
