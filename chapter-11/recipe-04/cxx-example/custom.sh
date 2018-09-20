@@ -17,9 +17,9 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    conda.exe build --build-only conda-recipe
+    conda.exe build --no-anaconda-upload --no-test conda-recipe
 
-    conda.exe install --yes --use-local conda-example-simple
+    conda.exe install --no-update-dependencies --use-local --yes conda-example-simple
 
     hello-conda.exe
 
@@ -27,9 +27,9 @@ if [[ "$OSTYPE" == "msys" ]]; then
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
-    conda build --build-only conda-recipe
+    conda build --no-anaconda-upload conda-recipe
 
-    conda install --yes --use-local conda-example-simple
+    conda install --no-update-deps --use-local --yes conda-example-simple
 
     hello-conda
 

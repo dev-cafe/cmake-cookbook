@@ -17,11 +17,8 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    echo "conda.exe clean --all --yes"
-    conda.exe clean --all --yes
-
-    echo "conda.exe build --no-anaconda-upload conda-recipe"
-    conda.exe build --no-anaconda-upload conda-recipe
+    echo "conda.exe build --no-anaconda-upload --no-test conda-recipe"
+    conda.exe build --no-anaconda-upload --no-test conda-recipe
 
     echo "In culo alla balena! Maremma gatta!"
 
@@ -36,9 +33,7 @@ if [[ "$OSTYPE" == "msys" ]]; then
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
-    conda clean --all --yes
-
-    conda build conda-recipe
+    conda build --no-anaconda-upload conda-recipe
 
     conda install --no-update-deps --use-local --yes conda-example-dgemm
 
