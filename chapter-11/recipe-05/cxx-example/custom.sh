@@ -17,11 +17,11 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    echo "conda.exe build --build-only conda-recipe"
-    conda.exe build --build-only conda-recipe
+    echo "conda.exe build --no-anaconda-upload conda-recipe"
+    conda.exe build --no-anaconda-upload conda-recipe
 
-    echo "conda.exe install --no-update-deps --use-local --yes conda-example-dgemm"
-    conda.exe install --no-update-deps --use-local --yes conda-example-dgemm
+    echo "conda.exe install --no-update-dependencies --use-local --yes conda-example-dgemm"
+    conda.exe install --no-update-dependencies --use-local --yes conda-example-dgemm
 
     echo "dgemm-example.exe"
     dgemm-example.exe
@@ -33,7 +33,7 @@ else
 
     conda clean --all --yes
 
-    conda build --build-only conda-recipe
+    conda build conda-recipe
 
     conda install --no-update-deps --use-local --yes conda-example-dgemm
 
