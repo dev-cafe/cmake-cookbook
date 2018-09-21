@@ -21,6 +21,7 @@ environment:
   matrix:
     - CMAKE_GENERATOR: 'Visual Studio 15 2017 Win64'
       BUILDFLAGS: '/verbosity:normal'
+      TESTTARGET: 'RUN_TESTS'
     - CMAKE_GENERATOR: 'MSYS Makefiles'
       BUILDFLAGS: 'VERBOSE=1'
     - CMAKE_GENERATOR: 'Visual Studio 15 2017 Win64'
