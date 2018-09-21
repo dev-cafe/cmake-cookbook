@@ -5,7 +5,8 @@ appveyor-vs:
     - MSMPI_LIB32: 'C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x86\'
     - MSMPI_LIB64: 'C:\Program Files (x86)\Microsoft SDKs\MPI\Lib\x64\'
 
+# No suitable MPI with MSYS
 appveyor-msys:
-  failing_generators:
+  skip_generators:
     - 'MSYS Makefiles'
     - 'Ninja'

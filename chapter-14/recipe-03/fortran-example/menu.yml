@@ -1,8 +1,9 @@
 targets:
   - test
 
+# No ASan on Windows
 appveyor-vs:
-  failing_generators:
+  skip_generators:
     - 'Visual Studio 15 2017 Win64'
 
 # No ASan on Windows

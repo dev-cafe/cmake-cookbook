@@ -138,7 +138,7 @@ published by Packt and authored by [Radovan Bast](https://github.com/bast) and
 - [1. Installing your project](chapter-10/recipe-01/README.md)
 - [2. Generating export headers](chapter-10/recipe-02/README.md)
 - [3. Exporting your targets](chapter-10/recipe-03/README.md)
-- [4. Installing a superbuild project](chapter-10/recipe-04/README.md)
+- [4. Installing a superbuild](chapter-10/recipe-04/README.md)
 
 
 ### [Chapter 11: Packaging Projects](chapter-11/README.md)

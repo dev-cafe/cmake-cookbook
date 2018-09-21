@@ -1,1 +1,1 @@
-Installing a superbuild project
+Installing a superbuild

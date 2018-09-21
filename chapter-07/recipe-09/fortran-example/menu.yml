@@ -1,5 +1,5 @@
 appveyor-vs:
-  failing_generators:
+  skip_generators:
     - 'Visual Studio 15 2017 Win64'
 
 appveyor-msys:
@@ -10,5 +10,9 @@ targets:
   - test
 
 travis-linux:
+  failing_generators:
+    - 'Ninja'
+
+travis-osx:
   failing_generators:
     - 'Ninja'

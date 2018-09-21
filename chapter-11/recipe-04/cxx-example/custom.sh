@@ -19,19 +19,23 @@ cp ../example.cpp .
 if [[ "$OSTYPE" == "msys" ]]; then
     conda.exe config --set always_yes yes --set changeps1 no
 
-    conda.exe build conda-recipe
+    conda.exe build --no-anaconda-upload conda-recipe
 
-    conda.exe install --use-local conda-example-simple
+    conda.exe install --no-update-dependencies --use-local --yes conda-example-simple
 
     hello-conda.exe
+
+    conda.exe clean --all --yes
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}
 
-    conda build conda-recipe
+    conda build --no-anaconda-upload conda-recipe
 
-    conda install --use-local conda-example-simple
+    conda install --no-update-deps --use-local --yes conda-example-simple
 
     hello-conda
+
+    conda clean --all --yes
 fi
 
 exit $?

@@ -25,7 +25,7 @@ else
     conda update --all --yes &> /dev/null
     conda clean -tipy &> /dev/null
     # Install conda build and deployment tools.
-    conda install --yes --quiet conda-build anaconda-client jinja2 setuptools &> /dev/null
+    conda install --yes --quiet conda-build anaconda-client conda-verify jinja2 setuptools &> /dev/null
     conda clean -tipsy &> /dev/null
     conda info -a
     cd "$TRAVIS_BUILD_DIR"

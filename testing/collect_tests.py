@@ -55,6 +55,8 @@ def run_command(*, step, command, expect_failure):
     # Stream stderr always
     stderr_streamer = functools.partial(streamer, file_handle=sys.stderr)
     stderr = ''
+    # subprocess.Popen can be managed as a context and allows us to stream
+    # stdout and stderr in real-time
     with subprocess.Popen(
             cmd,
             bufsize=1,
@@ -166,6 +168,7 @@ def run_example(topdir, generator, ci_environment, buildflags, recipe, example):
     custom_script = 'custom.sh'
     custom_script_path = cmakelists_path / custom_script
     if custom_script_path.exists():
+        sys.stdout.write('\nRunning a custom.sh script\n')
         # if this directory contains a custom.sh script, we launch it
         step = custom_script
         command = 'bash "{0}" "{1}"'.format(custom_script_path, build_directory)

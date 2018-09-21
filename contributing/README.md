@@ -24,8 +24,9 @@ To update the README files, run `python contributing/generate-readmes.py` - this
 
 #### Indentation
 
-We use 2 spaces instead of 4 spaces to reduce the printed page width.
-No tabs.
+We use 2 spaces instead of 4 spaces to reduce the printed page width. No tabs.
+Get the integration for [EditorConfig](https://editorconfig.org/) in your
+favorite editor to help you keep the conventions.
 
 
 #### Case of commands

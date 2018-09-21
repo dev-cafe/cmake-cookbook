@@ -1,3 +1,7 @@
+appveyor-vs:
+  env:
+    - VERBOSE_OUTPUT: 'ON'
+
 local:
   env:
-    - VERBOSE_OUTPUT: 'True'
+    - VERBOSE_OUTPUT: 'ON'
