@@ -47,7 +47,7 @@ function InstallAnaconda ($Anaconda_cache) {
     $filepath = DownloadAnaconda
     Write-Host "Installing" $filepath "to" $Anaconda_cache
     $install_log = $Anaconda_cache + ".log"
-    $args = "/InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=$Anaconda_cache"
+    $args = "/InstallationType=AllUsers /AddToPath=0 /RegisterPython=0 /S /D=$Anaconda_cache"
     Write-Host $filepath $args
     Start-Process -FilePath $filepath -ArgumentList $args -Wait -Passthru
     if (Test-Path $Anaconda_cache) {
