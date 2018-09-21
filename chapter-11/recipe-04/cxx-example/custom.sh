@@ -17,7 +17,9 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    conda.exe build --no-anaconda-upload --no-test --no-locking conda-recipe
+    conda.exe config --set always_yes yes --set changeps1 no
+
+    conda.exe build --no-anaconda-upload conda-recipe
 
     conda.exe install --no-update-dependencies --use-local --yes conda-example-simple
 

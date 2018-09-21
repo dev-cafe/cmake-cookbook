@@ -17,16 +17,14 @@ cp ../CMakeLists.txt .
 cp ../example.cpp .
 
 if [[ "$OSTYPE" == "msys" ]]; then
-    echo "conda.exe build --no-anaconda-upload --no-test --no-locking conda-recipe"
-    conda.exe build --no-anaconda-upload --no-test --no-locking --numpy=1.14 conda-recipe
+    conda.exe config --set always_yes yes --set changeps1 no
 
-    echo "conda.exe install --no-update-dependencies --use-local --yes conda-example-dgemm"
-    conda.exe install --no-update-dependencies --use-local --yes conda-example-dgemm
+    conda.exe build --no-anaconda-upload conda-recipe
 
-    echo "dgemm-example.exe"
+    conda.exe install --no-update-deps --use-local --yes conda-example-dgemm
+
     dgemm-example.exe
 
-    echo "conda.exe clean --all --yes"
     conda.exe clean --all --yes
 else
     PATH=$HOME/Deps/conda/bin${PATH:+:$PATH}

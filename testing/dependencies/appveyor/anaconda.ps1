@@ -47,7 +47,7 @@ function InstallAnaconda ($Anaconda_cache) {
     $filepath = DownloadAnaconda
     Write-Host "Installing" $filepath "to" $Anaconda_cache
     $install_log = $Anaconda_cache + ".log"
-    $args = "/InstallationType=AllUsers /AddToPath=0 /RegisterPython=0 /S /D=$Anaconda_cache"
+    $args = "/InstallationType=JustMe /AddToPath=0 /RegisterPython=0 /S /D=$Anaconda_cache"
     Write-Host $filepath $args
     Start-Process -FilePath $filepath -ArgumentList $args -Wait -Passthru
     if (Test-Path $Anaconda_cache) {
@@ -99,13 +99,13 @@ function SetUpConda ($Anaconda_cache) {
 
 function main () {
     $Anaconda_cache = "C:\Deps\conda"
-    #If ($env:ANACONDA_TESTS_ONLY -eq 1) {
+    If ($env:ANACONDA_TESTS_ONLY -eq 1) {
         Write-Host "-- ANACONDA_TESTS_ONLY is set, hence installing latest Miniconda"
         InstallAnaconda $Anaconda_cache
         SetUpConda $Anaconda_cache
-    #} Else {
-    #    Write-Host "-- ANACONDA_TESTS_ONLY is not set, hence not installing it!"
-    #}
+    } Else {
+        Write-Host "-- ANACONDA_TESTS_ONLY is not set, hence not installing it!"
+    }
 }
 
 main

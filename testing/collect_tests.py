@@ -48,15 +48,13 @@ def run_command(*, step, command, expect_failure):
     expect_failure: bool; if True we do not panic if the command fails
     """
     cmd = shlex.split(command)
-    sys.stdout.write('\nWe are in run_command verbose={}\n'.format(verbose_output()))
     # Stream stdout in verbose mode only
-    stdout_streamer = functools.partial(streamer, verbose=True)
+    stdout_streamer = functools.partial(streamer, verbose=verbose_output())
     # stdout starts with the command we want to execute
     stdout = stdout_streamer(command, end='\n')
     # Stream stderr always
     stderr_streamer = functools.partial(streamer, file_handle=sys.stderr)
     stderr = ''
-    sys.stdout.write('\nStarting subprocess with {}\n'.format(cmd))
     # subprocess.Popen can be managed as a context and allows us to stream
     # stdout and stderr in real-time
     with subprocess.Popen(
@@ -65,7 +63,6 @@ def run_command(*, step, command, expect_failure):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             universal_newlines=True) as child:
-        sys.stdout.write('\nIn context manager\n')
         stdout += ''.join(list(map(stdout_streamer, child.stdout)))
         # Always stream stderr
         stderr = ''.join(list(map(stderr_streamer, child.stderr)))
