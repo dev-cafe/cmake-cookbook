@@ -74,8 +74,8 @@ This repository collects sources for the recipes contained in the
 published by Packt and authored by [Radovan Bast](https://github.com/bast) and
 [Roberto Di Remigio](https://github.com/robertodr)
 
+- [Contributing](.github/CONTRIBUTING.md)
 - [Testing](testing/README.md)
-- [Contributing](contributing/README.md)
 
 
 ## Table of contents
