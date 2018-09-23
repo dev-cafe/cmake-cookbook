@@ -1,5 +1,6 @@
 # Running a custom command at build time: II. Using `add_custom_target`
 
-Abstract to be written ...
+Running a custom command at build time: II. Using `add_custom_target`
+
 
 - [cxx-example](cxx-example/)

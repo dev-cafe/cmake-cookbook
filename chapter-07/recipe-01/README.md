@@ -1,5 +1,6 @@
 # Code reuse with functions and macros
 
-Abstract to be written ...
+Code reuse with functions and macros
+
 
 - [cxx-example](cxx-example/)
