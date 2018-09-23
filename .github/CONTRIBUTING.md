@@ -3,13 +3,23 @@
 We welcome contributions from external contributors.
 This document describes the contribution process: from proposing a change to
 getting it merged into CMake Cookbook.
-Our contribution guide is based on [Psi4 contribution guide].
+The process for contributing is exactly the same for the core development team
+and for external contributors:
+
+* Maintainers do not push directly to the repository.
+* Maintainers do not review their own patches.
+* Approval of one or more maintainers is sufficient for trivial patches.
+  Trivial patches are typos and trivial bugfixes
+* For any patch that is not trivial, two maintainers need to review and approve the patch.
 
 ## Getting Started
 
 * Make sure you have a [GitHub account].
 * [Fork] the [dev-cafe/cmake-cookbook] repository on GitHub.
 * On your local machine, [clone] your fork of the CMake Cookbook repository.
+* The Psi4 documentation has more detailed instructions for interacting with your fork which can be found
+  [here](http://psicode.org/psi4manual/master/build_obtaining.html#faq-forkpsi4public).
+  and [here](http://psicode.org/psi4manual/master/build_obtaining.html#faq-githubworkflow).
 
 ## Making Changes
 
