@@ -17,7 +17,7 @@ and for external contributors:
 * Make sure you have a [GitHub account].
 * [Fork] the [dev-cafe/cmake-cookbook] repository on GitHub.
 * On your local machine, [clone] your fork of the CMake Cookbook repository.
-* The Psi4 documentation has more detailed instructions for interacting with your fork which can be found
+* The [Psi4](http://psicode.org/) documentation has more detailed instructions for interacting with your fork which can be found
   [here](http://psicode.org/psi4manual/master/build_obtaining.html#faq-forkpsi4public).
   and [here](http://psicode.org/psi4manual/master/build_obtaining.html#faq-githubworkflow).
 
@@ -67,7 +67,6 @@ and for external contributors:
 * [Developer Certificate of Origin versus Contributor License Agreements](https://julien.ponge.org/blog/developer-certificate-of-origin-versus-contributor-license-agreements/)
 
 
-[Psi4 contribution guide]: https://github.com/psi4/psi4/blob/master/.github/CONTRIBUTING.md
 [GitHub account]: https://github.com/signup/free
 [Fork]: https://help.github.com/articles/fork-a-repo/
 [dev-cafe/cmake-cookbook]: https://github.com/dev-cafe/cmake-cookbook
