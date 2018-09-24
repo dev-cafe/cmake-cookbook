@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [Version 1.0] - 2018-09-XY
+## [Version 1.0] - 2018-09-24
 
 ### Added
 ### Changed
