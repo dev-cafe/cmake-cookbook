@@ -27,6 +27,8 @@ mv account/test.py venv
 
 cd venv
 export PIPENV_MAX_DEPTH=1
+export PIPENV_IGNORE_VIRTUALENVS=1
+export PIPENV_VERBOSITY=-1
 pipenv install --three ..
 pipenv run python test.py
 pipenv --rm
