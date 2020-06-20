@@ -30,3 +30,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip poetry
         poetry install -v
+
+    - name: Run tests
+      run: |
+        poetry run python testing/collect_tests.py 'chapter-0[1-7]/recipe-*'
