@@ -1,8 +1,0 @@
-breathe
-cffi
-colorama
-cython
-docopt
-numpy
-pyyaml
-sphinx
